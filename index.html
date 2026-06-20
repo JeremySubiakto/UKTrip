@@ -237,15 +237,15 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 .fclear:hover{ color:var(--deep-rose); }
 .filter-empty{ font-size:14px; color:var(--muted); padding:8px 2px; }
 .panel-count{ font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:.1em; font-size:11px; color:var(--muted); margin-bottom:14px; }
-.overview .ov-blurb{ font-family:var(--serif); font-style:italic; font-size:clamp(16px,2.6vw,20px); line-height:1.5; color:var(--ink); max-width:62ch; margin-bottom:22px; }
+.overview .ov-blurb{ font-family:var(--serif); font-style:italic; font-size:clamp(16px,2.6vw,20px); line-height:1.5; color:var(--ink); max-width:58ch; margin:0 auto 26px; text-align:center; }
 .ov-facts{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:30px; }
 .ov-fact{ background:var(--surface); border:1px solid rgba(232,197,193,.45); border-radius:18px; box-shadow:var(--soft); padding:14px 18px; min-width:150px; flex:1; }
 .ov-fact .label{ display:block; margin-bottom:4px; }
 .ov-fact .val{ font-family:var(--sans); font-weight:600; font-size:14px; color:var(--ink); line-height:1.4; }
 .ov-h{ font-family:var(--sans); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:var(--deep-rose); margin-bottom:16px; }
 /* ---- live weather + daylight (Open-Meteo, free, no key) ---- */
-.ov-weather{ margin:0 0 26px; min-height:0; }
-.wx-row{ display:flex; align-items:center; gap:13px; background:linear-gradient(180deg,#FFFFFF,#FEF7F6); border:1px solid rgba(232,197,193,.5); border-radius:18px; box-shadow:var(--soft); padding:13px 17px; }
+.ov-weather{ margin:0 0 26px; min-height:0; display:flex; justify-content:center; }
+.wx-row{ display:inline-flex; align-items:center; gap:13px; width:max-content; max-width:100%; background:linear-gradient(180deg,#FFFFFF,#FEF7F6); border:1px solid rgba(232,197,193,.5); border-radius:var(--r-pill); box-shadow:var(--soft); padding:12px 22px; }
 .wx-row .wx-ic{ font-size:22px; line-height:1; }
 .wx-row .label{ display:block; margin-bottom:3px; }
 .wx-row .val{ font-family:var(--sans); font-weight:600; font-size:13.5px; color:var(--ink); line-height:1.4; }
