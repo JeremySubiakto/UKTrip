@@ -2164,7 +2164,7 @@ function showView(name){
   currentView = name;
   if(name==="map"){ ensureMap(); playRouteMap(); }
   else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
-  else if(DEST_META[name]){ enrichActivePanel(name); fetchWeather(name); fetchCityHero(name); }
+  else if(DEST_META[name]){ enrichPlaces(PLACES.filter(p=>p.dest===name)); fetchWeather(name); fetchCityHero(name); }
 }
 navBtns.forEach(b=> b.addEventListener("click", ()=>showView(b.dataset.view)) );
 document.getElementById("openTrip").addEventListener("click", ()=>showView("map"));
