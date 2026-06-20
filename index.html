@@ -2636,7 +2636,7 @@ function loadGoogle(key){
 }
 
 /* localStorage cache so 100+ lookups only cost on first visit */
-const CACHE_KEY="le_enrich_v3", CACHE_TTL=30*864e5;
+const CACHE_KEY="le_enrich_v4", CACHE_TTL=30*864e5;
 function loadCache(){
   try{
     const c=JSON.parse(localStorage.getItem(CACHE_KEY)||"{}");
@@ -2658,7 +2658,7 @@ async function enrichOne(Place, p){
     if(pl.location){ data.lat=pl.location.lat(); data.lng=pl.location.lng(); }
     if(pl.rating) data.rating=pl.rating;
     if(pl.userRatingCount) data.count=pl.userRatingCount;
-    if(pl.photos && pl.photos.length) data.photos=pl.photos.slice(0,5).map(ph=>ph.getURI({maxWidth:1000}));
+    if(pl.photos && pl.photos.length) data.photos=pl.photos.slice(0,5).map(ph=>ph.getURI({maxWidth:1600}));
     applyCardEnrichment(p);
     if(mapBuilt) addMarker(p);
   }catch(_){}
@@ -2756,7 +2756,7 @@ async function fetchWeather(dest){
 
 /* ---------- editorial city hero photo (Google Places, lazy + cached) ---------- */
 const HERO_QUERY = { london:"Tower Bridge London", hampstead:"Hampstead Heath London", bath:"Royal Crescent Bath", wales:"Snowdonia Wales", scotland:"Edinburgh Castle Scotland" };
-const HERO_KEY="le_hero_v1";
+const HERO_KEY="le_hero_v2";
 function loadHero(){ try{ return JSON.parse(localStorage.getItem(HERO_KEY)||"{}"); }catch(_){ return {}; } }
 const HERO=loadHero();
 function applyHero(dest){ const el=document.getElementById("hero-"+dest); if(el && HERO[dest]){ el.style.backgroundImage='url("'+HERO[dest]+'")'; } }
@@ -2768,7 +2768,7 @@ async function fetchCityHero(dest){
   try{
     const { places } = await placesLib.searchByText({ textQuery:HERO_QUERY[dest]||(DEST_META[dest]&&DEST_META[dest].name)||dest, fields:["photos"], maxResultCount:1 });
     const p = places && places[0];
-    if(p && p.photos && p.photos.length){ HERO[dest]=p.photos[0].getURI({maxWidth:1400}); try{ localStorage.setItem(HERO_KEY, JSON.stringify(HERO)); }catch(_){}; applyHero(dest); }
+    if(p && p.photos && p.photos.length){ HERO[dest]=p.photos[0].getURI({maxWidth:2400}); try{ localStorage.setItem(HERO_KEY, JSON.stringify(HERO)); }catch(_){}; applyHero(dest); }
   }catch(_){}
 }
 
