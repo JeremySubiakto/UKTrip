@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#FDF0F0" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="A little map of everywhere we'll wander — Jer &amp; Tev, July 2026." />
 <title>UK Trip — Jer &amp; Tev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,6 +57,14 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .hero .cities .amp{ color:var(--rose); }
 .hero .days{ font-family:var(--sans); text-transform:uppercase; letter-spacing:0.32em; font-size:13px; font-weight:500; color:var(--muted); margin-top:24px; }
 .hero .when{ font-family:var(--serif); font-style:italic; font-size:clamp(19px,4vw,26px); color:var(--deep-rose); margin-top:6px; }
+.hero-eyebrow{ font-family:var(--sans); text-transform:uppercase; letter-spacing:0.34em; font-size:12px; font-weight:500; color:var(--muted); margin-top:22px; }
+.hero-names{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(58px,16vw,132px); line-height:0.92; letter-spacing:-0.02em; color:var(--ink); margin-top:8px; }
+.hero-names .amp{ color:var(--rose); font-weight:400; padding:0 .03em; }
+.hero-sub{ font-family:var(--serif); font-style:italic; font-size:clamp(18px,4vw,27px); color:var(--deep-rose); margin-top:14px; }
+.hero-dests{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:26px; max-width:540px; }
+.hero-dest{ display:inline-flex; align-items:center; gap:7px; font-family:var(--sans); font-weight:600; font-size:12.5px; color:var(--deep-rose); background:var(--glass); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border:1px solid rgba(232,197,193,0.6); padding:7px 14px; border-radius:var(--r-pill); box-shadow:0 2px 8px rgba(176,127,122,0.08); cursor:pointer; transition:transform .2s, background .2s, color .2s, box-shadow .2s; }
+.hero-dest:hover{ transform:translateY(-2px); background:var(--blush); color:var(--ink); box-shadow:0 6px 16px rgba(176,127,122,0.2); }
+.hero-dest .flag{ width:18px; height:12px; }
 .btn{ display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); font-weight:600; font-size:16px; color:var(--ink); background:linear-gradient(180deg,#F0D6D3 0%, var(--blush) 60%, var(--rose) 100%); border:1px solid rgba(255,255,255,0.6); padding:17px 32px; border-radius:var(--r-pill); margin-top:44px; cursor:pointer; box-shadow:0 1px 0 rgba(255,255,255,0.7) inset,0 10px 24px rgba(176,127,122,0.30),0 2px 6px rgba(176,127,122,0.20); transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s; }
 .btn:hover{ transform:translateY(-3px) scale(1.015); box-shadow:0 1px 0 rgba(255,255,255,0.8) inset,0 16px 36px rgba(176,127,122,0.38),0 4px 10px rgba(176,127,122,0.25); }
 .btn .arrow{ transition:transform .25s; } .btn:hover .arrow{ transform:translateX(4px); }
@@ -196,20 +206,171 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 .hoods button.hood-chip:hover{ background:var(--blush); color:var(--ink); transform:translateY(-1px); box-shadow:0 4px 12px rgba(176,127,122,.2); }
 
 /* ---- filter chips ---- */
-.filterbar{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:20px; }
-.filterbar button{ font-family:var(--sans); font-weight:600; font-size:11.5px; letter-spacing:.02em; color:var(--deep-rose); background:var(--surface); border:1px solid rgba(232,197,193,0.6); padding:7px 13px; border-radius:var(--r-pill); cursor:pointer; transition:background .2s,color .2s,transform .2s,box-shadow .2s; }
-.filterbar button:hover{ transform:translateY(-1px); }
-.filterbar button.active{ background:var(--blush); color:var(--ink); border-color:transparent; box-shadow:0 3px 10px rgba(176,127,122,.2); }
-.filterbar button.gold.active{ background:linear-gradient(180deg,#E7C98F,var(--gold)); color:#4a3a1c; }
+.filterbar{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:20px; }
+.fgroup{ display:flex; flex-wrap:wrap; gap:7px; }
+.fsep{ width:1px; height:20px; background:rgba(176,127,122,.22); margin:0 3px; }
+.fchip{ font-family:var(--sans); font-weight:600; font-size:11.5px; letter-spacing:.02em; color:var(--deep-rose); background:var(--surface); border:1px solid rgba(232,197,193,.6); padding:7px 13px; border-radius:var(--r-pill); cursor:pointer; transition:background .2s,color .2s,transform .2s,box-shadow .2s; }
+.fchip:hover{ transform:translateY(-1px); }
+.fchip.on{ background:var(--blush); color:var(--ink); border-color:transparent; box-shadow:0 3px 10px rgba(176,127,122,.2); }
+.fchip.gold.on{ background:linear-gradient(180deg,#E7C98F,var(--gold)); color:#4a3a1c; }
+.fclear{ font-family:var(--sans); font-weight:600; font-size:11.5px; color:var(--muted); background:transparent; border:none; cursor:pointer; padding:7px 6px; }
+.fclear:hover{ color:var(--deep-rose); }
+.filter-empty{ font-size:14px; color:var(--muted); padding:8px 2px; }
+.panel-count{ font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:.1em; font-size:11px; color:var(--muted); margin-bottom:14px; }
+.overview .ov-blurb{ font-family:var(--serif); font-style:italic; font-size:clamp(19px,3.4vw,25px); line-height:1.45; color:var(--ink); max-width:62ch; margin-bottom:22px; }
+.ov-facts{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:30px; }
+.ov-fact{ background:var(--surface); border:1px solid rgba(232,197,193,.45); border-radius:18px; box-shadow:var(--soft); padding:14px 18px; min-width:150px; flex:1; }
+.ov-fact .label{ display:block; margin-bottom:4px; }
+.ov-fact .val{ font-family:var(--sans); font-weight:600; font-size:14px; color:var(--ink); line-height:1.4; }
+.ov-h{ font-family:var(--sans); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:var(--deep-rose); margin-bottom:16px; }
 
 /* ---- open-our-trip button sheen ---- */
 .btn{ position:relative; overflow:hidden; }
 .btn::after{ content:""; position:absolute; top:0; bottom:0; left:-70%; width:45%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent); transform:skewX(-18deg); animation:sheen 4.8s ease-in-out infinite; pointer-events:none; }
 @keyframes sheen{ 0%{ left:-70%; } 22%,100%{ left:130%; } }
 @media (prefers-reduced-motion: reduce){ .btn::after{ display:none; } }
+
+/* ---- hero places line ---- */
+.hero-places{ font-family:var(--sans); font-size:13px; letter-spacing:0.05em; color:var(--muted); margin-top:18px; }
+
+/* ---- favourites: Jer = dusty blue, Tev = dusty pink ---- */
+:root{ --jer:#6E93B2; --tev:#D680A0; }
+:root{ --wax-hi:#f0cfc9; --wax-light:#dc9f97; --wax-mid:#b9756f; --wax-deep:#854c4a; --wax-rim:#5e3433; }
+.saves{ position:absolute; right:10px; bottom:10px; z-index:3; display:flex; gap:6px; }
+.save-btn{ width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(255,255,255,.85); background:rgba(255,255,255,.22); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); color:#fff; font-family:var(--sans); font-weight:700; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,.22); transition:transform .15s, background .2s; }
+.save-btn:hover{ transform:scale(1.14); }
+.save-btn.jer.on{ background:var(--jer); }
+.save-btn.tev.on{ background:var(--tev); }
+.save-row{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:18px; }
+.save-row-label{ font-family:var(--sans); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); }
+.save-pill{ font-family:var(--sans); font-weight:600; font-size:13px; color:var(--deep-rose); background:var(--surface); border:1.5px solid rgba(232,197,193,.7); padding:8px 14px; border-radius:var(--r-pill); cursor:pointer; transition:background .2s, color .2s, border-color .2s, transform .2s; }
+.save-pill:hover{ transform:translateY(-1px); }
+.save-pill.jer.on{ background:var(--jer); color:#fff; border-color:transparent; }
+.save-pill.tev.on{ background:var(--tev); color:#fff; border-color:transparent; }
+
+.fab{ position:fixed; right:18px; bottom:18px; z-index:75; display:inline-flex; align-items:center; gap:9px; background:var(--surface); border:1px solid rgba(232,197,193,.6); box-shadow:0 10px 28px rgba(176,127,122,.3); border-radius:var(--r-pill); padding:11px 16px 11px 13px; cursor:pointer; font-family:var(--sans); font-weight:600; font-size:13px; color:var(--ink); transition:transform .2s, box-shadow .2s; }
+.fab:hover{ transform:translateY(-2px); box-shadow:0 14px 34px rgba(176,127,122,.36); }
+.fab .dots{ display:inline-flex; }
+.fab .dot{ width:13px; height:13px; border-radius:50%; border:2px solid var(--surface); }
+.fab .dot.jer{ background:var(--jer); }
+.fab .dot.tev{ background:var(--tev); margin-left:-5px; }
+.fab .count{ min-width:20px; height:20px; padding:0 5px; border-radius:var(--r-pill); background:var(--blush); color:var(--ink); font-size:11px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+
+.favs-backdrop{ position:fixed; inset:0; z-index:90; background:rgba(28,26,26,.45); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); display:flex; align-items:flex-end; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
+@media (min-width:700px){ .favs-backdrop{ align-items:center; padding:24px; } }
+.favs-backdrop.open{ opacity:1; pointer-events:auto; }
+.favs-sheet{ background:var(--bg); width:100%; max-width:920px; max-height:92vh; overflow-y:auto; border-radius:26px 26px 0 0; box-shadow:var(--soft-hover); transform:translateY(40px); transition:transform .38s cubic-bezier(.2,.8,.2,1); }
+@media (min-width:700px){ .favs-sheet{ border-radius:28px; transform:scale(.96); } }
+.favs-backdrop.open .favs-sheet{ transform:none; }
+.favs-head{ position:sticky; top:0; background:var(--bg); display:flex; align-items:center; justify-content:space-between; padding:22px 24px 12px; z-index:2; }
+.favs-head h2{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:32px; color:var(--ink); }
+.favs-body{ padding:6px 24px 32px; }
+.fav-section{ margin-bottom:26px; }
+.fav-section h3{ font-family:var(--sans); font-weight:600; font-size:16px; letter-spacing:-0.01em; margin-bottom:14px; display:inline-flex; align-items:center; gap:8px; padding:7px 15px; border-radius:var(--r-pill); }
+.fav-section.jer h3{ color:#2f4658; background:rgba(110,147,178,.18); }
+.fav-section.tev h3{ color:#6e3650; background:rgba(214,128,160,.18); }
+.fav-section .fav-n{ font-weight:700; opacity:.65; }
+.fav-empty{ font-size:14px; color:var(--muted); padding:4px 2px; }
+
+/* placeholder category motifs */
+.thumb-motif{ width:84px; height:84px; opacity:.6; }
+.thumb-motif svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 1px 3px rgba(120,80,76,.28)); }
+.m-motif{ display:flex; width:90px; height:90px; opacity:.62; }
+.m-motif svg{ width:100%; height:100%; filter:drop-shadow(0 2px 5px rgba(120,80,76,.28)); }
+
+/* ---- mobile / safe-area pass (she opens on iPhone) ---- */
+.nav{ top:calc(14px + env(safe-area-inset-top)); }
+.fab{ right:calc(18px + env(safe-area-inset-right)); bottom:calc(18px + env(safe-area-inset-bottom)); }
+@media (max-width:640px){
+  .save-btn{ width:30px; height:30px; font-size:12px; }
+  .ov-fact{ min-width:130px; }
+  .modal, .favs-sheet{ padding-bottom:calc(env(safe-area-inset-bottom) + 8px); }
+  .view.content{ padding-top:96px; }
+}
+
+/* ---- hero crest monogram (Jer & Tev) ---- */
+.crest{ width:clamp(160px,36vw,216px); margin:2px auto 4px; }
+.crest svg{ width:100%; height:auto; overflow:visible; }
+.cr-star{ font-size:20px; fill:var(--rose); }
+.crest .mono-j,.crest .mono-t{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:52px; fill:var(--ink); }
+.crest .mono-amp{ font-family:var(--serif); font-style:italic; font-size:34px; fill:var(--rose); }
+.crest .banner{ font-family:var(--sans); font-weight:500; font-size:10px; letter-spacing:3px; fill:var(--deep-rose); }
+@media (prefers-reduced-motion: no-preference){
+  .crest{ animation:crestFloat 6s ease-in-out 1.9s infinite; }
+  .crest .stem,.crest .ring{ stroke-dasharray:1; stroke-dashoffset:1; animation:crestDraw 1.8s ease forwards; }
+  .crest .ring{ animation-delay:.25s; }
+  .crest .leaf{ opacity:0; animation:crestFade .5s ease forwards; }
+  .crest .leaf:nth-child(1){animation-delay:.5s}.crest .leaf:nth-child(2){animation-delay:.64s}.crest .leaf:nth-child(3){animation-delay:.78s}.crest .leaf:nth-child(4){animation-delay:.92s}.crest .leaf:nth-child(5){animation-delay:1.06s}.crest .leaf:nth-child(6){animation-delay:1.2s}
+  .crest .mono{ opacity:0; transform-box:fill-box; transform-origin:center; animation:crestMono .9s cubic-bezier(.2,.9,.3,1.2) 1.2s forwards; }
+  .crest .cr-star{ opacity:0; animation:crestFade .5s ease 1.5s forwards, twinkle 3.6s ease-in-out 2.3s infinite; }
+  .crest .banner{ opacity:0; animation:crestFade .6s ease 1.6s forwards; }
+}
+@keyframes crestDraw{ to{ stroke-dashoffset:0; } }
+@keyframes crestFade{ to{ opacity:1; } }
+@keyframes crestMono{ from{ opacity:0; transform:scale(.82);} to{ opacity:1; transform:none;} }
+@keyframes crestFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-6px);} }
+
+/* ---- per-place travel-stamp seals ---- */
+.city-head .seal{ width:clamp(120px,24vw,156px); margin:0 auto 12px; }
+.seal svg{ width:100%; height:auto; overflow:visible; }
+.seal-ring{ stroke:var(--deep-rose); stroke-width:2.4; }
+.seal-dots{ stroke:var(--rose); stroke-width:2; stroke-dasharray:1.5 6.5; stroke-linecap:round; transform-box:fill-box; transform-origin:center; }
+.seal-name{ font-family:var(--sans); font-weight:600; font-size:18px; letter-spacing:2.5px; fill:var(--ink); }
+.seal-country{ font-family:var(--sans); font-weight:600; font-size:10px; letter-spacing:3.5px; fill:var(--deep-rose); }
+.seal-star{ font-size:12px; fill:var(--gold); }
+.seal-emblem{ fill:none; stroke:#8a5d57; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+@media (prefers-reduced-motion: no-preference){
+  .seal-dots{ animation:sealspin 60s linear infinite; }
+  .view.content.active .seal{ animation:sealIn .6s cubic-bezier(.2,.8,.2,1) both; }
+}
+@keyframes sealspin{ to{ transform:rotate(360deg); } }
+@keyframes sealIn{ from{ opacity:0; transform:scale(.86);} to{ opacity:1; transform:none;} }
+
+/* ---- front-page loader: spinning pink globe + whirl ---- */
+#preloader{ position:fixed; inset:0; z-index:200; background:#FBF4EC; display:flex; align-items:center; justify-content:center; transition:opacity .6s ease, visibility .6s; }
+#preloader.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+.loader{ position:relative; width:200px; height:200px; display:flex; align-items:center; justify-content:center; }
+.loader .globe{ width:200px; height:200px; display:block; }
+.loader .grat{ opacity:.5; }
+@media (prefers-reduced-motion: no-preference){ .loader .spin{ animation:globeSpin 8s linear infinite; } }
+@keyframes globeSpin{ from{ transform:translateX(0); } to{ transform:translateX(-184px); } }
+.whirl{ position:absolute; width:252px; height:252px; border-radius:50%; pointer-events:none; }
+.whirl::before{ content:""; position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 0deg, rgba(217,139,134,0) 0 250deg, rgba(217,139,134,.6) 340deg, rgba(217,139,134,0) 360deg); -webkit-mask:radial-gradient(circle, #0000 111px, #000 113px, #000 124px, #0000 126px); mask:radial-gradient(circle, #0000 111px, #000 113px, #000 124px, #0000 126px); }
+.whirl::after{ content:""; position:absolute; inset:13px; border-radius:50%; border:1.5px dashed rgba(176,127,122,.38); }
+@media (prefers-reduced-motion: no-preference){ .whirl::before{ animation:whirlSpin 2.2s linear infinite; } .whirl::after{ animation:whirlSpin 9s linear infinite reverse; } }
+@keyframes whirlSpin{ to{ transform:rotate(360deg); } }
 </style>
 </head>
 <body>
+
+<div id="preloader" aria-hidden="true">
+  <div class="loader">
+    <span class="whirl"></span>
+    <svg class="globe" viewBox="0 0 200 200" aria-hidden="true">
+      <defs>
+        <clipPath id="gclip"><circle cx="100" cy="100" r="92"/></clipPath>
+        <g id="land" fill="#D98B86" transform="translate(8,8)">
+          <path d="M16,44 C12,34 28,30 40,36 C52,34 56,46 50,56 C56,62 48,74 40,74 C36,82 28,78 32,68 C24,66 18,54 16,44Z"/>
+          <path d="M54,26 C62,22 68,30 62,40 C54,42 50,32 54,26Z"/>
+          <path d="M44,98 C54,94 60,106 54,120 C56,134 48,150 42,150 C38,142 44,128 42,118 C38,110 38,100 44,98Z"/>
+          <path d="M86,64 C100,60 110,70 106,84 C108,100 98,120 90,126 C84,118 84,102 86,92 C80,84 80,70 86,64Z"/>
+          <path d="M84,46 C94,42 98,50 92,56 C84,60 78,52 84,46Z"/>
+          <path d="M104,42 C124,32 150,38 156,52 C160,62 148,68 140,64 C146,74 132,80 126,74 C118,80 106,72 110,60 C102,54 100,46 104,42Z"/>
+          <path d="M138,116 C150,112 160,120 154,130 C146,138 134,132 138,116Z"/>
+        </g>
+      </defs>
+      <circle cx="100" cy="100" r="92" fill="#F4DBD6"/>
+      <g clip-path="url(#gclip)">
+        <g class="spin"><use href="#land"/><use href="#land" transform="translate(184,0)"/></g>
+        <g class="grat" fill="none" stroke="#E7BAB4" stroke-width="1">
+          <line x1="8" y1="46" x2="192" y2="46"/><line x1="8" y1="69" x2="192" y2="69"/><line x1="8" y1="92" x2="192" y2="92"/><line x1="8" y1="115" x2="192" y2="115"/><line x1="8" y1="138" x2="192" y2="138"/>
+          <ellipse cx="100" cy="100" rx="60" ry="92"/><ellipse cx="100" cy="100" rx="28" ry="92"/><line x1="100" y1="8" x2="100" y2="192"/>
+        </g>
+      </g>
+      <circle cx="100" cy="100" r="92" fill="none" stroke="#C98C84" stroke-width="2.5"/>
+    </svg>
+  </div>
+</div>
 
 <nav class="nav" id="nav" aria-label="Sections">
   <button class="util" data-view="hero"><span class="ic">✦</span><span class="tx">home</span></button>
@@ -223,11 +384,11 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 
 <section class="view hero active" data-view="hero">
   <div class="petals" id="petals" aria-hidden="true"></div>
-  <span class="star">✦</span>
-  <p class="foryou">Jer &amp; Tev</p>
-  <h1 class="cities">London <span class="amp">·</span> Bath<br />Wales <span class="amp">·</span> Scotland</h1>
-  <p class="days">our trip · July 2026</p>
-  <p class="when serif">a little map of where we'll wander</p>
+  <div class="crest" id="crest" aria-label="Jer and Tev"></div>
+  <p class="hero-eyebrow">fourteen days · July 2026</p>
+  <h1 class="hero-names">Jer <span class="amp">&amp;</span> Tev</h1>
+  <p class="hero-sub serif">two weeks of long light and slow mornings</p>
+  <p class="hero-places">London · Hampstead · Bath · Wales · Scotland</p>
   <button class="btn" id="openTrip">open our trip <span class="arrow">→</span></button>
 </section>
 
@@ -236,7 +397,7 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
     <div class="section-head">
       <span class="eyebrow">🗺 the map</span>
       <h2>find us here</h2>
-      <p class="kicker">Every spot pinned across the trip. Tap a city to fly there, tap a pin to open it.</p>
+      <p class="kicker">Everywhere we're going, pinned. Tap a city to fly there, a pin to open it.</p>
     </div>
     <div class="toggle" id="mapToggle" role="tablist">
       <button class="active" data-city="london">London</button>
@@ -262,20 +423,58 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
   <div class="small">July 2026 · London · Hampstead · Bath · Wales · Scotland</div>
 </footer>
 
+<button class="fab" id="fab" aria-label="Our picks" style="display:none;">
+  <span class="dots"><span class="dot jer"></span><span class="dot tev"></span></span>
+  <span>Our Picks</span>
+  <span class="count">0</span>
+</button>
+<div class="favs-backdrop" id="favsModal" aria-hidden="true">
+  <div class="favs-sheet" role="dialog" aria-modal="true" aria-label="Our picks">
+    <div class="favs-head"><h2>Our Picks</h2><button class="modal-close" id="favsClose" aria-label="Close" style="position:static;">✕</button></div>
+    <div class="favs-body" id="favsBody"></div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="modal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" id="modalCard"></div>
 </div>
 
 <script>
-const CONFIG = { googleApiKey: "AIzaSyB_JseRSfr-paQDwmZ4JnB2CUrygfc3_xo" };
+/* ============================================================
+   GOOGLE KEY — OFF by default to prevent charges.
+   Do ALL of these before re-adding a key, or you risk another bill:
+   1) Create a NEW key (delete the old, exposed one first).
+   2) RESTRICT IT TO YOUR LIVE SITE ONLY — this is what stops dev/preview
+      reloads from spending money:
+        Credentials → key → Application restrictions → Websites →
+        add  https://YOUR-USERNAME.github.io/*
+   3) API restrictions → Maps JavaScript API + Places API (New) only.
+   4) HARD DAILY CAP (the real cost ceiling; budgets only warn):
+        APIs & Services → Places API (New) → Quotas →
+        "Text Search requests per day" → set ~100.
+   5) Paste the key ONLY into the copy you deploy to GitHub Pages.
+      Keep THIS local copy blank so editing never spends.
+   (Photos = the expensive 'Enterprise' calls, ~1,000 free/month. Maps & ratings are cheap.)
+   ============================================================ */
+const CONFIG = { googleApiKey: "" };
 
 const DEST_ORDER = ["london","hampstead","bath","wales","scotland"];
 const DEST_META = {
-  london:   { name:"London",    tag:"the most beautiful city in the world" },
-  hampstead:{ name:"Hampstead",  tag:"leafy, literary, villagey — London's romantic north" },
-  bath:     { name:"Bath",       tag:"Georgian honey-stone, Roman steam, Jane Austen" },
-  wales:    { name:"Wales",      tag:"castles, coastline & the wild of Eryri" },
-  scotland: { name:"Scotland",   tag:"wilder, older, yours — Edinburgh to the Highlands" },
+  london:   { name:"London",    tag:"ten days in the grey and the gold",
+    blurb:"Museum hush and market noise; rose lattes down Portobello and dinners that run too long. We'll walk further than we mean to, and not mind once.",
+    best:"Go for the long July evenings.", areas:"Mayfair · Notting Hill · Chelsea · South Kensington · Soho" },
+  hampstead:{ name:"Hampstead",  tag:"the hill where the city goes quiet",
+    blurb:"Up the hill the noise falls away — wild grass and bathing ponds, a mansion full of Rembrandts you can see for nothing, and a fire in every pub. London, breathing slower.",
+    best:"A clear afternoon: the Heath, then a fire.", areas:"The Village · the Heath · Highgate · Kenwood" },
+  bath:     { name:"Bath",       tag:"a city the colour of honey",
+    blurb:"A whole city cut from honey-coloured stone, warm springs still rising under it after two thousand years. We'll bathe on the roof at dusk and pretend we live here.",
+    best:"Spring light; book the rooftop pool for dusk.", areas:"City centre · Royal Crescent · Pulteney" },
+  wales:    { name:"Wales",      tag:"castles, coast, and the wild bit",
+    blurb:"Arcades and a roaring stadium in Cardiff, then north until the roads narrow and the mountains start — fortresses on the sea, a toy Italian village, and Eryri going on for miles.",
+    best:"Summer for the peaks; give the north a day or two.", areas:"Cardiff · Eryri / Snowdonia · the North coast" },
+  scotland: { name:"Scotland",   tag:"older, wilder, the far end of the map",
+    blurb:"The last leg and the wildest — Edinburgh's gothic spires, Glasgow's galleries, then the train pushing north into lochs and empty glens and the long strange light over Skye.",
+    best:"Long summer days; take the train up — it's the lovely part.", areas:"Edinburgh · Glasgow · the Highlands & Skye" },
 };
 const CAT_ORDER = ["restaurants","coffee","matcha","pubs","landmarks","parks"];
 const CAT_META = {
@@ -295,6 +494,27 @@ const FLAG = {
   wales:`<svg viewBox="0 0 30 20" preserveAspectRatio="none"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#00803D"/><path d="M8.5 11 q3 -5.5 8.5 -4.3 q-2.2 1.5 -1 3.6 q2.6 -1.1 4.8 .6 q-2.2 .8 -2.7 2.7 q-.7 2.6 -3.9 2.6 q-4.3 0 -5.3 -3.2 q-1.7 .7 -2.6 -1 q1.9 0 3.2 -1.4 Z" fill="#D7443B"/></svg>`,
 };
 function flagHTML(country){ return `<span class="flag">${FLAG[country]||""}</span>`; }
+
+/* per-place travel-stamp seal (the destination "logo") */
+const SEAL = {
+  london:   { name:"LONDON",    country:"ENGLAND", emblem:`<rect x="93" y="95" width="14" height="25"/><path d="M93 95 L100 86 L107 95"/><circle cx="100" cy="102" r="3.4"/>` },
+  hampstead:{ name:"HAMPSTEAD", country:"ENGLAND", emblem:`<path d="M100 120v-15"/><circle cx="100" cy="98" r="11"/><circle cx="92" cy="104" r="6.5"/><circle cx="108" cy="104" r="6.5"/>` },
+  bath:     { name:"BATH",      country:"ENGLAND", emblem:`<path d="M91 96h18"/><path d="M96 96v24M100 96v24M104 96v24"/><path d="M89 120h22"/>` },
+  wales:    { name:"WALES",     country:"CYMRU",   emblem:`<rect x="92" y="99" width="16" height="21"/><path d="M92 99v-5h4v3h4v-3h4v3h4v-5"/><path d="M100 94v-9"/><path d="M100 85l9 3l-9 3Z" fill="#D7443B" stroke="none"/>` },
+  scotland: { name:"SCOTLAND",  country:"ALBA",    emblem:`<path d="M100 120v-20"/><path d="M100 109q-9-1-12-9M100 109q9-1 12-9"/><path d="M92 97q8-13 16 0q-8 5-16 0Z" fill="#B07F9A" stroke-width="1.3"/><path d="M96 97q4-7 8 0" fill="#C99AB5" stroke="none"/><path d="M100 85v-4M97 82h6"/>` },
+};
+function sealHTML(dest){
+  const s=SEAL[dest]; if(!s) return "";
+  return `<svg class="sealsvg" viewBox="0 0 200 200" aria-hidden="true">
+    <defs><path id="seal-arc-${dest}" d="M42,100 A58,58 0 0,1 158,100" fill="none"/></defs>
+    <circle class="seal-ring" cx="100" cy="100" r="93" fill="none"/>
+    <circle class="seal-dots" cx="100" cy="100" r="83" fill="none"/>
+    <text class="seal-name"><textPath href="#seal-arc-${dest}" startOffset="50%" text-anchor="middle">${s.name}</textPath></text>
+    <text class="seal-star" x="33" y="105">✦</text><text class="seal-star" x="167" y="105" text-anchor="end">✦</text>
+    <g class="seal-emblem">${s.emblem}</g>
+    <text class="seal-country" x="100" y="156" text-anchor="middle">${s.country}</text>
+  </svg>`;
+}
 
 /* neighbourhood-chip → fly-to coordinates on the map */
 const HOOD_COORDS = {
@@ -317,35 +537,43 @@ const HOOD_COORDS = {
 
 /* per-city hand-drawn doodles (original SVG; swap for your own art via DEST_META[dest].image) */
 const DOODLE = {
-  london:`<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M14 122 H346" stroke="#C9A96E" stroke-width="2"/>
-    <rect x="166" y="46" width="30" height="76" fill="#F2E6D4"/><rect x="170" y="58" width="22" height="18" fill="#fff"/><circle cx="181" cy="67" r="6" fill="#F4D27A"/><path d="M166 46 L181 24 L196 46 Z" fill="#D9A8A2"/><path d="M181 24 V14"/>
-    <rect x="58" y="70" width="34" height="52" rx="3" fill="#D7443B"/><rect x="64" y="78" width="22" height="30" rx="2" fill="#F7D9D5"/><rect x="62" y="62" width="26" height="8" rx="2" fill="#D7443B"/>
-    <rect x="250" y="84" width="80" height="38" rx="6" fill="#D7443B"/><rect x="256" y="90" width="14" height="12" rx="2" fill="#F7D9D5"/><rect x="276" y="90" width="14" height="12" rx="2" fill="#F7D9D5"/><rect x="296" y="90" width="14" height="12" rx="2" fill="#F7D9D5"/><circle cx="266" cy="124" r="6" fill="#3a2f2e"/><circle cx="314" cy="124" r="6" fill="#3a2f2e"/>
-    <circle cx="306" cy="34" r="14" fill="#E8C5C1"/><path d="M300 46 L306 54 L312 46" fill="#F7D9D5"/></g></svg>`,
-  hampstead:`<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M14 120 Q120 98 210 116 T346 112" fill="none" stroke="#8FB46A"/>
-    <rect x="92" y="80" width="9" height="40" fill="#B08968"/><circle cx="96" cy="60" r="26" fill="#9FBE73"/><circle cx="74" cy="74" r="16" fill="#9FBE73"/><circle cx="118" cy="74" r="16" fill="#9FBE73"/>
-    <ellipse cx="262" cy="112" rx="48" ry="12" fill="#CFE3EA" stroke-width="2"/>
-    <g stroke-width="2"><ellipse cx="168" cy="108" rx="22" ry="13" fill="#fff"/><circle cx="150" cy="100" r="10" fill="#fff"/><path d="M144 92 l-3 -8 l7 4 Z" fill="#fff"/><path d="M156 92 l3 -8 l-7 4 Z" fill="#fff"/><path d="M186 104 l8 -3"/><path d="M158 121 v6 M170 121 v6 M180 117 v6"/></g>
-    <circle cx="147" cy="100" r="1.6" fill="#3a2f2e" stroke="none"/></g></svg>`,
-  bath:`<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M14 122 H346" stroke="#C9A96E" stroke-width="2"/>
-    <circle cx="306" cy="40" r="15" fill="#F4D27A"/>
-    <g stroke-width="2"><path d="M48 96 Q180 58 312 96" fill="none"/><path d="M48 116 Q180 78 312 116" fill="none"/><path d="M82 92 V112 M118 84 V106 M158 79 V101 M200 77 V99 M242 80 V102 M278 86 V108"/></g>
-    <rect x="36" y="92" width="13" height="30" fill="#F0E0CC"/><rect x="31" y="85" width="23" height="8" fill="#E6C9A8"/></g></svg>`,
-  wales:`<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M14 122 H346" stroke="#8FB46A" stroke-width="2"/>
-    <path d="M40 122 L120 50 L200 122 Z" fill="#BFA98C"/><path d="M101 73 L120 50 L139 73 L128 79 L120 71 L112 79 Z" fill="#fff" stroke="none"/>
-    <rect x="226" y="72" width="38" height="50" fill="#E6D2B8"/><path d="M226 72 v-8 h7 v6 h6 v-6 h6 v6 h6 v-6 h7 v8" fill="#E6D2B8"/><rect x="238" y="88" width="14" height="34" fill="#C9A96E"/>
-    <path d="M286 98 q12 -16 28 -11 q-3 6 1 9 q6 -3 11 1 q-5 3 -5 8 q-1 8 -12 8 q-15 0 -17 -10 q-7 2 -9 -4 q7 0 12 -5 Z" fill="#D7443B" stroke-width="1.5"/></g></svg>`,
-  scotland:`<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M14 122 Q100 104 190 120 T346 116" fill="none" stroke="#8FB46A" stroke-width="2"/>
-    <path d="M60 122 L82 96 L150 90 L208 100 L224 122 Z" fill="#BFA98C"/>
-    <g fill="#E6D2B8"><rect x="96" y="64" width="84" height="30"/><path d="M96 64 v-7 h8 v5 h9 v-5 h8 v5 h9 v-5 h8 v5 h9 v-5 h8 v5 h8 v-5 h8 v7"/><rect x="122" y="48" width="22" height="16"/><path d="M122 48 v-6 h5 v4 h6 v-4 h6 v4 h5 v-4 v6"/></g>
-    <path d="M150 64 V40"/><path d="M150 40 l16 5 l-16 6 Z" fill="#D7443B" stroke-width="1.5"/>
-    <path d="M300 122 V84" stroke="#5a7a4a"/><path d="M300 102 q-13 -2 -17 -13 M300 102 q13 -2 17 -13" stroke="#5a7a4a"/>
-    <path d="M289 82 q11 -17 22 0 q-11 6 -22 0 Z" fill="#B07F9A" stroke-width="1.5"/><path d="M293 82 q7 -10 14 0" fill="#C99AB5" stroke="none"/></g></svg>`,
+  london:`<svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 130 H350" stroke="#C9A96E" stroke-width="2"/>
+    <circle cx="58" cy="74" r="30"/><circle cx="58" cy="74" r="4.5" fill="#E8C5C1"/><path d="M58 44v60M28 74h60M37 53l42 42M79 53l-42 42"/><path d="M58 104v26"/>
+    <rect x="166" y="42" width="32" height="88" fill="#F2E6D4"/><rect x="171" y="56" width="22" height="20" fill="#fff"/><circle cx="182" cy="66" r="6.5" fill="#F4D27A"/><path d="M182 66v-5M182 66l4 2"/><path d="M166 42 L182 20 L198 42 Z" fill="#D9A8A2"/><path d="M182 20v-9"/><path d="M170 130v-10h24v10"/>
+    <rect x="226" y="80" width="32" height="50" rx="3" fill="#D7443B"/><rect x="232" y="88" width="20" height="28" rx="2" fill="#F7D9D5"/><rect x="228" y="72" width="28" height="8" rx="2" fill="#D7443B"/><path d="M236 90v24M244 90v24" stroke="#D7443B" stroke-width="1.4"/>
+    <rect x="284" y="92" width="66" height="38" rx="7" fill="#D7443B"/><rect x="290" y="98" width="12" height="11" rx="2" fill="#F7D9D5"/><rect x="307" y="98" width="12" height="11" rx="2" fill="#F7D9D5"/><rect x="324" y="98" width="12" height="11" rx="2" fill="#F7D9D5"/><rect x="290" y="116" width="54" height="4" fill="#F4D27A" stroke="none"/><circle cx="300" cy="132" r="6" fill="#3a2f2e"/><circle cx="334" cy="132" r="6" fill="#3a2f2e"/>
+    <circle cx="306" cy="34" r="14" fill="#E8C5C1"/><path d="M300 46 L306 55 L312 46 Z" fill="#F7D9D5"/></g></svg>`,
+  hampstead:`<svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 124 Q110 102 210 118 T350 112" fill="none" stroke="#8FB46A"/>
+    <circle cx="302" cy="40" r="12" fill="#F4D27A"/>
+    <rect x="64" y="74" width="9" height="46" fill="#B08968"/><circle cx="68" cy="52" r="27" fill="#9FBE73"/><circle cx="44" cy="68" r="16" fill="#9FBE73"/><circle cx="92" cy="68" r="16" fill="#9FBE73"/>
+    <path d="M42 120h28M46 120v-8M68 120v-8M42 112h28" stroke-width="2"/>
+    <ellipse cx="272" cy="116" rx="54" ry="13" fill="#CFE3EA"/><path d="M250 112q6-4 12 0M268 117q6-4 12 0" stroke="#9BB8C2" stroke-width="1.5"/>
+    <circle cx="246" cy="104" r="6" fill="#fff"/><path d="M252 104l5-2-5-2Z" fill="#E9C46A" stroke="none"/><circle cx="244" cy="103" r="1.2" fill="#3a2f2e" stroke="none"/>
+    <g stroke-width="2"><ellipse cx="150" cy="110" rx="21" ry="12" fill="#fff"/><circle cx="134" cy="103" r="9" fill="#fff"/><path d="M129 96l-2-7 6 4Z" fill="#fff"/><path d="M139 96l2-7-6 4Z" fill="#fff"/><circle cx="131" cy="103" r="1.4" fill="#3a2f2e" stroke="none"/><path d="M168 106l7-3"/><path d="M140 122v6M151 122v6M161 119v6"/></g>
+    <g stroke-width="2"><ellipse cx="194" cy="114" rx="14" ry="9" fill="#fff"/><circle cx="205" cy="109" r="7" fill="#fff"/><path d="M209 103l2-5-5 3Z" fill="#fff"/><path d="M202 103l-2-5 5 3Z" fill="#fff"/><circle cx="207" cy="109" r="1.1" fill="#3a2f2e" stroke="none"/><path d="M181 111l-6-2"/></g></g></svg>`,
+  bath:`<svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 128 H350" stroke="#C9A96E" stroke-width="2"/>
+    <circle cx="318" cy="38" r="14" fill="#F4D27A"/><path d="M318 18v-7M340 38h7M333 23l5-5M333 53l5 5" stroke="#E9C46A" stroke-width="2"/>
+    <rect x="40" y="58" width="26" height="70" fill="#EFE0CC"/><path d="M42 58v-9M50 58v-12M58 58v-9"/><path d="M48 74a5 5 0 0 1 10 0v22h-10z" fill="#E6C9A8"/>
+    <g stroke-width="2"><path d="M104 96 Q208 60 308 96" fill="none"/><path d="M104 118 Q208 82 308 118" fill="none"/><path d="M134 90V110M168 84V104M206 81V101M246 83V103M282 89V109"/></g>
+    <path d="M150 128h150" stroke="#9BB8C2" stroke-width="2"/></g></svg>`,
+  wales:`<svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 128 H350" stroke="#8FB46A" stroke-width="2"/>
+    <circle cx="322" cy="36" r="13" fill="#F4D27A"/>
+    <path d="M26 128 L92 56 L122 90 L150 48 L226 128 Z" fill="#BFA98C"/><path d="M134 64 L150 48 L166 64 L156 70 L150 62 L142 70 Z" fill="#fff" stroke="none"/>
+    <rect x="236" y="74" width="46" height="54" fill="#E6D2B8"/><path d="M236 74v-8h8v6h8v-6h7v6h8v-6h7v8" fill="#E6D2B8"/><rect x="248" y="46" width="18" height="28" fill="#E6D2B8"/><path d="M248 46v-7h5v5h4v-5h5v5h4v-5v7" fill="#E6D2B8"/><path d="M252 92a7 7 0 0 1 14 0v36h-14z" fill="#C9A96E"/>
+    <path d="M257 46V20"/><path d="M257 22h28v16h-28z" fill="#fff"/><path d="M257 30h28v8h-28z" fill="#3B8C4E" stroke="none"/><path d="M263 27q5-3 9 0q-4 4-9 0Z" fill="#D7443B" stroke="none"/></g></svg>`,
+  scotland:`<svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg"><g stroke="#8a5d57" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M10 126 Q100 106 190 122 T350 118" fill="none" stroke="#8FB46A" stroke-width="2"/>
+    <path d="M40 128 L64 92 L150 84 L214 96 L232 128 Z" fill="#BFA98C"/>
+    <g fill="#E6D2B8"><rect x="92" y="60" width="86" height="34"/><path d="M92 60v-7h8v5h9v-5h8v5h9v-5h8v5h9v-5h8v5h8v-5h8v7"/><rect x="118" y="42" width="22" height="18"/><path d="M118 42v-6h5v4h6v-4h6v4h5v-4v6"/></g>
+    <rect x="126" y="68" width="8" height="14" fill="#8a5d57" stroke="none"/><rect x="150" y="70" width="10" height="14" fill="#8a5d57" stroke="none"/>
+    <path d="M129 42V22"/><path d="M129 24l16 5-16 5Z" fill="#3A6EA5" stroke="none"/>
+    <path d="M250 104h28M254 104V90M262 104V90M270 104V90M252 90h24M249 86h30" stroke-width="2"/>
+    <path d="M306 128 V84" stroke="#5a7a4a"/><path d="M306 104 q-14 -2 -18 -14 M306 104 q14 -2 18 -14" stroke="#5a7a4a"/>
+    <path d="M294 82 q12 -18 24 0 q-12 7 -24 0 Z" fill="#B07F9A" stroke-width="1.5"/><path d="M299 82 q7 -10 14 0" fill="#C99AB5" stroke="none"/><path d="M306 64v-7M302 60h8" stroke="#5a7a4a" stroke-width="2"/></g></svg>`,
 };
 
 /* ============================================================
@@ -357,168 +585,168 @@ const PLACES = [
     cuisine:"New England brasserie — seafood, lobster, raw bar", price:3,
     bookingUrl:"https://www.opentable.co.uk/r/the-maine-mayfair-london", bookingLabel:"OpenTable",
     walkIn:"Bar & Terrace are walk-in friendly. Brasserie needs a booking · +44 20 3432 2192.",
-    summary:"Set inside a restored Georgian townhouse spread over five elegant rooms, The Maine is New England glamour meets Mayfair mischief. Think lobster rolls, clam chowder, raw bar platters — and live music every single night in the Brasserie. The Drawing Room has chandelier banquettes and cocktail-bar energy; the hidden year-round Terrace is perfect for lazy lunches.",
+    summary:"A Georgian townhouse spread over five rooms and done up like a New England summer. Lobster rolls, oysters on ice, clam chowder, and a band somewhere up the stairs every night of the week. The terrace stays open all year, and this is where we'll start.",
     tags:["live music","terrace","date night","iconic"], badge:"✦ your pick", badgeRose:true, feature:true },
 
   { id:"the-dover", dest:"london", cat:"restaurants", name:"The Dover", hood:"Mayfair, W1",
     cuisine:"Italian-American — pasta, steak, caviar", price:3,
     bookingUrl:"https://www.thedover.co.uk", bookingLabel:"Resy",
     walkIn:"Walk-in bar (no reservation) — great for cocktails & bar snacks.",
-    summary:"Time Out crowned this London's most romantic restaurant in 2025. Dark walnut walls lifted from a 1930s cruise liner, discreet corner booths, flattering lighting. Try the crispy potato cakes with caviar or lobster bisque ravioli. The no-bookings bar does martinis and mini hot dogs — genuinely one of the best spontaneous date stops in Mayfair.",
+    summary:"Time Out's most romantic room of 2025: walnut walls lifted from a 1930s ocean liner, discreet corner booths, lighting that flatters everyone. Order the crisp potato cakes under caviar or the lobster-bisque ravioli, and if there's no table, the bar pours martinis beside mini hot dogs.",
     tags:["most romantic","walk-in bar","date night","Mayfair"], badge:"Time Out #1 · 2025" },
 
   { id:"bouchon-racine", dest:"london", cat:"restaurants", name:"Bouchon Racine", hood:"Farringdon, EC1",
     cuisine:"Classic French bistro", price:2,
     bookingUrl:"https://bouchonracine.co.uk", bookingLabel:"Book",
     walkIn:"Limited walk-ins — book at least 2 weeks ahead.",
-    summary:"A 'heavenly hideaway' hidden in Farringdon — Time Out's most romantic restaurant in London for 2026. Timeless French bistro cooking in a candlelit room that feels like it belongs in Paris. Onion soup, duck confit, crème brûlée. Small, intimate, and unfussy in the best way.",
+    summary:"Up a narrow stair above a Farringdon pub is a candlelit room that could have been carried over from Paris, named Time Out's most romantic of 2026. Onion soup, duck confit, crème brûlée. It seats almost no one, so book a fortnight ahead.",
     tags:["most romantic 2026","French","candlelit","hidden gem"], badge:"Time Out #1 · 2026" },
 
   { id:"claridges", dest:"london", cat:"restaurants", name:"Claridge's Restaurant", hood:"Mayfair, W1",
     cuisine:"Modern British — Art Deco, seasonal plates", price:4,
     bookingUrl:"https://www.claridges.co.uk/restaurants-bars/the-restaurant-at-claridges/", bookingLabel:"Book",
     walkIn:"Booking essential. Dress up.",
-    summary:"Inside the legendary Claridge's Hotel, this Art Deco dining room is one of London's great rooms. Plush green velvet booths, seasonal British plates, old-world formality done beautifully. After dinner, slip into the Red Room — an intimate wine bar with pink blush walls, contemporary art, and rare vintages.",
+    summary:"One of London's truly great rooms: Art Deco lines, deep green velvet, seasonal British plates served as though it were still 1930. Afterwards, slip next door into the Red Room and have a last glass against its blush-pink walls.",
     tags:["fine dining","Art Deco","splurge","iconic"] },
 
   { id:"bottarga", dest:"london", cat:"restaurants", name:"Bottarga", hood:"Chelsea, SW3",
     cuisine:"Seafood-forward Mediterranean — relaxed glamour", price:3,
     bookingUrl:"https://bottarga.co.uk", bookingLabel:"Book",
     walkIn:"Limited — book ahead.",
-    summary:"From the team behind beloved Notting Hill Greek restaurant Zephyr, Bottarga is a Med-inspired stunner in Chelsea. Curved banquettes, a tiled terrace, an unfussy seafood-forward menu. Dimly lit and subtly chic — the kind of place where one glass turns into three and you forget the time.",
+    summary:"The Zephyr team's low-lit Mediterranean room in Chelsea, all curved banquettes and a tiled terrace, with seafood handled simply and well. It's the kind of place where one glass becomes three and you lose track of the evening entirely.",
     tags:["seafood","Mediterranean","intimate","date night"] },
 
   { id:"automat", dest:"london", cat:"restaurants", name:"Automat", hood:"Mayfair, Mount St, W1",
     cuisine:"Modern European — aphrodisiac menu, dark energy", price:3,
     bookingUrl:"https://resy.com/cities/ldn", bookingLabel:"Resy",
     walkIn:"Small venue — book. Hidden behind the Tanner Krolle shop on Mount St.",
-    summary:"Hidden in the back of a luxury leather-goods shop on Mayfair's coolest street, Automat is low-lit, cheeky, and full of scandal-prone drinking-den energy. The Infatuation called it an “aphrodisiac of a restaurant.” Secret, small, and exactly the kind of place that becomes your story from the trip.",
+    summary:"It hides behind a leather-goods shop on Mount Street, low-lit and a little conspiratorial; the Infatuation called it “an aphrodisiac of a restaurant.” Small and secret, it's the sort of place a whole evening gets named after.",
     tags:["hidden gem","secret","date night","Mayfair"], badge:"hidden gem" },
 
   { id:"farm-girl", dest:"london", cat:"restaurants", name:"Farm Girl", hood:"Notting Hill / Portobello Rd, W11",
     cuisine:"Australian brunch — healthy, plant-forward", price:2,
     bookingUrl:"https://thefarmgirl.co.uk", bookingLabel:"Book",
     walkIn:"Walk-ins usually fine on weekdays.",
-    summary:"The original Notting Hill Farm Girl on Portobello Road is one of London's most iconic brunch spots. Rose lattes (yes, actual rose lattes), avocado toast, açaí bowls — all against a backdrop of hanging plants and natural wood. The aesthetic is very her.",
+    summary:"Hanging plants and rose lattes and the easy Australian brunch Notting Hill does so well, avocado toast and açaí and all of it. Get the rose latte to go, carry it out onto Portobello Road, and let the morning run slow.",
     tags:["brunch","rose latte","Notting Hill","walk-in"] },
 
   /* ===================== LONDON · COFFEE ===================== */
   { id:"elan-cafe", dest:"london", cat:"coffee", name:"Elan Cafe", hood:"Marylebone · multiple",
     cuisine:"Pink decor & brunch — the most instagrammable café in London", price:2,
     mustTry:"Dutch baby pancakes · Lucky Charms latte", walkIn:"Walk-in: yes",
-    summary:"If she likes pink, this is the one. The interior is rose-pink with mirrored details and velvet chairs. Get the Dutch baby and the Lucky Charms latte. Peak pink-girl energy.",
+    summary:"London's most unapologetically pink café: rose walls, mirrored everything, velvet chairs. Get the Dutch baby and the Lucky Charms latte, and let the whole room be the photo.",
     tags:["pink","brunch","instagrammable"] },
 
   { id:"laduree", dest:"london", cat:"coffee", name:"Ladurée London", hood:"Covent Garden + Notting Hill",
     cuisine:"Parisian macaron institution — pastel tearoom", price:2,
     mustTry:"Pistachio macaron · rose latte · mille-feuille", walkIn:"Walk-in: yes",
-    summary:"The famous Paris macaron house has two London spots. The Notting Hill one is more serene; Covent Garden is grander. Get a box of macarons to take away.",
+    summary:"The Paris macaron house keeps two London tearooms: Notting Hill the quieter, Covent Garden the grander. Choose a pistachio, then carry a ribboned box of macarons back out with you.",
     tags:["macarons","Parisian","pastel"] },
 
   { id:"butter-bakery", dest:"london", cat:"coffee", name:"Butter Bakery", hood:"Notting Hill, W11",
     cuisine:"Cozy neighbourhood bakery — local favourite", price:1,
     mustTry:"Salted caramel brownie · sourdough · flat white", walkIn:"Walk-in: yes",
-    summary:"A proper Notting Hill local. No frills, just excellent baked goods and strong coffee. Great pit stop after wandering Portobello Road market.",
+    summary:"A proper Notting Hill local with no frills to it, just very good baking and strong coffee. The right place to stop after an hour lost in Portobello market.",
     tags:["bakery","local","cozy"] },
 
   { id:"biscuiteers", dest:"london", cat:"coffee", name:"Biscuiteers Café", hood:"Portobello Rd, Notting Hill",
     cuisine:"Black-and-white Parisian style — hand-iced biscuits", price:2,
     mustTry:"Hand-iced biscuits · mocha", walkIn:"Walk-in: yes",
-    summary:"One of London's most photographed cafés. Begging to be on her Instagram. Black-and-white exterior with beautiful biscuit-art in the window. Buy a tin to take home.",
+    summary:"One of the most photographed café fronts in London, black-and-white with hand-iced biscuit-art filling the window. Have a mocha, then take a tin of the iced biscuits home.",
     tags:["photogenic","biscuits","Notting Hill"] },
 
   { id:"farm-girl-coffee", dest:"london", cat:"coffee", name:"Farm Girl Coffee", hood:"Portobello Rd, Notting Hill",
     cuisine:"Rustic-chic, plant-filled, Australian-cool", price:2,
     mustTry:"The (famous) rose latte · chia pudding", walkIn:"Walk-in: yes",
-    summary:"The rose latte alone is worth the visit. Get one, walk down Portobello Road with it. You're welcome.",
+    summary:"The rose latte alone is reason enough to come. Order one, wander down Portobello Road with it in hand, and thank us later.",
     tags:["rose latte","plants","Portobello"] },
 
   { id:"leto", dest:"london", cat:"coffee", name:"L'eto Café", hood:"Westbourne Grove, Notting Hill",
     cuisine:"Mediterranean, home-like, pastel — famous for milk cakes", price:2,
     mustTry:"Pistachio milk cake · cappuccino", walkIn:"Walk-in: yes",
-    summary:"The Westbourne Grove branch has the best aesthetics of all L'eto locations. The milk cakes are their signature — get the pistachio. Comfy sofa seating, very lingerable.",
+    summary:"Of all the L'eto cafés, the Westbourne Grove one is the prettiest. The milk cakes are the thing to order, pistachio above all, and the sofas are built for lingering over a second coffee.",
     tags:["milk cake","pastel","lingerable"] },
 
   /* ===================== LONDON · PUBS & BARS ===================== */
   { id:"churchill-arms", dest:"london", cat:"pubs", name:"The Churchill Arms", hood:"Kensington Church St, Notting Hill",
     cuisine:"🌸 Famous flower-covered exterior — legendary", price:1, walkIn:"Walk-in: yes",
-    summary:"One of London's most photographed pubs. The exterior is absolutely buried in hanging baskets and flowers — a classic Notting Hill shot. Inside is charmingly chaotic with old Churchill memorabilia everywhere. Thai food served inside (surprisingly good).",
+    summary:"One of the most photographed pubs in London, its front entirely buried under hanging baskets and flowers. Inside it's all happy clutter and old Churchill memorabilia, and there's a proper Thai kitchen out the back that's genuinely good.",
     tags:["flowers","photogenic","Thai food"] },
 
   { id:"george-inn", dest:"london", cat:"pubs", name:"The George Inn", hood:"Borough / London Bridge, SE1",
     cuisine:"🏛 London's only surviving galleried coaching inn · 1542", price:1, walkIn:"Walk-in: yes",
-    summary:"The only National Trust-owned pub in London. Tucked down an alley near London Bridge, it looks like it hasn't changed since Shakespeare's day (because it mostly hasn't). Order a pint and sit in the courtyard.",
+    summary:"The last galleried coaching inn in London, and the only pub the National Trust owns, down an alley near London Bridge. It has barely changed since Shakespeare's day. Take a pint out into the cobbled courtyard.",
     tags:["National Trust","historic","courtyard"] },
 
   { id:"dickies-bar", dest:"london", cat:"pubs", name:"Dickie's Bar", hood:"Upper Grosvenor St, Mayfair",
     cuisine:"Secret whisky bar — Michelin-chef bar food", price:3, walkIn:"Walk-in: yes, but intimate — can fill up",
-    summary:"Hidden inside Corrigan's Mayfair, this is one of the city's best-kept secrets. Rare Irish whiskeys, perfectly poured Guinness, Michelin-starred bar snacks (smoked eel croquettes, quail scotch eggs). The ideal Mayfair nightcap.",
+    summary:"Hidden inside Corrigan's, one of Mayfair's better-kept secrets. Rare Irish whiskeys, a perfectly poured Guinness, and Michelin-kitchen bar snacks like smoked-eel croquettes and quail scotch eggs. The ideal nightcap.",
     tags:["hidden gem","whisky","nightcap"], badge:"hidden gem" },
 
   { id:"red-room", dest:"london", cat:"pubs", name:"The Red Room · The Connaught", hood:"Carlos Place, Mayfair",
     cuisine:"Hotel wine bar — blush-pink walls, art by women", price:4, walkIn:"Walk-in welcome · can be busy",
-    summary:"Hidden inside The Connaught hotel. An intimate wine bar with blush-pink walls, stained glass, and art from four female artists. The wine list is legendary (pulled from the hotel's historic cellars) and cocktails are wine-inspired. Genuinely the most romantic bar in London.",
+    summary:"Tucked inside the Connaught, an intimate wine bar with blush-pink walls, stained glass, and art by four women. The list is drawn from the hotel's historic cellars and the cocktails are built around wine. To our minds, the most romantic bar in London.",
     tags:["most romantic","blush walls","cocktails"], badge:"most romantic bar", badgeRose:true, feature:true },
 
   /* ===================== LONDON · LANDMARKS ===================== */
   { id:"va", dest:"london", cat:"landmarks", name:"Victoria & Albert Museum", hood:"South Kensington, SW7",
     entry:"free",
     tip:"Book free entry online. Head straight to the Fashion gallery and the Cast Courts (enormous Victorian plaster casts — jaw-dropping). The café is in a stunning ornate room.",
-    summary:"The world's greatest museum of art, design, and fashion. Five floors of everything from medieval armour to Alexander McQueen gowns. She'll love the Fashion gallery. Budget half a day minimum — it's impossible to rush.",
+    summary:"The greatest museum of art, design and fashion in the world, five floors running from medieval armour to Alexander McQueen gowns. The Fashion gallery is the heart of it. Give it half a day; it can't be rushed.",
     tags:["fashion","free","half a day"] },
 
   { id:"nhm", dest:"london", cat:"landmarks", name:"Natural History Museum", hood:"South Kensington, SW7",
     entry:"free",
     tip:"Book timed entry online. The blue whale 'Hope' in Hintze Hall is one of the most beautiful things in London. Go first thing or late afternoon to dodge crowds.",
-    summary:"Dinosaur skeletons, 80 million specimens, and one of London's most beautiful Victorian buildings. The suspended blue whale alone is worth the visit. Right next to the V&A — do both in one South Kensington morning.",
+    summary:"Dinosaur skeletons, eighty million specimens, and one of the most beautiful Victorian buildings in London. The blue whale hung in the main hall is worth the trip on its own. It's right beside the V&A, so do both in a single South Kensington morning.",
     tags:["dinosaurs","free","Victorian"] },
 
   { id:"tate-modern", dest:"london", cat:"landmarks", name:"Tate Modern", hood:"Bankside, SE1",
     entry:"free",
     tip:"Walk across the Millennium Bridge from St Paul's for the best approach. Friday late openings (10pm) are more romantic and less crowded.",
-    summary:"London's modern and contemporary art museum inside a dramatic converted power station. The Turbine Hall always has a spectacular installation. Walk across the Millennium Bridge afterward for one of London's best views.",
+    summary:"London's modern and contemporary art, housed inside a converted power station on the river. There's always something vast filling the Turbine Hall. Walk back over the Millennium Bridge afterwards for one of the best views in the city.",
     tags:["modern art","free","river views"] },
 
   { id:"national-gallery", dest:"london", cat:"landmarks", name:"National Gallery", hood:"Trafalgar Square, WC2",
     entry:"free",
     tip:"Friday late opening to 9pm — quieter, more atmospheric. Go to Room 34 for the Impressionists (Monet, Renoir, Van Gogh's Sunflowers).",
-    summary:"2,300 paintings from 1300–1900, including da Vinci, Vermeer, Turner, and Van Gogh's Sunflowers. One of the finest art collections on earth, all free. Trafalgar Square outside is one of London's great public spaces.",
+    summary:"Two and a half thousand paintings spanning 1300 to 1900: da Vinci, Vermeer, Turner, Van Gogh's Sunflowers. One of the finest collections on earth, and free to all. Trafalgar Square is waiting outside when you're done.",
     tags:["paintings","free","Sunflowers"] },
 
   { id:"tower-of-london", dest:"london", cat:"landmarks", name:"Tower of London", hood:"Tower Hill, EC3",
     entry:"paid · ~£34",
     tip:"Book online in advance — cheaper and you skip queues. Don't miss the Crown Jewels (arrive early, queues build fast). The Yeoman Warder tours are genuinely good.",
-    summary:"Over 900 years of royal history in a riverside fortress. Home of the Crown Jewels, including the 530-carat Cullinan I — the largest colourless cut diamond in the world. Walk the medieval walls, see the ravens, take the Yeoman Warder tour.",
+    summary:"Nine hundred years of royal history packed into a riverside fortress. The Crown Jewels live here, the Cullinan I among them, the largest colourless cut diamond in the world. Walk the medieval walls, find the ravens, and take the Yeoman Warder tour.",
     tags:["Crown Jewels","history","ravens"] },
 
   { id:"kensington-palace", dest:"london", cat:"landmarks", name:"Kensington Palace", hood:"Kensington Gardens, W8",
     entry:"paid · ~£22",
     tip:"Combine with a walk through Kensington Gardens to the Diana Memorial Fountain. The palace gift shop has beautiful things.",
-    summary:"The home of Princess Diana, now home to William and Kate. See the State Rooms, Diana's dresses, and the beautiful Sunken Garden. Kensington Gardens surrounds it — one of London's loveliest parks for a wander.",
+    summary:"Once Princess Diana's home, now William and Kate's. The State Rooms, Diana's dresses and the Sunken Garden are the draws, and Kensington Gardens wraps around the whole thing for a long wander afterwards.",
     tags:["Diana","royal","gardens"] },
 
   { id:"sky-garden", dest:"london", cat:"landmarks", name:"Sky Garden", hood:"Fenchurch St (Walkie Talkie), EC3",
     entry:"free · book ahead",
     tip:"Book weeks ahead at skygarden.london — it sells out. Evening slots give the best city views. No photography restrictions.",
-    summary:"A free rooftop garden 35 floors above the City, with 360° panoramic views. Tropical plants, a bar, and one of London's best free views. Book evening for sunset over the Thames — spectacular and completely free.",
+    summary:"A free rooftop garden thirty-five floors above the City, planted with palms and ringed by glass, with a bar and a view that runs all the way round. Book an evening slot and watch the sun drop over the Thames. It costs nothing.",
     tags:["rooftop","free","sunset"] },
 
   { id:"borough-market", dest:"london", cat:"landmarks", name:"Borough Market", hood:"London Bridge, SE1",
     entry:"free",
     tip:"Go on a weekday morning (less crowded). Try the Raclette stall, the Ethiopian injera stand, and the Spanish jamón. Coffee at Monmouth inside the market.",
-    summary:"London's oldest and most celebrated food market, under the Victorian railway arches near London Bridge. Sample everything — the best way to eat your way through London in one morning. Beautiful for photography.",
+    summary:"London's oldest and most loved food market, under the Victorian railway arches by London Bridge. Graze your way from stall to stall; it's the best way to eat the whole city in a single morning. It photographs beautifully, too.",
     tags:["food market","free","photogenic"] },
 
   { id:"portobello", dest:"london", cat:"landmarks", name:"Portobello Road Market", hood:"Notting Hill, W11",
     entry:"free",
     tip:"Saturday is the biggest day — arrive by 10am. Antiques at the Notting Hill Gate end; street food and vintage toward Ladbroke Grove.",
-    summary:"London's most famous street market, stretching down a colourful hill through Notting Hill. Antiques, vintage fashion, street food, buskers. The pastel houses make it one of the most photogenic streets in the city. Perfect Saturday morning.",
+    summary:"The most famous street market in London, running downhill through Notting Hill: antiques, vintage clothes, street food, buskers. The pastel houses behind the stalls make it one of the prettiest streets in the city. Go on a Saturday morning.",
     tags:["market","pastel houses","Saturday"] },
 
   { id:"the-shard", dest:"london", cat:"landmarks", name:"The View from The Shard", hood:"London Bridge, SE1",
     entry:"paid · ~£32",
     tip:"Book a sunset slot. Cheaper free alternatives: Sky Garden or Horizon 22 (horizon22.co.uk).",
-    summary:"Europe's tallest building offers 360° views from 244 metres above London. The view at sunset, with the Thames winding through the city, is extraordinary. Worth splurging on for one evening — book the latest possible slot.",
+    summary:"The UK's tallest building, with a viewing deck 244 metres up. At sunset, with the Thames threading through the city below you, the view is extraordinary. Splurge on it for one evening, and book the latest slot you can.",
     tags:["views","sunset","splurge"] },
 
   /* ---------- LONDON · RESTAURANTS (fine dining / Michelin) ---------- */
@@ -526,219 +754,219 @@ const PLACES = [
     cuisine:"Modern British — produce-led tasting menus", price:4,
     bookingUrl:"https://www.corebyclaresmyth.com", bookingLabel:"Book",
     walkIn:"Booking essential — books open well in advance.",
-    summary:"Clare Smyth's three-Michelin-star flagship and one of the UK's very best restaurants — the first British female chef to hold three stars. Deceptively simple British produce taken to dizzying heights ('potato and roe' is legendary), in a softly elegant Notting Hill room. A once-in-a-trip splurge.",
+    summary:"Three Michelin stars in a hushed Notting Hill room. Clare Smyth takes plain British produce and makes something close to astonishing of it, and the potato and roe alone is worth the whole evening. Save up for this one.",
     tags:["michelin ★★★","fine dining","splurge","iconic"], badge:"Michelin ★★★", badgeRose:true, feature:true },
 
   { id:"sketch", dest:"london", cat:"restaurants", name:"Sketch", hood:"Mayfair, W1",
     cuisine:"Modern French — and the famous pink room", price:4,
     bookingUrl:"https://sketch.london", bookingLabel:"Book",
     walkIn:"Gallery & Glade take some walk-ins; the Lecture Room needs booking.",
-    summary:"The most Instagrammed room in London — the blush-pink Gallery, all velvet and David Shrigley drawings, with afternoon tea and the famous egg-pod loos. Upstairs, the three-Michelin-star Lecture Room & Library is pure gilded indulgence. Come for the pink, stay for the spectacle.",
+    summary:"The famous blush-pink room is velvet to the ceiling, hung with David Shrigley drawings, and yes, the loos really are egg-shaped pods. Come for afternoon tea and the photographs. Upstairs, the Lecture Room holds three Michelin stars for the more serious nights.",
     tags:["pink room","michelin","afternoon tea","iconic"], badge:"the pink room", badgeRose:true, feature:true },
 
   { id:"helene-darroze", dest:"london", cat:"restaurants", name:"Hélène Darroze at The Connaught", hood:"Mayfair, W1",
     cuisine:"Haute French — Landes produce", price:4,
     bookingUrl:"https://www.the-connaught.co.uk/restaurants-bars/helene-darroze-at-the-connaught/", bookingLabel:"Book",
     walkIn:"Booking essential.",
-    summary:"Three Michelin stars inside The Connaught — Hélène Darroze cooks the produce of her native south-west France with serious soul. Pick your courses from a beautiful coloured-bead board. Refined, warm, and a true special-occasion room.",
+    summary:"Three stars inside the Connaught, where Hélène Darroze cooks the south-west of France with genuine warmth and you pick your courses from a board of coloured beads. Dress up for it, and give the evening room to unfold.",
     tags:["michelin ★★★","French","fine dining","splurge"], badge:"Michelin ★★★" },
 
   { id:"gordon-ramsay-rhr", dest:"london", cat:"restaurants", name:"Restaurant Gordon Ramsay", hood:"Chelsea, SW3",
     cuisine:"Haute French", price:4,
     bookingUrl:"https://www.gordonramsayrestaurants.com/restaurant-gordon-ramsay/", bookingLabel:"Book",
     walkIn:"Booking essential.",
-    summary:"Ramsay's three-Michelin-star Chelsea mothership on Royal Hospital Road — the restaurant that made his name and has held three stars for over two decades. Classical French precision, faultless service, a hushed jewel-box room.",
+    summary:"The Chelsea room that made his name has held three stars for more than twenty years. The cooking is classical French, quiet and exact, in a jewel-box of a dining room on Royal Hospital Road. Keep it for one proper night.",
     tags:["michelin ★★★","French","iconic","splurge"], badge:"Michelin ★★★" },
 
   { id:"a-wong", dest:"london", cat:"restaurants", name:"A. Wong", hood:"Victoria, SW1",
     cuisine:"Chinese — regional China, dim sum", price:3,
     bookingUrl:"https://www.awong.co.uk", bookingLabel:"Book",
     walkIn:"Book ahead — dim sum lunch is the value sweet spot.",
-    summary:"The only Chinese restaurant in Europe with two Michelin stars. Andrew Wong reinvents dishes from across China's provinces — the lunchtime dim sum is revelatory, the 'Taste of China' tasting menu a proper journey. Smart but unstuffy.",
+    summary:"The only Chinese restaurant in Europe with two Michelin stars, tucked into unflashy Victoria. The lunchtime dim sum is a quiet revelation, and the 'Taste of China' menu walks you across the provinces a small plate at a time.",
     tags:["michelin ★★","dim sum","award","date night"], badge:"Michelin ★★" },
 
   { id:"ikoyi", dest:"london", cat:"restaurants", name:"Ikoyi", hood:"St James's, SW1",
     cuisine:"Sub-Saharan-inspired, spice-led tasting", price:4,
     bookingUrl:"https://www.ikoyilondon.com", bookingLabel:"Book",
     walkIn:"Booking essential.",
-    summary:"Two Michelin stars and one of the most original kitchens in the world — chef Jeremy Chan builds intense, spice-driven dishes around British produce and West African flavour. Adventurous, beautiful, and unlike anywhere else in London.",
+    summary:"Two stars, and quite unlike anywhere else you'll eat. Jeremy Chan builds dishes of clean, ringing spice around British produce and West African flavour. Come hungry and a little curious; you'll be talking about it for days.",
     tags:["michelin ★★","adventurous","tasting menu"], badge:"Michelin ★★" },
 
   { id:"gymkhana", dest:"london", cat:"restaurants", name:"Gymkhana", hood:"Mayfair, W1",
     cuisine:"Indian — Raj-era club glamour", price:3,
     bookingUrl:"https://www.gymkhanalondon.com", bookingLabel:"Book",
     walkIn:"Book ahead; bar seats sometimes walk-in.",
-    summary:"London's most lauded Indian restaurant — two Michelin stars, styled like a colonial-era sporting club with ceiling fans and dark wood. The wild muntjac biryani and the kid-goat methi are the stuff of legend. Buzzy, fun, delicious.",
+    summary:"Two Michelin stars dressed up as a Raj-era sporting club, all dark wood and slow ceiling fans. People cross the city for the wild muntjac biryani. It's loud and warm and properly good.",
     tags:["michelin ★★","Indian","iconic","date night"], badge:"Michelin ★★" },
 
   { id:"kitchen-table", dest:"london", cat:"restaurants", name:"Kitchen Table", hood:"Fitzrovia, W1",
     cuisine:"Chef's-counter tasting menu", price:4,
     bookingUrl:"https://kitchentablelondon.co.uk", bookingLabel:"Book",
     walkIn:"Counter only — booking essential.",
-    summary:"Hidden behind a hot-dog bar, this 19-seat chef's counter holds two Michelin stars. Watch James Knappett and team cook a surprise British tasting menu inches in front of you while they call each dish by name. Intimate, theatrical, special.",
+    summary:"Behind a hot-dog bar, find a counter of nineteen seats and two Michelin stars. James Knappett and his cooks build a surprise British menu inches from your hands, calling out each dish as it lands. It's as much performance as dinner.",
     tags:["michelin ★★","chef's counter","hidden gem","tasting menu"], badge:"Michelin ★★" },
 
   { id:"kol", dest:"london", cat:"restaurants", name:"Kol", hood:"Marylebone, W1",
     cuisine:"Mexican — British produce, mezcal", price:3,
     bookingUrl:"https://kolrestaurant.com", bookingLabel:"Book",
     walkIn:"Mezcalería bar downstairs is walk-in.",
-    summary:"Michelin-starred Mexican that swaps imports for British produce — Santiago Lastra's tacos, moles and aguachiles are some of the most exciting food in town. The candlelit Mezcalería downstairs is a brilliant date-night drink.",
+    summary:"Michelin-starred Mexican built from British produce, where Santiago Lastra's tacos and moles are some of the liveliest food in the city. Downstairs there's a candlelit mezcalería that's worth an evening on its own.",
     tags:["michelin ★","Mexican","date night","mezcal"], badge:"Michelin ★" },
 
   { id:"brat", dest:"london", cat:"restaurants", name:"Brat", hood:"Shoreditch, E1",
     cuisine:"Wood-fired Basque-inspired", price:3,
     bookingUrl:"https://www.bratrestaurant.com", bookingLabel:"Book",
     walkIn:"Some walk-in seats; book to be safe.",
-    summary:"A Michelin star for live-fire cooking above a Shoreditch pub — the whole turbot grilled over coals is a rite of passage. Warm, smoky, unfussy and consistently one of London's most loved kitchens.",
+    summary:"A Michelin star for cooking over open flame, up a staircase above a Shoreditch pub. The whole turbot grilled over coals is the order to make: smoky, generous, every part of it right.",
     tags:["michelin ★","wood-fired","hidden gem"], badge:"Michelin ★" },
 
   { id:"clove-club", dest:"london", cat:"restaurants", name:"The Clove Club", hood:"Shoreditch, EC1",
     cuisine:"Modern British tasting menu", price:4,
     bookingUrl:"https://thecloveclub.com", bookingLabel:"Book",
     walkIn:"Booking essential.",
-    summary:"Set in Shoredich Town Hall, this Michelin-starred room serves a precise, produce-driven British tasting menu — the buttermilk fried chicken and pine-cured trout are signatures. A perennial World's-50-Best regular.",
+    summary:"In the old Shoreditch Town Hall, a precise, produce-led British tasting menu carries a Michelin star. The buttermilk fried chicken and the pine-cured trout have become quiet legends, and the room is a fixture on the World's 50 Best list.",
     tags:["michelin ★","tasting menu","award"], badge:"Michelin ★" },
 
   { id:"st-john", dest:"london", cat:"restaurants", name:"St. JOHN", hood:"Smithfield, EC1",
     cuisine:"British nose-to-tail", price:3,
     bookingUrl:"https://stjohnrestaurant.com", bookingLabel:"Book",
     walkIn:"Bar & bakery are walk-in; dining room book ahead.",
-    summary:"Fergus Henderson's whitewashed Smithfield icon — the most influential British restaurant of its generation and a past World's-50-Best winner. Roast bone marrow with parsley salad, then the famous Eccles cake with Lancashire cheese. A pilgrimage.",
+    summary:"Fergus Henderson's whitewashed Smithfield room is the most quietly influential restaurant of its kind. Start with roast bone marrow and parsley, then finish with the famous Eccles cake and a wedge of Lancashire. Worth the trip across town.",
     tags:["iconic","British","award","nose-to-tail"], badge:"modern classic" },
 
   /* ---------- LONDON · COFFEE (specialty) ---------- */
   { id:"monmouth", dest:"london", cat:"coffee", name:"Monmouth Coffee", hood:"Borough & Covent Garden", price:2,
     mustTry:"Filter of the day · cappuccino", walkIn:"Walk-in: yes (expect a queue)",
-    summary:"London's specialty-coffee pioneer since 1978. The tiny Borough counter beside the market, with shared wooden tables and a pastry from the neighbours, is a proper London morning ritual.",
+    summary:"London's specialty-coffee pioneer, going since 1978. Squeeze onto a shared table at the tiny Borough counter, take a pastry from the market next door, and you've got the best morning ritual in the city.",
     tags:["specialty","iconic","Borough"] },
 
   { id:"kaffeine", dest:"london", cat:"coffee", name:"Kaffeine", hood:"Fitzrovia, W1", price:2,
     mustTry:"Flat white · seasonal toast", walkIn:"Walk-in: yes",
-    summary:"Antipodean-run and routinely voted among London's best coffee. Friendly, polished, with excellent flat whites and a tidy little food counter. A reliable Fitzrovia pick-me-up.",
+    summary:"Antipodean-run and forever on the lists of London's best coffee. The flat whites are faultless, the little food counter good, the welcome warm. A reliable Fitzrovia stop.",
     tags:["specialty","flat white","Antipodean"] },
 
   { id:"watchhouse", dest:"london", cat:"coffee", name:"WatchHouse", hood:"Bermondsey · multiple", price:2,
     mustTry:"House espresso blend · oat flat white", walkIn:"Walk-in: yes",
-    summary:"A chic London specialty mini-chain born in a tiny Bermondsey watchman's hut. Beautiful interiors, own-roasted beans, very good pastries — the design-led coffee stop.",
+    summary:"A chic little specialty chain that began in a Bermondsey watchman's hut. Own-roasted beans, lovely interiors, very good pastries. The design-conscious place to perch for an hour.",
     tags:["specialty","design-led","chic"] },
 
   /* ---------- LONDON · MATCHA ---------- */
   { id:"how-matcha", dest:"london", cat:"matcha", name:"How Matcha", hood:"Marylebone & Notting Hill", price:2,
     mustTry:"Iced ceremonial matcha · the 'Dirty Matcha'", walkIn:"Walk-in: yes",
-    summary:"One of London's most popular all-day matcha bars, ceremonial-grade sourced direct from farms in Kagoshima. Try the Dirty Matcha (with a shot of espresso) — and the Notting Hill branch is the prettier of the two.",
+    summary:"One of London's most popular all-day matcha bars, ceremonial-grade sourced straight from farms in Kagoshima. Order the Dirty Matcha, with a shot of espresso through it. The Notting Hill branch is the prettier of the two.",
     tags:["ceremonial","all-day","Kagoshima"], badge:"matcha pick", badgeRose:true },
 
   { id:"tsujiri", dest:"london", cat:"matcha", name:"Tsujiri", hood:"Chinatown, WC2", price:2,
     mustTry:"Matcha soft-serve parfait · matcha latte", walkIn:"Walk-in: yes",
-    summary:"A Kyoto matcha house founded in 1860, now in Chinatown. Matcha in every form — intense soft-serve, parfaits, crepe cake, bubble tea — using high-grade gyokuro. Not too sweet, properly green.",
+    summary:"A Kyoto matcha house going since 1860, now with a counter in Chinatown. They serve it every way there is: intense soft-serve, parfaits, crepe cake, bubble tea, all from high-grade gyokuro. Properly green, never too sweet.",
     tags:["Kyoto","dessert","soft-serve"] },
 
   { id:"tea-parlour", dest:"london", cat:"matcha", name:"Tea Parlour", hood:"near Trafalgar Sq, WC2", price:2,
     mustTry:"Single-origin Uji ceremonial matcha", walkIn:"Walk-in: yes",
-    summary:"Purist single-origin matcha from Uji, Kyoto, plus a fun bubble-tea side, a few minutes from the National Gallery. A serene central spot to whisk up after a museum morning.",
+    summary:"Purist single-origin matcha from Uji, with a fun bubble-tea side, a few minutes from the National Gallery. A serene, central place to whisk one up after a museum morning.",
     tags:["Uji","ceremonial","central"] },
 
   { id:"cafe-kitsune", dest:"london", cat:"matcha", name:"Café Kitsuné", hood:"Belgravia, SW1", price:3,
     mustTry:"Matcha latte · yuzu madeleine", walkIn:"Walk-in: yes",
-    summary:"Maison Kitsuné's chic Belgravia café — French patisserie with a Japanese accent and a very good matcha latte. Tiny, stylish, and extremely her aesthetic.",
+    summary:"Maison Kitsuné's chic little Belgravia café, French patisserie with a Japanese accent and a genuinely good matcha latte. Tiny, stylish, and exactly the right aesthetic.",
     tags:["chic","Parisian-Japanese","pastries"] },
 
   /* ---------- LONDON · PUBS & BARS (more) ---------- */
   { id:"connaught-bar", dest:"london", cat:"pubs", name:"Connaught Bar", hood:"Carlos Place, Mayfair", price:4, walkIn:"Walk-in welcome early; busy later",
-    summary:"Repeatedly ranked the World's Best Bar. The tableside martini trolley — where your drink is mixed in front of you with a choice of bitters — is one of London's great luxuries. Silver-leaf walls, impeccable service. Dress smart.",
+    summary:"Ranked the World's Best Bar more than once, and it earns it. The martini trolley comes to your table and the drink is built in front of you, bitters and all, against silver-leaf walls. Dress smart, and order the martini.",
     tags:["world's best","cocktails","martini","iconic"], badge:"World's Best Bar", badgeRose:true },
 
   { id:"american-bar-savoy", dest:"london", cat:"pubs", name:"American Bar · The Savoy", hood:"Strand, WC2", price:4, walkIn:"Walk-in; can queue — smart dress",
-    summary:"The oldest surviving cocktail bar in Britain and the birthplace of countless classics. Live piano, art-deco glamour, white-jacketed bartenders. Order a Hanky Panky and feel the history.",
+    summary:"The oldest surviving cocktail bar in Britain, birthplace of more classics than anyone can count. Live piano, art-deco glamour, bartenders in white jackets. Order a Hanky Panky and feel the years in it.",
     tags:["historic","cocktails","live piano","iconic"] },
 
   { id:"tayer-elementary", dest:"london", cat:"pubs", name:"Tayēr + Elementary", hood:"Old Street, EC1", price:3, walkIn:"Walk-in (Elementary side); book the bar",
-    summary:"A World's-50-Best two-in-one: casual 'Elementary' up front, refined 'Tayēr' cocktail counter behind. Some of the most inventive, low-waste cocktails in the city from Monica Berg & Alex Kratena.",
+    summary:"Two bars in one, both on the World's 50 Best list: casual Elementary at the front, the refined Tayēr counter behind. Monica Berg and Alex Kratena pour some of the most inventive, low-waste cocktails in the city.",
     tags:["cocktails","award","innovative"], badge:"World's 50 Best" },
 
   { id:"cheshire-cheese", dest:"london", cat:"pubs", name:"Ye Olde Cheshire Cheese", hood:"Fleet Street, EC4", price:1, walkIn:"Walk-in: yes",
-    summary:"Rebuilt in 1667 after the Great Fire, a warren of dark, candlelit, low-ceilinged rooms down a Fleet Street alley. Dickens and Dr Johnson drank here. Order a pint and disappear into another century.",
+    summary:"Rebuilt in 1667 after the Great Fire, a warren of dark, low-ceilinged, candlelit rooms down a Fleet Street alley. Dickens and Dr Johnson both drank here. Order a pint and disappear into another century.",
     tags:["historic","candlelit","atmospheric"] },
 
   { id:"gordons-wine", dest:"london", cat:"pubs", name:"Gordon's Wine Bar", hood:"Embankment, WC2", price:2, walkIn:"Walk-in: yes — arrive early for the cave",
-    summary:"London's oldest wine bar (1890): a candlelit, cave-like cellar with barrel tables, cheese and charcuterie, and zero pretension. Cramped, flickering and deeply romantic — get there early to bag a vault seat.",
+    summary:"London's oldest wine bar, going since 1890: a candlelit cellar of barrel tables, cheese and charcuterie, and not an ounce of pretension. It's cramped and flickering and quietly romantic, so get there early to claim a seat in the vaults.",
     tags:["wine","candlelit","historic","romantic"], badge:"oldest wine bar" },
 
   /* ---------- LONDON · LANDMARKS (more + stadiums) ---------- */
   { id:"british-museum", dest:"london", cat:"landmarks", name:"The British Museum", hood:"Bloomsbury, WC1", entry:"free",
     tip:"Free; book a timed slot at busy periods. Head for the Rosetta Stone, the Egyptian mummies and the great glass-roofed Great Court.",
-    summary:"Two million years of human history under one roof — the Rosetta Stone, the Parthenon sculptures, Egyptian mummies — and it's free. The Norman Foster Great Court is one of the most beautiful interior spaces in London.",
+    summary:"Two million years of human history under one roof: the Rosetta Stone, the Parthenon sculptures, the Egyptian mummies, all of it free. Foster's glass-roofed Great Court is one of the most beautiful interiors in London.",
     tags:["free","history","iconic"] },
 
   { id:"st-pauls", dest:"london", cat:"landmarks", name:"St Paul's Cathedral", hood:"City of London, EC4", entry:"paid · ~£26",
     tip:"Climb the 528 steps to the Golden Gallery for a knockout City view. The Whispering Gallery carries a murmur right around the dome.",
-    summary:"Wren's masterpiece and the City's great dome. Climb to the Whispering Gallery and on up for panoramic views, then walk the Millennium Bridge to Tate Modern. Beautiful at golden hour.",
+    summary:"Wren's masterpiece, and the dome that still defines the City skyline. Climb to the Whispering Gallery and keep going for the view, then cross the Millennium Bridge to Tate Modern. It's loveliest at golden hour.",
     tags:["iconic","views","architecture"] },
 
   { id:"westminster-abbey", dest:"london", cat:"landmarks", name:"Westminster Abbey", hood:"Westminster, SW1", entry:"paid · ~£30",
     tip:"Book online. Don't miss Poets' Corner and the Cosmati pavement. Evensong (free) is a magical, quieter way to experience it.",
-    summary:"The coronation church for a thousand years — where monarchs are crowned, married and buried. Gothic vaulting, royal tombs, Poets' Corner. Attend free Evensong to hear the choir fill the nave.",
+    summary:"The coronation church for a thousand years, where monarchs are crowned, married and buried beneath soaring Gothic vaults. Find Poets' Corner among the tombs. Come to free Evensong to hear the choir fill the nave.",
     tags:["royal","historic","Gothic"] },
 
   { id:"tower-bridge", dest:"london", cat:"landmarks", name:"Tower Bridge", hood:"Tower Hill, SE1", entry:"paid · ~£13 (free to cross)",
     tip:"Free to walk across; pay for the high-level glass-floor walkways & Victorian engine rooms. Check the bridge-lift times to watch it open.",
-    summary:"London's most photogenic bridge (often mistaken for London Bridge). Walk the glass-floored high walkways for a view straight down onto the road, or just cross it at dusk when it's lit.",
+    summary:"The most photogenic bridge in London, and the one everyone mistakes for London Bridge. Walk the glass-floored high walkways and look straight down onto the traffic, or simply cross it at dusk once it's lit.",
     tags:["iconic","river","views"] },
 
   { id:"buckingham-palace", dest:"london", cat:"landmarks", name:"Buckingham Palace", hood:"St James's, SW1", entry:"paid · State Rooms ~£32 (summer)",
     tip:"The State Rooms open in summer only (book ahead). Year-round, catch the Changing of the Guard, then walk through St James's Park.",
-    summary:"The monarch's London home and the backdrop to the Changing of the Guard. In summer the lavish State Rooms open to visitors; the rest of the year, the railings, the Mall and the park around it are a lovely free wander.",
+    summary:"The monarch's London home, and the backdrop to the Changing of the Guard. The lavish State Rooms open only in summer; the rest of the year, the gates, the Mall and the surrounding park make a lovely free wander.",
     tags:["royal","iconic","ceremony"] },
 
   { id:"stamford-bridge", dest:"london", cat:"landmarks", name:"Stamford Bridge — Chelsea FC", hood:"Fulham, SW6", entry:"paid · tour ~£28",
     tip:"Book the stadium tour + museum online; on non-match days you get the dressing rooms, tunnel and pitchside. Matchday tickets sell fast.",
-    summary:"Home of Chelsea FC since 1905. The stadium tour takes you through the dressing rooms, players' tunnel and pitchside, plus the trophy-filled museum. A must if Jer's blue.",
+    summary:"Home of Chelsea FC since 1905. The tour runs through the dressing rooms, the players' tunnel and pitchside, with a trophy-filled museum alongside. Unmissable if Jer's a Blue.",
     tags:["football","stadium","tour"] },
 
   { id:"emirates-stadium", dest:"london", cat:"landmarks", name:"Emirates Stadium — Arsenal", hood:"Holloway, N5", entry:"paid · tour ~£30",
     tip:"The self-guided audio tour (narrated partly by Ian Wright) is genuinely good. Combine with the Arsenal museum.",
-    summary:"Arsenal's 60,000-seat home in north London. The self-guided 'Legends' tour gives you the dressing rooms, tunnel and directors' box, with the club museum alongside. A Gunners pilgrimage.",
+    summary:"Arsenal's sixty-thousand-seat home in north London. The self-guided Legends tour takes in the dressing rooms, the tunnel and the directors' box, with the club museum alongside. A Gunners pilgrimage.",
     tags:["football","stadium","tour"] },
 
   { id:"spurs-stadium", dest:"london", cat:"landmarks", name:"Tottenham Hotspur Stadium", hood:"Tottenham, N17", entry:"paid · tour ~£30, Skywalk ~£60",
     tip:"For thrill-seekers, the rooftop 'Dare Skywalk' climbs to the top of the stand. Otherwise the regular tour covers tunnel & dressing rooms.",
-    summary:"Widely rated the best club stadium in Europe — a vast, single-tier 'wall' of fans, a retractable pitch and a rooftop Dare Skywalk for the brave. Tours run on non-match days.",
+    summary:"Widely rated the best club stadium in Europe: a vast single-tier wall of fans, a pitch that slides away, and a rooftop Skywalk for the brave. Tours run on non-match days.",
     tags:["football","stadium","skywalk"] },
 
   /* ---------- LONDON · PARKS ---------- */
   { id:"hyde-park", dest:"london", cat:"parks", name:"Hyde Park", hood:"Central London, W2", entry:"free",
     tip:"Hire a pedalo on the Serpentine, or walk to the Diana Memorial Fountain. The Rose Garden by Hyde Park Corner is gorgeous in summer.",
-    summary:"350 acres in the middle of the city — boating on the Serpentine, the Rose Garden, and Speakers' Corner. The classic central London picnic and stroll.",
+    summary:"Three hundred and fifty acres in the middle of the city. Hire a boat on the Serpentine, find the Rose Garden, catch the arguments at Speakers' Corner. The classic central-London picnic and stroll.",
     tags:["royal park","boating","central"] },
 
   { id:"regents-park", dest:"london", cat:"parks", name:"Regent's Park", hood:"Marylebone, NW1", entry:"free",
     tip:"Queen Mary's Gardens has 12,000 roses (peak: June). Climb Primrose Hill at the north end for the skyline.",
-    summary:"London's most elegant royal park — Queen Mary's Rose Garden with 12,000 roses, a boating lake, formal avenues and the open-air theatre. Romantic in early summer.",
+    summary:"The most elegant of the royal parks. Queen Mary's Gardens hold twelve thousand roses, and there's a boating lake, formal avenues and an open-air theatre besides. At its most romantic in early summer.",
     tags:["roses","boating","romantic"] },
 
   { id:"st-james-park", dest:"london", cat:"parks", name:"St James's Park", hood:"Westminster, SW1", entry:"free",
     tip:"Stand on the Blue Bridge for the fairy-tale view to Buckingham Palace one way, the London Eye the other. Say hi to the resident pelicans.",
-    summary:"The prettiest of the royal parks — a ribbon of lake with pelicans, weeping willows and the storybook view from the Blue Bridge to Buckingham Palace. Tiny and perfect.",
+    summary:"The prettiest of the royal parks: a ribbon of lake with pelicans on it, weeping willows, and the storybook view from the Blue Bridge to Buckingham Palace. Small, and close to perfect.",
     tags:["royal park","views","romantic"] },
 
   { id:"kyoto-garden", dest:"london", cat:"parks", name:"Kyoto Garden · Holland Park", hood:"Kensington, W8", entry:"free",
     tip:"Go early to have the koi pond to yourself. Peacocks roam the wider park. Magical in autumn when the maples turn.",
-    summary:"A perfect Japanese garden tucked inside Holland Park — tiered waterfalls, a koi pond, stone lanterns and Japanese maples, with peacocks strutting nearby. One of London's loveliest hidden corners.",
+    summary:"A Japanese garden tucked inside Holland Park, with tiered waterfalls, a koi pond, stone lanterns and maples, and peacocks wandering the paths around it. One of the loveliest quiet corners in London.",
     tags:["Japanese garden","hidden gem","romantic"], badge:"hidden gem" },
 
   { id:"richmond-park", dest:"london", cat:"parks", name:"Richmond Park", hood:"Richmond, SW", entry:"free",
     tip:"Walk to King Henry's Mound for a protected, telescope view all the way to St Paul's. Keep your distance from the deer (especially autumn rut).",
-    summary:"London's largest park and a National Nature Reserve — 600 wild red and fallow deer roam huge skies and ancient oaks. The Isabella Plantation blazes with azaleas in spring.",
+    summary:"The largest of London's parks and a national nature reserve, where six hundred wild deer roam under huge skies and ancient oaks. In spring the Isabella Plantation blazes with azaleas.",
     tags:["wild deer","nature","big skies"] },
 
   { id:"kew-gardens", dest:"london", cat:"parks", name:"Kew Gardens", hood:"Kew, Richmond", entry:"paid · ~£22",
     tip:"Book online. Don't miss the Palm House, the Temperate House and the Treetop Walkway. A full half-day, easily.",
-    summary:"The Royal Botanic Gardens — a UNESCO World Heritage site and one of the world's great gardens. Victorian glasshouses, a treetop walkway, a Japanese gateway and 50,000 living plants.",
+    summary:"The Royal Botanic Gardens, a UNESCO site and one of the great gardens of the world. Victorian glasshouses, a treetop walkway, a Japanese gateway, and fifty thousand living plants to lose an afternoon among.",
     tags:["botanical","glasshouses","UNESCO"] },
 
   { id:"primrose-hill", dest:"london", cat:"parks", name:"Primrose Hill", hood:"NW1", entry:"free",
     tip:"Bring a bottle and climb for sunset — the protected view across the whole skyline is one of the best in London.",
-    summary:"A short, steep climb to the most beloved skyline view in London — the whole city laid out below. The classic spot for a sunset picnic with a bottle of something.",
+    summary:"A short, steep climb to the most loved skyline view in London, the whole city laid out below you. The classic spot for a sunset picnic with a bottle of something.",
     tags:["view","picnic","sunset"] },
 
   /* ===================== HAMPSTEAD ===================== */
@@ -1193,8 +1421,86 @@ const baseCat = (c)=>c;
 const byId = (id)=>PLACES.find(p=>p.id===id);
 const ENRICH = {};
 
+/* ---------- favourites (Jer = blue · Tev = pink) ---------- */
+const FAV_KEY = "le_favs_v1";
+const FAV_META = { jer:{label:"Jer", emoji:"💙"}, tev:{label:"Tev", emoji:"💗"} };
+function loadFavs(){ try{ const o=JSON.parse(localStorage.getItem(FAV_KEY)||"{}"); return { jer:new Set(o.jer||[]), tev:new Set(o.tev||[]) }; }catch(_){ return { jer:new Set(), tev:new Set() }; } }
+const FAVS = loadFavs();
+function saveFavsStore(){ try{ localStorage.setItem(FAV_KEY, JSON.stringify({ jer:[...FAVS.jer], tev:[...FAVS.tev] })); }catch(_){} }
+function savesHTML(id){
+  return `<div class="saves">`+
+    `<button class="save-btn jer${FAVS.jer.has(id)?" on":""}" data-who="jer" data-id="${id}" title="Jer's pick" aria-label="Jer's pick">J</button>`+
+    `<button class="save-btn tev${FAVS.tev.has(id)?" on":""}" data-who="tev" data-id="${id}" title="Tev's pick" aria-label="Tev's pick">T</button></div>`;
+}
+function savesRowHTML(id){
+  return `<div class="save-row"><span class="save-row-label">save to</span>`+
+    `<button class="save-pill jer${FAVS.jer.has(id)?" on":""}" data-who="jer" data-id="${id}">💙 Jer's pick</button>`+
+    `<button class="save-pill tev${FAVS.tev.has(id)?" on":""}" data-who="tev" data-id="${id}">💗 Tev's pick</button></div>`;
+}
+function syncFavUI(id){
+  document.querySelectorAll(`.save-btn[data-id="${id}"], .save-pill[data-id="${id}"]`).forEach(b=>{
+    b.classList.toggle("on", FAVS[b.dataset.who].has(id));
+  });
+}
+function toggleFav(who,id){
+  const s = FAVS[who]; if(s.has(id)) s.delete(id); else s.add(id);
+  saveFavsStore(); syncFavUI(id); updateFab();
+  if(favsOpen) renderFavs();
+}
+/* one capture-phase listener covers every save control (cards, modal, favourites list) */
+document.addEventListener("click", e=>{
+  const b = e.target.closest(".save-btn, .save-pill");
+  if(b){ e.stopPropagation(); e.preventDefault(); toggleFav(b.dataset.who, b.dataset.id); }
+}, true);
+
+let favsOpen = false;
+function updateFab(){
+  const f = document.getElementById("fab"); if(!f) return;
+  f.querySelector(".count").textContent = FAVS.jer.size + FAVS.tev.size;
+}
+function favSectionHTML(who){
+  const items = [...FAVS[who]].map(byId).filter(Boolean);
+  const inner = items.length
+    ? `<div class="grid">${items.map(cardHTML).join("")}</div>`
+    : `<p class="fav-empty">No picks yet — tap the ${who==="jer"?"blue J":"pink T"} on any place.</p>`;
+  return `<div class="fav-section ${who}"><h3>${FAV_META[who].emoji} ${FAV_META[who].label}'s picks <span class="fav-n">${items.length}</span></h3>${inner}</div>`;
+}
+function renderFavs(){
+  const body = document.getElementById("favsBody");
+  body.innerHTML = favSectionHTML("jer") + favSectionHTML("tev");
+  body.querySelectorAll(".card").forEach(c=> c.addEventListener("click", ()=>openDetail(c.dataset.id)));
+  enrichPlaces([...FAVS.jer, ...FAVS.tev].map(byId).filter(Boolean));
+}
+function openFavs(){ renderFavs(); const m=document.getElementById("favsModal"); m.classList.add("open"); m.setAttribute("aria-hidden","false"); document.body.classList.add("locked"); favsOpen=true; }
+function closeFavs(){ const m=document.getElementById("favsModal"); m.classList.remove("open"); m.setAttribute("aria-hidden","true"); document.body.classList.remove("locked"); favsOpen=false; }
+document.getElementById("fab").addEventListener("click", openFavs);
+document.getElementById("favsClose").addEventListener("click", closeFavs);
+document.getElementById("favsModal").addEventListener("click", e=>{ if(e.target.id==="favsModal") closeFavs(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && favsOpen) closeFavs(); });
+updateFab();
+
 const priceMarkup = (lvl)=> lvl ? `${"$".repeat(lvl)}<span class="off">${"$".repeat(4-lvl)}</span>` : "";
 const mapsUrl = (p)=> "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${p.name} ${p.hood}`);
+
+/* placeholder art — unique seeded gradient + soft category line-icon (so key-free cards still feel designed) */
+function hashId(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))>>>0; } return h; }
+const CAT_GRAD = {
+  restaurants:["#F8E7E5","#E8C5C1","#D4A5A0"],
+  coffee:["#F7ECE0","#EAD2C4","#D9B6A6"],
+  matcha:["#EDF2E2","#C8DBAB","#A6C77E"],
+  pubs:["#F4DFDC","#D9A8A2","#B98A85"],
+  landmarks:["#F7E9DF","#E6C9A8","#CDAE78"],
+  parks:["#E7F0DD","#BCD7A6","#94B873"],
+};
+function thumbGrad(p){ const g=CAT_GRAD[p.cat]||CAT_GRAD.restaurants; const a=100+(hashId(p.id)%90); return `linear-gradient(${a}deg, ${g[0]} 0%, ${g[1]} 60%, ${g[2]} 100%)`; }
+const CAT_ICON = {
+  restaurants:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="33" r="19"/><circle cx="32" cy="33" r="12"/><path d="M14 14v15M10 14v9M18 14v9M14 29v21"/><path d="M50 14c5 0 5 12 0 17v19"/></svg>`,
+  coffee:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 28h27v9a13.5 13.5 0 0 1-27 0z"/><path d="M43 30h5a5 5 0 0 1 0 10h-4"/><path d="M14 52h31"/><path d="M25 13c-3 3 0 5 0 8M34 13c-3 3 0 5 0 8"/></svg>`,
+  matcha:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 33h37a18.5 18.5 0 0 1-37 0z"/><path d="M32 10v21M27 13v18M37 13v18"/><path d="M22 14c-2 2 0 4 0 6"/></svg>`,
+  pubs:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18h24l-3 34H23z"/><path d="M20 26h24"/><path d="M24 18q4-6 8 0q4-6 8 0"/></svg>`,
+  landmarks:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 24L32 12l20 12"/><path d="M14 24h36"/><path d="M19 24v22M28 24v22M36 24v22M45 24v22"/><path d="M14 46h36M10 52h44"/></svg>`,
+  parks:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="22" r="13"/><circle cx="22" cy="31" r="8"/><circle cx="42" cy="31" r="8"/><path d="M32 39v15M32 47l-7-5M32 45l7-5"/></svg>`,
+};
 
 function cardHTML(p){
   const emoji = CAT_META[p.cat].emoji;
@@ -1212,10 +1518,11 @@ function cardHTML(p){
   const fFree = (p.entry && p.entry.startsWith("free")) ? 1 : 0;
   return `
   <article class="card${feature}" data-id="${p.id}" data-price="${p.price||""}" data-mich="${fMich}" data-award="${fAward}" data-hidden="${fHidden}" data-free="${fFree}" tabindex="0" role="button" aria-label="${p.name} — view details">
-    <div class="thumb" data-base="${p.cat}">
-      <span class="thumb-emoji" aria-hidden="true">${emoji}</span>
+    <div class="thumb" data-base="${p.cat}" style="background:${thumbGrad(p)}">
+      <span class="thumb-motif" aria-hidden="true">${CAT_ICON[p.cat]||""}</span>
       ${badge}${chip}
       <span class="thumb-rating" id="cr-${p.id}"><span class="s">★</span><span class="v"></span></span>
+      ${savesHTML(p.id)}
     </div>
     <div class="card-body">
       <span class="label">${p.hood}</span>
@@ -1227,26 +1534,41 @@ function cardHTML(p){
   </article>`;
 }
 
-/* ---------- filter chips ---------- */
+/* ---------- filters: faceted (vibe × price), multi-select, AND across groups ---------- */
 const tagHas = (p,s)=>(p.tags||[]).some(t=>t.toLowerCase().includes(s));
 function filterBarHTML(places){
-  const some = (fn)=>places.some(fn);
-  const chips = [`<button class="active" data-f="all">All</button>`];
-  if(some(p=>tagHas(p,"michelin"))) chips.push(`<button class="gold" data-f="mich">★ Michelin</button>`);
-  if(some(p=>tagHas(p,"award"))) chips.push(`<button data-f="award">Award-winning</button>`);
-  if(some(p=>p.badge==="hidden gem"||tagHas(p,"hidden gem"))) chips.push(`<button data-f="hidden">Hidden gem</button>`);
-  [1,2,3,4].forEach(n=>{ if(some(p=>p.price===n)) chips.push(`<button data-f="p${n}">${"$".repeat(n)}</button>`); });
-  if(some(p=>p.entry&&p.entry.startsWith("free"))) chips.push(`<button data-f="free">Free entry</button>`);
-  return chips.length>1 ? `<div class="filterbar">${chips.join("")}</div>` : "";
+  const some=(fn)=>places.some(fn);
+  const vibe=[];
+  if(some(p=>tagHas(p,"michelin"))) vibe.push(`<button class="fchip gold" data-dim="vibe" data-f="mich">★ Michelin</button>`);
+  if(some(p=>tagHas(p,"award"))) vibe.push(`<button class="fchip" data-dim="vibe" data-f="award">Award-winning</button>`);
+  if(some(p=>p.badge==="hidden gem"||tagHas(p,"hidden gem"))) vibe.push(`<button class="fchip" data-dim="vibe" data-f="hidden">Hidden gem</button>`);
+  if(some(p=>p.entry&&p.entry.startsWith("free"))) vibe.push(`<button class="fchip" data-dim="vibe" data-f="free">Free entry</button>`);
+  const price=[];
+  [1,2,3,4].forEach(n=>{ if(some(p=>p.price===n)) price.push(`<button class="fchip" data-dim="price" data-f="${n}">${"$".repeat(n)}</button>`); });
+  if(!vibe.length && !price.length) return "";
+  let h=`<div class="filterbar">`;
+  if(vibe.length) h+=`<div class="fgroup">${vibe.join("")}</div>`;
+  if(vibe.length && price.length) h+=`<span class="fsep"></span>`;
+  if(price.length) h+=`<div class="fgroup">${price.join("")}</div>`;
+  h+=`<button class="fclear" hidden>✕ clear</button></div>`;
+  return h;
 }
-function matchFilter(card,f){
-  if(f==="all") return true;
-  if(f==="mich") return card.dataset.mich==="1";
-  if(f==="award") return card.dataset.award==="1";
-  if(f==="hidden") return card.dataset.hidden==="1";
-  if(f==="free") return card.dataset.free==="1";
-  if(f[0]==="p") return card.dataset.price===f.slice(1);
-  return true;
+function vibeMatch(card,f){
+  return f==="mich"?card.dataset.mich==="1": f==="award"?card.dataset.award==="1": f==="hidden"?card.dataset.hidden==="1": f==="free"?card.dataset.free==="1": true;
+}
+function overviewHTML(dest, cats){
+  const meta=DEST_META[dest];
+  const all=PLACES.filter(p=>p.dest===dest);
+  const hi=all.filter(p=>p.feature).concat(all.filter(p=>p.badge && !p.feature)).slice(0,4);
+  return `<div class="overview">
+    <p class="ov-blurb">${meta.blurb||meta.tag}</p>
+    <div class="ov-facts">
+      <div class="ov-fact"><span class="label">Best time</span><span class="val">${meta.best||"—"}</span></div>
+      <div class="ov-fact"><span class="label">Areas</span><span class="val">${meta.areas||"—"}</span></div>
+      <div class="ov-fact"><span class="label">In here</span><span class="val">${all.length} places · ${cats.length} lists</span></div>
+    </div>
+    ${hi.length?`<h4 class="ov-h">✦ Don't miss</h4><div class="grid">${hi.map(cardHTML).join("")}</div>`:""}
+  </div>`;
 }
 const TRAIN_HTML = `<div class="train"><div class="route"><span class="stop">London King's Cross</span><span class="dash"></span><span class="stop">Edinburgh Waverley</span></div>
   <div class="facts"><div class="fact"><span class="label">Operator</span><span class="val">LNER · lner.co.uk</span></div><div class="fact"><span class="label">Duration</span><span class="val">~4.5 hours</span></div><div class="fact"><span class="label">Advance from</span><span class="val">~£30–40</span></div></div>
@@ -1260,18 +1582,19 @@ DEST_ORDER.forEach(dest=>{
   const meta = DEST_META[dest];
   const sec = document.createElement("section");
   sec.className = "view content"; sec.dataset.view = dest;
-  const doodle = meta.image ? `<img src="${meta.image}" alt="${meta.name}">` : (DOODLE[dest]||"");
   let html = `<div class="wrap"><div class="city-head">
-      <div class="doodle">${doodle}</div>
-      <div class="city-row">${flagHTML(COUNTRY[dest])}<div class="city serif">${meta.name}</div></div>
+      <div class="seal">${sealHTML(dest)}</div>
+      <div class="city serif">${meta.name}</div>
       <div class="sub">${meta.tag}</div></div>`;
+  const tabs = [["overview","✦","Overview"]].concat(cats.map(c=>[c,CAT_META[c].emoji,CAT_META[c].label]));
   html += `<div class="toggle" role="tablist">` +
-    cats.map((c,i)=>`<button class="${i===0?"active":""}" data-cat="${c}">${CAT_META[c].emoji} ${CAT_META[c].label}</button>`).join("") + `</div>`;
-  html += cats.map((c,i)=>{
+    tabs.map((t,i)=>`<button class="${i===0?"active":""}" data-cat="${t[0]}">${t[1]} ${t[2]}</button>`).join("") + `</div>`;
+  html += `<div class="cat-panel active" data-cat="overview">${overviewHTML(dest, cats)}</div>`;
+  html += cats.map(c=>{
     const places = PLACES.filter(p=>p.dest===dest && p.cat===c);
     const cards = places.map(cardHTML).join("");
     const extra = (dest==="scotland" && c==="restaurants") ? TRAIN_HTML : "";
-    return `<div class="cat-panel ${i===0?"active":""}" data-cat="${c}">${extra}${filterBarHTML(places)}<div class="grid">${cards}</div></div>`;
+    return `<div class="cat-panel" data-cat="${c}"><div class="panel-count">${places.length} ${CAT_META[c].label.toLowerCase()}</div>${extra}${filterBarHTML(places)}<div class="grid">${cards}</div></div>`;
   }).join("");
   html += `</div>`;
   sec.innerHTML = html;
@@ -1285,20 +1608,30 @@ DEST_ORDER.forEach(dest=>{
       toggle.querySelectorAll("button").forEach(x=>x.classList.remove("active"));
       b.classList.add("active");
       panels.forEach(pl=>pl.classList.toggle("active", pl.dataset.cat===b.dataset.cat));
+      const c=b.dataset.cat;
+      enrichPlaces(c==="overview" ? PLACES.filter(p=>p.dest===dest && (p.feature||p.badge)).slice(0,4) : PLACES.filter(p=>p.dest===dest && p.cat===c));
     });
   });
-  // filter wiring
+  // faceted filter wiring (vibe × price, multi-select)
   panels.forEach(panel=>{
     const fb = panel.querySelector(".filterbar"); if(!fb) return;
     const grid = panel.querySelector(".grid");
-    fb.querySelectorAll("button").forEach(btn=>{
-      btn.addEventListener("click",()=>{
-        fb.querySelectorAll("button").forEach(x=>x.classList.remove("active"));
-        btn.classList.add("active");
-        const f = btn.dataset.f;
-        grid.querySelectorAll(".card").forEach(card=>{ card.style.display = matchFilter(card,f) ? "" : "none"; });
+    const clear = fb.querySelector(".fclear");
+    const apply = ()=>{
+      const vibe=[...fb.querySelectorAll('[data-dim="vibe"].on')].map(b=>b.dataset.f);
+      const price=[...fb.querySelectorAll('[data-dim="price"].on')].map(b=>b.dataset.f);
+      let shown=0;
+      grid.querySelectorAll(".card").forEach(card=>{
+        const show = (!vibe.length || vibe.some(f=>vibeMatch(card,f))) && (!price.length || price.includes(card.dataset.price));
+        card.style.display = show?"":"none"; if(show) shown++;
       });
-    });
+      clear.hidden = !(vibe.length||price.length);
+      let es = panel.querySelector(".filter-empty");
+      if(shown===0){ if(!es){ es=document.createElement("p"); es.className="filter-empty"; panel.appendChild(es);} es.textContent="No spots match those filters — try loosening one."; es.style.display=""; }
+      else if(es){ es.style.display="none"; }
+    };
+    fb.querySelectorAll(".fchip").forEach(b=> b.addEventListener("click",()=>{ b.classList.toggle("on"); apply(); }));
+    clear.addEventListener("click",()=>{ fb.querySelectorAll(".fchip").forEach(x=>x.classList.remove("on")); apply(); });
   });
 });
 
@@ -1311,19 +1644,20 @@ document.querySelectorAll(".card").forEach(card=>{
 
 function applyCardEnrichment(p){
   const e = ENRICH[p.id]; if(!e) return;
-  const card = document.querySelector(`.card[data-id="${p.id}"]`); if(!card) return;
-  if(e.photos && e.photos[0]){
-    const thumb = card.querySelector(".thumb");
-    if(!thumb.querySelector("img")){
-      const img = new Image(); img.alt = p.name; img.loading = "lazy";
-      img.onload = ()=>img.classList.add("loaded"); img.src = e.photos[0];
-      thumb.appendChild(img);
+  document.querySelectorAll(`.card[data-id="${p.id}"]`).forEach(card=>{
+    if(e.photos && e.photos[0]){
+      const thumb = card.querySelector(".thumb");
+      if(thumb && !thumb.querySelector("img")){
+        const img = new Image(); img.alt = p.name; img.loading = "lazy";
+        img.onload = ()=>img.classList.add("loaded"); img.src = e.photos[0];
+        thumb.appendChild(img);
+      }
     }
-  }
-  if(e.rating){
-    const r = card.querySelector(`#cr-${p.id}`);
-    if(r){ r.querySelector(".v").textContent = " " + e.rating.toFixed(1); r.classList.add("on"); }
-  }
+    if(e.rating){
+      const r = card.querySelector(".thumb-rating");
+      if(r){ r.querySelector(".v").textContent = " " + e.rating.toFixed(1); r.classList.add("on"); }
+    }
+  });
 }
 
 /* ---------- detail sheet ---------- */
@@ -1334,7 +1668,7 @@ let lastFocus = null;
 function detailHTML(p){
   const e = ENRICH[p.id] || {}, photos = e.photos || [];
   const badge = p.badge ? `<div class="m-badge${p.badgeRose?" rose":""}">${p.badge}</div>` : "";
-  const hero = photos[0] ? `<img id="m-hero-img" src="${photos[0]}" alt="${p.name}">` : `<span class="emoji" aria-hidden="true">${CAT_META[p.cat].emoji}</span>`;
+  const hero = photos[0] ? `<img id="m-hero-img" src="${photos[0]}" alt="${p.name}">` : `<span class="m-motif" aria-hidden="true">${CAT_ICON[p.cat]||""}</span>`;
   const thumbs = photos.length>1
     ? `<div class="modal-thumbs">${photos.map((u,i)=>`<button data-src="${u}" class="${i===0?"active":""}" aria-label="Photo ${i+1}"><img src="${u}" alt=""></button>`).join("")}</div>` : "";
   const priceBit = p.price ? `<span class="m-price">${priceMarkup(p.price)}</span>` : "";
@@ -1351,7 +1685,7 @@ function detailHTML(p){
   if(p.bookingUrl) actions.push(`<a class="chip-link solid" href="${p.bookingUrl}" target="_blank" rel="noopener">${p.bookingLabel||"Book"} ↗</a>`);
   actions.push(`<a class="chip-link" href="${mapsUrl(p)}" target="_blank" rel="noopener">📍 Open in Maps</a>`);
   return `
-    <div class="modal-hero" data-base="${p.cat}">${hero}${badge}<button class="modal-close" id="modalClose" aria-label="Close">✕</button></div>
+    <div class="modal-hero" data-base="${p.cat}" style="background:${thumbGrad(p)}">${hero}${badge}<button class="modal-close" id="modalClose" aria-label="Close">✕</button></div>
     ${thumbs}
     <div class="modal-body">
       <span class="label">${p.hood}</span>
@@ -1359,17 +1693,13 @@ function detailHTML(p){
       <div class="m-meta-row">${priceBit}${entryBit}${ratingBit}</div>
       ${cuisine}${summary}${must}${tip}${walk}
       <div class="modal-tags">${tags}</div>
+      ${savesRowHTML(p.id)}
       <div class="modal-actions">${actions.join("")}</div>
     </div>`;
 }
 
-function openDetail(id){
-  const p = byId(id); if(!p) return;
-  lastFocus = document.activeElement;
-  modalCard.innerHTML = detailHTML(p);
-  modalCard.scrollTop = 0;
-  modal.classList.add("open"); modal.setAttribute("aria-hidden","false");
-  document.body.classList.add("locked");
+let currentDetailId = null;
+function wireDetailControls(){
   document.getElementById("modalClose").addEventListener("click", closeDetail);
   modalCard.querySelectorAll(".modal-thumbs button").forEach(b=>{
     b.addEventListener("click",()=>{
@@ -1379,7 +1709,22 @@ function openDetail(id){
       b.classList.add("active");
     });
   });
+}
+function openDetail(id){
+  const p = byId(id); if(!p) return;
+  lastFocus = document.activeElement;
+  currentDetailId = id;
+  modalCard.innerHTML = detailHTML(p);
+  modalCard.scrollTop = 0;
+  modal.classList.add("open"); modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("locked");
+  wireDetailControls();
   document.getElementById("modalClose").focus();
+  if(!ENRICH[id]){
+    enrichPlaces([p]).then(()=>{
+      if(modal.classList.contains("open") && currentDetailId===id){ modalCard.innerHTML = detailHTML(p); wireDetailControls(); }
+    });
+  }
 }
 function closeDetail(){
   modal.classList.remove("open"); modal.setAttribute("aria-hidden","true");
@@ -1400,9 +1745,11 @@ function showView(name){
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v===target));
   navBtns.forEach(b=>b.classList.toggle("active", b.dataset.view===name));
   nav.classList.toggle("show", name!=="hero");
+  const _fab = document.getElementById("fab"); if(_fab) _fab.style.display = name==="hero" ? "none" : "inline-flex";
   window.scrollTo({ top:0, behavior:"auto" });
   currentView = name;
   if(name==="map") ensureMap();
+  else if(DEST_META[name]) enrichActivePanel(name);
 }
 navBtns.forEach(b=> b.addEventListener("click", ()=>showView(b.dataset.view)) );
 document.getElementById("openTrip").addEventListener("click", ()=>showView("map"));
@@ -1462,6 +1809,7 @@ document.getElementById("mapToggle").querySelectorAll("button").forEach(b=>{
   b.addEventListener("click",()=>{
     document.getElementById("mapToggle").querySelectorAll("button").forEach(x=>x.classList.remove("active"));
     b.classList.add("active"); setCity(b.dataset.city);
+    if(gmap) enrichPlaces(PLACES.filter(p=>p.dest===b.dataset.city));
   });
 });
 setCity("london");
@@ -1548,32 +1896,86 @@ async function buildMap(){
   PLACES.forEach(addMarker);
 }
 async function ensureMap(){
-  if(!googleReady || !CONFIG.googleApiKey) return;
-  if(mapBuilt){ google.maps.event.trigger(gmap,"resize"); setCity(currentDest); return; }
-  if(mapBuilding) return;
-  mapBuilding=true; await buildMap(); mapBuilding=false;
+  if(!CONFIG.googleApiKey) return;
+  if(!await ensureGoogleLib()) return;
+  if(mapBuilt){ google.maps.event.trigger(gmap,"resize"); setCity(currentDest); }
+  else if(!mapBuilding){ mapBuilding=true; await buildMap(); mapBuilding=false; }
+  enrichPlaces(PLACES.filter(p=>p.dest===currentDest));
 }
 
-(async function activateGoogle(){
-  const key=CONFIG.googleApiKey;
-  if(!key){ mapNote.textContent="Add a Google API key in the code to load live photos, ratings and pins."; return; }
-  const hadCache = loadCache();
-  if(hadCache) PLACES.forEach(p=>{ if(ENRICH[p.id]) applyCardEnrichment(p); });
+/* lazy enrichment — only fetch the places you're actually looking at (saves quota) */
+let placesLib = null;
+const enrichQueued = new Set();
+async function ensureGoogleLib(){
+  if(!CONFIG.googleApiKey) return false;
+  if(placesLib) return true;
   try{
-    await loadGoogle(key);
-    googleReady=true;
-    if(currentView==="map") ensureMap();
-    const { Place } = await google.maps.importLibrary("places");
-    const todo = PLACES.filter(p=>!ENRICH[p.id]);
-    const batch=8;
-    for(let i=0;i<todo.length;i+=batch){
-      await Promise.allSettled(todo.slice(i,i+batch).map(p=>enrichOne(Place,p)));
-    }
-    saveCache();
-    mapNote.textContent="Tap any pin to open the place. Photos & ratings are live from Google.";
-  }catch(err){
-    mapNote.textContent="Couldn't reach Google (check the API key / enabled APIs). The trip still works.";
+    await loadGoogle(CONFIG.googleApiKey);
+    googleReady = true;
+    placesLib = (await google.maps.importLibrary("places")).Place;
+    return true;
+  }catch(e){ mapNote.textContent = "Couldn't reach Google — check the key, billing and that Maps JavaScript API + Places API (New) are enabled."; return false; }
+}
+async function enrichPlaces(list){
+  if(!list || !list.length) return;
+  const todo = list.filter(p=>!ENRICH[p.id] && !enrichQueued.has(p.id));
+  if(!todo.length) return;
+  if(!await ensureGoogleLib()) return;
+  todo.forEach(p=>enrichQueued.add(p.id));
+  const batch = 6;
+  for(let i=0;i<todo.length;i+=batch){
+    await Promise.allSettled(todo.slice(i,i+batch).map(p=>enrichOne(placesLib,p)));
   }
+  saveCache();
+}
+function enrichActivePanel(dest){
+  const sec = document.querySelector(`.view[data-view="${dest}"]`); if(!sec) return;
+  const panel = sec.querySelector(".cat-panel.active"); if(!panel) return;
+  const cat = panel.dataset.cat;
+  enrichPlaces(cat==="overview" ? PLACES.filter(p=>p.dest===dest && (p.feature||p.badge)).slice(0,4) : PLACES.filter(p=>p.dest===dest && p.cat===cat));
+}
+(function initGoogle(){
+  if(!CONFIG.googleApiKey){ mapNote.textContent = "Add a Google API key in the code to load live photos, ratings and pins."; return; }
+  loadCache();
+  PLACES.forEach(p=>{ if(ENRICH[p.id]) applyCardEnrichment(p); });
+  mapNote.textContent = "Photos & ratings load as you browse. Tap a pin to open a place.";
+  if(currentView==="map") ensureMap();
+  else if(DEST_META[currentView]) enrichActivePanel(currentView);
+})();
+
+/* wax-seal insignia (the J&T seal) + front-page loader dismissal */
+function waxSealHTML(){
+  return `<svg viewBox="0 0 320 320" aria-hidden="true">
+    <defs>
+      <radialGradient id="waxGrad" cx="38%" cy="30%" r="80%">
+        <stop offset="0%" style="stop-color:var(--wax-hi)"/><stop offset="20%" style="stop-color:var(--wax-light)"/><stop offset="52%" style="stop-color:var(--wax-mid)"/><stop offset="84%" style="stop-color:var(--wax-deep)"/><stop offset="100%" style="stop-color:var(--wax-rim)"/>
+      </radialGradient>
+      <radialGradient id="innerGrad" cx="42%" cy="34%" r="78%"><stop offset="0%" stop-color="var(--wax-light)"/><stop offset="68%" stop-color="var(--wax-mid)"/><stop offset="100%" stop-color="var(--wax-deep)"/></radialGradient>
+      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    </defs>
+    <path id="waxPath" d="M 306.34 158.00 C 306.30 164.55, 305.02 171.40, 302.87 177.64 C 300.73 183.87, 296.30 189.55, 293.49 195.40 C 290.68 201.25, 288.04 206.67, 286.01 212.74 C 283.99 218.80, 283.80 225.83, 281.32 231.78 C 278.85 237.73, 275.87 244.12, 271.16 248.44 C 266.45 252.75, 259.19 255.14, 253.08 257.66 C 246.97 260.19, 240.07 260.96, 234.52 263.57 C 228.97 266.18, 224.68 269.82, 219.76 273.34 C 214.84 276.85, 210.37 281.75, 205.01 284.64 C 199.64 287.52, 193.54 289.34, 187.57 290.67 C 181.60 291.99, 175.36 291.89, 169.21 292.60 C 163.05 293.30, 156.90 294.57, 150.64 294.89 C 144.37 295.20, 137.74 295.75, 131.63 294.50 C 125.53 293.25, 119.71 290.02, 114.02 287.38 C 108.33 284.74, 103.47 280.87, 97.48 278.67 C 91.48 276.46, 84.79 275.84, 78.03 274.13 C 71.27 272.42, 62.80 271.83, 56.89 268.40 C 50.99 264.97, 45.70 259.58, 42.58 253.53 C 39.45 247.48, 39.19 239.07, 38.15 232.10 C 37.10 225.13, 37.29 218.11, 36.30 211.73 C 35.31 205.35, 33.31 199.77, 32.21 193.80 C 31.12 187.83, 30.03 181.87, 29.72 175.91 C 29.41 169.94, 30.39 163.98, 30.34 158.00 C 30.30 152.02, 29.88 146.23, 29.44 140.06 C 29.01 133.88, 27.16 127.15, 27.73 120.94 C 28.30 114.73, 29.90 108.20, 32.86 102.78 C 35.83 97.35, 41.47 93.13, 45.50 88.37 C 49.54 83.62, 53.87 79.66, 57.06 74.26 C 60.26 68.85, 61.65 61.98, 64.70 55.95 C 67.74 49.93, 70.67 42.70, 75.36 38.09 C 80.04 33.47, 86.58 30.53, 92.78 28.28 C 98.99 26.03, 106.14 25.88, 112.58 24.57 C 119.02 23.27, 125.12 21.66, 131.41 20.44 C 137.71 19.22, 144.03 17.39, 150.37 17.24 C 156.71 17.09, 163.24 18.36, 169.47 19.53 C 175.71 20.70, 181.63 22.98, 187.79 24.27 C 193.95 25.57, 200.34 25.76, 206.45 27.31 C 212.56 28.87, 219.33 30.05, 224.45 33.61 C 229.58 37.16, 233.72 43.13, 237.19 48.64 C 240.66 54.16, 242.03 61.57, 245.28 66.69 C 248.53 71.81, 251.89 75.68, 256.67 79.35 C 261.45 83.02, 268.50 84.96, 273.97 88.70 C 279.43 92.43, 285.45 96.66, 289.45 101.77 C 293.45 106.88, 295.70 113.25, 297.98 119.34 C 300.26 125.43, 301.76 131.88, 303.15 138.32 C 304.54 144.77, 306.39 151.45, 306.34 158.00 Z" fill="url(#waxGrad)"/>
+    <use href="#waxPath" fill="none" stroke="var(--wax-rim)" stroke-width="8" opacity="0.6" filter="url(#soft)" transform="translate(160 158) scale(0.95) translate(-160 -158)"/>
+    <use href="#waxPath" fill="none" stroke="var(--wax-hi)" stroke-width="3" opacity="0.4" filter="url(#soft)" transform="translate(160 158) scale(0.88) translate(-160 -158)"/>
+    <circle cx="164" cy="159" r="98" fill="none" stroke="var(--wax-rim)" stroke-width="5" opacity="0.32" filter="url(#soft)"/>
+    <circle cx="164" cy="159" r="96" fill="url(#innerGrad)"/>
+    <circle cx="164" cy="159" r="89" fill="none" stroke="var(--wax-rim)" stroke-width="2.5" opacity="0.45"/>
+    <circle cx="164" cy="159" r="85.5" fill="none" stroke="var(--wax-hi)" stroke-width="1.2" opacity="0.3"/>
+    <g text-anchor="middle" font-family="Georgia, serif" font-size="19">
+      <text x="165" y="107" fill="var(--wax-rim)" opacity="0.45">✦</text><text x="165" y="231" fill="var(--wax-rim)" opacity="0.45">✦</text>
+      <text x="164" y="105" fill="var(--wax-hi)" opacity="0.85">✦</text><text x="164" y="229" fill="var(--wax-hi)" opacity="0.85">✦</text>
+    </g>
+    <g text-anchor="middle" font-family="Georgia,'Cormorant Garamond',serif" font-style="italic" font-weight="600">
+      <g fill="var(--wax-rim)" opacity="0.4" transform="translate(2,3)"><text x="127" y="188" font-size="104">J</text><text x="164" y="184" font-size="52">&amp;</text><text x="201" y="188" font-size="104">T</text></g>
+      <g fill="var(--wax-light)"><text x="127" y="188" font-size="104">J</text><text x="164" y="184" font-size="52">&amp;</text><text x="201" y="188" font-size="104">T</text></g>
+    </g>
+  </svg>`;
+}
+(function(){ const c=document.getElementById("crest"); if(c) c.innerHTML=waxSealHTML(); })();
+(function(){
+  const p=document.getElementById("preloader"); if(!p) return;
+  const hide=()=>p.classList.add("hide");
+  if(document.readyState==="complete") setTimeout(hide,650); else window.addEventListener("load", ()=>setTimeout(hide,650));
+  setTimeout(hide, 4000);
 })();
 </script>
 </body>
