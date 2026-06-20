@@ -85,6 +85,16 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .city-head{ text-align:center; margin-bottom:24px; }
 .city-head .city{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(46px,10vw,88px); line-height:1; color:var(--ink); letter-spacing:-0.01em; }
 .city-head .sub{ font-family:var(--serif); font-style:italic; font-size:clamp(17px,3.4vw,23px); color:var(--deep-rose); margin-top:8px; }
+/* ---- editorial city hero (big photo banner per destination) ---- */
+.city-hero{ position:relative; border-radius:var(--r-card); overflow:hidden; margin-bottom:26px; aspect-ratio:5/2; min-height:220px; display:flex; align-items:flex-end; background:linear-gradient(150deg,var(--rose),var(--deep-rose)); background-size:cover; background-position:center; box-shadow:var(--soft); }
+@media (max-width:640px){ .city-hero{ aspect-ratio:4/3.4; min-height:280px; } }
+.city-hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(40,26,26,.10) 0%, transparent 34%, transparent 44%, rgba(40,26,26,.60) 100%); }
+.city-hero .seal-badge{ position:absolute; top:16px; left:18px; z-index:3; width:clamp(56px,11vw,76px); background:rgba(255,255,255,.82); border-radius:50%; padding:7px; box-shadow:0 4px 14px rgba(40,26,26,.22); }
+.city-hero .seal-badge svg{ width:100%; height:auto; display:block; }
+.city-hero .city-hero-text{ position:relative; z-index:3; padding:28px 32px; width:100%; }
+.city-hero .city{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(40px,8vw,76px); line-height:.96; color:#fff; letter-spacing:-0.01em; text-shadow:0 2px 22px rgba(40,26,26,.42); }
+.city-hero .sub{ font-family:var(--serif); font-style:italic; font-size:clamp(16px,3vw,22px); color:rgba(255,255,255,.94); margin-top:7px; text-shadow:0 1px 12px rgba(40,26,26,.5); }
+@media (prefers-reduced-motion: no-preference){ .view.content.active .city-hero{ animation:viewIn .6s cubic-bezier(.2,.8,.2,1) both; } }
 
 .toggle{ display:flex; gap:6px; background:var(--glass); border:1px solid rgba(232,197,193,0.6); padding:6px; border-radius:var(--r-pill); box-shadow:var(--soft); margin:0 auto 26px; max-width:100%; width:max-content; overflow-x:auto; scrollbar-width:none; }
 .toggle::-webkit-scrollbar{ display:none; }
@@ -1987,10 +1997,9 @@ DEST_ORDER.forEach(dest=>{
   const meta = DEST_META[dest];
   const sec = document.createElement("section");
   sec.className = "view content"; sec.dataset.view = dest;
-  let html = `<div class="wrap"><div class="city-head">
-      <div class="seal">${sealHTML(dest)}</div>
-      <div class="city serif">${meta.name}</div>
-      <div class="sub">${meta.tag}</div></div>`;
+  let html = `<div class="wrap"><div class="city-hero" id="hero-${dest}">
+      <span class="seal-badge">${sealHTML(dest)}</span>
+      <div class="city-hero-text"><div class="city serif">${meta.name}</div><div class="sub">${meta.tag}</div></div></div>`;
   const tabs = [["overview","✦","Overview"]].concat(cats.map(c=>[c,CAT_META[c].emoji,CAT_META[c].label]));
   html += `<div class="toggle" role="tablist">` +
     tabs.map((t,i)=>`<button class="${i===0?"active":""}" data-cat="${t[0]}">${t[1]} ${t[2]}</button>`).join("") + `</div>`;
@@ -2155,7 +2164,7 @@ function showView(name){
   currentView = name;
   if(name==="map"){ ensureMap(); playRouteMap(); }
   else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
-  else if(DEST_META[name]){ enrichActivePanel(name); fetchWeather(name); }
+  else if(DEST_META[name]){ enrichActivePanel(name); fetchWeather(name); fetchCityHero(name); }
 }
 navBtns.forEach(b=> b.addEventListener("click", ()=>showView(b.dataset.view)) );
 document.getElementById("openTrip").addEventListener("click", ()=>showView("map"));
@@ -2742,6 +2751,24 @@ async function fetchWeather(dest){
     WX[dest]={ tmax:avg(dd.temperature_2m_max), tmin:avg(dd.temperature_2m_min), rainDays:dd.precipitation_sum.filter(x=>x>=1).length, sunrise:dd.sunrise[mid].slice(11,16), sunset:dd.sunset[mid].slice(11,16) };
     try{ localStorage.setItem(WX_KEY, JSON.stringify(WX)); }catch(_){}
     el.innerHTML=wxHTML(WX[dest]);
+  }catch(_){}
+}
+
+/* ---------- editorial city hero photo (Google Places, lazy + cached) ---------- */
+const HERO_QUERY = { london:"Tower Bridge London", hampstead:"Hampstead Heath London", bath:"Royal Crescent Bath", wales:"Snowdonia Wales", scotland:"Edinburgh Castle Scotland" };
+const HERO_KEY="le_hero_v1";
+function loadHero(){ try{ return JSON.parse(localStorage.getItem(HERO_KEY)||"{}"); }catch(_){ return {}; } }
+const HERO=loadHero();
+function applyHero(dest){ const el=document.getElementById("hero-"+dest); if(el && HERO[dest]){ el.style.backgroundImage='url("'+HERO[dest]+'")'; } }
+async function fetchCityHero(dest){
+  const el=document.getElementById("hero-"+dest); if(!el) return;
+  if(HERO[dest]){ applyHero(dest); return; }
+  if(!CONFIG.googleApiKey) return; /* no key — keep the blush gradient header */
+  if(!await ensureGoogleLib()) return;
+  try{
+    const { places } = await placesLib.searchByText({ textQuery:HERO_QUERY[dest]||(DEST_META[dest]&&DEST_META[dest].name)||dest, fields:["photos"], maxResultCount:1 });
+    const p = places && places[0];
+    if(p && p.photos && p.photos.length){ HERO[dest]=p.photos[0].getURI({maxWidth:1400}); try{ localStorage.setItem(HERO_KEY, JSON.stringify(HERO)); }catch(_){}; applyHero(dest); }
   }catch(_){}
 }
 
