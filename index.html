@@ -37,6 +37,7 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .label{ font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:0.08em; font-size:11px; color:var(--muted); }
 
 .view{ display:none; } .view.active{ display:block; }
+.view:not(.active){ display:none; } .view.hero.active{ display:flex; }
 .view.content{ padding:108px 0 80px; min-height:100svh; }
 .view.content.active{ animation:viewIn .5s cubic-bezier(.2,.8,.2,1); }
 @keyframes viewIn{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:none;} }
@@ -466,6 +467,37 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
 .share-prompt .chip-link{ font-size:12.5px; padding:8px 14px; }
 
 @media (prefers-reduced-motion: reduce){ .pchip, .day-box{ transition:none; } .pchip:hover, .day-box.drop-hot{ transform:none; } }
+
+/* ============================================================
+   ROUTE RIBBON — our journey as a wax-seal trail: the line draws
+   on, stamps drop per stop, a little train rides it. Mobile-first
+   (scales to any width, no tall silhouette to fight a phone).
+   ============================================================ */
+.routemap{ background:linear-gradient(160deg,#FFFFFF,#FDF3F0); border:1px solid rgba(232,197,193,.5); border-radius:var(--r-card); box-shadow:var(--soft); padding:20px 20px 14px; margin:0 0 24px; text-align:center; }
+.rm-eyebrow{ display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:.14em; font-size:11px; color:var(--deep-rose); background:var(--glass); border:1px solid rgba(232,197,193,.6); padding:6px 13px; border-radius:var(--r-pill); margin-bottom:10px; }
+.routemap h3{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(22px,3.6vw,30px); line-height:1.08; color:var(--ink); margin-bottom:14px; }
+.rm-stage{ width:100%; }
+.rm-stage svg{ width:100%; max-width:640px; height:auto; overflow:visible; display:block; margin:0 auto; }
+.rm-route-bg{ fill:none; stroke:rgba(201,169,110,.22); stroke-width:2.4; stroke-linecap:round; }
+.rm-route{ fill:none; stroke:var(--gold); stroke-width:2.4; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
+.rm-leg{ font-family:var(--sans); font-size:10px; letter-spacing:.04em; fill:var(--muted); }
+.rm-stop{ opacity:0; transform-box:fill-box; transform-origin:center; cursor:pointer; }
+.rm-stop .pin-seal{ fill:#fff; stroke:var(--deep-rose); stroke-width:1.6; }
+.rm-stop .pin-seal-in{ fill:none; stroke:var(--rose); stroke-width:1; stroke-dasharray:1.4 2.4; }
+.rm-stop .pin-dot{ fill:var(--gold); }
+.rm-stop .pin-name{ font-family:var(--serif); font-style:italic; font-size:13px; fill:var(--ink); paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round; }
+.rm-stop:hover .pin-seal{ stroke-width:2.2; } .rm-stop:focus-visible{ outline:none; } .rm-stop:focus-visible .pin-seal{ stroke:var(--gold); stroke-width:2.6; }
+.rm-train{ font-size:18px; }
+@media (prefers-reduced-motion: no-preference){
+  .routemap.play .rm-route{ transition:stroke-dashoffset 2.4s ease; stroke-dashoffset:0; }
+  .routemap.play .rm-stop{ animation:rmStop .5s cubic-bezier(.2,.9,.3,1.35) both; animation-delay:var(--d,0s); }
+}
+@media (prefers-reduced-motion: reduce){
+  .routemap.play .rm-route{ stroke-dashoffset:0; }
+  .routemap.play .rm-stop{ opacity:1; }
+  .rm-train{ display:none; }
+}
+@keyframes rmStop{ from{ opacity:0; transform:scale(.4) translateY(-8px);} to{ opacity:1; transform:scale(1) translateY(0); } }
 </style>
 </head>
 <body>
@@ -528,6 +560,27 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
       <h2>find us here</h2>
       <p class="kicker">Everywhere we're going, pinned. Tap a city to fly there, a pin to open it.</p>
     </div>
+
+    <div class="routemap" id="routeMap">
+      <span class="rm-eyebrow">✦ the journey</span>
+      <h3>London to the far north</h3>
+      <div class="rm-stage">
+        <svg viewBox="0 0 660 210" role="img" aria-label="Our route: London, Bath, Cardiff, Eryri, then Edinburgh">
+          <path id="rmRoutePath" class="rm-route-bg" d="M60,160 C110,152 150,150 190,150 C250,150 280,162 330,160 C390,158 420,128 470,118 C520,108 565,95 600,72"/>
+          <path class="rm-route" pathLength="1" d="M60,160 C110,152 150,150 190,150 C250,150 280,162 330,160 C390,158 420,128 470,118 C520,108 565,95 600,72"/>
+          <text class="rm-leg" x="125" y="134" text-anchor="middle">~1h20 · rail</text>
+          <text class="rm-leg" x="262" y="143" text-anchor="middle">~1h</text>
+          <text class="rm-leg" x="398" y="120" text-anchor="middle">into the hills</text>
+          <text class="rm-leg" x="532" y="86" text-anchor="middle">the long way up</text>
+          <g transform="translate(60,160)"><g class="rm-stop" style="--d:.5s" data-go="london" tabindex="0" role="link" aria-label="London"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">London</text></g></g>
+          <g transform="translate(190,150)"><g class="rm-stop" style="--d:.95s" data-go="bath" tabindex="0" role="link" aria-label="Bath"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Bath</text></g></g>
+          <g transform="translate(330,160)"><g class="rm-stop" style="--d:1.4s" data-go="wales" tabindex="0" role="link" aria-label="Cardiff"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Cardiff</text></g></g>
+          <g transform="translate(470,118)"><g class="rm-stop" style="--d:1.85s" data-go="wales" tabindex="0" role="link" aria-label="Eryri"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Eryri</text></g></g>
+          <g transform="translate(600,72)"><g class="rm-stop" style="--d:2.3s" data-go="scotland" tabindex="0" role="link" aria-label="Edinburgh"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Edinburgh</text></g></g>
+        </svg>
+      </div>
+    </div>
+
     <div class="toggle" id="mapToggle" role="tablist">
       <button class="active" data-city="london">London</button>
       <button data-city="hampstead">Hampstead</button>
@@ -617,6 +670,8 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
    (Photos = the expensive 'Enterprise' calls, ~1,000 free/month. Maps & ratings are cheap.)
    ============================================================ */
 const CONFIG = { googleApiKey: "" };
+/* SPA: keep our own scroll control on refresh (don't let the browser restore an old position) */
+if("scrollRestoration" in history) history.scrollRestoration = "manual";
 
 /* JEREMY: set the real first day of the trip (YYYY-MM-DD). The hero counts down to this and the planner dates from it. */
 const TRIP_START = new Date("2026-07-10T00:00:00");
@@ -1974,12 +2029,30 @@ function showView(name){
   const _fab = document.getElementById("fab"); if(_fab) _fab.style.display = name==="hero" ? "none" : "inline-flex";
   window.scrollTo({ top:0, behavior:"auto" });
   currentView = name;
-  if(name==="map") ensureMap();
+  if(name==="map"){ ensureMap(); playRouteMap(); }
   else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
   else if(DEST_META[name]) enrichActivePanel(name);
 }
 navBtns.forEach(b=> b.addEventListener("click", ()=>showView(b.dataset.view)) );
 document.getElementById("openTrip").addEventListener("click", ()=>showView("map"));
+
+/* ---------- animated route map ---------- */
+function playRouteMap(){
+  const rm=document.getElementById("routeMap"); if(!rm || rm.classList.contains("played")) return;
+  rm.classList.add("play","played");
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    const t=document.getElementById("rmTrainAnim");
+    if(t && t.beginElement){ try{ t.beginElement(); }catch(_){} }
+  }
+}
+(function(){
+  const rm=document.getElementById("routeMap"); if(!rm) return;
+  rm.querySelectorAll(".rm-stop").forEach(s=>{ s.style.cursor="pointer"; s.setAttribute("tabindex","0"); s.setAttribute("role","link");
+    const go=()=>{ const d=s.dataset.go; if(d) showView(d); };
+    s.addEventListener("click", go);
+    s.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } });
+  });
+})();
 
 /* ---------- countdown + day-by-day itinerary (Phase 1) ---------- */
 (function(){
