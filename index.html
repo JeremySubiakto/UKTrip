@@ -802,11 +802,12 @@ const DEST_META = {
     blurb:"The last leg and the wildest — Edinburgh's gothic spires, Glasgow's galleries, then the train pushing north into lochs and empty glens and the long strange light over Skye.",
     best:"Long summer days; take the train up — it's the lovely part.", areas:"Edinburgh · Glasgow · the Highlands & Skye" },
 };
-const CAT_ORDER = ["restaurants","coffee","matcha","pubs","landmarks","parks"];
+const CAT_ORDER = ["restaurants","coffee","matcha","wellness","pubs","landmarks","parks"];
 const CAT_META = {
   restaurants:{ label:"Restaurants", emoji:"🍽" },
   coffee:     { label:"Coffee Shops", emoji:"☕" },
   matcha:     { label:"Matcha",       emoji:"🍵" },
+  wellness:   { label:"Wellness",     emoji:"🧘" },
   pubs:       { label:"Pubs & Bars",  emoji:"🍺" },
   landmarks:  { label:"Landmarks",    emoji:"🏛" },
   parks:      { label:"Parks",        emoji:"🌳" },
@@ -1740,6 +1741,79 @@ const PLACES = [
     summary:"A lovely West End garden centred on the Kibble Palace, a vast domed Victorian glasshouse of ferns and marble statues. Free, gentle and pretty year-round.",
     tags:["glasshouse","free","Glasgow"] },
 
+  /* ===================== LONDON · WELLNESS (added) ===================== */
+  { id:"heartcore-nottinghill", dest:"london", cat:"wellness", name:"Heartcore", hood:"Notting Hill, W11",
+    cuisine:"Reformer pilates studio",
+    summary:"Low light, a long row of reformers, and a class that leaves your legs shaking by the end. The Notting Hill studio is the prettiest of them — book the early slot and walk out into the market after.",
+    tags:["reformer pilates","boutique","Notting Hill"], badge:"✦ reformer pilates" },
+
+  { id:"equinox-stjames", dest:"london", cat:"wellness", name:"Equinox St James's", hood:"St James's, SW1",
+    cuisine:"Luxury gym & spa",
+    summary:"The members' club of gyms — a lap pool, eucalyptus in the steam room, and a locker room you'd happily move into. Worth a day pass for one slow morning.",
+    tags:["luxury gym","pool","spa","St James's"], badge:"members' club" },
+
+  { id:"third-space-mayfair", dest:"london", cat:"wellness", name:"Third Space", hood:"Mayfair, W1",
+    cuisine:"Luxury health club",
+    summary:"Floors of it under Mayfair: a sky pool, a climbing wall, a sauna to disappear into. The sort of place you'd spend a rainy afternoon and not notice the time.",
+    tags:["luxury gym","pool","Mayfair"] },
+
+  { id:"kxu-chelsea", dest:"london", cat:"wellness", name:"KXU", hood:"Chelsea, SW3",
+    cuisine:"Boutique studio",
+    summary:"The studio that spun out of Chelsea's most private club — treadmills, reformers, and a juice bar, all in the same hushed marble as the members' side.",
+    tags:["boutique studio","Chelsea"] },
+
+  { id:"bodyism-nottinghill", dest:"london", cat:"wellness", name:"Bodyism", hood:"Notting Hill, W11",
+    cuisine:"Wellness studio & café",
+    summary:"Part gym, part café, part apothecary — the Notting Hill set come for the trainers and stay for the shakes. Calm, white, and quietly pleased with itself.",
+    tags:["wellness","Notting Hill"] },
+
+  /* ===================== LONDON · MORE CAFÉS (added) ===================== */
+  { id:"peggy-porschen", dest:"london", cat:"coffee", name:"Peggy Porschen", hood:"Belgravia, SW1", price:2,
+    cuisine:"Pink cake parlour",
+    summary:"The pink corner everyone photographs — flowers up the walls, cakes under glass domes, hot chocolate that arrives looking like a painting. Take the window seat and order a slice of the layer cake.",
+    tags:["pink","cakes","Belgravia"], badge:"✿ the pink parlour", badgeRose:true },
+
+  { id:"eln-mayfair", dest:"london", cat:"coffee", name:"EL&N", hood:"Mayfair, W1", price:2,
+    cuisine:"Café — flowers and pastel",
+    summary:"Floral walls, pastel everything, and the most photographed lattes in London. More about the look than the bean, and entirely unbothered by that.",
+    tags:["pink","floral","Mayfair"] },
+
+  { id:"saint-aymes", dest:"london", cat:"coffee", name:"Saint Aymes", hood:"Marylebone, W1", price:2,
+    cuisine:"Café — matcha and gold",
+    summary:"Gold-leaf hot chocolate and rose lattes in a little Marylebone room done up like a jewellery box. Sweet, pretty, and unmistakably pink.",
+    tags:["pink","matcha","Marylebone"] },
+
+  { id:"the-wolseley", dest:"london", cat:"coffee", name:"The Wolseley", hood:"Piccadilly, W1", price:3,
+    cuisine:"Grand European café",
+    summary:"A 1920s car showroom turned grand café — black-and-gold pillars, white cloths, and the best people-watching in town over afternoon tea or a late breakfast.",
+    tags:["grand café","afternoon tea","Piccadilly","iconic"], badge:"a London institution" },
+
+  /* ===================== LONDON · MORE HIGH-END (added) ===================== */
+  { id:"sexy-fish", dest:"london", cat:"restaurants", name:"Sexy Fish", hood:"Berkeley Square, Mayfair", price:4,
+    cuisine:"Asian seafood, glamour",
+    summary:"Damien Hirst mermaids, a wall of living coral, and a martini list as long as your arm. Loud and golden and over the top — go for the room as much as the robata.",
+    tags:["glamour","Asian","cocktails","Mayfair"], badge:"glamour" },
+
+  { id:"amazonico-london", dest:"london", cat:"restaurants", name:"Amazónico", hood:"Berkeley Square, Mayfair", price:4,
+    cuisine:"Latin American, live music",
+    summary:"Berkeley Square's jungle — palms to the ceiling, a jazz band down in the Jaguar bar, Brazilian-Asian grill arriving long past dark. Dress for it.",
+    tags:["live music","Latin","glamour","Mayfair"] },
+
+  { id:"isabel-mayfair", dest:"london", cat:"restaurants", name:"Isabel Mayfair", hood:"Albemarle St, Mayfair", price:4,
+    cuisine:"Modern European, late",
+    summary:"Dark wood, low light, a downstairs bar that runs late — the Mayfair dinner that becomes a night. Order the truffle pasta and stay for one more.",
+    tags:["date night","late","Mayfair"] },
+
+  { id:"scotts-mayfair", dest:"london", cat:"restaurants", name:"Scott's", hood:"Mount St, Mayfair", price:4,
+    cuisine:"Seafood — a London classic",
+    summary:"Oysters on crushed ice, a champagne trolley, and a Mount Street terrace that's been the address for lunch since 1851. Old-money calm.",
+    tags:["seafood","terrace","iconic","Mayfair"] },
+
+  { id:"bacchanalia-mayfair", dest:"london", cat:"restaurants", name:"Bacchanalia", hood:"Mount St, Mayfair", price:4,
+    cuisine:"Greek-Italian, opulent",
+    summary:"Real antiquities on the walls, a Greco-Roman menu to match, and theatre in every corner. Absurd in the best way, and rather wonderful for a special night.",
+    tags:["opulent","Greek-Italian","Mayfair"] },
+
   /* INSERT-NEW-PLACES-HERE */
 ];
 
@@ -1815,6 +1889,7 @@ const CAT_GRAD = {
   restaurants:["#F8E7E5","#E8C5C1","#D4A5A0"],
   coffee:["#F7ECE0","#EAD2C4","#D9B6A6"],
   matcha:["#EDF2E2","#C8DBAB","#A6C77E"],
+  wellness:["#F4E8F0","#E3C8D8","#CBA9C2"],
   pubs:["#F4DFDC","#D9A8A2","#B98A85"],
   landmarks:["#F7E9DF","#E6C9A8","#CDAE78"],
   parks:["#E7F0DD","#BCD7A6","#94B873"],
@@ -1824,6 +1899,7 @@ const CAT_ICON = {
   restaurants:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="33" r="19"/><circle cx="32" cy="33" r="12"/><path d="M14 14v15M10 14v9M18 14v9M14 29v21"/><path d="M50 14c5 0 5 12 0 17v19"/></svg>`,
   coffee:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 28h27v9a13.5 13.5 0 0 1-27 0z"/><path d="M43 30h5a5 5 0 0 1 0 10h-4"/><path d="M14 52h31"/><path d="M25 13c-3 3 0 5 0 8M34 13c-3 3 0 5 0 8"/></svg>`,
   matcha:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 33h37a18.5 18.5 0 0 1-37 0z"/><path d="M32 10v21M27 13v18M37 13v18"/><path d="M22 14c-2 2 0 4 0 6"/></svg>`,
+  wellness:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 48C20 48 12 40 12 40c0-5 5-8 9-8M32 48c12 0 20-8 20-8 0-5-5-8-9-8"/><path d="M32 48c-6 0-10-7-10-15 0-6 4-12 10-16 6 4 10 10 10 16 0 8-4 15-10 15Z"/></svg>`,
   pubs:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18h24l-3 34H23z"/><path d="M20 26h24"/><path d="M24 18q4-6 8 0q4-6 8 0"/></svg>`,
   landmarks:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 24L32 12l20 12"/><path d="M14 24h36"/><path d="M19 24v22M28 24v22M36 24v22M45 24v22"/><path d="M14 46h36M10 52h44"/></svg>`,
   parks:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="22" r="13"/><circle cx="22" cy="31" r="8"/><circle cx="42" cy="31" r="8"/><path d="M32 39v15M32 47l-7-5M32 45l7-5"/></svg>`,
@@ -2442,7 +2518,7 @@ const CITY_VIEW = {
 };
 /* ---------- interactive map: free OpenStreetMap via Leaflet (no key, no billing) ---------- */
 let lmap=null, lmarkers=[];
-const PLACE_COORDS = {"maine-mayfair":[51.50843,-0.14389],"the-dover":[51.50424,-0.12688],"bouchon-racine":[51.52161,-0.10948],"claridges":[51.51255,-0.148],"bottarga":[51.48339,-0.17661],"automat":[51.50826,-0.14584],"farm-girl":[51.51204,-0.20076],"elan-cafe":[51.50684,-0.15184],"laduree":[51.51449,-0.20074],"butter-bakery":[51.5177,-0.20139],"biscuiteers":[51.51558,-0.2057],"farm-girl-coffee":[51.50442,-0.20046],"leto":[51.509,-0.13637],"churchill-arms":[51.50688,-0.19487],"george-inn":[51.39155,-0.20388],"dickies-bar":[51.51304,-0.14405],"red-room":[51.50909,-0.14328],"va":[51.49589,-0.17288],"nhm":[51.49651,-0.176],"tate-modern":[51.50743,-0.09934],"national-gallery":[51.50872,-0.12859],"tower-of-london":[51.50822,-0.07619],"kensington-palace":[51.50509,-0.18763],"sky-garden":[51.51127,-0.08354],"borough-market":[51.50558,-0.0902],"portobello":[51.51609,-0.20512],"the-shard":[51.50451,-0.08644],"core-clare-smyth":[51.51272,-0.20311],"sketch":[51.51273,-0.14149],"helene-darroze":[51.50905,-0.15149],"gordon-ramsay-rhr":[51.48551,-0.16206],"a-wong":[51.493,-0.14054],"ikoyi":[51.51243,-0.11515],"gymkhana":[51.50848,-0.14149],"kitchen-table":[51.52039,-0.13648],"kol":[51.51479,-0.15753],"brat":[51.52427,-0.07669],"clove-club":[51.52708,-0.07916],"st-john":[51.52048,-0.10127],"monmouth":[51.51437,-0.1268],"kaffeine":[51.51845,-0.14034],"watchhouse":[51.51108,-0.12238],"how-matcha":[51.51282,-0.20598],"tsujiri":[51.54393,-0.00891],"tea-parlour":[51.51045,-0.12945],"cafe-kitsune":[51.51107,-0.13255],"connaught-bar":[51.50881,0.03943],"american-bar-savoy":[51.50987,-0.12715],"tayer-elementary":[51.52502,-0.09151],"cheshire-cheese":[51.51434,-0.10718],"gordons-wine":[51.50792,-0.12331],"british-museum":[51.51938,-0.12749],"st-pauls":[51.51379,-0.09845],"westminster-abbey":[51.4986,-0.1317],"tower-bridge":[51.50552,-0.07537],"buckingham-palace":[51.50083,-0.143],"stamford-bridge":[51.50415,-0.12802],"emirates-stadium":[51.50626,-0.13251],"spurs-stadium":[51.60416,-0.06626],"hyde-park":[51.50749,-0.16221],"regents-park":[51.52846,-0.15477],"st-james-park":[51.49928,-0.13459],"kyoto-garden":[51.51192,-0.13255],"richmond-park":[51.43851,-0.27474],"kew-gardens":[51.4782,-0.29689],"primrose-hill":[51.53929,-0.14073],"jin-kichi":[51.55728,-0.17843],"the-wells":[51.55873,-0.1736],"la-gaffe":[51.55933,-0.17848],"ginger-white":[51.5603,-0.17571],"louis-patisserie":[51.56321,-0.17993],"brew-house-kenwood":[51.56762,-0.17136],"holly-bush":[51.55789,-0.17932],"spaniards-inn":[51.57023,-0.17372],"the-flask-hampstead":[51.5566,-0.17725],"old-bull-bush":[51.56757,-0.18262],"kenwood-house":[51.57155,-0.16734],"keats-house":[51.55552,-0.16794],"parliament-hill":[51.55962,-0.15977],"hampstead-pergola":[51.5656,-0.18397],"hampstead-heath":[51.56415,-0.16717],"golders-hill-park":[51.56794,-0.18361],"olive-tree":[51.37697,-2.36334],"menu-gordon-jones":[51.37414,-2.36677],"hywel-jones":[51.38439,-2.36249],"scallop-shell":[51.38292,-2.36578],"beckford-bottle-shop":[51.38647,-2.3621],"colonna-small":[51.38274,-2.36441],"mokoko":[51.38135,-2.36022],"society-cafe":[51.38102,-2.36311],"landrace":[51.38592,-2.35992],"star-inn-bath":[51.38782,-2.36016],"saracens-head":[51.38152,-2.35468],"the-raven":[51.38312,-2.36197],"garricks-head":[51.38489,-2.35739],"roman-baths":[51.38103,-2.35968],"royal-crescent":[51.38727,-2.36823],"bath-abbey":[51.38145,-2.35887],"pulteney-bridge":[51.38304,-2.35792],"thermae-spa":[51.38057,-2.36103],"the-circus-bath":[51.3862,-2.36376],"jane-austen-centre":[51.38407,-2.36313],"royal-victoria-park":[51.38654,-2.37559],"prior-park":[51.37734,-2.36334],"alexandra-park":[51.37391,-2.35927],"ynyshir":[51.62625,-3.41239],"gorse":[51.88637,-4.74814],"heaneys":[51.48517,-3.20134],"asador-44":[51.48007,-3.18054],"bullys":[51.48468,-3.16351],"coffee-barker":[51.48589,-3.16743],"hard-lines":[51.48029,-3.17867],"uncommon-ground":[51.47825,-3.17743],"city-arms-cardiff":[51.48,-3.18096],"tiny-rebel-cardiff":[51.4799,-3.18116],"goat-major":[51.48098,-3.18059],"cardiff-castle":[51.48233,-3.18117],"principality-stadium":[51.47825,-3.18263],"cardiff-bay":[51.46396,-3.16414],"portmeirion":[52.91345,-4.09935],"conwy-castle":[53.28003,-3.82559],"caernarfon-castle":[53.13935,-4.27684],"yr-wyddfa":[52.92654,-4.13059],"llandudno":[51.48701,-3.17163],"harlech-castle":[52.85997,-4.10914],"bute-park":[51.48734,-3.1883],"roath-park":[51.50091,-3.17273],"fairy-glen":[51.48093,-3.16436],"witchery":[55.94881,-3.19563],"stockbridge":[55.95537,-3.18416],"six-by-nico":[55.95449,-3.19747],"cafe-st-honore":[55.95409,-3.20024],"chaophraya":[55.9522,-3.20307],"timberyard":[55.94635,-3.20173],"little-chartroom":[55.97258,-3.17596],"cairngorm":[57.15475,-2.13824],"fortitude":[55.95617,-3.17185],"bow-bar":[55.95427,-3.18512],"sheep-heid":[55.95526,-3.19147],"edinburgh-castle":[55.94869,-3.20042],"arthurs-seat":[55.94407,-3.1616],"royal-mile":[55.94929,-3.19357],"nms":[55.94707,-3.18934],"dean-village":[55.95226,-3.21822],"calton-hill":[55.95525,-3.1828],"cail-bruich":[55.87751,-4.28924],"unalome":[55.95496,-3.18992],"ox-and-finch":[55.86579,-4.28475],"crabshakk":[55.86502,-4.28471],"ka-pao":[55.87714,-4.29037],"three-chimneys":[57.44338,-6.64196],"loch-bay":[57.50748,-6.57743],"kinloch-lodge":[57.1756,-5.79774],"papercup":[55.86392,-4.29873],"spitfire-espresso":[55.85753,-4.24301],"pot-still":[55.8629,-4.25772],"oran-mor":[55.87756,-4.2897],"horse-shoe-bar":[55.93157,-4.49506],"kelvingrove-museum":[55.86858,-4.29063],"glasgow-cathedral":[55.95554,-3.19312],"riverside-museum":[55.86523,-4.30617],"eilean-donan":[57.2741,-5.51592],"glenfinnan":[56.87582,-5.42932],"loch-lomond":[56.1562,-4.65638],"glencoe":[56.68276,-5.10146],"old-man-storr":[57.50696,-6.17464],"quiraing":[57.64526,-6.27485],"fairy-pools":[57.41374,-6.20375],"ben-nevis":[56.79686,-5.00353],"princes-st-gardens":[55.95025,-3.19949],"rbge":[55.96529,-3.20886],"the-meadows":[55.94234,-3.19429],"kelvingrove-park":[55.86926,-4.28729],"glasgow-botanic":[55.87989,-4.29202]}; /* id -> {lat,lng} — geocoded from OSM; injected below */
+const PLACE_COORDS = {"maine-mayfair":[51.50843,-0.14389],"the-dover":[51.50424,-0.12688],"bouchon-racine":[51.52161,-0.10948],"claridges":[51.51255,-0.148],"bottarga":[51.48339,-0.17661],"automat":[51.50826,-0.14584],"farm-girl":[51.51204,-0.20076],"elan-cafe":[51.50684,-0.15184],"laduree":[51.51449,-0.20074],"butter-bakery":[51.5177,-0.20139],"biscuiteers":[51.51558,-0.2057],"farm-girl-coffee":[51.50442,-0.20046],"leto":[51.509,-0.13637],"churchill-arms":[51.50688,-0.19487],"george-inn":[51.39155,-0.20388],"dickies-bar":[51.51304,-0.14405],"red-room":[51.50909,-0.14328],"va":[51.49589,-0.17288],"nhm":[51.49651,-0.176],"tate-modern":[51.50743,-0.09934],"national-gallery":[51.50872,-0.12859],"tower-of-london":[51.50822,-0.07619],"kensington-palace":[51.50509,-0.18763],"sky-garden":[51.51127,-0.08354],"borough-market":[51.50558,-0.0902],"portobello":[51.51609,-0.20512],"the-shard":[51.50451,-0.08644],"core-clare-smyth":[51.51272,-0.20311],"sketch":[51.51273,-0.14149],"helene-darroze":[51.50905,-0.15149],"gordon-ramsay-rhr":[51.48551,-0.16206],"a-wong":[51.493,-0.14054],"ikoyi":[51.51243,-0.11515],"gymkhana":[51.50848,-0.14149],"kitchen-table":[51.52039,-0.13648],"kol":[51.51479,-0.15753],"brat":[51.52427,-0.07669],"clove-club":[51.52708,-0.07916],"st-john":[51.52048,-0.10127],"monmouth":[51.51437,-0.1268],"kaffeine":[51.51845,-0.14034],"watchhouse":[51.51108,-0.12238],"how-matcha":[51.51282,-0.20598],"tsujiri":[51.54393,-0.00891],"tea-parlour":[51.51045,-0.12945],"cafe-kitsune":[51.51107,-0.13255],"connaught-bar":[51.50881,0.03943],"american-bar-savoy":[51.50987,-0.12715],"tayer-elementary":[51.52502,-0.09151],"cheshire-cheese":[51.51434,-0.10718],"gordons-wine":[51.50792,-0.12331],"british-museum":[51.51938,-0.12749],"st-pauls":[51.51379,-0.09845],"westminster-abbey":[51.4986,-0.1317],"tower-bridge":[51.50552,-0.07537],"buckingham-palace":[51.50083,-0.143],"stamford-bridge":[51.50415,-0.12802],"emirates-stadium":[51.50626,-0.13251],"spurs-stadium":[51.60416,-0.06626],"hyde-park":[51.50749,-0.16221],"regents-park":[51.52846,-0.15477],"st-james-park":[51.49928,-0.13459],"kyoto-garden":[51.51192,-0.13255],"richmond-park":[51.43851,-0.27474],"kew-gardens":[51.4782,-0.29689],"primrose-hill":[51.53929,-0.14073],"jin-kichi":[51.55728,-0.17843],"the-wells":[51.55873,-0.1736],"la-gaffe":[51.55933,-0.17848],"ginger-white":[51.5603,-0.17571],"louis-patisserie":[51.56321,-0.17993],"brew-house-kenwood":[51.56762,-0.17136],"holly-bush":[51.55789,-0.17932],"spaniards-inn":[51.57023,-0.17372],"the-flask-hampstead":[51.5566,-0.17725],"old-bull-bush":[51.56757,-0.18262],"kenwood-house":[51.57155,-0.16734],"keats-house":[51.55552,-0.16794],"parliament-hill":[51.55962,-0.15977],"hampstead-pergola":[51.5656,-0.18397],"hampstead-heath":[51.56415,-0.16717],"golders-hill-park":[51.56794,-0.18361],"olive-tree":[51.37697,-2.36334],"menu-gordon-jones":[51.37414,-2.36677],"hywel-jones":[51.38439,-2.36249],"scallop-shell":[51.38292,-2.36578],"beckford-bottle-shop":[51.38647,-2.3621],"colonna-small":[51.38274,-2.36441],"mokoko":[51.38135,-2.36022],"society-cafe":[51.38102,-2.36311],"landrace":[51.38592,-2.35992],"star-inn-bath":[51.38782,-2.36016],"saracens-head":[51.38152,-2.35468],"the-raven":[51.38312,-2.36197],"garricks-head":[51.38489,-2.35739],"roman-baths":[51.38103,-2.35968],"royal-crescent":[51.38727,-2.36823],"bath-abbey":[51.38145,-2.35887],"pulteney-bridge":[51.38304,-2.35792],"thermae-spa":[51.38057,-2.36103],"the-circus-bath":[51.3862,-2.36376],"jane-austen-centre":[51.38407,-2.36313],"royal-victoria-park":[51.38654,-2.37559],"prior-park":[51.37734,-2.36334],"alexandra-park":[51.37391,-2.35927],"ynyshir":[51.62625,-3.41239],"gorse":[51.88637,-4.74814],"heaneys":[51.48517,-3.20134],"asador-44":[51.48007,-3.18054],"bullys":[51.48468,-3.16351],"coffee-barker":[51.48589,-3.16743],"hard-lines":[51.48029,-3.17867],"uncommon-ground":[51.47825,-3.17743],"city-arms-cardiff":[51.48,-3.18096],"tiny-rebel-cardiff":[51.4799,-3.18116],"goat-major":[51.48098,-3.18059],"cardiff-castle":[51.48233,-3.18117],"principality-stadium":[51.47825,-3.18263],"cardiff-bay":[51.46396,-3.16414],"portmeirion":[52.91345,-4.09935],"conwy-castle":[53.28003,-3.82559],"caernarfon-castle":[53.13935,-4.27684],"yr-wyddfa":[52.92654,-4.13059],"llandudno":[51.48701,-3.17163],"harlech-castle":[52.85997,-4.10914],"bute-park":[51.48734,-3.1883],"roath-park":[51.50091,-3.17273],"fairy-glen":[51.48093,-3.16436],"witchery":[55.94881,-3.19563],"stockbridge":[55.95537,-3.18416],"six-by-nico":[55.95449,-3.19747],"cafe-st-honore":[55.95409,-3.20024],"chaophraya":[55.9522,-3.20307],"timberyard":[55.94635,-3.20173],"little-chartroom":[55.97258,-3.17596],"cairngorm":[57.15475,-2.13824],"fortitude":[55.95617,-3.17185],"bow-bar":[55.95427,-3.18512],"sheep-heid":[55.95526,-3.19147],"edinburgh-castle":[55.94869,-3.20042],"arthurs-seat":[55.94407,-3.1616],"royal-mile":[55.94929,-3.19357],"nms":[55.94707,-3.18934],"dean-village":[55.95226,-3.21822],"calton-hill":[55.95525,-3.1828],"cail-bruich":[55.87751,-4.28924],"unalome":[55.95496,-3.18992],"ox-and-finch":[55.86579,-4.28475],"crabshakk":[55.86502,-4.28471],"ka-pao":[55.87714,-4.29037],"three-chimneys":[57.44338,-6.64196],"loch-bay":[57.50748,-6.57743],"kinloch-lodge":[57.1756,-5.79774],"papercup":[55.86392,-4.29873],"spitfire-espresso":[55.85753,-4.24301],"pot-still":[55.8629,-4.25772],"oran-mor":[55.87756,-4.2897],"horse-shoe-bar":[55.93157,-4.49506],"kelvingrove-museum":[55.86858,-4.29063],"glasgow-cathedral":[55.95554,-3.19312],"riverside-museum":[55.86523,-4.30617],"eilean-donan":[57.2741,-5.51592],"glenfinnan":[56.87582,-5.42932],"loch-lomond":[56.1562,-4.65638],"glencoe":[56.68276,-5.10146],"old-man-storr":[57.50696,-6.17464],"quiraing":[57.64526,-6.27485],"fairy-pools":[57.41374,-6.20375],"ben-nevis":[56.79686,-5.00353],"princes-st-gardens":[55.95025,-3.19949],"rbge":[55.96529,-3.20886],"the-meadows":[55.94234,-3.19429],"kelvingrove-park":[55.86926,-4.28729],"glasgow-botanic":[55.87989,-4.29202],"heartcore-nottinghill":[51.50848,-0.19738],"equinox-stjames":[51.5054,-0.134],"third-space-mayfair":[51.5096,-0.1476],"kxu-chelsea":[51.49355,-0.1586],"bodyism-nottinghill":[51.51447,-0.2011],"peggy-porschen":[51.49329,-0.15054],"eln-mayfair":[51.5096,-0.1476],"saint-aymes":[51.518,-0.15],"the-wolseley":[51.50739,-0.14091],"sexy-fish":[51.50937,-0.14432],"amazonico-london":[51.50954,-0.14459],"isabel-mayfair":[51.50964,-0.14279],"scotts-mayfair":[51.5103,-0.149],"bacchanalia-mayfair":[51.5103,-0.149]}; /* id -> {lat,lng} — geocoded from OSM; injected below */
 function destBounds(dest){
   const pts = PLACES.filter(p=>p.dest===dest && PLACE_COORDS[p.id]).map(p=>PLACE_COORDS[p.id]);
   return pts.length ? L.latLngBounds(pts) : null;
