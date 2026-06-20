@@ -176,7 +176,8 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .map-frame.live #map-canvas{ display:block; } .map-frame.live iframe{ display:none; }
 .map-note{ font-size:12.5px; color:var(--muted); margin-top:12px; }
 /* ---- Leaflet (free OpenStreetMap) map styling ---- */
-.map-frame .leaflet-tile-pane{ filter:saturate(1.05) hue-rotate(-6deg) brightness(1.02); }
+.map-frame .leaflet-tile-pane{ filter:grayscale(.5) brightness(1.06); }
+.map-frame .map-tint{ position:absolute; inset:0; z-index:300; pointer-events:none; background:var(--blush); mix-blend-mode:multiply; }
 .leaflet-container{ background:#F5E6E4; font-family:var(--sans); }
 .le-pin-wrap{ background:none; border:none; }
 .le-pin{ position:relative; filter:drop-shadow(0 2px 4px rgba(120,80,76,.32)); transition:transform .15s; }
@@ -236,7 +237,7 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 .fclear:hover{ color:var(--deep-rose); }
 .filter-empty{ font-size:14px; color:var(--muted); padding:8px 2px; }
 .panel-count{ font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:.1em; font-size:11px; color:var(--muted); margin-bottom:14px; }
-.overview .ov-blurb{ font-family:var(--serif); font-style:italic; font-size:clamp(19px,3.4vw,25px); line-height:1.45; color:var(--ink); max-width:62ch; margin-bottom:22px; }
+.overview .ov-blurb{ font-family:var(--serif); font-style:italic; font-size:clamp(16px,2.6vw,20px); line-height:1.5; color:var(--ink); max-width:62ch; margin-bottom:22px; }
 .ov-facts{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:30px; }
 .ov-fact{ background:var(--surface); border:1px solid rgba(232,197,193,.45); border-radius:18px; box-shadow:var(--soft); padding:14px 18px; min-width:150px; flex:1; }
 .ov-fact .label{ display:block; margin-bottom:4px; }
@@ -2497,6 +2498,7 @@ async function ensureMap(){
       attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(lmap);
     mapFrame.classList.add("live");
+    var tint=document.createElement("div"); tint.className="map-tint"; lmap.getContainer().appendChild(tint); /* blush multiply over tiles only (markers stay above) */
     buildLeafletMarkers();
   }
   sizeAndFit(0);
