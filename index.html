@@ -2699,17 +2699,21 @@ async function ensureGoogleMap(){
 }
 
 /* lazy enrichment — only fetch the places you're actually looking at (saves quota) */
-let placesLib = null;
+let placesLib = null, _libPromise = null;
 const enrichQueued = new Set();
-async function ensureGoogleLib(){
-  if(!CONFIG.googleApiKey) return false;
-  if(placesLib) return true;
-  try{
-    await loadGoogle(CONFIG.googleApiKey);
-    googleReady = true;
-    placesLib = (await google.maps.importLibrary("places")).Place;
-    return true;
-  }catch(e){ mapNote.textContent = "Couldn't reach Google — check the key, billing and that Maps JavaScript API + Places API (New) are enabled."; return false; }
+function ensureGoogleLib(){
+  if(!CONFIG.googleApiKey) return Promise.resolve(false);
+  if(placesLib) return Promise.resolve(true);
+  if(_libPromise) return _libPromise; /* a load is already in flight — reuse it, never inject Google twice */
+  _libPromise = (async ()=>{
+    try{
+      await loadGoogle(CONFIG.googleApiKey);
+      googleReady = true;
+      placesLib = (await google.maps.importLibrary("places")).Place;
+      return true;
+    }catch(e){ _libPromise = null; mapNote.textContent = "Couldn't reach Google — check the key, billing and that Maps JavaScript API + Places API (New) are enabled."; return false; }
+  })();
+  return _libPromise;
 }
 async function enrichPlaces(list){
   if(!list || !list.length) return;
