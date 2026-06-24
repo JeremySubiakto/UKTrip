@@ -12,8 +12,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Jer &amp; Tev" />
 <meta name="robots" content="noindex, nofollow" />
-<meta name="description" content="A little map of everywhere we'll wander — Jer &amp; Tev, July 2026." />
-<title>UK Trip — Jer &amp; Tev</title>
+<meta name="description" content="A little map of everywhere we'll wander. Jer &amp; Tev, July 2026." />
+<title>UK Trip · Jer &amp; Tev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
@@ -555,35 +555,46 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
     <svg class="globe" viewBox="0 0 200 200" aria-hidden="true">
       <defs>
         <clipPath id="gclip"><circle cx="100" cy="100" r="92"/></clipPath>
+        <radialGradient id="gshade" cx="37%" cy="33%" r="74%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity=".5"/>
+          <stop offset="40%" stop-color="#ffffff" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#9d5f5a" stop-opacity=".3"/>
+        </radialGradient>
         <g id="land" fill="#D98B86" transform="translate(8,8)">
-          <!-- equirectangular world strip (0-184 wide tiles seamlessly at the mid-Pacific edges) -->
+          <!-- equirectangular world strip (184 wide), equator at y=92, tiles seamlessly at the mid-Pacific -->
           <!-- North America -->
-          <path d="M14,54 C24,47 42,45 58,49 C66,52 67,59 60,63 C56,65 60,70 53,72 C51,79 45,77 47,85 C43,90 39,85 39,79 C34,83 30,79 31,73 C25,71 18,67 14,60 Z"/>
+          <path d="M24,46 C30,36 42,32 54,34 C62,35 67,40 64,47 C68,52 63,58 58,57 C61,63 55,66 57,71 C53,73 51,80 47,85 C44,81 45,74 42,71 C38,66 34,63 33,56 C29,54 25,51 24,46 Z"/>
           <!-- Greenland -->
-          <path d="M66,44 C74,40 83,44 81,51 C76,55 69,55 65,50 Z"/>
-          <!-- Central + South America -->
-          <path d="M47,86 C52,89 50,95 55,99 C62,103 67,111 64,121 C61,131 54,134 51,125 C49,114 43,111 46,103 C44,97 44,90 47,86 Z"/>
+          <path d="M68,30 C74,26 82,29 80,36 C76,40 69,39 67,34 Z"/>
+          <!-- South America -->
+          <path d="M50,90 C56,88 58,94 62,97 C68,101 70,110 66,120 C63,131 56,140 52,134 C50,124 45,118 48,109 C45,103 45,96 50,90 Z"/>
           <!-- Europe -->
-          <path d="M86,53 C94,49 103,51 101,57 C96,61 90,61 88,65 C84,62 83,57 86,53 Z"/>
+          <path d="M90,52 C96,46 104,48 103,54 C99,57 95,55 93,60 C89,60 87,56 90,52 Z"/>
           <!-- Africa -->
-          <path d="M88,66 C101,62 117,65 119,75 C117,85 110,90 109,99 C105,110 98,117 92,110 C88,101 86,91 85,83 C83,76 84,70 88,66 Z"/>
+          <path d="M94,60 C104,56 118,58 120,68 C121,78 114,82 113,92 C112,103 106,114 100,124 C96,118 94,108 92,99 C90,90 88,80 89,72 C89,65 90,62 94,60 Z"/>
+          <!-- Arabia -->
+          <path d="M118,66 C124,64 130,68 127,75 C123,79 118,76 117,71 Z"/>
           <!-- Asia -->
-          <path d="M103,51 C121,44 152,44 174,51 C181,55 178,63 167,65 C157,67 150,62 142,66 C150,71 147,79 139,81 C135,87 129,85 131,77 C123,73 114,71 109,65 C103,62 99,57 103,51 Z"/>
+          <path d="M104,52 C112,42 128,32 150,30 C166,29 178,34 175,44 C171,50 160,49 152,52 C160,55 156,62 148,62 C152,68 144,70 138,66 C132,69 124,66 118,62 C110,60 104,58 104,52 Z"/>
           <!-- India -->
-          <path d="M127,71 C133,73 137,81 133,89 C129,85 125,79 127,71 Z"/>
+          <path d="M128,64 C134,64 140,70 137,80 C134,86 130,84 129,76 C126,72 125,67 128,64 Z"/>
           <!-- SE Asia / Indonesia -->
-          <path d="M150,82 C157,80 164,84 159,89 C154,89 150,86 150,82 Z"/>
+          <path d="M146,86 C152,83 160,85 158,90 C153,92 149,90 146,86 Z"/>
+          <path d="M160,90 C166,88 170,92 165,95 C161,95 159,93 160,90 Z"/>
           <!-- Australia -->
-          <path d="M151,99 C161,95 173,99 171,108 C167,114 156,116 150,109 C146,105 147,101 151,99 Z"/>
+          <path d="M152,106 C162,101 174,105 173,114 C170,122 158,124 152,117 C148,113 148,109 152,106 Z"/>
+          <!-- Antarctica (seamless south band) -->
+          <path d="M0,176 C30,170 60,174 92,171 C124,168 154,173 184,176 L184,188 L0,188 Z"/>
         </g>
       </defs>
       <circle cx="100" cy="100" r="92" fill="#F4DBD6"/>
       <g clip-path="url(#gclip)">
         <g class="spin"><use href="#land"/><use href="#land" transform="translate(184,0)"/></g>
         <g class="grat" fill="none" stroke="#E7BAB4" stroke-width="1">
-          <line x1="8" y1="46" x2="192" y2="46"/><line x1="8" y1="69" x2="192" y2="69"/><line x1="8" y1="92" x2="192" y2="92"/><line x1="8" y1="115" x2="192" y2="115"/><line x1="8" y1="138" x2="192" y2="138"/>
+          <line x1="8" y1="54" x2="192" y2="54"/><line x1="8" y1="77" x2="192" y2="77"/><line x1="8" y1="100" x2="192" y2="100"/><line x1="8" y1="123" x2="192" y2="123"/><line x1="8" y1="146" x2="192" y2="146"/>
           <ellipse cx="100" cy="100" rx="60" ry="92"/><ellipse cx="100" cy="100" rx="28" ry="92"/><line x1="100" y1="8" x2="100" y2="192"/>
         </g>
+        <circle cx="100" cy="100" r="92" fill="url(#gshade)"/>
       </g>
       <circle cx="100" cy="100" r="92" fill="none" stroke="#C98C84" stroke-width="2.5"/>
     </svg>
@@ -661,9 +672,9 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
     <div class="section-head">
       <span class="eyebrow">🗓 the plan</span>
       <h2 id="plannerTitle">twenty days</h2>
-      <p class="kicker">Nothing's pinned to a date — we'll decide each day by mood. Drag a city, a place, or one of our picks onto any day, then rearrange to taste. It saves on this phone, just for us.</p>
+      <p class="kicker">Nothing's pinned to a date. We'll decide each day by mood. Drag a city, a place, or one of our picks onto any day, then rearrange to taste. It saves on this phone, just for us.</p>
     </div>
-    <div class="packing"><span class="stay-ic">🧥</span> <b>UK in July:</b> daylight stretches past 10pm and the days are mild rather than hot, but rain blows through fast — pack layers and something waterproof.</div>
+    <div class="packing"><span class="stay-ic">🧥</span> <b>UK in July:</b> daylight stretches past 10pm and the days are mild rather than hot, but rain blows through fast, so pack layers and something waterproof.</div>
     <div class="planner" id="planner">
       <div class="planner-tools">
         <button class="chip-link solid" id="planShare" type="button">Share our plan</button>
@@ -690,7 +701,7 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
 
 <footer>
   <div class="heart">✦</div>
-  <div class="line">Built with love — Jer</div>
+  <div class="line">Built with love, Jer</div>
   <div class="small">July 2026 · London · Hampstead · Bath · Wales · Scotland</div>
 </footer>
 
@@ -743,16 +754,16 @@ const ITINERARY = [
   { dest:"london",   plan:"Land, drop the bags, and wander Notting Hill as the light goes." },
   { dest:"london",   plan:"South Kensington museums in the morning, Portobello on a Saturday." },
   { dest:"london",   plan:"Mayfair and Soho, then dinner at The Maine with the band playing." },
-  { dest:"hampstead",plan:"Up to the Heath — Kenwood, Parliament Hill, and a fireside pub after." },
+  { dest:"hampstead",plan:"Up to the Heath: Kenwood, Parliament Hill, and a fireside pub after." },
   { dest:"london",   plan:"Borough Market, Tate Modern over the bridge, Sky Garden at sunset." },
   { dest:"london",   plan:"The Tower and Tower Bridge, then a slow evening on the river." },
   { dest:"bath",     plan:"Roman Baths, the Royal Crescent, and the rooftop thermal pool at dusk.", travel:{ from:"London Paddington", to:"Bath Spa", note:"~1h20 · GWR", url:"https://www.gwr.com", label:"Book GWR" } },
   { dest:"bath",     plan:"A slow Bath morning and a wander, then on towards Wales.", travel:{ from:"Bath Spa", to:"Cardiff Central", note:"~1h · GWR", url:"https://www.gwr.com", label:"Book GWR" } },
   { dest:"wales",    plan:"Cardiff Castle, the Victorian arcades, and Cardiff Bay in the evening." },
-  { dest:"wales",    plan:"North into Eryri — the mountains, and Portmeirion on the coast." },
-  { dest:"scotland", plan:"The long way north to Edinburgh — settle in for the views.", travel:{ from:"Cardiff", to:"Edinburgh", note:"~7h by rail, or a short flight north", url:"https://www.nationalrail.co.uk", label:"Plan the route" } },
+  { dest:"wales",    plan:"North into Eryri for the mountains, then Portmeirion on the coast." },
+  { dest:"scotland", plan:"The long way north to Edinburgh. Settle in for the views.", travel:{ from:"Cardiff", to:"Edinburgh", note:"~7h by rail, or a short flight north", url:"https://www.nationalrail.co.uk", label:"Plan the route" } },
   { dest:"scotland", plan:"Edinburgh's Old Town and the closes, Arthur's Seat at golden hour." },
-  { dest:"scotland", plan:"A Highlands or Glasgow day — galleries, lochs, big skies." },
+  { dest:"scotland", plan:"A Highlands or Glasgow day: galleries, lochs, big skies." },
   { dest:"scotland", plan:"One last slow morning, Calton Hill at sunset, then home." },
 ];
 
@@ -766,7 +777,7 @@ const STAYS = {
 };
 function stayCardHTML(dest){
   const s=STAYS[dest]; if(!s) return "";
-  if(s.base){ const b=DEST_META[s.base]; return `<div class="stay base"><span class="stay-ic">🏠</span><span class="stay-line">A day out from our ${b?b.name:s.base} base — no bags to move.</span></div>`; }
+  if(s.base){ const b=DEST_META[s.base]; return `<div class="stay base"><span class="stay-ic">🏠</span><span class="stay-line">A day out from our ${b?b.name:s.base} base, no bags to move.</span></div>`; }
   return `<div class="stay"><div class="stay-top"><span class="stay-ic">🏠</span><span class="stay-lbl">where we're staying</span></div><div class="stay-name serif">${s.name}</div><div class="stay-meta">${s.area?`<span>${s.area}</span>`:""}<span class="stay-dates">${s.checkin} → ${s.checkout}</span></div></div>`;
 }
 function bookChip(p){
@@ -775,7 +786,7 @@ function bookChip(p){
   return "";
 }
 function isGolden(p){ return (p.tags||[]).some(t=>/sunset|golden/i.test(t)); }
-function goldenHTML(p){ return isGolden(p) ? `<p class="golden"><b>✦ Golden hour</b> — one of the best places to be as the sun goes down.</p>` : ""; }
+function goldenHTML(p){ return isGolden(p) ? `<p class="golden"><b>✦ Golden hour.</b> One of the best places to be as the sun goes down.</p>` : ""; }
 function flagsRow(p){ const html=[bookChip(p), isGolden(p)?`<span class="goldchip">✦ sunset</span>`:""].filter(Boolean).join(""); return html?`<div class="card-flags">${html}</div>`:""; }
 const AREAS = [
   ["South Kensington"],["Notting Hill","Portobello","Westbourne","Kensington Church"],["Mayfair","Mount St","Carlos Place","Grosvenor"],
@@ -791,7 +802,7 @@ function areaKey(p){ const h=p.hood||""; for(const g of AREAS){ if(g.some(k=>h.i
 function nearHTML(p){
   const a=areaKey(p); if(!a) return "";
   const others=PLACES.filter(q=>q.id!==p.id && q.dest===p.dest && areaKey(q)===a).slice(0,3);
-  return others.length ? `<p class="near"><b>Near —</b> ${others.map(q=>q.name).join(" · ")}</p>` : "";
+  return others.length ? `<p class="near"><b>Nearby:</b> ${others.map(q=>q.name).join(" · ")}</p>` : "";
 }
 
 const DEST_ORDER = ["london","hampstead","bath","wales","scotland"];
@@ -800,17 +811,17 @@ const DEST_META = {
     blurb:"Museum hush and market noise; rose lattes down Portobello and dinners that run too long. We'll walk further than we mean to, and not mind once.",
     best:"Go for the long July evenings.", areas:"Mayfair · Notting Hill · Chelsea · South Kensington · Soho" },
   hampstead:{ name:"Hampstead",  tag:"the hill where the city goes quiet",
-    blurb:"Up the hill the noise falls away — wild grass and bathing ponds, a mansion full of Rembrandts you can see for nothing, and a fire in every pub. London, breathing slower.",
+    blurb:"Up the hill the noise falls away. Wild grass and bathing ponds, a mansion full of Rembrandts you can see for nothing, and a fire in every pub. London, breathing slower.",
     best:"A clear afternoon: the Heath, then a fire.", areas:"The Village · the Heath · Highgate · Kenwood" },
   bath:     { name:"Bath",       tag:"a city the colour of honey",
     blurb:"A whole city cut from honey-coloured stone, warm springs still rising under it after two thousand years. We'll bathe on the roof at dusk and pretend we live here.",
     best:"Spring light; book the rooftop pool for dusk.", areas:"City centre · Royal Crescent · Pulteney" },
   wales:    { name:"Wales",      tag:"castles, coast, and the wild bit",
-    blurb:"Arcades and a roaring stadium in Cardiff, then north until the roads narrow and the mountains start — fortresses on the sea, a toy Italian village, and Eryri going on for miles.",
+    blurb:"Arcades and a roaring stadium in Cardiff, then north until the roads narrow and the mountains start. Fortresses on the sea, a toy Italian village, and Eryri going on for miles.",
     best:"Summer for the peaks; give the north a day or two.", areas:"Cardiff · Eryri / Snowdonia · the North coast" },
   scotland: { name:"Scotland",   tag:"older, wilder, the far end of the map",
-    blurb:"The last leg and the wildest — Edinburgh's gothic spires, Glasgow's galleries, then the train pushing north into lochs and empty glens and the long strange light over Skye.",
-    best:"Long summer days; take the train up — it's the lovely part.", areas:"Edinburgh · Glasgow · the Highlands & Skye" },
+    blurb:"The last leg, and the wildest. Edinburgh's gothic spires, Glasgow's galleries, then the train pushing north into lochs and empty glens and the long strange light over Skye.",
+    best:"Long summer days; take the train up, it's the lovely part.", areas:"Edinburgh · Glasgow · the Highlands & Skye" },
 };
 const CAT_ORDER = ["restaurants","coffee","matcha","wellness","pubs","landmarks","parks"];
 const CAT_META = {
@@ -919,49 +930,49 @@ const DOODLE = {
 const PLACES = [
   /* ===================== LONDON · RESTAURANTS ===================== */
   { id:"maine-mayfair", dest:"london", cat:"restaurants", name:"The Maine Mayfair", hood:"Mayfair, W1", booked:true,
-    cuisine:"New England brasserie — seafood, lobster, raw bar", price:3,
+    cuisine:"New England brasserie: seafood, lobster, raw bar", price:3,
     bookingUrl:"https://www.opentable.co.uk/r/the-maine-mayfair-london", bookingLabel:"OpenTable",
     walkIn:"Bar & Terrace are walk-in friendly. Brasserie needs a booking · +44 20 3432 2192.",
     summary:"A Georgian townhouse spread over five rooms and done up like a New England summer. Lobster rolls, oysters on ice, clam chowder, and a band somewhere up the stairs every night of the week. The terrace stays open all year, and this is where we'll start.",
     tags:["live music","terrace","date night","iconic"], badge:"✦ your pick", badgeRose:true, feature:true },
 
   { id:"the-dover", dest:"london", cat:"restaurants", name:"The Dover", hood:"Mayfair, W1",
-    cuisine:"Italian-American — pasta, steak, caviar", price:3,
+    cuisine:"Italian-American: pasta, steak, caviar", price:3,
     bookingUrl:"https://www.thedover.co.uk", bookingLabel:"Resy",
-    walkIn:"Walk-in bar (no reservation) — great for cocktails & bar snacks.",
+    walkIn:"Walk-in bar (no reservation). Great for cocktails & bar snacks.",
     summary:"Time Out's most romantic room of 2025: walnut walls lifted from a 1930s ocean liner, discreet corner booths, lighting that flatters everyone. Order the crisp potato cakes under caviar or the lobster-bisque ravioli, and if there's no table, the bar pours martinis beside mini hot dogs.",
     tags:["most romantic","walk-in bar","date night","Mayfair"], badge:"Time Out #1 · 2025" },
 
   { id:"bouchon-racine", dest:"london", cat:"restaurants", name:"Bouchon Racine", hood:"Farringdon, EC1",
     cuisine:"Classic French bistro", price:2,
     bookingUrl:"https://bouchonracine.co.uk", bookingLabel:"Book",
-    walkIn:"Limited walk-ins — book at least 2 weeks ahead.",
+    walkIn:"Limited walk-ins. Book at least 2 weeks ahead.",
     summary:"Up a narrow stair above a Farringdon pub is a candlelit room that could have been carried over from Paris, named Time Out's most romantic of 2026. Onion soup, duck confit, crème brûlée. It seats almost no one, so book a fortnight ahead.",
     tags:["most romantic 2026","French","candlelit","hidden gem"], badge:"Time Out #1 · 2026" },
 
   { id:"claridges", dest:"london", cat:"restaurants", name:"Claridge's Restaurant", hood:"Mayfair, W1",
-    cuisine:"Modern British — Art Deco, seasonal plates", price:4,
+    cuisine:"Modern British: Art Deco, seasonal plates", price:4,
     bookingUrl:"https://www.claridges.co.uk/restaurants-bars/the-restaurant-at-claridges/", bookingLabel:"Book",
     walkIn:"Booking essential. Dress up.",
     summary:"One of London's truly great rooms: Art Deco lines, deep green velvet, seasonal British plates served as though it were still 1930. Afterwards, slip next door into the Red Room and have a last glass against its blush-pink walls.",
     tags:["fine dining","Art Deco","splurge","iconic"] },
 
   { id:"bottarga", dest:"london", cat:"restaurants", name:"Bottarga", hood:"Chelsea, SW3",
-    cuisine:"Seafood-forward Mediterranean — relaxed glamour", price:3,
+    cuisine:"Seafood-forward Mediterranean: relaxed glamour", price:3,
     bookingUrl:"https://bottarga.co.uk", bookingLabel:"Book",
-    walkIn:"Limited — book ahead.",
+    walkIn:"Limited. Book ahead.",
     summary:"The Zephyr team's low-lit Mediterranean room in Chelsea, all curved banquettes and a tiled terrace, with seafood handled simply and well. It's the kind of place where one glass becomes three and you lose track of the evening entirely.",
     tags:["seafood","Mediterranean","intimate","date night"] },
 
   { id:"automat", dest:"london", cat:"restaurants", name:"Automat", hood:"Mayfair, Mount St, W1",
-    cuisine:"Modern European — aphrodisiac menu, dark energy", price:3,
+    cuisine:"Modern European: aphrodisiac menu, dark energy", price:3,
     bookingUrl:"https://resy.com/cities/ldn", bookingLabel:"Resy",
-    walkIn:"Small venue — book. Hidden behind the Tanner Krolle shop on Mount St.",
+    walkIn:"Small venue. Book. Hidden behind the Tanner Krolle shop on Mount St.",
     summary:"It hides behind a leather-goods shop on Mount Street, low-lit and a little conspiratorial; the Infatuation called it “an aphrodisiac of a restaurant.” Small and secret, it's the sort of place a whole evening gets named after.",
     tags:["hidden gem","secret","date night","Mayfair"], badge:"hidden gem" },
 
   { id:"farm-girl", dest:"london", cat:"restaurants", name:"Farm Girl", hood:"Notting Hill / Portobello Rd, W11",
-    cuisine:"Australian brunch — healthy, plant-forward", price:2,
+    cuisine:"Australian brunch: healthy, plant-forward", price:2,
     bookingUrl:"https://thefarmgirl.co.uk", bookingLabel:"Book",
     walkIn:"Walk-ins usually fine on weekdays.",
     summary:"Hanging plants and rose lattes and the easy Australian brunch Notting Hill does so well, avocado toast and açaí and all of it. Get the rose latte to go, carry it out onto Portobello Road, and let the morning run slow.",
@@ -969,25 +980,25 @@ const PLACES = [
 
   /* ===================== LONDON · COFFEE ===================== */
   { id:"elan-cafe", dest:"london", cat:"coffee", name:"Elan Cafe", hood:"Marylebone · multiple",
-    cuisine:"Pink decor & brunch — the most instagrammable café in London", price:2,
+    cuisine:"Pink decor & brunch: the most instagrammable café in London", price:2,
     mustTry:"Dutch baby pancakes · Lucky Charms latte", walkIn:"Walk-in: yes",
     summary:"London's most unapologetically pink café: rose walls, mirrored everything, velvet chairs. Get the Dutch baby and the Lucky Charms latte, and let the whole room be the photo.",
     tags:["pink","brunch","instagrammable"] },
 
   { id:"laduree", dest:"london", cat:"coffee", name:"Ladurée London", hood:"Covent Garden + Notting Hill",
-    cuisine:"Parisian macaron institution — pastel tearoom", price:2,
+    cuisine:"Parisian macaron institution: pastel tearoom", price:2,
     mustTry:"Pistachio macaron · rose latte · mille-feuille", walkIn:"Walk-in: yes",
     summary:"The Paris macaron house keeps two London tearooms: Notting Hill the quieter, Covent Garden the grander. Choose a pistachio, then carry a ribboned box of macarons back out with you.",
     tags:["macarons","Parisian","pastel"] },
 
   { id:"butter-bakery", dest:"london", cat:"coffee", name:"Butter Bakery", hood:"Notting Hill, W11",
-    cuisine:"Cozy neighbourhood bakery — local favourite", price:1,
+    cuisine:"Cozy neighbourhood bakery: local favourite", price:1,
     mustTry:"Salted caramel brownie · sourdough · flat white", walkIn:"Walk-in: yes",
     summary:"A proper Notting Hill local with no frills to it, just very good baking and strong coffee. The right place to stop after an hour lost in Portobello market.",
     tags:["bakery","local","cozy"] },
 
   { id:"biscuiteers", dest:"london", cat:"coffee", name:"Biscuiteers Café", hood:"Portobello Rd, Notting Hill",
-    cuisine:"Black-and-white Parisian style — hand-iced biscuits", price:2,
+    cuisine:"Black-and-white Parisian style: hand-iced biscuits", price:2,
     mustTry:"Hand-iced biscuits · mocha", walkIn:"Walk-in: yes",
     summary:"One of the most photographed café fronts in London, black-and-white with hand-iced biscuit-art filling the window. Have a mocha, then take a tin of the iced biscuits home.",
     tags:["photogenic","biscuits","Notting Hill"] },
@@ -999,14 +1010,14 @@ const PLACES = [
     tags:["rose latte","plants","Portobello"] },
 
   { id:"leto", dest:"london", cat:"coffee", name:"L'eto Café", hood:"Westbourne Grove, Notting Hill",
-    cuisine:"Mediterranean, home-like, pastel — famous for milk cakes", price:2,
+    cuisine:"Mediterranean, home-like, pastel: famous for milk cakes", price:2,
     mustTry:"Pistachio milk cake · cappuccino", walkIn:"Walk-in: yes",
     summary:"Of all the L'eto cafés, the Westbourne Grove one is the prettiest. The milk cakes are the thing to order, pistachio above all, and the sofas are built for lingering over a second coffee.",
     tags:["milk cake","pastel","lingerable"] },
 
   /* ===================== LONDON · PUBS & BARS ===================== */
   { id:"churchill-arms", dest:"london", cat:"pubs", name:"The Churchill Arms", hood:"Kensington Church St, Notting Hill",
-    cuisine:"🌸 Famous flower-covered exterior — legendary", price:1, walkIn:"Walk-in: yes",
+    cuisine:"🌸 Famous flower-covered exterior: legendary", price:1, walkIn:"Walk-in: yes",
     summary:"One of the most photographed pubs in London, its front entirely buried under hanging baskets and flowers. Inside it's all happy clutter and old Churchill memorabilia, and there's a proper Thai kitchen out the back that's genuinely good.",
     tags:["flowers","photogenic","Thai food"] },
 
@@ -1016,19 +1027,19 @@ const PLACES = [
     tags:["National Trust","historic","courtyard"] },
 
   { id:"dickies-bar", dest:"london", cat:"pubs", name:"Dickie's Bar", hood:"Upper Grosvenor St, Mayfair",
-    cuisine:"Secret whisky bar — Michelin-chef bar food", price:3, walkIn:"Walk-in: yes, but intimate — can fill up",
+    cuisine:"Secret whisky bar: Michelin-chef bar food", price:3, walkIn:"Walk-in: yes, but intimate. Can fill up",
     summary:"Hidden inside Corrigan's, one of Mayfair's better-kept secrets. Rare Irish whiskeys, a perfectly poured Guinness, and Michelin-kitchen bar snacks like smoked-eel croquettes and quail scotch eggs. The ideal nightcap.",
     tags:["hidden gem","whisky","nightcap"], badge:"hidden gem" },
 
   { id:"red-room", dest:"london", cat:"pubs", name:"The Red Room · The Connaught", hood:"Carlos Place, Mayfair",
-    cuisine:"Hotel wine bar — blush-pink walls, art by women", price:4, walkIn:"Walk-in welcome · can be busy",
+    cuisine:"Hotel wine bar: blush-pink walls, art by women", price:4, walkIn:"Walk-in welcome · can be busy",
     summary:"Tucked inside the Connaught, an intimate wine bar with blush-pink walls, stained glass, and art by four women. The list is drawn from the hotel's historic cellars and the cocktails are built around wine. To our minds, the most romantic bar in London.",
     tags:["most romantic","blush walls","cocktails"], badge:"most romantic bar", badgeRose:true, feature:true },
 
   /* ===================== LONDON · LANDMARKS ===================== */
   { id:"va", dest:"london", cat:"landmarks", name:"Victoria & Albert Museum", hood:"South Kensington, SW7",
     entry:"free",
-    tip:"Book free entry online. Head straight to the Fashion gallery and the Cast Courts (enormous Victorian plaster casts — jaw-dropping). The café is in a stunning ornate room.",
+    tip:"Book free entry online. Head straight to the Fashion gallery and the Cast Courts (enormous Victorian plaster casts. Jaw-dropping). The café is in a stunning ornate room.",
     summary:"The greatest museum of art, design and fashion in the world, five floors running from medieval armour to Alexander McQueen gowns. The Fashion gallery is the heart of it. Give it half a day; it can't be rushed.",
     tags:["fashion","free","half a day"] },
 
@@ -1046,13 +1057,13 @@ const PLACES = [
 
   { id:"national-gallery", dest:"london", cat:"landmarks", name:"National Gallery", hood:"Trafalgar Square, WC2",
     entry:"free",
-    tip:"Friday late opening to 9pm — quieter, more atmospheric. Go to Room 34 for the Impressionists (Monet, Renoir, Van Gogh's Sunflowers).",
+    tip:"Friday late opening to 9pm. Quieter, more atmospheric. Go to Room 34 for the Impressionists (Monet, Renoir, Van Gogh's Sunflowers).",
     summary:"Two and a half thousand paintings spanning 1300 to 1900: da Vinci, Vermeer, Turner, Van Gogh's Sunflowers. One of the finest collections on earth, and free to all. Trafalgar Square is waiting outside when you're done.",
     tags:["paintings","free","Sunflowers"] },
 
   { id:"tower-of-london", dest:"london", cat:"landmarks", name:"Tower of London", hood:"Tower Hill, EC3",
     entry:"paid · ~£34",
-    tip:"Book online in advance — cheaper and you skip queues. Don't miss the Crown Jewels (arrive early, queues build fast). The Yeoman Warder tours are genuinely good.",
+    tip:"Book online in advance. Cheaper and you skip queues. Don't miss the Crown Jewels (arrive early, queues build fast). The Yeoman Warder tours are genuinely good.",
     summary:"Nine hundred years of royal history packed into a riverside fortress. The Crown Jewels live here, the Cullinan I among them, the largest colourless cut diamond in the world. Walk the medieval walls, find the ravens, and take the Yeoman Warder tour.",
     tags:["Crown Jewels","history","ravens"] },
 
@@ -1064,7 +1075,7 @@ const PLACES = [
 
   { id:"sky-garden", dest:"london", cat:"landmarks", name:"Sky Garden", hood:"Fenchurch St (Walkie Talkie), EC3",
     entry:"free · book ahead",
-    tip:"Book weeks ahead at skygarden.london — it sells out. Evening slots give the best city views. No photography restrictions.",
+    tip:"Book weeks ahead at skygarden.london. It sells out. Evening slots give the best city views. No photography restrictions.",
     summary:"A free rooftop garden thirty-five floors above the City, planted with palms and ringed by glass, with a bar and a view that runs all the way round. Book an evening slot and watch the sun drop over the Thames. It costs nothing.",
     tags:["rooftop","free","sunset"] },
 
@@ -1076,7 +1087,7 @@ const PLACES = [
 
   { id:"portobello", dest:"london", cat:"landmarks", name:"Portobello Road Market", hood:"Notting Hill, W11",
     entry:"free",
-    tip:"Saturday is the biggest day — arrive by 10am. Antiques at the Notting Hill Gate end; street food and vintage toward Ladbroke Grove.",
+    tip:"Saturday is the biggest day. Arrive by 10am. Antiques at the Notting Hill Gate end; street food and vintage toward Ladbroke Grove.",
     summary:"The most famous street market in London, running downhill through Notting Hill: antiques, vintage clothes, street food, buskers. The pastel houses behind the stalls make it one of the prettiest streets in the city. Go on a Saturday morning.",
     tags:["market","pastel houses","Saturday"] },
 
@@ -1088,21 +1099,21 @@ const PLACES = [
 
   /* ---------- LONDON · RESTAURANTS (fine dining / Michelin) ---------- */
   { id:"core-clare-smyth", dest:"london", cat:"restaurants", name:"Core by Clare Smyth", hood:"Notting Hill, W11",
-    cuisine:"Modern British — produce-led tasting menus", price:4,
+    cuisine:"Modern British: produce-led tasting menus", price:4,
     bookingUrl:"https://www.corebyclaresmyth.com", bookingLabel:"Book",
-    walkIn:"Booking essential — books open well in advance.",
+    walkIn:"Booking essential. Books open well in advance.",
     summary:"Three Michelin stars in a hushed Notting Hill room. Clare Smyth takes plain British produce and makes something close to astonishing of it, and the potato and roe alone is worth the whole evening. Save up for this one.",
     tags:["michelin ★★★","fine dining","splurge","iconic"], badge:"Michelin ★★★", badgeRose:true, feature:true },
 
   { id:"sketch", dest:"london", cat:"restaurants", name:"Sketch", hood:"Mayfair, W1",
-    cuisine:"Modern French — and the famous pink room", price:4,
+    cuisine:"Modern French: and the famous pink room", price:4,
     bookingUrl:"https://sketch.london", bookingLabel:"Book",
     walkIn:"Gallery & Glade take some walk-ins; the Lecture Room needs booking.",
     summary:"The famous blush-pink room is velvet to the ceiling, hung with David Shrigley drawings, and yes, the loos really are egg-shaped pods. Come for afternoon tea and the photographs. Upstairs, the Lecture Room holds three Michelin stars for the more serious nights.",
     tags:["pink room","michelin","afternoon tea","iconic"], badge:"the pink room", badgeRose:true, feature:true },
 
   { id:"helene-darroze", dest:"london", cat:"restaurants", name:"Hélène Darroze at The Connaught", hood:"Mayfair, W1",
-    cuisine:"Haute French — Landes produce", price:4,
+    cuisine:"Haute French: Landes produce", price:4,
     bookingUrl:"https://www.the-connaught.co.uk/restaurants-bars/helene-darroze-at-the-connaught/", bookingLabel:"Book",
     walkIn:"Booking essential.",
     summary:"Three stars inside the Connaught, where Hélène Darroze cooks the south-west of France with genuine warmth and you pick your courses from a board of coloured beads. Dress up for it, and give the evening room to unfold.",
@@ -1116,9 +1127,9 @@ const PLACES = [
     tags:["michelin ★★★","French","iconic","splurge"], badge:"Michelin ★★★" },
 
   { id:"a-wong", dest:"london", cat:"restaurants", name:"A. Wong", hood:"Victoria, SW1",
-    cuisine:"Chinese — regional China, dim sum", price:3,
+    cuisine:"Chinese: regional China, dim sum", price:3,
     bookingUrl:"https://www.awong.co.uk", bookingLabel:"Book",
-    walkIn:"Book ahead — dim sum lunch is the value sweet spot.",
+    walkIn:"Book ahead. Dim sum lunch is the value sweet spot.",
     summary:"The only Chinese restaurant in Europe with two Michelin stars, tucked into unflashy Victoria. The lunchtime dim sum is a quiet revelation, and the 'Taste of China' menu walks you across the provinces a small plate at a time.",
     tags:["michelin ★★","dim sum","award","date night"], badge:"Michelin ★★" },
 
@@ -1130,7 +1141,7 @@ const PLACES = [
     tags:["michelin ★★","adventurous","tasting menu"], badge:"Michelin ★★" },
 
   { id:"gymkhana", dest:"london", cat:"restaurants", name:"Gymkhana", hood:"Mayfair, W1",
-    cuisine:"Indian — Raj-era club glamour", price:3,
+    cuisine:"Indian: Raj-era club glamour", price:3,
     bookingUrl:"https://www.gymkhanalondon.com", bookingLabel:"Book",
     walkIn:"Book ahead; bar seats sometimes walk-in.",
     summary:"Two Michelin stars dressed up as a Raj-era sporting club, all dark wood and slow ceiling fans. People cross the city for the wild muntjac biryani. It's loud and warm and properly good.",
@@ -1139,12 +1150,12 @@ const PLACES = [
   { id:"kitchen-table", dest:"london", cat:"restaurants", name:"Kitchen Table", hood:"Fitzrovia, W1",
     cuisine:"Chef's-counter tasting menu", price:4,
     bookingUrl:"https://kitchentablelondon.co.uk", bookingLabel:"Book",
-    walkIn:"Counter only — booking essential.",
+    walkIn:"Counter only. Booking essential.",
     summary:"Behind a hot-dog bar, find a counter of nineteen seats and two Michelin stars. James Knappett and his cooks build a surprise British menu inches from your hands, calling out each dish as it lands. It's as much performance as dinner.",
     tags:["michelin ★★","chef's counter","hidden gem","tasting menu"], badge:"Michelin ★★" },
 
   { id:"kol", dest:"london", cat:"restaurants", name:"Kol", hood:"Marylebone, W1",
-    cuisine:"Mexican — British produce, mezcal", price:3,
+    cuisine:"Mexican: British produce, mezcal", price:3,
     bookingUrl:"https://kolrestaurant.com", bookingLabel:"Book",
     walkIn:"Mezcalería bar downstairs is walk-in.",
     summary:"Michelin-starred Mexican built from British produce, where Santiago Lastra's tacos and moles are some of the liveliest food in the city. Downstairs there's a candlelit mezcalería that's worth an evening on its own.",
@@ -1213,7 +1224,7 @@ const PLACES = [
     summary:"Ranked the World's Best Bar more than once, and it earns it. The martini trolley comes to your table and the drink is built in front of you, bitters and all, against silver-leaf walls. Dress smart, and order the martini.",
     tags:["world's best","cocktails","martini","iconic"], badge:"World's Best Bar", badgeRose:true },
 
-  { id:"american-bar-savoy", dest:"london", cat:"pubs", name:"American Bar · The Savoy", hood:"Strand, WC2", price:4, walkIn:"Walk-in; can queue — smart dress",
+  { id:"american-bar-savoy", dest:"london", cat:"pubs", name:"American Bar · The Savoy", hood:"Strand, WC2", price:4, walkIn:"Walk-in; can queue. Smart dress",
     summary:"The oldest surviving cocktail bar in Britain, birthplace of more classics than anyone can count. Live piano, art-deco glamour, bartenders in white jackets. Order a Hanky Panky and feel the years in it.",
     tags:["historic","cocktails","live piano","iconic"] },
 
@@ -1225,7 +1236,7 @@ const PLACES = [
     summary:"Rebuilt in 1667 after the Great Fire, a warren of dark, low-ceilinged, candlelit rooms down a Fleet Street alley. Dickens and Dr Johnson both drank here. Order a pint and disappear into another century.",
     tags:["historic","candlelit","atmospheric"] },
 
-  { id:"gordons-wine", dest:"london", cat:"pubs", name:"Gordon's Wine Bar", hood:"Embankment, WC2", price:2, walkIn:"Walk-in: yes — arrive early for the cave",
+  { id:"gordons-wine", dest:"london", cat:"pubs", name:"Gordon's Wine Bar", hood:"Embankment, WC2", price:2, walkIn:"Walk-in: yes. Arrive early for the cave",
     summary:"London's oldest wine bar, going since 1890: a candlelit cellar of barrel tables, cheese and charcuterie, and not an ounce of pretension. It's cramped and flickering and quietly romantic, so get there early to claim a seat in the vaults.",
     tags:["wine","candlelit","historic","romantic"], badge:"oldest wine bar" },
 
@@ -1255,12 +1266,12 @@ const PLACES = [
     summary:"The monarch's London home, and the backdrop to the Changing of the Guard. The lavish State Rooms open only in summer; the rest of the year, the gates, the Mall and the surrounding park make a lovely free wander.",
     tags:["royal","iconic","ceremony"] },
 
-  { id:"stamford-bridge", dest:"london", cat:"landmarks", name:"Stamford Bridge — Chelsea FC", hood:"Fulham, SW6", entry:"paid · tour ~£28",
+  { id:"stamford-bridge", dest:"london", cat:"landmarks", name:"Stamford Bridge, Chelsea FC", hood:"Fulham, SW6", entry:"paid · tour ~£28",
     tip:"Book the stadium tour + museum online; on non-match days you get the dressing rooms, tunnel and pitchside. Matchday tickets sell fast.",
     summary:"Home of Chelsea FC since 1905. The tour runs through the dressing rooms, the players' tunnel and pitchside, with a trophy-filled museum alongside. Unmissable if Jer's a Blue.",
     tags:["football","stadium","tour"] },
 
-  { id:"emirates-stadium", dest:"london", cat:"landmarks", name:"Emirates Stadium — Arsenal", hood:"Holloway, N5", entry:"paid · tour ~£30",
+  { id:"emirates-stadium", dest:"london", cat:"landmarks", name:"Emirates Stadium, Arsenal", hood:"Holloway, N5", entry:"paid · tour ~£30",
     tip:"The self-guided audio tour (narrated partly by Ian Wright) is genuinely good. Combine with the Arsenal museum.",
     summary:"Arsenal's sixty-thousand-seat home in north London. The self-guided Legends tour takes in the dressing rooms, the tunnel and the directors' box, with the club museum alongside. A Gunners pilgrimage.",
     tags:["football","stadium","tour"] },
@@ -1302,18 +1313,18 @@ const PLACES = [
     tags:["botanical","glasshouses","UNESCO"] },
 
   { id:"primrose-hill", dest:"london", cat:"parks", name:"Primrose Hill", hood:"NW1", entry:"free",
-    tip:"Bring a bottle and climb for sunset — the protected view across the whole skyline is one of the best in London.",
+    tip:"Bring a bottle and climb for sunset. The protected view across the whole skyline is one of the best in London.",
     summary:"A short, steep climb to the most loved skyline view in London, the whole city laid out below you. The classic spot for a sunset picnic with a bottle of something.",
     tags:["view","picnic","sunset"] },
 
   /* ===================== HAMPSTEAD ===================== */
-  { id:"jin-kichi", dest:"hampstead", cat:"restaurants", name:"Jin Kichi", hood:"Heath St, Hampstead", cuisine:"Japanese — charcoal yakitori", price:3,
-    bookingUrl:"https://jinkichi.com", bookingLabel:"Book", walkIn:"Tiny — book ahead.",
-    summary:"A beloved, tiny Hampstead institution doing some of London's best charcoal yakitori and sushi. Cramped, smoky, joyful — and notoriously hard to get into, so book.",
+  { id:"jin-kichi", dest:"hampstead", cat:"restaurants", name:"Jin Kichi", hood:"Heath St, Hampstead", cuisine:"Japanese: charcoal yakitori", price:3,
+    bookingUrl:"https://jinkichi.com", bookingLabel:"Book", walkIn:"Tiny. Book ahead.",
+    summary:"A beloved, tiny Hampstead institution doing some of London's best charcoal yakitori and sushi. Cramped, smoky, joyful. And notoriously hard to get into, so book.",
     tags:["Japanese","yakitori","hidden gem"], badge:"hidden gem" },
   { id:"the-wells", dest:"hampstead", cat:"restaurants", name:"The Wells", hood:"Well Walk, Hampstead", cuisine:"Elegant Georgian gastropub", price:2,
     bookingUrl:"https://www.thewellshampstead.co.uk", bookingLabel:"Book", walkIn:"Downstairs bar walk-in; restaurant book.",
-    summary:"A handsome Georgian gastropub a few minutes from the Heath — proper Sunday roasts downstairs, a more refined dining room up top. The ideal post-walk lunch.",
+    summary:"A handsome Georgian gastropub a few minutes from the Heath. Proper Sunday roasts downstairs, a more refined dining room up top. The ideal post-walk lunch.",
     tags:["gastropub","Sunday roast","cosy"] },
   { id:"la-gaffe", dest:"hampstead", cat:"restaurants", name:"La Gaffe", hood:"Heath St, Hampstead", cuisine:"Family-run Italian", price:2,
     bookingUrl:"https://www.lagaffe.co.uk", bookingLabel:"Book", walkIn:"Walk-ins usually fine.",
@@ -1322,28 +1333,28 @@ const PLACES = [
 
   { id:"ginger-white", dest:"hampstead", cat:"coffee", name:"Ginger & White", hood:"Perrin's Court, Hampstead", price:2,
     mustTry:"Flat white · sausage roll", walkIn:"Walk-in: yes",
-    summary:"Hampstead's favourite café, tucked down a little pedestrian lane — British-Antipodean, brilliant coffee and bakes, buggies and locals galore. A proper village morning.",
+    summary:"Hampstead's favourite café, tucked down a little pedestrian lane. British-Antipodean, brilliant coffee and bakes, buggies and locals galore. A proper village morning.",
     tags:["local favourite","flat white","village"] },
   { id:"louis-patisserie", dest:"hampstead", cat:"coffee", name:"Louis Hungarian Patisserie", hood:"Heath St, Hampstead", price:1,
     mustTry:"Cherry strudel · coffee & a cream slice", walkIn:"Walk-in: yes",
-    summary:"A time-capsule Hungarian tearoom serving Hampstead since 1963 — net curtains, old-world cakes, waitresses in pinnies. Cash-y, charming, utterly unchanged.",
+    summary:"A time-capsule Hungarian tearoom serving Hampstead since 1963. Net curtains, old-world cakes, waitresses in pinnies. Cash-y, charming, utterly unchanged.",
     tags:["tearoom","historic","old-world"] },
   { id:"brew-house-kenwood", dest:"hampstead", cat:"coffee", name:"The Brew House · Kenwood", hood:"Kenwood House, Hampstead Ln", price:2,
     mustTry:"Cake of the day · coffee on the terrace", walkIn:"Walk-in: yes",
-    summary:"Set in Kenwood House's old kitchens with a big sunny garden terrace — pile your plate with cake after a Heath walk. One of the loveliest café gardens in London.",
+    summary:"Set in Kenwood House's old kitchens with a big sunny garden terrace. Pile your plate with cake after a Heath walk. One of the loveliest café gardens in London.",
     tags:["garden","Kenwood","cake"] },
 
   { id:"holly-bush", dest:"hampstead", cat:"pubs", name:"The Holly Bush", hood:"Holly Mount, Hampstead", price:2, walkIn:"Walk-in: yes · book for food",
-    summary:"A Grade II-listed 18th-century pub up a hidden flight of steps — roaring fire, dark wood, leather booths and Fuller's ale. The platonic ideal of a cosy Hampstead pub.",
+    summary:"A Grade II-listed 18th-century pub up a hidden flight of steps. Roaring fire, dark wood, leather booths and Fuller's ale. The platonic ideal of a cosy Hampstead pub.",
     tags:["historic","cosy","fireplace"] },
   { id:"spaniards-inn", dest:"hampstead", cat:"pubs", name:"The Spaniards Inn", hood:"Hampstead Heath, NW3", price:2, walkIn:"Walk-in: yes · book for food",
-    summary:"One of London's oldest pubs (1585) and genuinely one of the most romantic. Keats wrote 'Ode to a Nightingale' here; Dickens and Bram Stoker drank here too. Real fires, mulled wine, a big garden — combine it with a walk on the Heath.",
+    summary:"One of London's oldest pubs (1585) and genuinely one of the most romantic. Keats wrote 'Ode to a Nightingale' here; Dickens and Bram Stoker drank here too. Real fires, mulled wine, a big garden. Combine it with a walk on the Heath.",
     tags:["historic","fireplace","romantic"], badge:"1585" },
   { id:"the-flask-hampstead", dest:"hampstead", cat:"pubs", name:"The Flask", hood:"Flask Walk, Hampstead", price:2, walkIn:"Walk-in: yes",
-    summary:"A Hampstead institution down pretty Flask Walk — a Victorian interior with a cosy snug, good pies and a proper local crowd.",
+    summary:"A Hampstead institution down pretty Flask Walk. A Victorian interior with a cosy snug, good pies and a proper local crowd.",
     tags:["historic","cosy","local"] },
   { id:"old-bull-bush", dest:"hampstead", cat:"pubs", name:"The Old Bull & Bush", hood:"North End Way, NW3", price:2, walkIn:"Walk-in: yes",
-    summary:"The famous music-hall pub on the edge of the Heath (immortalised in song). Leafy garden, fireplaces, hearty food — a classic Heath-walk finish.",
+    summary:"The famous music-hall pub on the edge of the Heath (immortalised in song). Leafy garden, fireplaces, hearty food. A classic Heath-walk finish.",
     tags:["historic","garden","Heath"] },
 
   { id:"kenwood-house", dest:"hampstead", cat:"landmarks", name:"Kenwood House", hood:"Hampstead Heath, NW3", entry:"free",
@@ -1351,25 +1362,25 @@ const PLACES = [
     summary:"A free, dazzling neoclassical mansion on the edge of the Heath, with an art collection that includes Rembrandt and Vermeer, and sweeping lakeside lawns made for a picnic. One of London's best free things to do.",
     tags:["free","art","mansion"] },
   { id:"keats-house", dest:"hampstead", cat:"landmarks", name:"Keats House", hood:"Keats Grove, Hampstead", entry:"paid · ~£9",
-    tip:"Small and atmospheric — read the plum-tree story where he wrote 'Ode to a Nightingale'.",
+    tip:"Small and atmospheric. Read the plum-tree story where he wrote 'Ode to a Nightingale'.",
     summary:"The Regency villa where John Keats fell in love with neighbour Fanny Brawne and wrote some of his greatest poetry. Intimate, romantic and quietly moving.",
     tags:["literary","romantic","historic"] },
   { id:"parliament-hill", dest:"hampstead", cat:"landmarks", name:"Parliament Hill", hood:"Hampstead Heath, NW5", entry:"free",
     tip:"Climb at sunset for the protected skyline view. Kite-flyers love the top.",
-    summary:"The Heath's famous viewpoint — a protected panorama across the whole London skyline. Bring a flask, climb at golden hour, watch the city light up.",
+    summary:"The Heath's famous viewpoint. A protected panorama across the whole London skyline. Bring a flask, climb at golden hour, watch the city light up.",
     tags:["view","free","sunset"] },
   { id:"hampstead-pergola", dest:"hampstead", cat:"landmarks", name:"The Hill Garden & Pergola", hood:"West Heath, NW3", entry:"free",
-    tip:"Go on a weekday morning — almost empty, wildly romantic and great for photos. Wisteria peaks in late spring.",
-    summary:"A beautiful, slightly crumbling Edwardian pergola walk draped in wisteria and climbing roses, with a hidden formal garden. One of London's most romantic secret corners — and free.",
+    tip:"Go on a weekday morning. Almost empty, wildly romantic and great for photos. Wisteria peaks in late spring.",
+    summary:"A beautiful, slightly crumbling Edwardian pergola walk draped in wisteria and climbing roses, with a hidden formal garden. One of London's most romantic secret corners. And free.",
     tags:["romantic","hidden gem","free"], badge:"hidden gem" },
 
   { id:"hampstead-heath", dest:"hampstead", cat:"parks", name:"Hampstead Heath", hood:"NW3 / NW5", entry:"free",
-    tip:"Brave the wild swimming ponds (men's, ladies' and mixed), then climb Parliament Hill. 800 acres — easy to lose an afternoon.",
-    summary:"790 acres of wild, hilly, half-forgotten London — woods, meadows, bathing ponds and that skyline view. It feels like proper countryside ten minutes from the city.",
+    tip:"Brave the wild swimming ponds (men's, ladies' and mixed), then climb Parliament Hill. 800 acres. Easy to lose an afternoon.",
+    summary:"790 acres of wild, hilly, half-forgotten London. Woods, meadows, bathing ponds and that skyline view. It feels like proper countryside ten minutes from the city.",
     tags:["wild","swimming ponds","view"] },
   { id:"golders-hill-park", dest:"hampstead", cat:"parks", name:"Golders Hill Park", hood:"West Heath, NW11", entry:"free",
     tip:"Find the walled flower garden and the little free zoo (deer, donkeys, birds). Great ice-cream kiosk.",
-    summary:"A genteel formal park on the Heath's western edge — a walled flower garden, a small free animal enclosure, and famously good ice cream. A gentle, pretty counterpoint to the wild Heath.",
+    summary:"A genteel formal park on the Heath's western edge. A walled flower garden, a small free animal enclosure, and famously good ice cream. A gentle, pretty counterpoint to the wild Heath.",
     tags:["gardens","family","ice cream"] },
 
   /* ===================== BATH ===================== */
@@ -1378,16 +1389,16 @@ const PLACES = [
     summary:"Bath's only Michelin-starred restaurant (held since 2019), in the elegant Queensberry Hotel. Chef Chris Cleghorn cooks refined, local, seasonal British produce with Mediterranean touches. The city's special-occasion table.",
     tags:["michelin ★","fine dining","seasonal"], badge:"Michelin ★", badgeRose:true, feature:true },
   { id:"menu-gordon-jones", dest:"bath", cat:"restaurants", name:"Menu Gordon Jones", hood:"Wellsway, Bath", cuisine:"Surprise tasting menu", price:3,
-    bookingUrl:"https://menugordonjones.co.uk", bookingLabel:"Book", walkIn:"Tiny — book ahead.",
-    summary:"A tiny, cult favourite where you don't choose — you're served a daily 'surprise' multi-course tasting menu full of playful, punchy ideas (think dishes served in test tubes). One of Bath's most fun nights out.",
+    bookingUrl:"https://menugordonjones.co.uk", bookingLabel:"Book", walkIn:"Tiny. Book ahead.",
+    summary:"A tiny, cult favourite where you don't choose. You're served a daily 'surprise' multi-course tasting menu full of playful, punchy ideas (think dishes served in test tubes). One of Bath's most fun nights out.",
     tags:["tasting menu","inventive","hidden gem"], badge:"hidden gem" },
   { id:"hywel-jones", dest:"bath", cat:"restaurants", name:"Restaurant Hywel Jones · Lucknam Park", hood:"Colerne (near Bath)", cuisine:"Refined modern British", price:4,
     bookingUrl:"https://www.lucknampark.co.uk", bookingLabel:"Book", walkIn:"Booking essential; ~20 min from Bath.",
-    summary:"Michelin-starred country-house dining in a Palladian mansion just outside Bath — Hywel Jones has held his star since 2006. Make a night of it: spa, grand drive, faultless tasting menu.",
+    summary:"Michelin-starred country-house dining in a Palladian mansion just outside Bath. Hywel Jones has held his star since 2006. Make a night of it: spa, grand drive, faultless tasting menu.",
     tags:["michelin ★","country house","splurge"], badge:"Michelin ★" },
   { id:"scallop-shell", dest:"bath", cat:"restaurants", name:"The Scallop Shell", hood:"Monmouth Place, Bath", cuisine:"Seafood & proper fish-and-chips", price:2,
     bookingUrl:"https://thescallopshell.co.uk", bookingLabel:"Book", walkIn:"Walk-ins for the chippy counter.",
-    summary:"Bath's best seafood — a buzzy spot doing everything from a perfect battered cod to oysters and grilled day-boat fish. Casual, fresh, brilliant value.",
+    summary:"Bath's best seafood. A buzzy spot doing everything from a perfect battered cod to oysters and grilled day-boat fish. Casual, fresh, brilliant value.",
     tags:["seafood","fish & chips","casual"] },
   { id:"beckford-bottle-shop", dest:"bath", cat:"restaurants", name:"Beckford Bottle Shop", hood:"Saville Row, Bath", cuisine:"Wine bar & small plates", price:2,
     bookingUrl:"https://beckfordbottleshop.com", bookingLabel:"Book", walkIn:"Walk-ins welcome.",
@@ -1396,7 +1407,7 @@ const PLACES = [
 
   { id:"colonna-small", dest:"bath", cat:"coffee", name:"Colonna & Small's", hood:"Chapel Row, Bath", price:2,
     mustTry:"Single-origin filter · flat white", walkIn:"Walk-in: yes",
-    summary:"World-renowned specialty coffee from former barista champion Maxwell Colonna-Dashwood — arguably the best coffee in the West Country. Geeky, friendly, exceptional.",
+    summary:"World-renowned specialty coffee from former barista champion Maxwell Colonna-Dashwood. Arguably the best coffee in the West Country. Geeky, friendly, exceptional.",
     tags:["specialty","world-class","filter"], badge:"coffee pick", badgeRose:true },
   { id:"mokoko", dest:"bath", cat:"coffee", name:"Mokoko Coffee", hood:"Abbey Green / Southgate, Bath", price:2,
     mustTry:"Flat white · almond croissant", walkIn:"Walk-in: yes",
@@ -1404,29 +1415,29 @@ const PLACES = [
     tags:["local roaster","pastries","central"] },
   { id:"society-cafe", dest:"bath", cat:"coffee", name:"Society Café", hood:"Kingsmead Sq / The Corridor, Bath", price:2,
     mustTry:"Batch brew · seasonal espresso", walkIn:"Walk-in: yes",
-    summary:"A bright, design-led Bath specialty mini-chain with rotating guest roasters. Reliable, stylish and central — a good work-and-coffee perch.",
+    summary:"A bright, design-led Bath specialty mini-chain with rotating guest roasters. Reliable, stylish and central. A good work-and-coffee perch.",
     tags:["specialty","design-led"] },
   { id:"landrace", dest:"bath", cat:"coffee", name:"Landrace Bakery", hood:"Walcot St, Bath", price:2,
     mustTry:"Sourdough · cardamom bun · filter", walkIn:"Walk-in: yes",
-    summary:"A wood-fired sourdough bakery and café on artsy Walcot Street — exceptional bread and pastries with good coffee. Get there early before the buns go.",
+    summary:"A wood-fired sourdough bakery and café on artsy Walcot Street. Exceptional bread and pastries with good coffee. Get there early before the buns go.",
     tags:["bakery","sourdough","Walcot St"] },
 
   { id:"star-inn-bath", dest:"bath", cat:"pubs", name:"The Star Inn", hood:"Vineyards, Bath", price:1, walkIn:"Walk-in: yes",
-    summary:"A 16th-century, gloriously unspoilt ale house — tiny wood-panelled bars, gas lighting, and Bass served from the jug. A CAMRA classic and one of Britain's most atmospheric pubs.",
+    summary:"A 16th-century, gloriously unspoilt ale house. Tiny wood-panelled bars, gas lighting, and Bass served from the jug. A CAMRA classic and one of Britain's most atmospheric pubs.",
     tags:["historic","real ale","unspoilt"], badge:"16th-century" },
   { id:"saracens-head", dest:"bath", cat:"pubs", name:"The Saracen's Head", hood:"Broad St, Bath", price:1, walkIn:"Walk-in: yes",
-    summary:"Bath's oldest pub (1713), where Charles Dickens stayed in 1835. Low beams, open fires, hearty pub food — a cosy slice of old Bath.",
+    summary:"Bath's oldest pub (1713), where Charles Dickens stayed in 1835. Low beams, open fires, hearty pub food. A cosy slice of old Bath.",
     tags:["historic","oldest","cosy"] },
   { id:"the-raven", dest:"bath", cat:"pubs", name:"The Raven", hood:"Queen St, Bath", price:1, walkIn:"Walk-in: yes",
-    summary:"A beloved real-ale pub famous for its pies and its upstairs snug. No music, no machines — just good beer and conversation down a quiet lane.",
+    summary:"A beloved real-ale pub famous for its pies and its upstairs snug. No music, no machines. Just good beer and conversation down a quiet lane.",
     tags:["pies","real ale","cosy"] },
   { id:"garricks-head", dest:"bath", cat:"pubs", name:"The Garrick's Head", hood:"St John's Place, Bath", price:2, walkIn:"Walk-in: yes",
-    summary:"A handsome Georgian theatre pub right by the Theatre Royal — good wines, proper food, pre-show buzz. Reputedly haunted, charmingly so.",
+    summary:"A handsome Georgian theatre pub right by the Theatre Royal. Good wines, proper food, pre-show buzz. Reputedly haunted, charmingly so.",
     tags:["theatre","gastropub","historic"] },
 
   { id:"roman-baths", dest:"bath", cat:"landmarks", name:"The Roman Baths", hood:"Abbey Church Yard, Bath", entry:"paid · ~£28",
-    tip:"Book a timed ticket online; go early or for the torch-lit summer evenings. You can't bathe here — drink the spa water instead (or book Thermae Bath Spa).",
-    summary:"One of the finest Roman remains in the world — a 2,000-year-old thermal bathing complex around a steaming green pool, with a superb museum. The torch-lit summer evening sessions are magical.",
+    tip:"Book a timed ticket online; go early or for the torch-lit summer evenings. You can't bathe here. Drink the spa water instead (or book Thermae Bath Spa).",
+    summary:"One of the finest Roman remains in the world. A 2,000-year-old thermal bathing complex around a steaming green pool, with a superb museum. The torch-lit summer evening sessions are magical.",
     tags:["Roman","iconic","museum"], badge:"must-see" },
   { id:"royal-crescent", dest:"bath", cat:"landmarks", name:"Royal Crescent", hood:"Bath", entry:"free (No.1 museum ~£14)",
     tip:"Walk the full sweep, lie on the lawn out front, then tour No.1 Royal Crescent to see a Georgian townhouse restored inside.",
@@ -1438,19 +1449,19 @@ const PLACES = [
     tags:["abbey","views","Gothic"] },
   { id:"pulteney-bridge", dest:"bath", cat:"landmarks", name:"Pulteney Bridge", hood:"Bath", entry:"free",
     tip:"Best photographed from the riverside terraces below, with the curved weir in front. Lined with little shops to cross.",
-    summary:"A Palladian bridge (1774) lined with shops on both sides — one of only a handful like it in the world — framed by the elegant horseshoe weir on the Avon. Bath's postcard shot.",
+    summary:"A Palladian bridge (1774) lined with shops on both sides, one of only a handful like it in the world, framed by the elegant horseshoe weir on the Avon. Bath's postcard shot.",
     tags:["iconic","Georgian","river"] },
   { id:"thermae-spa", dest:"bath", cat:"landmarks", name:"Thermae Bath Spa", hood:"Hot Bath St, Bath", entry:"paid · from ~£40",
-    tip:"Book a twilight session and head to the open-air rooftop pool as the city lights come on — deeply romantic.",
-    summary:"The only place in Britain where you can bathe in natural thermal waters — the showpiece being the open-air rooftop pool steaming over the Bath skyline. Book the twilight session.",
+    tip:"Book a twilight session and head to the open-air rooftop pool as the city lights come on. Deeply romantic.",
+    summary:"The only place in Britain where you can bathe in natural thermal waters. The showpiece being the open-air rooftop pool steaming over the Bath skyline. Book the twilight session.",
     tags:["spa","rooftop","romantic"], badge:"romantic" },
   { id:"the-circus-bath", dest:"bath", cat:"landmarks", name:"The Circus", hood:"Bath", entry:"free",
     tip:"Stand in the middle by the great plane trees and look up; spot the acorn motifs along the rooftops.",
-    summary:"John Wood's circular Georgian masterpiece — three curved terraces of golden stone around a ring of plane trees. A two-minute stroll from the Royal Crescent.",
+    summary:"John Wood's circular Georgian masterpiece. Three curved terraces of golden stone around a ring of plane trees. A two-minute stroll from the Royal Crescent.",
     tags:["Georgian","architecture","free"] },
   { id:"jane-austen-centre", dest:"bath", cat:"landmarks", name:"Jane Austen Centre", hood:"Gay St, Bath", entry:"paid · ~£14",
     tip:"Costumed guides, a Regency tea room upstairs, and dress-up if you fancy. Austen lived in Bath 1801–06.",
-    summary:"A small, fun museum celebrating Austen's years in Bath — the city that shaped Persuasion and Northanger Abbey. Regency costumes, a tea room and plenty of charm.",
+    summary:"A small, fun museum celebrating Austen's years in Bath. The city that shaped Persuasion and Northanger Abbey. Regency costumes, a tea room and plenty of charm.",
     tags:["literary","Regency","Austen"] },
 
   { id:"royal-victoria-park", dest:"bath", cat:"parks", name:"Royal Victoria Park", hood:"Bath", entry:"free",
@@ -1458,18 +1469,18 @@ const PLACES = [
     summary:"57 acres of green sweeping right up to the Royal Crescent, with lovely Botanical Gardens, a boating pond and big lawns. The city's front garden.",
     tags:["gardens","central","picnic"] },
   { id:"prior-park", dest:"bath", cat:"parks", name:"Prior Park Landscape Garden", hood:"Ralph Allen Dr, Bath", entry:"paid · NT ~£9",
-    tip:"There's no car park — walk up (steep but short) or take the bus. The Palladian bridge view back over Bath is the prize.",
-    summary:"An intimate 18th-century landscape garden created with advice from 'Capability' Brown, descending a valley to a rare Palladian bridge — with one of the best views back across the whole city.",
+    tip:"There's no car park. Walk up (steep but short) or take the bus. The Palladian bridge view back over Bath is the prize.",
+    summary:"An intimate 18th-century landscape garden created with advice from 'Capability' Brown, descending a valley to a rare Palladian bridge, with one of the best views back across the whole city.",
     tags:["National Trust","views","romantic"], badge:"romantic" },
   { id:"alexandra-park", dest:"bath", cat:"parks", name:"Alexandra Park", hood:"Bathwick, Bath", entry:"free",
     tip:"A short climb up Beechen Cliff; go at sunset for the classic panorama over the rooftops and Abbey.",
-    summary:"A hilltop park on Beechen Cliff with the definitive panorama over Bath — the whole honey-stone city and the Abbey laid out below. Free, and best at golden hour.",
+    summary:"A hilltop park on Beechen Cliff with the definitive panorama over Bath. The whole honey-stone city and the Abbey laid out below. Free, and best at golden hour.",
     tags:["view","sunset","hilltop"] },
 
   /* ===================== WALES ===================== */
   { id:"ynyshir", dest:"wales", cat:"restaurants", name:"Ynyshir", hood:"Eglwys Fach, edge of Eryri", cuisine:"Fire-driven tasting (~30 courses)", price:4,
-    bookingUrl:"https://www.ynyshir.co.uk", bookingLabel:"Book", walkIn:"Destination dining — book months ahead; rooms on site.",
-    summary:"Wales' only two-Michelin-star restaurant and once named the best in the UK. Gareth Ward's four-to-five-hour, ~30-course, fire-and-protein theatre on the edge of Eryri — loud music, intense flavour, bluefin tuna and miso-cured cod. A bucket-list night; stay over.",
+    bookingUrl:"https://www.ynyshir.co.uk", bookingLabel:"Book", walkIn:"Destination dining. Book months ahead; rooms on site.",
+    summary:"Wales' only two-Michelin-star restaurant and once named the best in the UK. Gareth Ward's four-to-five-hour, ~30-course, fire-and-protein theatre on the edge of Eryri. Loud music, intense flavour, bluefin tuna and miso-cured cod. A bucket-list night; stay over.",
     tags:["michelin ★★","tasting menu","iconic","fire"], badge:"Michelin ★★", badgeRose:true, feature:true },
   { id:"gorse", dest:"wales", cat:"restaurants", name:"Gorse", hood:"Pontcanna, Cardiff", cuisine:"Ingredient-led modern Welsh", price:4,
     bookingUrl:"https://www.gorserestaurant.co.uk", bookingLabel:"Book", walkIn:"Booking essential.",
@@ -1477,43 +1488,43 @@ const PLACES = [
     tags:["michelin ★","Welsh produce","award"], badge:"Michelin ★ · Cardiff's first" },
   { id:"heaneys", dest:"wales", cat:"restaurants", name:"Heaneys", hood:"Pontcanna, Cardiff", cuisine:"Seasonal tasting menus", price:3,
     bookingUrl:"https://www.heaneyscardiff.co.uk", bookingLabel:"Book", walkIn:"Book ahead.",
-    summary:"Tommy Heaney's modern bistro — once crowned the best restaurant in Wales and a Michelin Guide regular. Generous, seasonal cooking and a great-value set lunch.",
+    summary:"Tommy Heaney's modern bistro. Once crowned the best restaurant in Wales and a Michelin Guide regular. Generous, seasonal cooking and a great-value set lunch.",
     tags:["award","tasting menu","Cardiff"] },
-  { id:"asador-44", dest:"wales", cat:"restaurants", name:"Asador 44", hood:"Quay St, Cardiff", cuisine:"Spanish asador — Galician beef", price:3,
+  { id:"asador-44", dest:"wales", cat:"restaurants", name:"Asador 44", hood:"Quay St, Cardiff", cuisine:"Spanish asador: Galician beef", price:3,
     bookingUrl:"https://asador44.co.uk", bookingLabel:"Book", walkIn:"Book ahead for dinner.",
-    summary:"Cardiff's special-occasion stunner — a Spanish wood-fired grill famous for show-stopping, slow-grown Rubia Gallega chuletón steaks and a deep Spanish wine list. Buzzy and brilliant.",
+    summary:"Cardiff's special-occasion stunner. A Spanish wood-fired grill famous for show-stopping, slow-grown Rubia Gallega chuletón steaks and a deep Spanish wine list. Buzzy and brilliant.",
     tags:["Spanish","steak","date night"] },
   { id:"bullys", dest:"wales", cat:"restaurants", name:"Bully's", hood:"Pontcanna, Cardiff", cuisine:"French-leaning neighbourhood bistro", price:2,
     bookingUrl:"https://www.bullysrestaurant.co.uk", bookingLabel:"Book", walkIn:"Book ahead.",
-    summary:"A cult Cardiff bistro crammed with curios and books — French at heart, warm and unpretentious, with a brilliant wine list. The local's local.",
+    summary:"A cult Cardiff bistro crammed with curios and books. French at heart, warm and unpretentious, with a brilliant wine list. The local's local.",
     tags:["French","hidden gem","cosy"], badge:"hidden gem" },
 
   { id:"coffee-barker", dest:"wales", cat:"coffee", name:"Coffee Barker", hood:"Castle Arcade, Cardiff", price:2,
     mustTry:"Flat white · chunky toast", walkIn:"Walk-in: yes",
-    summary:"A Parisian-feel café in the gorgeous Victorian Castle Arcade — expertly brewed coffee under the glass roof, right opposite Cardiff Castle.",
+    summary:"A Parisian-feel café in the gorgeous Victorian Castle Arcade. Expertly brewed coffee under the glass roof, right opposite Cardiff Castle.",
     tags:["arcade","cosy","central"] },
   { id:"hard-lines", dest:"wales", cat:"coffee", name:"Hard Lines", hood:"Cardiff", price:2,
     mustTry:"Single-origin filter · cortado", walkIn:"Walk-in: yes",
-    summary:"Cardiff's own specialty roaster — bright, modern and seriously good coffee, with a food-and-music side to it. The city's coffee benchmark.",
+    summary:"Cardiff's own specialty roaster. Bright, modern and seriously good coffee, with a food-and-music side to it. The city's coffee benchmark.",
     tags:["specialty","roaster"] },
   { id:"uncommon-ground", dest:"wales", cat:"coffee", name:"Uncommon Ground", hood:"Royal Arcade, Cardiff", price:2,
     mustTry:"House espresso · cake", walkIn:"Walk-in: yes",
-    summary:"A specialty coffee bar and roastery in the historic Royal Arcade — exposed brick, great beans, lovely arcade setting.",
+    summary:"A specialty coffee bar and roastery in the historic Royal Arcade. Exposed brick, great beans, lovely arcade setting.",
     tags:["specialty","arcade","roastery"] },
 
   { id:"city-arms-cardiff", dest:"wales", cat:"pubs", name:"The City Arms", hood:"Quay St, Cardiff", price:1, walkIn:"Walk-in: yes",
-    summary:"Cardiff's beer hub by the Principality Stadium — a huge, brilliant range of Welsh craft and cask, and absolute bedlam (in the best way) on a rugby matchday.",
+    summary:"Cardiff's beer hub by the Principality Stadium. A huge, brilliant range of Welsh craft and cask, and absolute bedlam (in the best way) on a rugby matchday.",
     tags:["real ale","matchday","craft beer"] },
   { id:"tiny-rebel-cardiff", dest:"wales", cat:"pubs", name:"Tiny Rebel", hood:"Westgate St, Cardiff", price:2, walkIn:"Walk-in: yes",
-    summary:"The flagship bar of Wales' best-known craft brewery — colourful, fun, with a big range of their own beers and proper pub food.",
+    summary:"The flagship bar of Wales' best-known craft brewery. Colourful, fun, with a big range of their own beers and proper pub food.",
     tags:["craft beer","fun","Welsh"] },
   { id:"goat-major", dest:"wales", cat:"pubs", name:"The Goat Major", hood:"High St, Cardiff", price:1, walkIn:"Walk-in: yes",
     summary:"A traditional wood-panelled pub right by Cardiff Castle, pouring Brains ale and serving a famous range of proper pies. Cosy and very Cardiff.",
     tags:["traditional","pies","central"] },
 
   { id:"cardiff-castle", dest:"wales", cat:"landmarks", name:"Cardiff Castle", hood:"Cardiff city centre", entry:"paid · ~£16",
-    tip:"The lavish Victorian Gothic-revival interiors by William Burges are the highlight — pay for the house tour, not just the grounds.",
-    summary:"Two thousand years of history in the heart of the city — a Roman fort and Norman keep wrapped around astonishing, jewel-box Victorian Gothic interiors by William Burges. Climb the keep for city views.",
+    tip:"The lavish Victorian Gothic-revival interiors by William Burges are the highlight. Pay for the house tour, not just the grounds.",
+    summary:"Two thousand years of history in the heart of the city. A Roman fort and Norman keep wrapped around astonishing, jewel-box Victorian Gothic interiors by William Burges. Climb the keep for city views.",
     tags:["castle","Gothic","central"] },
   { id:"principality-stadium", dest:"wales", cat:"landmarks", name:"Principality Stadium", hood:"Cardiff city centre", entry:"paid · tour ~£15",
     tip:"Tours run on non-event days (dressing rooms, tunnel, pitchside). For the full roar, catch a Wales rugby international.",
@@ -1533,7 +1544,7 @@ const PLACES = [
     tags:["castle","UNESCO","harbour"] },
   { id:"caernarfon-castle", dest:"wales", cat:"landmarks", name:"Caernarfon Castle", hood:"Caernarfon, North Wales", entry:"paid · ~£12",
     tip:"Climb the polygonal towers for views over the Menai Strait toward Anglesey.",
-    summary:"One of the world's finest surviving medieval castles — Edward I's vast statement of power, with banded stone and eagle towers, where Princes of Wales have been invested. Epic.",
+    summary:"One of the world's finest surviving medieval castles. Edward I's vast statement of power, with banded stone and eagle towers, where Princes of Wales have been invested. Epic.",
     tags:["castle","UNESCO","epic"] },
   { id:"yr-wyddfa", dest:"wales", cat:"landmarks", name:"Yr Wyddfa (Snowdon)", hood:"Eryri / Snowdonia", entry:"free (railway paid)",
     tip:"Not a hiker? Take the Snowdon Mountain Railway from Llanberis to near the summit. Hiking? The Llanberis Path is the gentlest.",
@@ -1541,16 +1552,16 @@ const PLACES = [
     tags:["mountain","railway","views"] },
   { id:"llandudno", dest:"wales", cat:"landmarks", name:"Llandudno & the Great Orme", hood:"North Wales coast", entry:"free (tram paid)",
     tip:"Ride the Victorian tramway or cable car up the Great Orme headland; walk the grand seafront promenade and pier.",
-    summary:"An elegant Victorian seaside resort with a sweeping promenade and pier, beneath the Great Orme — a dramatic limestone headland you can climb by vintage tram or cable car.",
+    summary:"An elegant Victorian seaside resort with a sweeping promenade and pier, beneath the Great Orme. A dramatic limestone headland you can climb by vintage tram or cable car.",
     tags:["seaside","Victorian","views"] },
   { id:"harlech-castle", dest:"wales", cat:"landmarks", name:"Harlech Castle", hood:"Harlech, Eryri coast", entry:"paid · ~£8",
     tip:"Combine with a walk down 'the steepest street in the world' and the dunes below.",
-    summary:"A clifftop UNESCO castle with jaw-dropping views over Eryri's peaks on one side and the sea on the other — the inspiration for the song 'Men of Harlech'.",
+    summary:"A clifftop UNESCO castle with jaw-dropping views over Eryri's peaks on one side and the sea on the other. The inspiration for the song 'Men of Harlech'.",
     tags:["castle","views","UNESCO"] },
 
   { id:"bute-park", dest:"wales", cat:"parks", name:"Bute Park", hood:"Cardiff city centre", entry:"free",
     tip:"Hire a bike or just stroll the River Taff path; it links the castle to Pontcanna Fields and beyond.",
-    summary:"130 acres of green right beside Cardiff Castle, following the River Taff — arboretum, riverside paths and open lawns. The city's lovely green lung.",
+    summary:"130 acres of green right beside Cardiff Castle, following the River Taff. Arboretum, riverside paths and open lawns. The city's lovely green lung.",
     tags:["central","river","green"] },
   { id:"roath-park", dest:"wales", cat:"parks", name:"Roath Park", hood:"Roath, Cardiff", entry:"free",
     tip:"Hire a rowing boat on the lake; the white lighthouse commemorates Captain Scott, who sailed from Cardiff.",
@@ -1558,37 +1569,37 @@ const PLACES = [
     tags:["lake","Victorian","boating"] },
   { id:"fairy-glen", dest:"wales", cat:"parks", name:"Betws-y-Coed & Swallow Falls", hood:"Eryri / Snowdonia", entry:"free (falls small fee)",
     tip:"Base yourself in pretty Betws-y-Coed; Swallow Falls and the wooded Fairy Glen gorge are a short hop.",
-    summary:"The 'gateway to Snowdonia' — a storybook stone village among forests and rivers, with the tumbling Swallow Falls and the mossy Fairy Glen gorge nearby. Pure Eryri magic.",
+    summary:"The 'gateway to Snowdonia'. A storybook stone village among forests and rivers, with the tumbling Swallow Falls and the mossy Fairy Glen gorge nearby. Pure Eryri magic.",
     tags:["waterfall","woodland","village"] },
 
   /* ===================== SCOTLAND · EDINBURGH ===================== */
-  { id:"witchery", dest:"scotland", cat:"restaurants", name:"The Witchery by the Castle", hood:"Royal Mile, Old Town, Edinburgh", booked:false, cuisine:"Scottish fine dining — game, seafood, whisky", price:4,
-    bookingUrl:"https://www.thewitchery.com", bookingLabel:"Book", walkIn:"No walk-ins realistically — book weeks ahead.",
-    summary:"Edinburgh's most atmospheric restaurant. Gothic candlelit chambers draped in tapestries, right by the Castle gates. The menu is Scottish luxury — venison, lobster, an exceptional whisky list. One of the most romantic rooms in Britain. Book the Secret Garden room if you can.",
+  { id:"witchery", dest:"scotland", cat:"restaurants", name:"The Witchery by the Castle", hood:"Royal Mile, Old Town, Edinburgh", booked:false, cuisine:"Scottish fine dining: game, seafood, whisky", price:4,
+    bookingUrl:"https://www.thewitchery.com", bookingLabel:"Book", walkIn:"No walk-ins realistically. Book weeks ahead.",
+    summary:"Edinburgh's most atmospheric restaurant. Gothic candlelit chambers draped in tapestries, right by the Castle gates. The menu is Scottish luxury. Venison, lobster, an exceptional whisky list. One of the most romantic rooms in Britain. Book the Secret Garden room if you can.",
     tags:["most romantic","fine dining","gothic","iconic"], badge:"✦ most romantic", badgeRose:true, feature:true },
-  { id:"stockbridge", dest:"scotland", cat:"restaurants", name:"The Stockbridge Restaurant", hood:"Stockbridge, Edinburgh", cuisine:"Modern Scottish — seasonal, local produce", price:3,
-    bookingUrl:"https://thestockbridgerestaurant.com", bookingLabel:"Book", walkIn:"Small venue — book ahead.",
-    summary:"A candlelit hidden gem in Edinburgh's most charming neighbourhood. The menu changes constantly with the seasons — venison with juniper, pan-seared salmon, cranachan. Intimate and quietly perfect.",
+  { id:"stockbridge", dest:"scotland", cat:"restaurants", name:"The Stockbridge Restaurant", hood:"Stockbridge, Edinburgh", cuisine:"Modern Scottish: seasonal, local produce", price:3,
+    bookingUrl:"https://thestockbridgerestaurant.com", bookingLabel:"Book", walkIn:"Small venue. Book ahead.",
+    summary:"A candlelit hidden gem in Edinburgh's most charming neighbourhood. The menu changes constantly with the seasons. Venison with juniper, pan-seared salmon, cranachan. Intimate and quietly perfect.",
     tags:["hidden gem","seasonal","intimate"], badge:"hidden gem" },
-  { id:"six-by-nico", dest:"scotland", cat:"restaurants", name:"Six by Nico", hood:"Hanover St, New Town, Edinburgh", booked:false, cuisine:"6-course tasting — new theme every 6 weeks", price:3,
-    bookingUrl:"https://sixbynico.co.uk", bookingLabel:"Book", walkIn:"Tasting menu only — book essential.",
-    summary:"A 6-course tasting menu built around a new theme every six weeks (past themes: Thai Street Food, The Chippie, Willy Wonka). A shared adventure where every course is a conversation starter — great value, dark basement setting.",
+  { id:"six-by-nico", dest:"scotland", cat:"restaurants", name:"Six by Nico", hood:"Hanover St, New Town, Edinburgh", booked:false, cuisine:"6-course tasting: new theme every 6 weeks", price:3,
+    bookingUrl:"https://sixbynico.co.uk", bookingLabel:"Book", walkIn:"Tasting menu only. Book essential.",
+    summary:"A 6-course tasting menu built around a new theme every six weeks (past themes: Thai Street Food, The Chippie, Willy Wonka). A shared adventure where every course is a conversation starter. Great value, dark basement setting.",
     tags:["tasting menu","unique","creative"] },
-  { id:"cafe-st-honore", dest:"scotland", cat:"restaurants", name:"Café St Honoré", hood:"Thistle St Lane, New Town, Edinburgh", cuisine:"Classic French bistro — seasonal", price:3,
+  { id:"cafe-st-honore", dest:"scotland", cat:"restaurants", name:"Café St Honoré", hood:"Thistle St Lane, New Town, Edinburgh", cuisine:"Classic French bistro: seasonal", price:3,
     bookingUrl:"https://cafesthonore.com", bookingLabel:"Book", walkIn:"Book ahead · walk-ins possible at lunch.",
-    summary:"Edinburgh's most beloved French bistro, hidden down a cobbled New Town lane. Zinc bar, wooden floors, Gallic warmth — the kind of place that feels like a discovery even though locals have known it forever.",
+    summary:"Edinburgh's most beloved French bistro, hidden down a cobbled New Town lane. Zinc bar, wooden floors, Gallic warmth. The kind of place that feels like a discovery even though locals have known it forever.",
     tags:["French","hidden gem","cosy"] },
-  { id:"chaophraya", dest:"scotland", cat:"restaurants", name:"Chaophraya", hood:"Castle St, New Town, Edinburgh", cuisine:"🏰 Thai — panoramic castle views", price:2,
+  { id:"chaophraya", dest:"scotland", cat:"restaurants", name:"Chaophraya", hood:"Castle St, New Town, Edinburgh", cuisine:"🏰 Thai: panoramic castle views", price:2,
     bookingUrl:"https://chaophraya.co.uk/edinburgh/", bookingLabel:"Book", walkIn:"Request a window table when booking.",
-    summary:"Request a castle-view table and you'll have Edinburgh Castle lit up outside your window while you eat pad Thai. One of the few places in the city with dramatic castle views during dinner — the view does all the work.",
+    summary:"Request a castle-view table and you'll have Edinburgh Castle lit up outside your window while you eat pad Thai. One of the few places in the city with dramatic castle views during dinner. The view does all the work.",
     tags:["castle views","Thai","romantic view"] },
   { id:"timberyard", dest:"scotland", cat:"restaurants", name:"Timberyard", hood:"Lady Lawson St, Edinburgh", cuisine:"Wood-fired, foraged, seasonal", price:4,
     bookingUrl:"https://timberyard.co", bookingLabel:"Book", walkIn:"Booking essential.",
-    summary:"A family-run, warehouse-cool Edinburgh favourite — live-fire cooking, house ferments and foraged Scottish produce, with a Michelin Green Star for sustainability. Quietly one of the best meals in the city.",
+    summary:"A family-run, warehouse-cool Edinburgh favourite. Live-fire cooking, house ferments and foraged Scottish produce, with a Michelin Green Star for sustainability. Quietly one of the best meals in the city.",
     tags:["award-winning","wood-fired","seasonal"], badge:"green star" },
   { id:"little-chartroom", dest:"scotland", cat:"restaurants", name:"The Little Chartroom", hood:"Bonnington Rd, Edinburgh", cuisine:"Modern bistro, daily-changing", price:3,
-    bookingUrl:"https://thelittlechartroom.com", bookingLabel:"Book", walkIn:"Small — book ahead.",
-    summary:"Roberta Hall-McCarron's much-loved bistro — a short, daily-changing menu of confident, generous modern cooking. Small, warm and consistently brilliant.",
+    bookingUrl:"https://thelittlechartroom.com", bookingLabel:"Book", walkIn:"Small. Book ahead.",
+    summary:"Roberta Hall-McCarron's much-loved bistro. A short, daily-changing menu of confident, generous modern cooking. Small, warm and consistently brilliant.",
     tags:["hidden gem","bistro","seasonal"], badge:"hidden gem" },
 
   { id:"cairngorm", dest:"scotland", cat:"coffee", name:"Cairngorm Coffee", hood:"Frederick St, New Town, Edinburgh", price:2,
@@ -1597,14 +1608,14 @@ const PLACES = [
     tags:["specialty","Scandi","filter"] },
   { id:"fortitude", dest:"scotland", cat:"coffee", name:"Fortitude Coffee", hood:"York Place, Edinburgh", price:2,
     mustTry:"Flat white · homemade banana bread", walkIn:"Walk-in: yes",
-    summary:"A tiny, beloved local institution. Flat white and homemade banana bread — that's the order.",
+    summary:"A tiny, beloved local institution. Flat white and homemade banana bread. That's the order.",
     tags:["tiny","local","flat white"] },
 
   { id:"bow-bar", dest:"scotland", cat:"pubs", name:"The Bow Bar", hood:"Victoria St, Old Town, Edinburgh", price:1, walkIn:"Walk-in: yes",
-    summary:"One of Edinburgh's finest real-ale and whisky bars, on the beautiful curved Victoria Street (think Diagon Alley). No music, no TV — just excellent ale, a wall of whisky and good conversation.",
+    summary:"One of Edinburgh's finest real-ale and whisky bars, on the beautiful curved Victoria Street (think Diagon Alley). No music, no TV. Just excellent ale, a wall of whisky and good conversation.",
     tags:["real ale","whisky","Victoria St"] },
   { id:"sheep-heid", dest:"scotland", cat:"pubs", name:"The Sheep Heid Inn", hood:"Duddingston Village, Edinburgh", price:2, walkIn:"Walk-in: yes",
-    summary:"Possibly Scotland's oldest surviving pub (1360), in a village 10 minutes from the foot of Arthur's Seat. Has a proper skittles alley and an unbeatable Sunday lunch — combine it with the hike.",
+    summary:"Possibly Scotland's oldest surviving pub (1360), in a village 10 minutes from the foot of Arthur's Seat. Has a proper skittles alley and an unbeatable Sunday lunch. Combine it with the hike.",
     tags:["oldest pub","skittles","Sunday lunch"], badge:"est. 1360" },
 
   { id:"edinburgh-castle", dest:"scotland", cat:"landmarks", name:"Edinburgh Castle", hood:"Castle Rock, Old Town, Edinburgh", entry:"paid · ~£19.50",
@@ -1616,16 +1627,16 @@ const PLACES = [
     summary:"An ancient volcano rising 251m above the city, a 20-minute walk from the Royal Mile. The gentle hike rewards you with one of the most breathtaking views in Britain. Pack a picnic.",
     tags:["hike","volcano","golden hour"] },
   { id:"royal-mile", dest:"scotland", cat:"landmarks", name:"The Royal Mile", hood:"Old Town, Edinburgh", entry:"free",
-    tip:"Walk Castle to Holyrood, but duck into the 'closes' — the narrow medieval alleyways hide courtyards and the best photos in Edinburgh.",
-    summary:"The spine of the Old Town — a mile of medieval history from Castle to Palace, lined with closes, shops and food stalls (try tablet and a haggis sausage roll). The closes are the real discovery.",
+    tip:"Walk Castle to Holyrood, but duck into the 'closes'. The narrow medieval alleyways hide courtyards and the best photos in Edinburgh.",
+    summary:"The spine of the Old Town. A mile of medieval history from Castle to Palace, lined with closes, shops and food stalls (try tablet and a haggis sausage roll). The closes are the real discovery.",
     tags:["walk","medieval","closes"] },
   { id:"nms", dest:"scotland", cat:"landmarks", name:"National Museum of Scotland", hood:"Chambers St, Old Town, Edinburgh", entry:"free",
     tip:"The Grand Gallery atrium is stunning; sneak up to the roof terrace for free views over the Old Town that almost no one knows about.",
-    summary:"Six floors of Scottish history, science and the natural world — all free — in a beautiful building with a soaring Grand Gallery. The hidden roof terrace has spectacular city views.",
+    summary:"Six floors of Scottish history, science and the natural world, all free, in a beautiful building with a soaring Grand Gallery. The hidden roof terrace has spectacular city views.",
     tags:["museum","free","roof terrace"] },
   { id:"dean-village", dest:"scotland", cat:"landmarks", name:"Dean Village", hood:"West End, Edinburgh", entry:"free",
     tip:"Walk down Bell's Brae from the Dean Bridge; come early morning or golden hour for empty, postcard-perfect photos.",
-    summary:"A hidden medieval village in a valley carved by the Water of Leith, ten minutes from the centre — cobbled lanes, old mill buildings, weeping willows over the river. A fairy-tale spot for couple photos.",
+    summary:"A hidden medieval village in a valley carved by the Water of Leith, ten minutes from the centre. Cobbled lanes, old mill buildings, weeping willows over the river. A fairy-tale spot for couple photos.",
     tags:["fairy tale","hidden","photos"] },
   { id:"calton-hill", dest:"scotland", cat:"landmarks", name:"Calton Hill", hood:"East end of Princes St, Edinburgh", entry:"free",
     tip:"Ten minutes from Princes Street; go at sunset for the sweep over the Castle, Arthur's Seat and the Firth of Forth.",
@@ -1635,35 +1646,35 @@ const PLACES = [
   /* ===================== SCOTLAND · GLASGOW & HIGHLANDS ===================== */
   { id:"cail-bruich", dest:"scotland", cat:"restaurants", name:"Cail Bruich", hood:"West End, Glasgow", cuisine:"Seasonal Scottish tasting", price:4,
     bookingUrl:"https://www.cailbruich.co.uk", bookingLabel:"Book", walkIn:"Booking essential.",
-    summary:"Glasgow's Michelin star (Gaelic for 'to eat well'), led by chef Lorna McNee. Refined, seasonal Scottish tasting menus built on local, sustainable produce — much of it from their own kitchen garden.",
+    summary:"Glasgow's Michelin star (Gaelic for 'to eat well'), led by chef Lorna McNee. Refined, seasonal Scottish tasting menus built on local, sustainable produce. Much of it from their own kitchen garden.",
     tags:["michelin ★","tasting menu","Glasgow"], badge:"Michelin ★", badgeRose:true, feature:true },
   { id:"unalome", dest:"scotland", cat:"restaurants", name:"Unalome by Graeme Cheevers", hood:"Finnieston, Glasgow", cuisine:"Modern European, Japanese touches", price:4,
     bookingUrl:"https://www.unalomebygc.com", bookingLabel:"Book", walkIn:"Booking essential.",
-    summary:"Graeme Cheevers' Michelin-starred solo venture near Kelvingrove — bold, classically rooted modern European cooking with occasional Japanese flavour, on a kitchen powered entirely by green energy.",
+    summary:"Graeme Cheevers' Michelin-starred solo venture near Kelvingrove. Bold, classically rooted modern European cooking with occasional Japanese flavour, on a kitchen powered entirely by green energy.",
     tags:["michelin ★","fine dining","Glasgow"], badge:"Michelin ★" },
   { id:"ox-and-finch", dest:"scotland", cat:"restaurants", name:"Ox and Finch", hood:"Finnieston, Glasgow", cuisine:"Mediterranean small plates", price:2,
     bookingUrl:"https://www.oxandfinch.com", bookingLabel:"Book", walkIn:"Book well ahead.",
-    summary:"Still one of Glasgow's most exciting restaurants — relaxed, buzzy, Mediterranean-leaning small plates made for sharing. Book ahead; it's deservedly always full.",
+    summary:"Still one of Glasgow's most exciting restaurants. Relaxed, buzzy, Mediterranean-leaning small plates made for sharing. Book ahead; it's deservedly always full.",
     tags:["small plates","buzzy","Glasgow"] },
   { id:"crabshakk", dest:"scotland", cat:"restaurants", name:"Crabshakk", hood:"Finnieston, Glasgow", cuisine:"Scottish seafood", price:3,
-    bookingUrl:"https://crabshakk.com", bookingLabel:"Book", walkIn:"Tight space — book.",
-    summary:"Scottish seafood done properly on Argyle Street — squid tempura, crab cakes, scallops in anchovy butter — in a tiny, lively room. A Glasgow institution.",
+    bookingUrl:"https://crabshakk.com", bookingLabel:"Book", walkIn:"Tight space. Book.",
+    summary:"Scottish seafood done properly on Argyle Street: squid tempura, crab cakes, scallops in anchovy butter, served in a tiny, lively room. A Glasgow institution.",
     tags:["seafood","Glasgow","institution"] },
   { id:"ka-pao", dest:"scotland", cat:"restaurants", name:"Ka Pao", hood:"Botanic Gardens, Glasgow", cuisine:"South-east Asian small plates", price:2,
     bookingUrl:"https://kapao.co.uk", bookingLabel:"Book", walkIn:"Walk-ins possible off-peak.",
-    summary:"Vibrant South-east Asian small plates in the Botanic Gardens Garage — bright, fragrant, fun, with great cocktails. A brilliant West End lunch or dinner.",
+    summary:"Vibrant South-east Asian small plates in the Botanic Gardens Garage. Bright, fragrant, fun, with great cocktails. A brilliant West End lunch or dinner.",
     tags:["SE Asian","small plates","Glasgow"] },
   { id:"three-chimneys", dest:"scotland", cat:"restaurants", name:"The Three Chimneys", hood:"Loch Dunvegan, Isle of Skye", cuisine:"Highland produce & seafood", price:4,
-    bookingUrl:"https://threechimneys.co.uk", bookingLabel:"Book", walkIn:"Destination dining — book ahead; rooms on site.",
-    summary:"One of Scotland's most famous restaurants — a 100-year-old crofter's cottage on the shore of Loch Dunvegan, leaning into local seafood and Highland beef. Remote, romantic, unforgettable; stay the night.",
+    bookingUrl:"https://threechimneys.co.uk", bookingLabel:"Book", walkIn:"Destination dining. Book ahead; rooms on site.",
+    summary:"One of Scotland's most famous restaurants. A 100-year-old crofter's cottage on the shore of Loch Dunvegan, leaning into local seafood and Highland beef. Remote, romantic, unforgettable; stay the night.",
     tags:["iconic","seafood","remote"], badge:"Skye icon" },
-  { id:"loch-bay", dest:"scotland", cat:"restaurants", name:"Loch Bay", hood:"Stein, Isle of Skye", cuisine:"Seafood — Michelin-recognised", price:4,
-    bookingUrl:"https://www.lochbay-restaurant.co.uk", bookingLabel:"Book", walkIn:"Tiny — book well ahead.",
-    summary:"A tiny, Michelin-recognised seafood restaurant in a whitewashed cottage in the hamlet of Stein — possibly the most romantic little dining room on Skye. The seafood lands metres away.",
+  { id:"loch-bay", dest:"scotland", cat:"restaurants", name:"Loch Bay", hood:"Stein, Isle of Skye", cuisine:"Seafood: Michelin-recognised", price:4,
+    bookingUrl:"https://www.lochbay-restaurant.co.uk", bookingLabel:"Book", walkIn:"Tiny. Book well ahead.",
+    summary:"A tiny, Michelin-recognised seafood restaurant in a whitewashed cottage in the hamlet of Stein. Possibly the most romantic little dining room on Skye. The seafood lands metres away.",
     tags:["seafood","hidden gem","Skye"], badge:"hidden gem" },
   { id:"kinloch-lodge", dest:"scotland", cat:"restaurants", name:"Kinloch Lodge", hood:"Sleat, Isle of Skye", cuisine:"Country-house Scottish", price:4,
     bookingUrl:"https://www.kinloch-lodge.co.uk", bookingLabel:"Book", walkIn:"Booking essential.",
-    summary:"Historic country-house dining with sea-loch views in the south of Skye — refined, generous Scottish cooking and a warm Highland welcome.",
+    summary:"Historic country-house dining with sea-loch views in the south of Skye. Refined, generous Scottish cooking and a warm Highland welcome.",
     tags:["country house","views","Skye"] },
 
   { id:"papercup", dest:"scotland", cat:"coffee", name:"Papercup Coffee", hood:"West End, Glasgow", price:2,
@@ -1672,14 +1683,14 @@ const PLACES = [
     tags:["specialty","roaster","Glasgow"] },
   { id:"spitfire-espresso", dest:"scotland", cat:"coffee", name:"Spitfire Espresso", hood:"Merchant City, Glasgow", price:2,
     mustTry:"Flat white · brunch", walkIn:"Walk-in: yes",
-    summary:"A lovely Merchant City café for espresso and a proper brunch — friendly, central, consistently good.",
+    summary:"A lovely Merchant City café for espresso and a proper brunch. Friendly, central, consistently good.",
     tags:["brunch","espresso","Glasgow"] },
 
   { id:"pot-still", dest:"scotland", cat:"pubs", name:"The Pot Still", hood:"Hope St, Glasgow", price:2, walkIn:"Walk-in: yes",
-    summary:"Glasgow's whisky temple — a family-run bar with 700+ whiskies behind the counter and a pie to soak it up. Ask the staff to guide you; they love it.",
+    summary:"Glasgow's whisky temple. A family-run bar with 700+ whiskies behind the counter and a pie to soak it up. Ask the staff to guide you; they love it.",
     tags:["whisky","historic","Glasgow"], badge:"700+ whiskies" },
   { id:"oran-mor", dest:"scotland", cat:"pubs", name:"Òran Mór", hood:"Byres Rd, Glasgow", price:2, walkIn:"Walk-in: yes",
-    summary:"A bar, venue and brasserie inside a converted West End church — look up at the extraordinary Alasdair Gray ceiling mural. Famous for lunchtime theatre, 'A Play, a Pie and a Pint'.",
+    summary:"A bar, venue and brasserie inside a converted West End church. Look up at the extraordinary Alasdair Gray ceiling mural. Famous for lunchtime theatre, 'A Play, a Pie and a Pint'.",
     tags:["venue","architecture","Glasgow"] },
   { id:"horse-shoe-bar", dest:"scotland", cat:"pubs", name:"The Horse Shoe Bar", hood:"Drury St, Glasgow", price:1, walkIn:"Walk-in: yes",
     summary:"A glorious Victorian city-centre pub with reputedly the longest continuous bar in the UK. Cheap pints, brilliant value pub lunch, proper Glasgow character.",
@@ -1687,56 +1698,56 @@ const PLACES = [
 
   { id:"kelvingrove-museum", dest:"scotland", cat:"landmarks", name:"Kelvingrove Art Gallery & Museum", hood:"West End, Glasgow", entry:"free",
     tip:"Free. Catch the daily organ recital under Dalí's 'Christ of Saint John of the Cross', with a Spitfire hanging overhead.",
-    summary:"Glasgow's beloved, free, cathedral-like museum — Dalí's 'Christ of Saint John of the Cross', a suspended Spitfire, armour and art across a glorious red-sandstone palace.",
+    summary:"Glasgow's beloved, free, cathedral-like museum. Dalí's 'Christ of Saint John of the Cross', a suspended Spitfire, armour and art across a glorious red-sandstone palace.",
     tags:["free","art","Glasgow"] },
   { id:"glasgow-cathedral", dest:"scotland", cat:"landmarks", name:"Glasgow Cathedral & Necropolis", hood:"East End, Glasgow", entry:"free",
     tip:"After the cathedral, climb the Necropolis hill behind it for the views and the Victorian monuments.",
-    summary:"A rare, intact medieval Scottish cathedral, with a Victorian 'city of the dead' rising on the hill behind — atmospheric monuments and big views over Glasgow.",
+    summary:"A rare, intact medieval Scottish cathedral, with a Victorian 'city of the dead' rising on the hill behind. Atmospheric monuments and big views over Glasgow.",
     tags:["historic","Gothic","free"] },
   { id:"riverside-museum", dest:"scotland", cat:"landmarks", name:"Riverside Museum", hood:"Pointhouse Quay, Glasgow", entry:"free",
     tip:"Free; combine with the Tall Ship moored outside on the Clyde.",
-    summary:"Zaha Hadid's wave-roofed transport museum on the Clyde — trams, locomotives and a recreated old Glasgow street, with a tall ship moored outside. Free and family-friendly.",
+    summary:"Zaha Hadid's wave-roofed transport museum on the Clyde. Trams, locomotives and a recreated old Glasgow street, with a tall ship moored outside. Free and family-friendly.",
     tags:["free","design","Glasgow"] },
   { id:"eilean-donan", dest:"scotland", cat:"landmarks", name:"Eilean Donan Castle", hood:"Dornie, Highlands", entry:"paid · ~£10",
-    tip:"On the road to Skye — stop for the classic shot from the lochside, then cross the stone bridge inside.",
-    summary:"The most photographed castle in Scotland — a stronghold on its own little island where three sea lochs meet, reached by an arched stone bridge. Pure Highland romance.",
+    tip:"On the road to Skye. Stop for the classic shot from the lochside, then cross the stone bridge inside.",
+    summary:"The most photographed castle in Scotland. A stronghold on its own little island where three sea lochs meet, reached by an arched stone bridge. Pure Highland romance.",
     tags:["castle","iconic","loch"], badge:"iconic" },
   { id:"glenfinnan", dest:"scotland", cat:"landmarks", name:"Glenfinnan Viaduct", hood:"Lochaber, Highlands", entry:"free",
     tip:"Check the Jacobite steam-train times and watch it cross the viaduct from the viewpoint trail (arrive early for a spot).",
-    summary:"The Harry Potter viaduct — a sweeping curved railway arc above Loch Shiel. Time your visit for the Jacobite steam train crossing and it's pure movie magic.",
+    summary:"The Harry Potter viaduct. A sweeping curved railway arc above Loch Shiel. Time your visit for the Jacobite steam train crossing and it's pure movie magic.",
     tags:["railway","iconic","views"] },
   { id:"loch-lomond", dest:"scotland", cat:"landmarks", name:"Loch Lomond", hood:"The Trossachs", entry:"free",
-    tip:"Easiest from Glasgow — Luss village is the prettiest base; hire a boat or just walk the shore.",
+    tip:"Easiest from Glasgow. Luss village is the prettiest base; hire a boat or just walk the shore.",
     summary:"The largest loch in Britain and the bonnie gateway to the Highlands, ringed by hills and dotted with islands. Pretty Luss village makes the perfect first stop.",
     tags:["loch","nature","Trossachs"] },
   { id:"glencoe", dest:"scotland", cat:"landmarks", name:"Glencoe", hood:"Lochaber, Highlands", entry:"free",
     tip:"Drive the A82 through the glen and stop at the viewpoints; the 'Three Sisters' layby is unmissable.",
-    summary:"Scotland's most dramatic and brooding glen — towering peaks, waterfalls and a haunting history. Even just driving through is one of Britain's great road trips.",
+    summary:"Scotland's most dramatic and brooding glen. Towering peaks, waterfalls and a haunting history. Even just driving through is one of Britain's great road trips.",
     tags:["glen","dramatic","views"] },
   { id:"old-man-storr", dest:"scotland", cat:"landmarks", name:"The Old Man of Storr", hood:"Trotternish, Isle of Skye", entry:"free",
     tip:"A steep but short (~1.5hr return) walk; go early to beat crowds and catch the light on the pinnacle.",
-    summary:"Skye's most iconic sight — a jagged rock pinnacle on the Trotternish ridge with otherworldly views over sea and mountains. A short, sharp, unforgettable hike.",
+    summary:"Skye's most iconic sight. A jagged rock pinnacle on the Trotternish ridge with otherworldly views over sea and mountains. A short, sharp, unforgettable hike.",
     tags:["hike","Skye","views"] },
   { id:"quiraing", dest:"scotland", cat:"landmarks", name:"The Quiraing", hood:"Trotternish, Isle of Skye", entry:"free",
     tip:"The roadside viewpoint alone is stunning; the full loop walk takes ~2 hours over uneven ground.",
-    summary:"An otherworldly landslip of green pinnacles, plateaus and hidden tables on northern Skye — one of the most surreal landscapes in Britain.",
+    summary:"An otherworldly landslip of green pinnacles, plateaus and hidden tables on northern Skye. One of the most surreal landscapes in Britain.",
     tags:["landscape","Skye","hike"] },
   { id:"fairy-pools", dest:"scotland", cat:"landmarks", name:"The Fairy Pools", hood:"Glen Brittle, Isle of Skye", entry:"free (parking fee)",
     tip:"Wear waterproof boots; the trail crosses streams. Brave souls swim in the icy blue pools.",
-    summary:"A series of crystal-clear, ice-blue pools and little waterfalls tumbling beneath the Cuillin mountains. A magical, easy walk — and a bracing wild swim if you dare.",
+    summary:"A series of crystal-clear, ice-blue pools and little waterfalls tumbling beneath the Cuillin mountains. A magical, easy walk. And a bracing wild swim if you dare.",
     tags:["nature","Skye","waterfall"] },
   { id:"ben-nevis", dest:"scotland", cat:"landmarks", name:"Ben Nevis", hood:"Fort William, Highlands", entry:"free",
     tip:"The full summit is a serious 7–9hr day; for the views without the climb, ride the Nevis Range gondola nearby.",
-    summary:"Britain's highest mountain (1,345m), looming over Fort William. A big-day hike for the experienced — or take the nearby gondola for Highland views with far less effort.",
+    summary:"Britain's highest mountain (1,345m), looming over Fort William. A big-day hike for the experienced. Or take the nearby gondola for Highland views with far less effort.",
     tags:["mountain","hike","Highlands"] },
 
   { id:"princes-st-gardens", dest:"scotland", cat:"parks", name:"Princes Street Gardens", hood:"Edinburgh", entry:"free",
     tip:"Best from the benches below the Castle; the Ross Fountain and the floral clock are highlights.",
-    summary:"A valley of green right below Edinburgh Castle in the heart of the city — the ornate Ross Fountain, big lawns and the best Castle views in town. Made for a sunny sit-down.",
+    summary:"A valley of green right below Edinburgh Castle in the heart of the city. The ornate Ross Fountain, big lawns and the best Castle views in town. Made for a sunny sit-down.",
     tags:["central","Castle views","free"] },
   { id:"rbge", dest:"scotland", cat:"parks", name:"Royal Botanic Garden", hood:"Inverleith, Edinburgh", entry:"free (glasshouses paid)",
     tip:"Free to roam; the Victorian glasshouses are a small paid add-on. The lawn has a surprise Edinburgh skyline view.",
-    summary:"One of the world's great botanic gardens — 70 acres of rock gardens, woodland and Victorian glasshouses, with a hidden skyline view of the city. Free and serene.",
+    summary:"One of the world's great botanic gardens. 70 acres of rock gardens, woodland and Victorian glasshouses, with a hidden skyline view of the city. Free and serene.",
     tags:["botanical","free","Edinburgh"] },
   { id:"the-meadows", dest:"scotland", cat:"parks", name:"The Meadows", hood:"Southside, Edinburgh", entry:"free",
     tip:"Walk the cherry-blossom avenue (Middle Meadow Walk) in late April; brilliant for a picnic in summer.",
@@ -1747,19 +1758,19 @@ const PLACES = [
     summary:"A handsome Victorian park in Glasgow's West End, threaded by the River Kelvin, between the Kelvingrove museum and the university's fairytale spires.",
     tags:["Victorian","river","Glasgow"] },
   { id:"glasgow-botanic", dest:"scotland", cat:"parks", name:"Glasgow Botanic Gardens", hood:"West End, Glasgow", entry:"free",
-    tip:"Don't miss the Kibble Palace — a beautiful domed Victorian glasshouse full of tree ferns.",
+    tip:"Don't miss the Kibble Palace. A beautiful domed Victorian glasshouse full of tree ferns.",
     summary:"A lovely West End garden centred on the Kibble Palace, a vast domed Victorian glasshouse of ferns and marble statues. Free, gentle and pretty year-round.",
     tags:["glasshouse","free","Glasgow"] },
 
   /* ===================== LONDON · WELLNESS (added) ===================== */
   { id:"heartcore-nottinghill", dest:"london", cat:"wellness", name:"Heartcore", hood:"Notting Hill, W11",
     cuisine:"Reformer pilates studio",
-    summary:"Low light, a long row of reformers, and a class that leaves your legs shaking by the end. The Notting Hill studio is the prettiest of them — book the early slot and walk out into the market after.",
+    summary:"Low light, a long row of reformers, and a class that leaves your legs shaking by the end. The Notting Hill studio is the prettiest of them. Book the early slot and walk out into the market after.",
     tags:["reformer pilates","boutique","Notting Hill"], badge:"✦ reformer pilates" },
 
   { id:"equinox-stjames", dest:"london", cat:"wellness", name:"Equinox St James's", hood:"St James's, SW1",
     cuisine:"Luxury gym & spa",
-    summary:"The members' club of gyms — a lap pool, eucalyptus in the steam room, and a locker room you'd happily move into. Worth a day pass for one slow morning.",
+    summary:"The members' club of gyms. A lap pool, eucalyptus in the steam room, and a locker room you'd happily move into. Worth a day pass for one slow morning.",
     tags:["luxury gym","pool","spa","St James's"], badge:"members' club" },
 
   { id:"third-space-mayfair", dest:"london", cat:"wellness", name:"Third Space", hood:"Mayfair, W1",
@@ -1769,53 +1780,53 @@ const PLACES = [
 
   { id:"kxu-chelsea", dest:"london", cat:"wellness", name:"KXU", hood:"Chelsea, SW3",
     cuisine:"Boutique studio",
-    summary:"The studio that spun out of Chelsea's most private club — treadmills, reformers, and a juice bar, all in the same hushed marble as the members' side.",
+    summary:"The studio that spun out of Chelsea's most private club. Treadmills, reformers, and a juice bar, all in the same hushed marble as the members' side.",
     tags:["boutique studio","Chelsea"] },
 
   { id:"bodyism-nottinghill", dest:"london", cat:"wellness", name:"Bodyism", hood:"Notting Hill, W11",
     cuisine:"Wellness studio & café",
-    summary:"Part gym, part café, part apothecary — the Notting Hill set come for the trainers and stay for the shakes. Calm, white, and quietly pleased with itself.",
+    summary:"Part gym, part café, part apothecary. The Notting Hill set come for the trainers and stay for the shakes. Calm, white, and quietly pleased with itself.",
     tags:["wellness","Notting Hill"] },
 
   /* ===================== LONDON · MORE CAFÉS (added) ===================== */
   { id:"peggy-porschen", dest:"london", cat:"coffee", name:"Peggy Porschen", hood:"Belgravia, SW1", price:2,
     cuisine:"Pink cake parlour",
-    summary:"The pink corner everyone photographs — flowers up the walls, cakes under glass domes, hot chocolate that arrives looking like a painting. Take the window seat and order a slice of the layer cake.",
+    summary:"The pink corner everyone photographs. Flowers up the walls, cakes under glass domes, hot chocolate that arrives looking like a painting. Take the window seat and order a slice of the layer cake.",
     tags:["pink","cakes","Belgravia"], badge:"✿ the pink parlour", badgeRose:true },
 
   { id:"eln-mayfair", dest:"london", cat:"coffee", name:"EL&N", hood:"Mayfair, W1", price:2,
-    cuisine:"Café — flowers and pastel",
+    cuisine:"Café: flowers and pastel",
     summary:"Floral walls, pastel everything, and the most photographed lattes in London. More about the look than the bean, and entirely unbothered by that.",
     tags:["pink","floral","Mayfair"] },
 
   { id:"saint-aymes", dest:"london", cat:"coffee", name:"Saint Aymes", hood:"Marylebone, W1", price:2,
-    cuisine:"Café — matcha and gold",
+    cuisine:"Café: matcha and gold",
     summary:"Gold-leaf hot chocolate and rose lattes in a little Marylebone room done up like a jewellery box. Sweet, pretty, and unmistakably pink.",
     tags:["pink","matcha","Marylebone"] },
 
   { id:"the-wolseley", dest:"london", cat:"coffee", name:"The Wolseley", hood:"Piccadilly, W1", price:3,
     cuisine:"Grand European café",
-    summary:"A 1920s car showroom turned grand café — black-and-gold pillars, white cloths, and the best people-watching in town over afternoon tea or a late breakfast.",
+    summary:"A 1920s car showroom turned grand café. Black-and-gold pillars, white cloths, and the best people-watching in town over afternoon tea or a late breakfast.",
     tags:["grand café","afternoon tea","Piccadilly","iconic"], badge:"a London institution" },
 
   /* ===================== LONDON · MORE HIGH-END (added) ===================== */
   { id:"sexy-fish", dest:"london", cat:"restaurants", name:"Sexy Fish", hood:"Berkeley Square, Mayfair", price:4,
     cuisine:"Asian seafood, glamour",
-    summary:"Damien Hirst mermaids, a wall of living coral, and a martini list as long as your arm. Loud and golden and over the top — go for the room as much as the robata.",
+    summary:"Damien Hirst mermaids, a wall of living coral, and a martini list as long as your arm. Loud and golden and over the top. Go for the room as much as the robata.",
     tags:["glamour","Asian","cocktails","Mayfair"], badge:"glamour" },
 
   { id:"amazonico-london", dest:"london", cat:"restaurants", name:"Amazónico", hood:"Berkeley Square, Mayfair", price:4,
     cuisine:"Latin American, live music",
-    summary:"Berkeley Square's jungle — palms to the ceiling, a jazz band down in the Jaguar bar, Brazilian-Asian grill arriving long past dark. Dress for it.",
+    summary:"Berkeley Square's jungle. Palms to the ceiling, a jazz band down in the Jaguar bar, Brazilian-Asian grill arriving long past dark. Dress for it.",
     tags:["live music","Latin","glamour","Mayfair"] },
 
   { id:"isabel-mayfair", dest:"london", cat:"restaurants", name:"Isabel Mayfair", hood:"Albemarle St, Mayfair", price:4,
     cuisine:"Modern European, late",
-    summary:"Dark wood, low light, a downstairs bar that runs late — the Mayfair dinner that becomes a night. Order the truffle pasta and stay for one more.",
+    summary:"Dark wood, low light, a downstairs bar that runs late. The Mayfair dinner that becomes a night. Order the truffle pasta and stay for one more.",
     tags:["date night","late","Mayfair"] },
 
   { id:"scotts-mayfair", dest:"london", cat:"restaurants", name:"Scott's", hood:"Mount St, Mayfair", price:4,
-    cuisine:"Seafood — a London classic",
+    cuisine:"Seafood: a London classic",
     summary:"Oysters on crushed ice, a champagne trolley, and a Mount Street terrace that's been the address for lunch since 1851. Old-money calm.",
     tags:["seafood","terrace","iconic","Mayfair"] },
 
@@ -1873,7 +1884,7 @@ function favSectionHTML(who){
   const items = [...FAVS[who]].map(byId).filter(Boolean);
   const inner = items.length
     ? `<div class="grid">${items.map(cardHTML).join("")}</div>`
-    : `<p class="fav-empty">No picks yet — tap the ${who==="jer"?"blue J":"pink T"} on any place.</p>`;
+    : `<p class="fav-empty">No picks yet. Tap the ${who==="jer"?"blue J":"pink T"} on any place.</p>`;
   return `<div class="fav-section ${who}"><h3>${FAV_META[who].emoji} ${FAV_META[who].label}'s picks <span class="fav-n">${items.length}</span></h3>${inner}</div>`;
 }
 function renderFavs(){
@@ -1930,7 +1941,7 @@ function cardHTML(p){
   const fHidden = (p.badge==="hidden gem" || tg.includes("hidden gem")) ? 1 : 0;
   const fFree = (p.entry && p.entry.startsWith("free")) ? 1 : 0;
   return `
-  <article class="card${feature}" data-id="${p.id}" data-price="${p.price||""}" data-mich="${fMich}" data-award="${fAward}" data-hidden="${fHidden}" data-free="${fFree}" tabindex="0" role="button" aria-label="${p.name} — view details">
+  <article class="card${feature}" data-id="${p.id}" data-price="${p.price||""}" data-mich="${fMich}" data-award="${fAward}" data-hidden="${fHidden}" data-free="${fFree}" tabindex="0" role="button" aria-label="${p.name}, view details">
     <div class="thumb" data-base="${p.cat}" style="background:${thumbGrad(p)}">
       <span class="thumb-motif" aria-hidden="true">${CAT_ICON[p.cat]||""}</span>
       ${badge}${chip}
@@ -1987,7 +1998,7 @@ function overviewHTML(dest, cats){
 }
 const TRAIN_HTML = `<div class="train"><div class="route"><span class="stop">London King's Cross</span><span class="dash"></span><span class="stop">Edinburgh Waverley</span></div>
   <div class="facts"><div class="fact"><span class="label">Operator</span><span class="val">LNER · lner.co.uk</span></div><div class="fact"><span class="label">Duration</span><span class="val">~4.5 hours</span></div><div class="fact"><span class="label">Advance from</span><span class="val">~£30–40</span></div></div>
-  <p class="note">Getting north: book in advance for cheap seats and grab a table seat — watch the North Yorkshire coast slide by.</p>
+  <p class="note">Getting north: book in advance for cheap seats and grab a table seat, then watch the North Yorkshire coast slide by.</p>
   <div class="modal-actions" style="margin-top:2px;"><a class="chip-link solid" href="https://www.lner.co.uk" target="_blank" rel="noopener">Book on LNER ↗</a></div></div>`;
 
 /* ---------- build destination views dynamically ---------- */
@@ -2041,7 +2052,7 @@ DEST_ORDER.forEach(dest=>{
       });
       clear.hidden = !(vibe.length||price.length);
       let es = panel.querySelector(".filter-empty");
-      if(shown===0){ if(!es){ es=document.createElement("p"); es.className="filter-empty"; panel.appendChild(es);} es.textContent="No spots match those filters — try loosening one."; es.style.display=""; }
+      if(shown===0){ if(!es){ es=document.createElement("p"); es.className="filter-empty"; panel.appendChild(es);} es.textContent="No spots match those filters. Try loosening one."; es.style.display=""; }
       else if(es){ es.style.display="none"; }
     };
     fb.querySelectorAll(".fchip").forEach(b=> b.addEventListener("click",()=>{ b.classList.toggle("on"); apply(); }));
@@ -2255,9 +2266,9 @@ function trainLegHTML(t){
     const label = labelOf(c.kind,c.ref);
     const lead = c.kind==="city" ? flagHTML(COUNTRY[c.ref]) : "";
     const whoAttr = c.who ? ` data-who="${c.who}"` : "";
-    const aria = `${label}${c.kind==="place"?" — tap to open":""}. Whose idea: ${whoName(c.who)}.`;
+    const aria = `${label}${c.kind==="place"?", tap to open":""}. Whose idea: ${whoName(c.who)}.`;
     return `<span class="pchip placed ${c.kind}" data-uid="${c.uid}" data-kind="${c.kind}" data-ref="${c.ref}"${whoAttr} tabindex="0" role="button" aria-label="${aria}">`
-      + `<button class="pc-who" type="button" tabindex="-1" title="Whose idea?" aria-label="Whose idea — ${whoName(c.who)}; tap to change"></button>`
+      + `<button class="pc-who" type="button" tabindex="-1" title="Whose idea?" aria-label="Whose idea: ${whoName(c.who)}; tap to change"></button>`
       + lead + `<span class="pc-label">${label}</span>`
       + `<button class="pc-x" type="button" tabindex="-1" aria-label="Remove ${label}">✕</button>`
       + `</span>`;
@@ -2286,7 +2297,7 @@ function trainLegHTML(t){
   function addChipAt(day, kind, ref, index){ if(day<0||day>=TRIP_DAYS) return; const arr=plan.days[day]; const ix=Math.max(0, Math.min(index==null?arr.length:index, arr.length)); arr.splice(ix,0,{uid:newUid(),kind,ref,who:null}); savePlan(); renderGrid(); }
   function moveChip(uid, toDay, index){ const f=findChip(uid); if(!f||toDay<0||toDay>=TRIP_DAYS) return; const [c]=plan.days[f.day].splice(f.idx,1); const arr=plan.days[toDay]; const ix=Math.max(0, Math.min(index==null?arr.length:index, arr.length)); arr.splice(ix,0,c); savePlan(); renderGrid(); }
   function removeChip(uid){ const f=findChip(uid); if(!f) return; plan.days[f.day].splice(f.idx,1); savePlan(); renderGrid(); say(`Removed ${labelOf(f.chip.kind,f.chip.ref)}.`); }
-  function cycleWho(uid){ const f=findChip(uid); if(!f) return; f.chip.who = WHO_CYCLE[(WHO_CYCLE.indexOf(f.chip.who||null)+1)%WHO_CYCLE.length]; savePlan(); renderGrid(); const w=f.chip.who; say(`${labelOf(f.chip.kind,f.chip.ref)} — ${w?whoName(w)+"'s idea":"no-one's idea yet"}.`); }
+  function cycleWho(uid){ const f=findChip(uid); if(!f) return; f.chip.who = WHO_CYCLE[(WHO_CYCLE.indexOf(f.chip.who||null)+1)%WHO_CYCLE.length]; savePlan(); renderGrid(); const w=f.chip.who; say(`${labelOf(f.chip.kind,f.chip.ref)}: ${w?whoName(w)+"'s idea":"no-one's idea yet"}.`); }
 
   /* ---------- pointer drag (mouse + touch; not native HTML5 DnD) ---------- */
   let cand=null, drag=null, ghost=null, marker=null, suppressClick=false;
@@ -2406,7 +2417,7 @@ function trainLegHTML(t){
     if(plan.days.some(d=>d.length) && !confirm("Replace the current plan with the suggested shape? You can rearrange it afterwards.")) return;
     plan=emptyPlan();
     ITINERARY.forEach((it,i)=>{ if(i<TRIP_DAYS && it.dest && DEST_META[it.dest]) plan.days[i].push({uid:newUid(),kind:"city",ref:it.dest,who:null}); });
-    savePlan(); renderGrid(); disarm(); say("Filled the board with the suggested shape — drag anything to rearrange.");
+    savePlan(); renderGrid(); disarm(); say("Filled the board with the suggested shape. Drag anything to rearrange.");
   });
   const clearBtn=document.getElementById("planClear");
   if(clearBtn) clearBtn.addEventListener("click", ()=>{
@@ -2452,11 +2463,11 @@ function trainLegHTML(t){
 
   function flashShare(txt){ const b=document.getElementById("planShare"); if(!b) return; if(!b.dataset.orig) b.dataset.orig=b.textContent; b.textContent=txt; clearTimeout(b._t); b._t=setTimeout(()=>{ b.textContent=b.dataset.orig; }, 2200); }
   function sharePlan(){
-    if(!plan.days.some(d=>d.length)){ say("Nothing to share yet — add a few things first."); flashShare("Add a few things first"); return; }
+    if(!plan.days.some(d=>d.length)){ say("Nothing to share yet. Add a few things first."); flashShare("Add a few things first"); return; }
     location.hash = "plan=" + encodePlan(plan);
     const url = location.href;
-    const ok = ()=>{ flashShare("Link copied ✓"); say("Share link copied — paste it to send your plan."); };
-    const no = ()=>{ flashShare("Copy it from the address bar"); say("Couldn't copy automatically — the link is in your address bar."); };
+    const ok = ()=>{ flashShare("Link copied ✓"); say("Share link copied. Paste it to send your plan."); };
+    const no = ()=>{ flashShare("Copy it from the address bar"); say("Couldn't copy automatically. The link is in your address bar."); };
     if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok, no);
     else { try{ const ta=document.createElement("textarea"); ta.value=url; ta.style.cssText="position:fixed;opacity:0;"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); ok(); }catch(_){ no(); } }
   }
@@ -2711,7 +2722,7 @@ function ensureGoogleLib(){
       googleReady = true;
       placesLib = (await google.maps.importLibrary("places")).Place;
       return true;
-    }catch(e){ _libPromise = null; mapNote.textContent = "Couldn't reach Google — check the key, billing and that Maps JavaScript API + Places API (New) are enabled."; return false; }
+    }catch(e){ _libPromise = null; mapNote.textContent = "Couldn't reach Google. Check the key, billing and that Maps JavaScript API + Places API (New) are enabled."; return false; }
   })();
   return _libPromise;
 }
