@@ -350,7 +350,7 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 /* ---- peony bomb + engraved-seal detail ---- */
 .crest{ cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .crest:focus-visible{ outline:2px solid var(--deep-rose); outline-offset:6px; border-radius:50%; }
-.burst{ position:absolute; inset:0; overflow:visible; pointer-events:none; z-index:6; }
+.burst{ position:absolute; inset:0; overflow:visible; pointer-events:none; z-index:6; perspective:900px; }
 .burst .bp{ position:absolute; left:0; top:0; display:block; will-change:transform,opacity; }
 .burst .bp svg{ width:100%; height:100%; display:block; }
 .bpetal{ background:radial-gradient(circle at 30% 30%, #F6E2DF, #EFB9C2); border-radius:80% 0 80% 0; }
@@ -545,11 +545,16 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
 .rm-stop .pin-dot{ fill:var(--gold); }
 .rm-stop .pin-name{ font-family:var(--serif); font-style:italic; font-size:13px; fill:var(--ink); paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round; }
 .rm-stop:hover .pin-seal{ stroke-width:2.2; } .rm-stop:focus-visible{ outline:none; } .rm-stop:focus-visible .pin-seal{ stroke:var(--gold); stroke-width:2.6; }
-.rm-train{ font-size:18px; }
+.rm-glyph{ fill:none; stroke:var(--deep-rose); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:.8; }
+.rm-pine{ fill:#E0B1AB; }
+.rm-leg{ paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round; }
 @media (prefers-reduced-motion: no-preference){
   .routemap.play .rm-route{ transition:stroke-dashoffset 2.4s ease; stroke-dashoffset:0; }
   .routemap.play .rm-stop{ animation:rmStop .5s cubic-bezier(.2,.9,.3,1.35) both; animation-delay:var(--d,0s); }
+  .rm-cloud{ animation:cloudDrift 16s ease-in-out infinite alternate; }
+  .rm-cloud.c2{ animation-duration:22s; animation-delay:-8s; }
 }
+@keyframes cloudDrift{ from{ transform:translateX(-8px);} to{ transform:translateX(10px);} }
 @media (prefers-reduced-motion: reduce){
   .routemap.play .rm-route{ stroke-dashoffset:0; }
   .routemap.play .rm-stop{ opacity:1; }
@@ -644,18 +649,43 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
       <span class="rm-eyebrow">✦ the journey</span>
       <h3>London to the far north</h3>
       <div class="rm-stage">
-        <svg viewBox="0 0 660 210" role="img" aria-label="Our route: London, Bath, Cardiff, Eryri, then Edinburgh">
-          <path id="rmRoutePath" class="rm-route-bg" d="M60,160 C110,152 150,150 190,150 C250,150 280,162 330,160 C390,158 420,128 470,118 C520,108 565,95 600,72"/>
-          <path class="rm-route" pathLength="1" d="M60,160 C110,152 150,150 190,150 C250,150 280,162 330,160 C390,158 420,128 470,118 C520,108 565,95 600,72"/>
-          <text class="rm-leg" x="125" y="134" text-anchor="middle">~1h20 · rail</text>
-          <text class="rm-leg" x="262" y="143" text-anchor="middle">~1h</text>
-          <text class="rm-leg" x="398" y="120" text-anchor="middle">into the hills</text>
-          <text class="rm-leg" x="532" y="86" text-anchor="middle">the long way up</text>
-          <g transform="translate(60,160)"><g class="rm-stop" style="--d:.5s" data-go="london" tabindex="0" role="link" aria-label="London"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">London</text></g></g>
-          <g transform="translate(190,150)"><g class="rm-stop" style="--d:.95s" data-go="bath" tabindex="0" role="link" aria-label="Bath"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Bath</text></g></g>
-          <g transform="translate(330,160)"><g class="rm-stop" style="--d:1.4s" data-go="wales" tabindex="0" role="link" aria-label="Cardiff"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Cardiff</text></g></g>
-          <g transform="translate(470,118)"><g class="rm-stop" style="--d:1.85s" data-go="wales" tabindex="0" role="link" aria-label="Eryri"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Eryri</text></g></g>
-          <g transform="translate(600,72)"><g class="rm-stop" style="--d:2.3s" data-go="scotland" tabindex="0" role="link" aria-label="Edinburgh"><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Edinburgh</text></g></g>
+        <svg viewBox="0 0 660 260" role="img" aria-label="Our route: London, Bath, Cardiff, Eryri, then Edinburgh">
+          <defs>
+            <linearGradient id="rmSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFF7F3"/><stop offset="100%" stop-color="#FBEBE7" stop-opacity="0"/></linearGradient>
+          </defs>
+          <rect x="0" y="0" width="660" height="150" fill="url(#rmSky)" rx="14"/>
+          <circle cx="104" cy="46" r="22" fill="#F6DDD0" opacity=".55"/>
+          <circle cx="104" cy="46" r="13" fill="#F2C9AE" opacity=".8"/>
+          <text x="258" y="44" font-size="11" fill="var(--rose)" opacity=".7" text-anchor="middle">✦</text>
+          <text x="392" y="30" font-size="9" fill="var(--rose)" opacity=".55" text-anchor="middle">✦</text>
+          <text x="556" y="24" font-size="10" fill="var(--rose)" opacity=".6" text-anchor="middle">✦</text>
+          <g class="rm-cloud" fill="#FFFFFF" opacity=".85"><ellipse cx="222" cy="62" rx="26" ry="9"/><ellipse cx="240" cy="56" rx="18" ry="8"/><ellipse cx="206" cy="57" rx="14" ry="7"/></g>
+          <g class="rm-cloud c2" fill="#FFFFFF" opacity=".7"><ellipse cx="480" cy="44" rx="22" ry="8"/><ellipse cx="495" cy="39" rx="14" ry="6"/></g>
+          <path d="M0,150 Q80,140 150,148 Q260,158 340,136 Q420,114 480,104 Q545,90 612,80 L660,76 L660,260 L0,260 Z" fill="#F8E9E6"/>
+          <path d="M0,192 Q90,178 170,188 Q280,200 360,178 Q440,154 505,148 Q575,140 660,122 L660,260 L0,260 Z" fill="#F4DCD9"/>
+          <path d="M0,226 Q120,214 240,224 Q380,234 480,214 Q575,197 660,190 L660,260 L0,260 Z" fill="#F1D3CF"/>
+          <g class="rm-pine" opacity=".8"><path d="M424,160 l6,-11 l6,11 Z"/><path d="M441,155 l5,-9 l5,9 Z"/><path d="M506,124 l5,-9 l5,9 Z"/><path d="M519,120 l4,-8 l4,8 Z"/></g>
+          <g class="rm-glyph" opacity=".55"><path d="M292,238 q5,-4 10,0 q5,4 10,0"/><path d="M310,246 q5,-4 10,0 q5,4 10,0"/></g>
+          <path d="M60,204 C110,196 148,192 185,192 C245,192 268,204 315,200 C382,196 408,152 455,132 C505,110 562,88 600,66" fill="none" stroke="rgba(217,139,134,.16)" stroke-width="8" stroke-linecap="round"/>
+          <path id="rmRoutePath" class="rm-route-bg" d="M60,204 C110,196 148,192 185,192 C245,192 268,204 315,200 C382,196 408,152 455,132 C505,110 562,88 600,66"/>
+          <path class="rm-route" pathLength="1" d="M60,204 C110,196 148,192 185,192 C245,192 268,204 315,200 C382,196 408,152 455,132 C505,110 562,88 600,66"/>
+          <g class="rm-train" transform="translate(60,204)">
+            <g transform="translate(0,-7)">
+              <circle cx="-12" cy="-8" r="2.2" fill="#fff" opacity=".6"/><circle cx="-16" cy="-11" r="1.6" fill="#fff" opacity=".4"/>
+              <rect x="-8" y="-5" width="13" height="7" rx="2.2" fill="var(--gold)"/>
+              <rect x="1" y="-8" width="7" height="10" rx="2" fill="var(--deep-rose)"/>
+              <circle cx="-4" cy="3.4" r="1.8" fill="var(--deep-rose)"/><circle cx="4" cy="3.4" r="1.8" fill="var(--deep-rose)"/>
+            </g>
+          </g>
+          <text class="rm-leg" x="122" y="178" text-anchor="middle">~1h20 · rail</text>
+          <text class="rm-leg" x="252" y="184" text-anchor="middle">~1h · rail</text>
+          <text class="rm-leg" x="390" y="152" text-anchor="middle">into the hills</text>
+          <text class="rm-leg" x="532" y="82" text-anchor="middle">the long way up</text>
+          <g transform="translate(60,204)"><g class="rm-stop" style="--d:.5s" data-go="london" tabindex="0" role="link" aria-label="London"><g class="rm-glyph"><path d="M-3.5,-16 v-16 h7 v16"/><path d="M-3.5,-32 L0,-40 L3.5,-32"/><circle cx="0" cy="-27" r="2.2"/></g><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">London</text></g></g>
+          <g transform="translate(185,192)"><g class="rm-stop" style="--d:.95s" data-go="bath" tabindex="0" role="link" aria-label="Bath"><g class="rm-glyph"><path d="M-9,-18 A11,11 0 0 1 9,-18"/><path d="M-6,-19 v-5 M-2,-21 v-6 M2,-21 v-6 M6,-19 v-5"/></g><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Bath</text></g></g>
+          <g transform="translate(315,200)"><g class="rm-stop" style="--d:1.4s" data-go="wales" tabindex="0" role="link" aria-label="Cardiff"><g class="rm-glyph"><path d="M-6,-16 v-10 h2.2 v3 h2.4 v-3 h2.8 v3 h2.4 v-3 h2.2 v10 Z"/><path d="M0,-26 v-7 l5,1.8 l-5,1.8"/></g><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Cardiff</text></g></g>
+          <g transform="translate(455,132)"><g class="rm-stop" style="--d:1.85s" data-go="wales" tabindex="0" role="link" aria-label="Eryri"><g class="rm-glyph"><path d="M-11,-16 L-4,-30 L0,-23 L6,-34 L13,-16"/></g><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Eryri</text></g></g>
+          <g transform="translate(600,66)"><g class="rm-stop" style="--d:2.3s" data-go="scotland" tabindex="0" role="link" aria-label="Edinburgh"><g class="rm-glyph"><path d="M-10,-16 L-3,-21 L9,-21 L12,-16"/><path d="M-2,-21 v-8 h6 v8"/><path d="M1,-29 v-6 l4,1.5 l-4,1.5"/></g><circle class="pin-seal" r="9.5"/><circle class="pin-seal-in" r="5.6"/><circle class="pin-dot" r="2.2"/><text class="pin-name" y="27" text-anchor="middle">Edinburgh</text></g></g>
         </svg>
       </div>
     </div>
@@ -2194,7 +2224,7 @@ function showView(name){
   const _fab = document.getElementById("fab"); if(_fab) _fab.style.display = name==="hero" ? "none" : "inline-flex";
   window.scrollTo({ top:0, behavior:"auto" });
   currentView = name;
-  if(name==="map"){ ensureMap(); playRouteMap(); }
+  if(name==="map"){ ensureMap(); playRouteMap(); if(window.trainStart) trainStart(); }
   else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
   else if(DEST_META[name]){ enrichPlaces(PLACES.filter(p=>p.dest===name)); fetchWeather(name); fetchCityHero(name); }
 }
@@ -2217,6 +2247,27 @@ function playRouteMap(){
     s.addEventListener("click", go);
     s.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } });
   });
+})();
+
+/* the little train rides the route while the map is open (JS-driven; SMIL is unreliable in embedded webviews) */
+(function(){
+  const train=document.querySelector(".rm-train"), path=document.getElementById("rmRoutePath");
+  if(!train||!path) return;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const LEN=path.getTotalLength(), DUR=9000;
+  let running=false;
+  window.trainStart=function(){
+    if(running) return; running=true;
+    function tick(now){
+      if(currentView!=="map"){ running=false; return; }
+      const u=((now%DUR)/DUR)*LEN;
+      const p=path.getPointAtLength(u), q=path.getPointAtLength(Math.min(LEN,u+2));
+      const ang=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;
+      train.setAttribute("transform","translate("+p.x.toFixed(1)+","+p.y.toFixed(1)+") rotate("+ang.toFixed(1)+")");
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  };
 })();
 
 /* ---------- countdown + day-by-day itinerary (Phase 1) ---------- */
@@ -2936,7 +2987,8 @@ function waxSealHTML(){
   c.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); peonyBomb(); } });
 })();
 
-/* ---------- the peony bomb: blooms are heavy and arc proudly, petals are light and flutter, sparks flash and die ---------- */
+/* ---------- the peony bombs: a salvo with real air. blooms are heavy and rock as they arc;
+   petals stall and flip and drift; sparks flash and die; blooms shed loose petals mid-flight ---------- */
 const PEONY_TONES=[["#F7E3E1","#EFC0CA"],["#F4CDD5","#E8A6B4"],["#F1BBC6","#DE95A6"],["#F3D9D3","#E2ABA7"]];
 function bloomSVG(ci){
   const t=PEONY_TONES[ci%PEONY_TONES.length];
@@ -2945,55 +2997,101 @@ function bloomSVG(ci){
   for(let i=0;i<6;i++) s+='<ellipse cx="0" cy="-7.5" rx="6" ry="9.5" fill="'+t[0]+'" transform="rotate('+(i*60+22)+')"/>';
   return '<svg viewBox="-24 -24 48 48"><g>'+s+'<circle r="4.4" fill="#EFC98F"/><circle r="2.4" fill="#DCA45E" opacity=".85"/></g></svg>';
 }
+const BURST={ parts:[], running:false };
+function burstRnd(a,b){ return a+Math.random()*(b-a); }
+function burstPush(el,w,h,m){
+  const host=document.getElementById("burst"); if(!host) return;
+  el.classList.add("bp");
+  el.style.width=w+"px"; el.style.height=h+"px"; el.style.opacity="0";
+  m.t=0; m.ph=burstRnd(0,6.28); m.ph2=burstRnd(0,6.28); m.el=el;
+  host.appendChild(el); BURST.parts.push(m);
+  burstRun();
+}
+function petalEl(){
+  const el=document.createElement("span"); el.className="bpetal";
+  const t=PEONY_TONES[(Math.random()*PEONY_TONES.length)|0];
+  el.style.background="radial-gradient(circle at 30% 30%, "+t[0]+", "+t[1]+")";
+  return el;
+}
+function shedPetal(x,y,vx,vy){
+  const w=burstRnd(8,14);
+  burstPush(petalEl(), w, w*burstRnd(.8,1.25), { x:x, y:y,
+    vx:vx*.45+burstRnd(-70,70), vy:vy*.45+burstRnd(-90,10),
+    g:400, k:2.4, spin:burstRnd(-240,240), flipA:burstRnd(35,70), flipF:burstRnd(3,7),
+    amp:burstRnd(10,26), freq:burstRnd(2.2,4.6), rock:0, rockF:0, shedAt:0, shedN:0,
+    life:burstRnd(2.4,3.6), z:burstRnd(.8,1.05) });
+}
+function bombAt(ox,oy,s){
+  const dim=.55+.45*s, vs=.5+.5*s;
+  for(let i=0;i<Math.round(8*s)+1;i++){
+    const el=document.createElement("span"); el.innerHTML=bloomSVG(i);
+    const a=(-90+burstRnd(-72,72))*Math.PI/180, v=burstRnd(300,640)*vs, size=burstRnd(26,46)*dim, z=burstRnd(.8,1.15);
+    burstPush(el,size,size,{ x:ox-size/2+burstRnd(-8,8), y:oy-size/2+burstRnd(-8,8),
+      vx:Math.cos(a)*v*z, vy:Math.sin(a)*v*z, g:920, k:1.05,
+      rock:burstRnd(26,52), rockF:burstRnd(2.2,3.6), spin:burstRnd(-45,45),
+      shedAt:burstRnd(.35,1.1), shedN:2+((Math.random()<.5)?1:0),
+      amp:0, freq:0, flipA:0, flipF:0, life:burstRnd(2.2,3.0), z:z });
+  }
+  for(let i=0;i<Math.round(28*s)+2;i++){
+    const w=burstRnd(9,17)*dim, z=burstRnd(.75,1.15);
+    const a=(-90+burstRnd(-118,118))*Math.PI/180, v=burstRnd(420,1020)*vs;
+    burstPush(petalEl(), w, w*burstRnd(.8,1.25), { x:ox-w/2+burstRnd(-8,8), y:oy-w/2+burstRnd(-8,8),
+      vx:Math.cos(a)*v*z, vy:Math.sin(a)*v*z, g:400, k:2.3,
+      spin:burstRnd(-300,300), flipA:burstRnd(35,75), flipF:burstRnd(3,7.5),
+      amp:burstRnd(12,34), freq:burstRnd(2.2,5), rock:0, rockF:0, shedAt:0, shedN:0,
+      life:burstRnd(3.0,4.4), z:z });
+  }
+  for(let i=0;i<Math.round(13*s)+1;i++){
+    const el=document.createElement("span"); el.className="bspark";
+    const a=burstRnd(0,6.283), v=burstRnd(480,1120)*vs, w=burstRnd(3,6)*dim;
+    burstPush(el,w,w,{ x:ox-w/2, y:oy-w/2, vx:Math.cos(a)*v, vy:Math.sin(a)*v,
+      g:560, k:3.4, spin:0, flipA:0, flipF:0, amp:0, freq:0, rock:0, rockF:0, shedAt:0, shedN:0,
+      life:burstRnd(.4,.9), z:1 });
+  }
+}
+function burstRun(){
+  if(BURST.running) return;
+  BURST.running=true;
+  let last=performance.now();
+  function step(now){
+    const dt=Math.min(.034,(now-last)/1000); last=now;
+    const parts=BURST.parts;
+    for(let i=0;i<parts.length;i++){
+      const m=parts[i]; if(!m.el) continue;
+      m.t+=dt;
+      if(m.t>=m.life){ m.el.remove(); m.el=null; continue; }
+      if(m.shedAt && m.t>=m.shedAt){
+        m.shedAt=0;
+        for(let j=0;j<m.shedN;j++) shedPetal(m.x,m.y,m.vx,m.vy);
+      }
+      const f=Math.exp(-m.k*dt);
+      m.vx*=f; m.vy=m.vy*f+m.g*dt;
+      const stall=m.flipA? (1-.28*Math.abs(Math.sin(m.t*m.flipF+m.ph2))) : 1;
+      m.x+=m.vx*dt; m.y+=m.vy*stall*dt;
+      const flip=m.flipA? Math.sin(m.t*m.flipF+m.ph2)*m.flipA : 0;
+      const sway=m.amp? Math.sin(m.t*m.freq+m.ph)*m.amp*Math.min(1,m.t*2) : 0;
+      const rz=m.rock? Math.sin(m.t*m.rockF+m.ph)*m.rock+m.spin*m.t : m.spin*m.t;
+      const fade=(m.t<.09? m.t/.09 : (m.life-m.t<.7? Math.max(0,(m.life-m.t)/.7) : 1))*(m.z<.85?.85:1);
+      m.el.style.opacity=fade.toFixed(3);
+      m.el.style.transform="translate3d("+(m.x+sway).toFixed(1)+"px,"+m.y.toFixed(1)+"px,0) rotate("+rz.toFixed(1)+"deg)"+(flip?" rotateX("+flip.toFixed(1)+"deg)":"")+" scale("+m.z.toFixed(2)+")";
+    }
+    BURST.parts=parts.filter(m=>m.el);
+    if(BURST.parts.length) requestAnimationFrame(step); else BURST.running=false;
+  }
+  requestAnimationFrame(t=>{ last=t; step(t); });
+}
 function peonyBomb(){
   if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const host=document.getElementById("burst"), crest=document.getElementById("crest");
   if(!host||!crest) return;
+  if(BURST.parts.length>230) return; /* keep the show smooth */
   const hb=host.getBoundingClientRect(), cb=crest.getBoundingClientRect();
   const ox=cb.left-hb.left+cb.width/2, oy=cb.top-hb.top+cb.height/2;
   crest.classList.remove("boom"); void crest.offsetWidth; crest.classList.add("boom");
-  const parts=[], rnd=(a,b)=>a+Math.random()*(b-a);
-  function add(el,size,m){
-    el.classList.add("bp");
-    el.style.width=size+"px"; el.style.height=size+"px"; el.style.opacity="0";
-    m.x=ox-size/2+rnd(-8,8); m.y=oy-size/2+rnd(-8,8);
-    m.t=0; m.ph=rnd(0,6.28); m.el=el;
-    host.appendChild(el); parts.push(m);
-  }
-  for(let i=0;i<9;i++){
-    const el=document.createElement("span"); el.innerHTML=bloomSVG(i);
-    const a=(-90+rnd(-70,70))*Math.PI/180, v=rnd(300,620);
-    add(el, rnd(26,46), { vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:980, k:1.15, spin:rnd(-140,140), amp:0, freq:0, life:rnd(2.1,2.8) });
-  }
-  for(let i=0;i<26;i++){
-    const el=document.createElement("span"); el.className="bpetal";
-    const a=(-90+rnd(-115,115))*Math.PI/180, v=rnd(420,980);
-    add(el, rnd(9,17), { vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:430, k:2.1, spin:rnd(-460,460), amp:rnd(14,30), freq:rnd(2.6,5.2), life:rnd(2.5,3.6) });
-  }
-  for(let i=0;i<12;i++){
-    const el=document.createElement("span"); el.className="bspark";
-    const a=rnd(0,6.283), v=rnd(460,1050);
-    add(el, rnd(3,6), { vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:520, k:3.1, spin:0, amp:0, freq:0, life:rnd(.45,.95) });
-  }
-  let last=performance.now();
-  function step(now){
-    const dt=Math.min(.034,(now-last)/1000); last=now; let alive=0;
-    for(const m of parts){
-      if(!m.el) continue;
-      m.t+=dt;
-      if(m.t>=m.life){ m.el.remove(); m.el=null; continue; }
-      alive++;
-      const f=Math.exp(-m.k*dt);
-      m.vx*=f; m.vy=m.vy*f+m.g*dt;
-      m.x+=m.vx*dt; m.y+=m.vy*dt;
-      const sway=m.amp?Math.sin(m.t*m.freq+m.ph)*m.amp*Math.min(1,m.t*2):0;
-      const fade=m.t<.1? m.t/.1 : (m.life-m.t<.6? Math.max(0,(m.life-m.t)/.6) : 1);
-      m.el.style.opacity=fade.toFixed(3);
-      m.el.style.transform="translate("+(m.x+sway).toFixed(1)+"px,"+m.y.toFixed(1)+"px) rotate("+(m.spin*m.t).toFixed(1)+"deg)";
-    }
-    if(alive) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(t=>{ last=t; step(t); });
+  bombAt(ox,oy,1);
+  setTimeout(()=>bombAt(ox-burstRnd(105,150), oy-burstRnd(20,70), .55), 280);
+  setTimeout(()=>bombAt(ox+burstRnd(105,160), oy-burstRnd(10,60), .6), 540);
+  setTimeout(()=>bombAt(ox+burstRnd(-45,45), oy-burstRnd(50,100), .38), 880);
 }
 
 (function(){
