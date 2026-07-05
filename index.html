@@ -326,7 +326,7 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 }
 
 /* ---- hero crest monogram (Jer & Tev) ---- */
-.crest{ width:clamp(160px,36vw,216px); margin:2px auto 4px; }
+.crest{ width:clamp(176px,38vw,232px); margin:2px auto 4px; }
 .crest svg{ width:100%; height:auto; overflow:visible; }
 .cr-star{ font-size:20px; fill:var(--rose); }
 .crest .mono-j,.crest .mono-t{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:52px; fill:var(--ink); }
@@ -346,6 +346,23 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 @keyframes crestFade{ to{ opacity:1; } }
 @keyframes crestMono{ from{ opacity:0; transform:scale(.82);} to{ opacity:1; transform:none;} }
 @keyframes crestFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-6px);} }
+
+/* ---- peony bomb + engraved-seal detail ---- */
+.crest{ cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.crest:focus-visible{ outline:2px solid var(--deep-rose); outline-offset:6px; border-radius:50%; }
+.burst{ position:absolute; inset:0; overflow:visible; pointer-events:none; z-index:6; }
+.burst .bp{ position:absolute; left:0; top:0; display:block; will-change:transform,opacity; }
+.burst .bp svg{ width:100%; height:100%; display:block; }
+.bpetal{ background:radial-gradient(circle at 30% 30%, #F6E2DF, #EFB9C2); border-radius:80% 0 80% 0; }
+.bspark{ border-radius:50%; background:radial-gradient(circle, #EFD3A0 0%, #D9AE66 55%, rgba(217,174,102,0) 78%); }
+@media (prefers-reduced-motion: no-preference){
+  .crest.boom svg{ animation:crestBoom .68s cubic-bezier(.34,1.56,.64,1); }
+  .crest .seal-word{ opacity:0; animation:crestFade .7s ease 1.5s forwards; }
+  .crest .sprig{ opacity:0; animation:crestFade .6s ease 1.3s forwards; }
+  .crest .seal-sheen{ animation:sheenBreathe 7s ease-in-out 2.4s infinite; }
+}
+@keyframes crestBoom{ 0%{ transform:scale(1);} 16%{ transform:scale(.9);} 46%{ transform:scale(1.075);} 100%{ transform:scale(1);} }
+@keyframes sheenBreathe{ 0%,100%{ opacity:.16;} 50%{ opacity:.3;} }
 
 /* ---- per-place travel-stamp seals ---- */
 .city-head .seal{ width:clamp(120px,24vw,156px); margin:0 auto 12px; }
@@ -604,6 +621,7 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
 
 <section class="view hero active" data-view="hero">
   <div class="petals" id="petals" aria-hidden="true"></div>
+  <div class="burst" id="burst" aria-hidden="true"></div>
   <div class="crest" id="crest" aria-label="Jer and Tev"></div>
   <p class="hero-eyebrow" id="heroEyebrow">twenty days · July 2026</p>
   <h1 class="hero-names">Jer <span class="amp">&amp;</span> Tev</h1>
@@ -2853,28 +2871,138 @@ function waxSealHTML(){
       </radialGradient>
       <radialGradient id="innerGrad" cx="42%" cy="34%" r="78%"><stop offset="0%" stop-color="var(--wax-light)"/><stop offset="68%" stop-color="var(--wax-mid)"/><stop offset="100%" stop-color="var(--wax-deep)"/></radialGradient>
       <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+      <linearGradient id="monoGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--wax-hi)"/><stop offset="55%" stop-color="var(--wax-light)"/><stop offset="100%" stop-color="var(--wax-mid)"/>
+      </linearGradient>
+      <path id="crest-top" d="M 90,159 A 74,74 0 0 1 238,159" fill="none"/>
+      <path id="crest-bot" d="M 80,159 A 84,84 0 0 0 248,159" fill="none"/>
+      <g id="peonySprig">
+        <path d="M7,10 Q1,5 0,-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M5,6 Q-1,5 -3,9 Q2,11 5,6 Z" fill="currentColor"/>
+        <g transform="translate(-1,-8)">
+          <ellipse cx="0" cy="-4.4" rx="2.7" ry="4.6" fill="currentColor"/>
+          <ellipse cx="0" cy="-4.4" rx="2.7" ry="4.6" fill="currentColor" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-4.4" rx="2.7" ry="4.6" fill="currentColor" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-4.4" rx="2.7" ry="4.6" fill="currentColor" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-4.4" rx="2.7" ry="4.6" fill="currentColor" transform="rotate(288)"/>
+          <circle r="1.9" fill="currentColor" opacity="0.55"/>
+        </g>
+      </g>
     </defs>
     <path id="waxPath" d="M 306.34 158.00 C 306.30 164.55, 305.02 171.40, 302.87 177.64 C 300.73 183.87, 296.30 189.55, 293.49 195.40 C 290.68 201.25, 288.04 206.67, 286.01 212.74 C 283.99 218.80, 283.80 225.83, 281.32 231.78 C 278.85 237.73, 275.87 244.12, 271.16 248.44 C 266.45 252.75, 259.19 255.14, 253.08 257.66 C 246.97 260.19, 240.07 260.96, 234.52 263.57 C 228.97 266.18, 224.68 269.82, 219.76 273.34 C 214.84 276.85, 210.37 281.75, 205.01 284.64 C 199.64 287.52, 193.54 289.34, 187.57 290.67 C 181.60 291.99, 175.36 291.89, 169.21 292.60 C 163.05 293.30, 156.90 294.57, 150.64 294.89 C 144.37 295.20, 137.74 295.75, 131.63 294.50 C 125.53 293.25, 119.71 290.02, 114.02 287.38 C 108.33 284.74, 103.47 280.87, 97.48 278.67 C 91.48 276.46, 84.79 275.84, 78.03 274.13 C 71.27 272.42, 62.80 271.83, 56.89 268.40 C 50.99 264.97, 45.70 259.58, 42.58 253.53 C 39.45 247.48, 39.19 239.07, 38.15 232.10 C 37.10 225.13, 37.29 218.11, 36.30 211.73 C 35.31 205.35, 33.31 199.77, 32.21 193.80 C 31.12 187.83, 30.03 181.87, 29.72 175.91 C 29.41 169.94, 30.39 163.98, 30.34 158.00 C 30.30 152.02, 29.88 146.23, 29.44 140.06 C 29.01 133.88, 27.16 127.15, 27.73 120.94 C 28.30 114.73, 29.90 108.20, 32.86 102.78 C 35.83 97.35, 41.47 93.13, 45.50 88.37 C 49.54 83.62, 53.87 79.66, 57.06 74.26 C 60.26 68.85, 61.65 61.98, 64.70 55.95 C 67.74 49.93, 70.67 42.70, 75.36 38.09 C 80.04 33.47, 86.58 30.53, 92.78 28.28 C 98.99 26.03, 106.14 25.88, 112.58 24.57 C 119.02 23.27, 125.12 21.66, 131.41 20.44 C 137.71 19.22, 144.03 17.39, 150.37 17.24 C 156.71 17.09, 163.24 18.36, 169.47 19.53 C 175.71 20.70, 181.63 22.98, 187.79 24.27 C 193.95 25.57, 200.34 25.76, 206.45 27.31 C 212.56 28.87, 219.33 30.05, 224.45 33.61 C 229.58 37.16, 233.72 43.13, 237.19 48.64 C 240.66 54.16, 242.03 61.57, 245.28 66.69 C 248.53 71.81, 251.89 75.68, 256.67 79.35 C 261.45 83.02, 268.50 84.96, 273.97 88.70 C 279.43 92.43, 285.45 96.66, 289.45 101.77 C 293.45 106.88, 295.70 113.25, 297.98 119.34 C 300.26 125.43, 301.76 131.88, 303.15 138.32 C 304.54 144.77, 306.39 151.45, 306.34 158.00 Z" fill="url(#waxGrad)"/>
     <use href="#waxPath" fill="none" stroke="var(--wax-rim)" stroke-width="8" opacity="0.6" filter="url(#soft)" transform="translate(160 158) scale(0.95) translate(-160 -158)"/>
     <use href="#waxPath" fill="none" stroke="var(--wax-hi)" stroke-width="3" opacity="0.4" filter="url(#soft)" transform="translate(160 158) scale(0.88) translate(-160 -158)"/>
     <circle cx="164" cy="159" r="98" fill="none" stroke="var(--wax-rim)" stroke-width="5" opacity="0.32" filter="url(#soft)"/>
     <circle cx="164" cy="159" r="96" fill="url(#innerGrad)"/>
-    <circle cx="164" cy="159" r="89" fill="none" stroke="var(--wax-rim)" stroke-width="2.5" opacity="0.45"/>
-    <circle cx="164" cy="159" r="85.5" fill="none" stroke="var(--wax-hi)" stroke-width="1.2" opacity="0.3"/>
-    <g text-anchor="middle" font-family="Georgia, serif" font-size="19">
-      <text x="165" y="107" fill="var(--wax-rim)" opacity="0.45">✦</text><text x="165" y="231" fill="var(--wax-rim)" opacity="0.45">✦</text>
-      <text x="164" y="105" fill="var(--wax-hi)" opacity="0.85">✦</text><text x="164" y="229" fill="var(--wax-hi)" opacity="0.85">✦</text>
+    <ellipse class="seal-sheen" cx="128" cy="112" rx="62" ry="36" fill="#fff" opacity="0.16" filter="url(#soft)" transform="rotate(-28 128 112)"/>
+    <!-- milled edge + fine ring, each cut twice: shadow below, light above -->
+    <circle cx="164" cy="159" r="92.5" fill="none" stroke="var(--wax-rim)" stroke-width="2" opacity="0.35" stroke-dasharray="1.5 3.6"/>
+    <circle cx="163.3" cy="158.2" r="92.5" fill="none" stroke="var(--wax-hi)" stroke-width="1" opacity="0.3" stroke-dasharray="1.5 3.6"/>
+    <circle cx="164" cy="159" r="87" fill="none" stroke="var(--wax-rim)" stroke-width="2" opacity="0.45"/>
+    <circle cx="163.4" cy="158.4" r="87" fill="none" stroke="var(--wax-hi)" stroke-width="1" opacity="0.35"/>
+    <!-- the realm, engraved in an arc -->
+    <g class="seal-word" text-anchor="middle" style="font-family:var(--sans)" font-weight="600" font-size="9.5" letter-spacing="1.3">
+      <text fill="var(--wax-rim)" opacity="0.5" transform="translate(1.2,1.6)"><textPath href="#crest-top" startOffset="50%">LONDON · BATH · WALES · SCOTLAND</textPath></text>
+      <text fill="var(--wax-hi)" opacity="0.9"><textPath href="#crest-top" startOffset="50%">LONDON · BATH · WALES · SCOTLAND</textPath></text>
     </g>
-    <g text-anchor="middle" font-family="Georgia,'Cormorant Garamond',serif" font-style="italic" font-weight="600">
-      <g fill="var(--wax-rim)" opacity="0.4" transform="translate(2,3)"><text x="127" y="188" font-size="104">J</text><text x="164" y="184" font-size="52">&amp;</text><text x="201" y="188" font-size="104">T</text></g>
-      <g fill="var(--wax-light)"><text x="127" y="188" font-size="104">J</text><text x="164" y="184" font-size="52">&amp;</text><text x="201" y="188" font-size="104">T</text></g>
+    <g class="seal-word" text-anchor="middle" style="font-family:var(--sans)" font-weight="600" font-size="10.5" letter-spacing="2.6">
+      <text fill="var(--wax-rim)" opacity="0.5" transform="translate(1.2,1.6)"><textPath href="#crest-bot" startOffset="50%">✦ JULY MMXXVI ✦</textPath></text>
+      <text fill="var(--wax-hi)" opacity="0.9"><textPath href="#crest-bot" startOffset="50%">✦ JULY MMXXVI ✦</textPath></text>
+    </g>
+    <!-- beaded inner ring -->
+    <circle cx="164" cy="159" r="63" fill="none" stroke="var(--wax-rim)" stroke-width="2" opacity="0.4" stroke-dasharray="0.1 6.2" stroke-linecap="round"/>
+    <circle cx="163.4" cy="158.4" r="63" fill="none" stroke="var(--wax-hi)" stroke-width="1.2" opacity="0.35" stroke-dasharray="0.1 6.2" stroke-linecap="round"/>
+    <!-- peony sprigs, east and west -->
+    <g class="sprig">
+      <g color="var(--wax-rim)" opacity="0.45" transform="translate(1.4,1.8)"><use href="#peonySprig" transform="translate(97,184) rotate(-12)"/><use href="#peonySprig" transform="translate(231,184) scale(-1,1) rotate(-12)"/></g>
+      <g color="var(--wax-hi)" opacity="0.85"><use href="#peonySprig" transform="translate(97,184) rotate(-12)"/><use href="#peonySprig" transform="translate(231,184) scale(-1,1) rotate(-12)"/></g>
+    </g>
+    <!-- the interlocked monogram: shadow, bevel, lit face -->
+    <g class="mono" text-anchor="middle" font-family="Georgia,'Cormorant Garamond',serif" font-style="italic" font-weight="600">
+      <g fill="var(--wax-rim)" opacity="0.45" transform="translate(2.6,3.2)"><text x="141" y="190" font-size="92">J</text><text x="189" y="190" font-size="92">T</text></g>
+      <g fill="var(--wax-deep)" opacity="0.55" transform="translate(-1.2,-1.4)"><text x="141" y="190" font-size="92">J</text><text x="189" y="190" font-size="92">T</text></g>
+      <g fill="url(#monoGrad)"><text x="141" y="190" font-size="92">J</text><text x="189" y="190" font-size="92">T</text></g>
+      <text x="166" y="186" font-size="46" fill="var(--wax-rim)" opacity="0.5" transform="translate(1.8,2.2)">&amp;</text>
+      <text x="165" y="185" font-size="46" fill="var(--wax-hi)">&amp;</text>
     </g>
   </svg>`;
 }
-(function(){ const c=document.getElementById("crest"); if(c) c.innerHTML=waxSealHTML(); })();
+(function(){
+  const c=document.getElementById("crest"); if(!c) return;
+  c.innerHTML=waxSealHTML();
+  c.setAttribute("role","button"); c.setAttribute("tabindex","0");
+  c.setAttribute("aria-label","Jer and Tev seal, tap for a burst of peonies");
+  c.addEventListener("click", peonyBomb);
+  c.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); peonyBomb(); } });
+})();
+
+/* ---------- the peony bomb: blooms are heavy and arc proudly, petals are light and flutter, sparks flash and die ---------- */
+const PEONY_TONES=[["#F7E3E1","#EFC0CA"],["#F4CDD5","#E8A6B4"],["#F1BBC6","#DE95A6"],["#F3D9D3","#E2ABA7"]];
+function bloomSVG(ci){
+  const t=PEONY_TONES[ci%PEONY_TONES.length];
+  let s="";
+  for(let i=0;i<8;i++) s+='<ellipse cx="0" cy="-11" rx="7.5" ry="12" fill="'+t[1]+'" transform="rotate('+(i*45)+')"/>';
+  for(let i=0;i<6;i++) s+='<ellipse cx="0" cy="-7.5" rx="6" ry="9.5" fill="'+t[0]+'" transform="rotate('+(i*60+22)+')"/>';
+  return '<svg viewBox="-24 -24 48 48"><g>'+s+'<circle r="4.4" fill="#EFC98F"/><circle r="2.4" fill="#DCA45E" opacity=".85"/></g></svg>';
+}
+function peonyBomb(){
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const host=document.getElementById("burst"), crest=document.getElementById("crest");
+  if(!host||!crest) return;
+  const hb=host.getBoundingClientRect(), cb=crest.getBoundingClientRect();
+  const ox=cb.left-hb.left+cb.width/2, oy=cb.top-hb.top+cb.height/2;
+  crest.classList.remove("boom"); void crest.offsetWidth; crest.classList.add("boom");
+  const parts=[], rnd=(a,b)=>a+Math.random()*(b-a);
+  function add(el,size,m){
+    el.classList.add("bp");
+    el.style.width=size+"px"; el.style.height=size+"px"; el.style.opacity="0";
+    m.x=ox-size/2+rnd(-8,8); m.y=oy-size/2+rnd(-8,8);
+    m.t=0; m.ph=rnd(0,6.28); m.el=el;
+    host.appendChild(el); parts.push(m);
+  }
+  for(let i=0;i<9;i++){
+    const el=document.createElement("span"); el.innerHTML=bloomSVG(i);
+    const a=(-90+rnd(-70,70))*Math.PI/180, v=rnd(300,620);
+    add(el, rnd(26,46), { vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:980, k:1.15, spin:rnd(-140,140), amp:0, freq:0, life:rnd(2.1,2.8) });
+  }
+  for(let i=0;i<26;i++){
+    const el=document.createElement("span"); el.className="bpetal";
+    const a=(-90+rnd(-115,115))*Math.PI/180, v=rnd(420,980);
+    add(el, rnd(9,17), { vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:430, k:2.1, spin:rnd(-460,460), amp:rnd(14,30), freq:rnd(2.6,5.2), life:rnd(2.5,3.6) });
+  }
+  for(let i=0;i<12;i++){
+    const el=document.createElement("span"); el.className="bspark";
+    const a=rnd(0,6.283), v=rnd(460,1050);
+    add(el, rnd(3,6), { vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:520, k:3.1, spin:0, amp:0, freq:0, life:rnd(.45,.95) });
+  }
+  let last=performance.now();
+  function step(now){
+    const dt=Math.min(.034,(now-last)/1000); last=now; let alive=0;
+    for(const m of parts){
+      if(!m.el) continue;
+      m.t+=dt;
+      if(m.t>=m.life){ m.el.remove(); m.el=null; continue; }
+      alive++;
+      const f=Math.exp(-m.k*dt);
+      m.vx*=f; m.vy=m.vy*f+m.g*dt;
+      m.x+=m.vx*dt; m.y+=m.vy*dt;
+      const sway=m.amp?Math.sin(m.t*m.freq+m.ph)*m.amp*Math.min(1,m.t*2):0;
+      const fade=m.t<.1? m.t/.1 : (m.life-m.t<.6? Math.max(0,(m.life-m.t)/.6) : 1);
+      m.el.style.opacity=fade.toFixed(3);
+      m.el.style.transform="translate("+(m.x+sway).toFixed(1)+"px,"+m.y.toFixed(1)+"px) rotate("+(m.spin*m.t).toFixed(1)+"deg)";
+    }
+    if(alive) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(t=>{ last=t; step(t); });
+}
+
 (function(){
   const p=document.getElementById("preloader"); if(!p) return;
-  const hide=()=>p.classList.add("hide");
+  let boomed=false;
+  const hide=()=>{
+    p.classList.add("hide");
+    if(!boomed){ boomed=true; setTimeout(()=>{ if(currentView==="hero") peonyBomb(); }, 420); }
+  };
   if(document.readyState==="complete") setTimeout(hide,650); else window.addEventListener("load", ()=>setTimeout(hide,650));
   setTimeout(hide, 4000);
 })();
