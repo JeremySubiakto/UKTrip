@@ -383,6 +383,18 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 @media (prefers-reduced-motion: no-preference){ .hero-count.tick strong{ display:inline-block; animation:countPulse 2.6s ease-in-out infinite; } }
 @keyframes countPulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.09);} }
 
+/* ---- live UK light: clock, sunset, golden hour + serendipity ---- */
+.hero-now{ font-family:var(--sans); font-size:12px; letter-spacing:0.05em; color:var(--muted); margin-top:8px; min-height:15px; }
+.hero-now b{ font-weight:600; color:var(--deep-rose); }
+.ov-sun{ font-family:var(--sans); font-size:12.5px; color:var(--muted); margin-top:10px; }
+.ov-sun b{ color:var(--deep-rose); font-weight:600; }
+.ov-surprise{ display:flex; align-items:center; gap:10px; margin:14px 0 22px; flex-wrap:wrap; }
+.surprise-hint{ font-family:var(--sans); font-size:12px; color:var(--muted); }
+@media (prefers-reduced-motion: no-preference){
+  body.golden-now .card[data-golden="1"]{ animation:goldenGlow 3.2s ease-in-out infinite; }
+}
+@keyframes goldenGlow{ 0%,100%{ box-shadow:0 10px 26px rgba(0,0,0,.05);} 50%{ box-shadow:0 10px 30px rgba(201,164,92,.42);} }
+
 /* ---- itinerary timeline (Phase 1) ---- */
 .timeline{ max-width:680px; margin:0 auto; }
 .day{ display:grid; grid-template-columns:50px 1fr; gap:16px; position:relative; padding-bottom:22px; }
@@ -598,6 +610,7 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
   <p class="hero-sub serif">weeks of long light and slow mornings</p>
   <p class="hero-places">London · Hampstead · Bath · Wales · Scotland</p>
   <p class="hero-count" id="heroCount" aria-live="polite"></p>
+  <p class="hero-now" id="heroNow"></p>
   <button class="btn" id="openTrip">open our trip <span class="arrow">→</span></button>
 </section>
 
@@ -1919,7 +1932,7 @@ function cardHTML(p){
   const fHidden = (p.badge==="hidden gem" || tg.includes("hidden gem")) ? 1 : 0;
   const fFree = (p.entry && p.entry.startsWith("free")) ? 1 : 0;
   return `
-  <article class="card${feature}" data-id="${p.id}" data-price="${p.price||""}" data-mich="${fMich}" data-award="${fAward}" data-hidden="${fHidden}" data-free="${fFree}" tabindex="0" role="button" aria-label="${p.name}, view details">
+  <article class="card${feature}" data-id="${p.id}" data-price="${p.price||""}" data-mich="${fMich}" data-award="${fAward}" data-hidden="${fHidden}" data-free="${fFree}" data-golden="${isGolden(p)?1:0}" tabindex="0" role="button" aria-label="${p.name}, view details">
     <div class="thumb" data-base="${p.cat}" style="background:${thumbGrad(p)}">
       <span class="thumb-motif" aria-hidden="true">${CAT_ICON[p.cat]||""}</span>
       ${badge}${chip}
@@ -1971,6 +1984,8 @@ function overviewHTML(dest, cats){
       <div class="ov-fact"><span class="label">In here</span><span class="val">${all.length} places · ${cats.length} lists</span></div>
     </div>
     <div class="ov-weather" id="wx-${dest}"></div>
+    <div class="ov-sun" id="sun-${dest}"></div>
+    <div class="ov-surprise"><button class="chip-link solid surprise-btn" type="button" data-dest="${dest}">✦ surprise us</button><span class="surprise-hint">one place in ${meta.name}, chosen at random</span></div>
     ${hi.length?`<h4 class="ov-h">✦ Don't miss</h4><div class="grid">${hi.map(cardHTML).join("")}</div>`:""}
   </div>`;
 }
@@ -2043,6 +2058,16 @@ document.querySelectorAll(".card").forEach(card=>{
   const id = card.dataset.id;
   card.addEventListener("click", ()=>openDetail(id));
   card.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openDetail(id); } });
+});
+
+/* "surprise us": one place at random, leaning toward the special ones */
+document.querySelectorAll(".surprise-btn").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const pool=PLACES.filter(p=>p.dest===b.dataset.dest); if(!pool.length) return;
+    const special=pool.filter(p=>p.feature||p.badge||isGolden(p));
+    const from=(special.length && Math.random()<0.7)?special:pool;
+    openDetail(from[Math.floor(Math.random()*from.length)].id);
+  });
 });
 
 function applyCardEnrichment(p){
@@ -2186,6 +2211,44 @@ function playRouteMap(){
   else el.textContent="we're here ✦";
   if(days>0 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) el.classList.add("tick");
 })();
+
+/* ---------- live UK light: clock, tonight's sunset, golden hour (pure math, no API) ---------- */
+function sunsetUTC(lat,lng,when){
+  /* NOAA/Ed Williams sunrise-sunset algorithm, sunset branch, zenith 90.833deg */
+  const d=when||new Date(), rad=Math.PI/180;
+  const yStart=Date.UTC(d.getUTCFullYear(),0,0);
+  const n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-yStart)/86400000);
+  const lngHour=lng/15, t=n+((18-lngHour)/24);
+  const M=(0.9856*t)-3.289;
+  let L=M+(1.916*Math.sin(M*rad))+(0.020*Math.sin(2*M*rad))+282.634; L=((L%360)+360)%360;
+  let RA=Math.atan(0.91764*Math.tan(L*rad))/rad; RA=((RA%360)+360)%360;
+  RA+=(Math.floor(L/90)*90)-(Math.floor(RA/90)*90); RA/=15;
+  const sinDec=0.39782*Math.sin(L*rad), cosDec=Math.cos(Math.asin(sinDec));
+  const cosH=(Math.cos(90.833*rad)-(sinDec*Math.sin(lat*rad)))/(cosDec*Math.cos(lat*rad));
+  if(cosH<-1||cosH>1) return null; /* midnight sun / polar night */
+  const H=(Math.acos(cosH)/rad)/15;
+  const T=H+RA-(0.06571*t)-6.622;
+  let UT=((T-lngHour)%24+24)%24;
+  return new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())+UT*3600000);
+}
+function ukClock(dt){ return dt.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/London"}); }
+(function ukLight(){
+  const el=document.getElementById("heroNow");
+  function tick(){
+    const now=new Date(), ss=sunsetUTC(51.51,-0.13,now);
+    let phase="", golden=false;
+    if(ss){
+      const mins=(ss.getTime()-now.getTime())/60000;
+      if(mins>50) phase="sun sets "+ukClock(ss);
+      else if(mins>-5){ phase="golden hour ✦"; golden=true; }
+      else phase="the sun set at "+ukClock(ss);
+    }
+    if(el) el.innerHTML="in London it's <b>"+ukClock(now)+"</b>"+(phase?" · "+phase:"");
+    document.body.classList.toggle("golden-now", golden);
+  }
+  tick(); setInterval(tick,30000);
+})();
+
 function dayDateLabel(i){ return new Date(TRIP_START.getTime()+i*86400000).toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}); }
 function trainLegHTML(t){
   return `<div class="train day-leg"><div class="route"><span class="stop">${t.from}</span><span class="dash"></span><span class="stop">${t.to}</span></div>
@@ -2746,6 +2809,15 @@ async function fetchWeather(dest){
     el.innerHTML=wxHTML(WX[dest]);
   }catch(_){}
 }
+
+/* tonight's real sunset per city (solar math via sunsetUTC; WX_COORDS is defined above) */
+(function(){
+  DEST_ORDER.forEach(d=>{
+    const el=document.getElementById("sun-"+d), v=WX_COORDS[d]; if(!el||!v) return;
+    const ss=sunsetUTC(v.lat,v.lng,new Date());
+    if(ss) el.innerHTML="✦ tonight the sun sets there at <b>"+ukClock(ss)+"</b>";
+  });
+})();
 
 /* ---------- editorial city hero photo (Google Places, lazy + cached) ---------- */
 const HERO_QUERY = { london:"Tower Bridge London", hampstead:"Hampstead Heath London", bath:"Royal Crescent Bath", wales:"Snowdonia Wales", scotland:"Edinburgh Castle Scotland" };
