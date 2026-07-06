@@ -617,6 +617,15 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
 @keyframes savePop{ 0%{ transform:scale(1);} 38%{ transform:scale(1.34);} 100%{ transform:scale(1);} }
 .nav button:focus-visible, .toggle button:focus-visible, .chip-link:focus-visible, .fchip:focus-visible, .hood-chip:focus-visible, .save-pill:focus-visible, .fab:focus-visible, .surprise-btn:focus-visible, .modal-close:focus-visible, .btn:focus-visible, .planner-tools button:focus-visible, .modal-actions a:focus-visible{ outline:2.5px solid var(--deep-rose); outline-offset:2px; border-radius:var(--r-pill); }
 .save-btn:focus-visible{ outline:2px solid #fff; outline-offset:1px; }
+/* ===== deeper polish (skill: make-interfaces-feel-better) ===== */
+html{ -moz-osx-font-smoothing:grayscale; }
+.hero-names, .city-hero .city, .section-head h2, .routemap h3, #m-title, .card-body h3, .card-body .name, .ov-blurb, .favs-head h2{ text-wrap:balance; }
+.kicker, .hero-sub, .card-body .cuisine, .card-body .summary, .modal-body .summary, .modal-body .cuisine, .map-note, .surprise-hint, .near, .note, .packing{ text-wrap:pretty; }
+.hero-count, .hero-count strong, .hero-now, .ov-rc .val, .fab .count, .day-date, .train .fact .val, .modal-body .facts .val{ font-variant-numeric:tabular-nums; }
+.thumb img{ outline:1px solid rgba(58,26,26,.09); outline-offset:-1px; }
+.city-hero{ box-shadow:inset 0 0 0 1px rgba(58,26,26,.06), var(--soft); }
+.save-btn{ position:relative; }
+.save-btn::after{ content:""; position:absolute; inset:-6px -3px; border-radius:40%; }
 </style>
 </head>
 <body>
@@ -2277,7 +2286,18 @@ function closeDetail(){
   if(lastFocus) lastFocus.focus();
 }
 modal.addEventListener("click", e=>{ if(e.target===modal) closeDetail(); });
-document.addEventListener("keydown", e=>{ if(e.key==="Escape" && modal.classList.contains("open")) closeDetail(); });
+document.addEventListener("keydown", e=>{
+  if(!modal.classList.contains("open")) return;
+  if(e.key==="Escape"){ closeDetail(); return; }
+  if(e.key==="Tab"){
+    const f=[...modalCard.querySelectorAll('a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(!modalCard.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
+    else if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+});
 
 /* ---------- view switching ---------- */
 const nav = document.getElementById("nav");
