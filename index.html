@@ -19,7 +19,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --bg:#FDF0F0; --surface:#FFFFFF; --blush:#E8C5C1; --rose:#D4A5A0; --deep-rose:#B07F7A;
+  --bg:#FDF0F0; --surface:#FFFCF8; --blush:#E8C5C1; --rose:#D4A5A0; --deep-rose:#B07F7A;
+  --card-bg:linear-gradient(160deg,#FFFDFB 0%,#FCF3EF 100%); --card-brd:rgba(206,170,116,0.28); --card-sheen:inset 0 1px 0 rgba(255,255,255,0.6);
   --ink:#1C1A1A; --muted:#9E8A88; --gold:#C9A96E; --glass:rgba(255,255,255,0.65);
   --serif:"Cormorant Garamond",Georgia,serif; --sans:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --r-card:24px; --r-pill:9999px;
@@ -112,7 +113,7 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 @media (max-width:680px){ .grid{ grid-template-columns:1fr 1fr; gap:14px; } }
 @media (max-width:420px){ .grid{ grid-template-columns:1fr; } }
 
-.card{ position:relative; background:var(--surface); border-radius:var(--r-card); box-shadow:var(--soft); border:1px solid rgba(232,197,193,0.4); overflow:hidden; cursor:pointer; display:flex; flex-direction:column; transition:transform .25s, box-shadow .25s; }
+.card{ position:relative; background:var(--card-bg); border-radius:var(--r-card); box-shadow:var(--soft); border:1px solid var(--card-brd); overflow:hidden; cursor:pointer; display:flex; flex-direction:column; transition:transform .25s, box-shadow .25s; }
 .card:hover{ transform:translateY(-4px) scale(1.01); box-shadow:var(--soft-hover); }
 .card:focus-visible{ outline:3px solid var(--rose); outline-offset:2px; }
 .card.feature{ border-color:rgba(201,169,110,0.55); }
@@ -205,10 +206,10 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .hoods{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
 .hoods .hood-chip{ font-family:var(--sans); font-weight:500; font-size:12px; color:var(--deep-rose); background:var(--surface); border:1px solid rgba(232,197,193,0.55); padding:8px 14px; border-radius:var(--r-pill); box-shadow:0 2px 8px rgba(176,127,122,0.08); }
 
-.train{ background:linear-gradient(180deg,#FFFFFF,#FEF7F6); border:1px solid rgba(232,197,193,0.5); border-radius:var(--r-card); box-shadow:var(--soft); padding:26px 24px; display:grid; gap:14px; margin-bottom:26px; }
+.train{ background:var(--card-bg); border:1px solid var(--card-brd); border-radius:var(--r-card); box-shadow:var(--card-sheen), var(--soft); padding:26px 24px; display:grid; gap:14px; margin-bottom:26px; }
 .train .route{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
 .train .stop{ font-family:var(--serif); font-style:italic; font-size:clamp(20px,4vw,28px); color:var(--ink); }
-.train .dash{ flex:1; min-width:40px; height:2px; background:repeating-linear-gradient(90deg,var(--blush) 0 8px, transparent 8px 16px); position:relative; }
+.train .dash{ flex:1; min-width:40px; height:2px; background:repeating-linear-gradient(90deg,#cdae74 0 8px, transparent 8px 16px); position:relative; }
 .train .dash::after{ content:"🚆"; position:absolute; right:-4px; top:-13px; font-size:18px; }
 .train .facts{ display:flex; flex-wrap:wrap; gap:22px; }
 .train .fact .label{ display:block; margin-bottom:2px; } .train .fact .val{ font-family:var(--sans); font-weight:600; font-size:15px; color:var(--ink); }
@@ -253,7 +254,7 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
 .filter-empty{ font-size:14px; color:var(--muted); padding:8px 2px; }
 .panel-count{ font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:.1em; font-size:11px; color:var(--muted); margin-bottom:14px; }
 .overview .ov-blurb{ font-family:var(--serif); font-style:italic; font-size:clamp(16px,2.6vw,20px); line-height:1.5; color:var(--ink); max-width:58ch; margin:0 auto 26px; text-align:center; }
-.ov-panel{ max-width:620px; margin:0 auto 22px; background:var(--surface); border:1px solid rgba(201,164,92,.3); border-radius:18px; box-shadow:var(--soft); overflow:hidden; }
+.ov-panel{ max-width:620px; margin:0 auto 22px; background:var(--card-bg); border:1px solid var(--card-brd); border-radius:18px; box-shadow:var(--card-sheen), var(--soft); overflow:hidden; }
 .ov-row{ display:flex; align-items:center; gap:14px; padding:15px 22px; }
 .ov-row:empty{ display:none; }
 .ov-row + .ov-row{ border-top:1px solid rgba(232,197,193,.42); }
