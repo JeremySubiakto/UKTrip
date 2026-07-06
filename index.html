@@ -602,6 +602,21 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
   .fab{ animation:fabIn .5s cubic-bezier(.2,.9,.3,1.2) both; }
   @keyframes fabIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
 }
+/* ===== feel polish: tactile press, focus rings, motion (2026-07) ===== */
+:root{ --ease-out:cubic-bezier(.2,.8,.2,1); --ease-spring:cubic-bezier(.34,1.42,.5,1); }
+@media (prefers-reduced-motion: no-preference){
+  .nav button, .toggle button, .chip-link, .fchip, .hood-chip, .save-pill, .surprise-btn, .modal-close, .planner-tools button, .modal-actions a{ transition:transform .24s var(--ease-spring), background .2s, color .2s, box-shadow .25s, border-color .2s; }
+  .nav button:active, .toggle button:active, .chip-link:active, .fchip:active, .hood-chip:active, .save-pill:active, .surprise-btn:active, .modal-close:active, .planner-tools button:active, .modal-actions a:active{ transform:scale(.93); }
+  .btn:active{ transform:translateY(-1px) scale(.98); }
+  .fab:active{ transform:scale(.95); } .fab:hover{ transform:translateY(-2px) scale(1.03); }
+  .save-btn:active{ transform:scale(.86); }
+  .thumb img{ transition:opacity .55s, transform .6s var(--ease-out); }
+  .card:hover .thumb img.loaded{ transform:scale(1.07); }
+  .save-btn.pop, .save-pill.pop{ animation:savePop .46s var(--ease-spring); }
+}
+@keyframes savePop{ 0%{ transform:scale(1);} 38%{ transform:scale(1.34);} 100%{ transform:scale(1);} }
+.nav button:focus-visible, .toggle button:focus-visible, .chip-link:focus-visible, .fchip:focus-visible, .hood-chip:focus-visible, .save-pill:focus-visible, .fab:focus-visible, .surprise-btn:focus-visible, .modal-close:focus-visible, .btn:focus-visible, .planner-tools button:focus-visible, .modal-actions a:focus-visible{ outline:2.5px solid var(--deep-rose); outline-offset:2px; border-radius:var(--r-pill); }
+.save-btn:focus-visible{ outline:2px solid #fff; outline-offset:1px; }
 </style>
 </head>
 <body>
@@ -1947,10 +1962,11 @@ function syncFavUI(id){
   });
 }
 function toggleFav(who,id){
-  const s = FAVS[who]; if(s.has(id)) s.delete(id); else s.add(id);
+  const s = FAVS[who]; const nowOn = !s.has(id); if(s.has(id)) s.delete(id); else s.add(id);
   saveFavsStore(); syncFavUI(id); updateFab();
   if(favsOpen) renderFavs();
   if(window.renderTrayPicks && document.getElementById("trayPicks")) window.renderTrayPicks();
+  if(nowOn){ document.querySelectorAll(`.save-btn.${who}[data-id="${id}"], .save-pill.${who}[data-id="${id}"]`).forEach(b=>{ b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); setTimeout(()=>b.classList.remove("pop"),480); }); }
 }
 /* one capture-phase listener covers every save control (cards, modal, favourites list) */
 document.addEventListener("click", e=>{
