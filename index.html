@@ -626,6 +626,18 @@ html{ -moz-osx-font-smoothing:grayscale; }
 .city-hero{ box-shadow:inset 0 0 0 1px rgba(58,26,26,.06), var(--soft); }
 .save-btn{ position:relative; }
 .save-btn::after{ content:""; position:absolute; inset:-6px -3px; border-radius:40%; }
+/* ===== next level: view transitions + richer liquid glass ===== */
+@media (prefers-reduced-motion: no-preference){
+  ::view-transition-old(root){ animation:vtFade .24s ease both; }
+  ::view-transition-new(root){ animation:vtRise .44s cubic-bezier(.2,.8,.2,1) both; }
+}
+@keyframes vtFade{ to{ opacity:0; } }
+@keyframes vtRise{ from{ opacity:0; transform:translateY(14px) scale(.992); } }
+html[data-vt] .view.content.active, html[data-vt] .cat-panel.active .grid>.card, html[data-vt] .view.content.active .city-hero, html[data-vt] .view.content.active .seal{ animation:none !important; }
+.nav{ view-transition-name:uk-nav; } .fab{ view-transition-name:uk-fab; }
+.fab{ background:rgba(253,248,244,.72); -webkit-backdrop-filter:blur(16px) saturate(1.6); backdrop-filter:blur(16px) saturate(1.6); box-shadow:0 10px 28px rgba(176,127,122,.3), inset 0 1px 0 rgba(255,255,255,.6); }
+.toggle{ -webkit-backdrop-filter:blur(14px) saturate(1.4); backdrop-filter:blur(14px) saturate(1.4); box-shadow:var(--soft), inset 0 1px 0 rgba(255,255,255,.55); }
+.hood-chip{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
 </style>
 </head>
 <body>
@@ -2307,15 +2319,23 @@ let currentView = "hero";
 function showView(name){
   const target = document.querySelector(`.view[data-view="${name}"]`);
   if(!target) return;
-  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v===target));
-  navBtns.forEach(b=>b.classList.toggle("active", b.dataset.view===name));
-  nav.classList.toggle("show", name!=="hero");
-  const _fab = document.getElementById("fab"); if(_fab) _fab.style.display = name==="hero" ? "none" : "inline-flex";
-  window.scrollTo({ top:0, behavior:"auto" });
-  currentView = name;
-  if(name==="map"){ ensureMap(); playRouteMap(); if(window.trainStart) trainStart(); }
-  else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
-  else if(DEST_META[name]){ enrichPlaces(PLACES.filter(p=>p.dest===name)); fetchWeather(name); }
+  const apply=()=>{
+    document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v===target));
+    navBtns.forEach(b=>b.classList.toggle("active", b.dataset.view===name));
+    nav.classList.toggle("show", name!=="hero");
+    const _fab = document.getElementById("fab"); if(_fab) _fab.style.display = name==="hero" ? "none" : "inline-flex";
+    window.scrollTo({ top:0, behavior:"auto" });
+    currentView = name;
+    if(name==="map"){ ensureMap(); playRouteMap(); if(window.trainStart) trainStart(); }
+    else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
+    else if(DEST_META[name]){ enrichPlaces(PLACES.filter(p=>p.dest===name)); fetchWeather(name); }
+  };
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(document.startViewTransition && !reduce){
+    const root=document.documentElement; root.dataset.vt="1";
+    try{ const t=document.startViewTransition(apply); t.finished.finally(()=>{ delete root.dataset.vt; }); }
+    catch(_){ delete root.dataset.vt; apply(); }
+  } else { apply(); }
 }
 navBtns.forEach(b=> b.addEventListener("click", ()=>showView(b.dataset.view)) );
 document.getElementById("openTrip").addEventListener("click", ()=>showView("map"));
