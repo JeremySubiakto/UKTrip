@@ -192,8 +192,8 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .map-frame.live #map-canvas{ display:block; } .map-frame.live iframe{ display:none; }
 .map-note{ font-size:12.5px; color:var(--muted); margin-top:12px; }
 /* ---- Leaflet (free OpenStreetMap) map styling ---- */
-.map-frame .leaflet-tile-pane{ filter:grayscale(1) sepia(.6) hue-rotate(308deg) saturate(1.75) brightness(.95) contrast(1.22); }
-.map-frame .map-tint{ position:absolute; inset:0; z-index:300; pointer-events:none; background:radial-gradient(135% 130% at 50% 42%, rgba(206,147,140,.1) 0%, rgba(206,147,140,.05) 55%, rgba(150,84,80,.22) 100%); }
+.map-frame .leaflet-tile-pane{ filter:grayscale(1) sepia(.5) hue-rotate(312deg) saturate(1.45) brightness(1.04) contrast(.97); }
+.map-frame .map-tint{ position:absolute; inset:0; z-index:300; pointer-events:none; background:radial-gradient(135% 130% at 50% 42%, rgba(233,196,190,.05) 0%, rgba(233,196,190,0) 56%, rgba(160,95,90,.15) 100%); }
 .leaflet-container{ background:#F6E2DF; font-family:var(--sans); }
 .le-pin-wrap{ background:none; border:none; }
 .le-pin{ position:relative; filter:drop-shadow(0 2px 4px rgba(120,80,76,.32)); transition:transform .15s; }
@@ -2760,7 +2760,7 @@ async function ensureMap(){
   if(typeof L==="undefined") return;
   if(!lmap){
     lmap = L.map("map-canvas", { zoomControl:true, scrollWheelZoom:false, attributionControl:true, center:[54.5,-4.0], zoom:5 });
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png", {
       maxZoom:19, subdomains:"abcd",
       attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(lmap);
