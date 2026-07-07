@@ -19,9 +19,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --bg:#FDF0F0; --surface:#FFFCF8; --blush:#E8C5C1; --rose:#D4A5A0; --deep-rose:#B07F7A;
+  --bg:#FDF0F0; --surface:#FFFCF8; --blush:#E8C5C1; --rose:#D4A5A0; --deep-rose:#8F5C57;
   --card-bg:linear-gradient(160deg,#FFFDFB 0%,#FCF3EF 100%); --card-brd:rgba(206,170,116,0.28); --card-sheen:inset 0 1px 0 rgba(255,255,255,0.6);
-  --ink:#1C1A1A; --muted:#9E8A88; --gold:#C9A96E; --glass:rgba(255,255,255,0.65);
+  --ink:#1C1A1A; --muted:#7A6663; --gold:#C9A96E; --gold-ink:#8A6A2E; --glass:rgba(255,255,255,0.65);
   --serif:"Cormorant Garamond",Georgia,serif; --sans:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --r-card:24px; --r-pill:9999px;
   --soft:0 2px 4px rgba(176,127,122,0.06),0 8px 24px rgba(176,127,122,0.12),0 24px 48px rgba(176,127,122,0.08);
@@ -50,16 +50,17 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .section-head h2{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(38px,7vw,62px); line-height:1.02; letter-spacing:-0.01em; color:var(--ink); }
 .section-head p.kicker{ font-family:var(--sans); color:var(--muted); font-size:15px; margin-top:10px; max-width:46ch; }
 
-.nav{ position:fixed; top:14px; left:50%; transform:translate(-50%,-160%); z-index:60; display:flex; align-items:center; gap:2px; background:var(--glass); -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%); border:1px solid rgba(255,255,255,0.7); box-shadow:0 8px 30px rgba(176,127,122,0.18), inset 0 1px 0 rgba(255,255,255,0.6); border-radius:var(--r-pill); padding:6px; max-width:calc(100vw - 24px); overflow-x:auto; scrollbar-width:none; opacity:0; transition:transform .45s cubic-bezier(.2,.8,.2,1), opacity .45s ease; }
+.nav{ position:fixed; top:14px; left:50%; transform:translate(-50%,-160%); z-index:60; display:flex; align-items:center; gap:2px; background:var(--glass); -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%); border:1px solid rgba(255,255,255,0.7); box-shadow:0 8px 30px rgba(176,127,122,0.18), inset 0 1px 0 rgba(255,255,255,0.6); border-radius:var(--r-pill); padding:6px; max-width:calc(100vw - 24px); overflow-x:auto; scrollbar-width:none; scroll-snap-type:x proximity; opacity:0; visibility:hidden; transition:transform .45s cubic-bezier(.2,.8,.2,1), opacity .45s ease, visibility .45s; }
 .nav::-webkit-scrollbar{ display:none; }
-.nav.show{ transform:translate(-50%,0); opacity:1; }
+.nav.show{ transform:translate(-50%,0); opacity:1; visibility:visible; }
 .nav button{ flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-family:var(--sans); font-weight:600; font-size:13px; letter-spacing:-0.01em; color:var(--deep-rose); background:transparent; border:none; padding:9px 13px; border-radius:var(--r-pill); white-space:nowrap; transition:background .2s, color .2s, transform .2s; }
 .nav button .ic{ font-size:14px; }
 .nav button:hover{ background:rgba(232,197,193,0.35); transform:translateY(-1px); }
 .nav button.active{ background:var(--blush); color:var(--ink); box-shadow:0 4px 14px rgba(176,127,122,0.25); }
-@media (max-width:720px){ .nav button.util .tx{ display:none; } .nav button{ padding:9px 11px; } }
+@media (max-width:720px){ .nav button.util .tx{ display:none; } .nav button{ padding:9px 11px; scroll-snap-align:start; } .nav{ -webkit-mask-image:linear-gradient(90deg,#000 0 90%,#0000); mask-image:linear-gradient(90deg,#000 0 90%,#0000); } }
 
 .hero{ min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 22px; position:relative; overflow:hidden; }
+@media (max-height:640px){ .hero{ min-height:auto; justify-content:flex-start; padding-top:calc(72px + env(safe-area-inset-top)); padding-bottom:48px; } }
 .hero .star{ font-size:26px; color:var(--rose); animation:twinkle 4s ease-in-out infinite; }
 .hero .foryou{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(30px,7vw,52px); color:var(--deep-rose); margin-top:20px; }
 .hero .cities{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(46px,11vw,104px); line-height:0.98; letter-spacing:-0.02em; margin-top:14px; color:var(--ink); }
@@ -79,7 +80,7 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .btn:hover{ transform:translateY(-3px) scale(1.015); box-shadow:0 1px 0 rgba(255,255,255,0.8) inset,0 16px 36px rgba(176,127,122,0.38),0 4px 10px rgba(176,127,122,0.25); }
 .btn .arrow{ transition:transform .25s; } .btn:hover .arrow{ transform:translateX(4px); }
 .petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:-1; }
-.petal{ position:absolute; top:-8%; width:14px; height:14px; background:radial-gradient(circle at 30% 30%, #F3DEDB, var(--blush)); border-radius:80% 0 80% 0; opacity:0.55; animation:fall linear infinite; will-change:transform; }
+.petal{ position:absolute; top:-8%; width:14px; height:14px; background:radial-gradient(circle at 30% 30%, #F3DEDB, var(--blush)); border-radius:80% 0 80% 0; opacity:0.55; animation:fall linear infinite; }
 @keyframes fall{ 0%{ transform:translateY(-10vh) translateX(0) rotate(0deg);} 100%{ transform:translateY(112vh) translateX(40px) rotate(360deg);} }
 @keyframes twinkle{ 0%,100%{ opacity:.4; transform:scale(.9);} 50%{ opacity:1; transform:scale(1.1);} }
 @media (prefers-reduced-motion: reduce){ .petal,.hero .star{ animation:none !important; } .petals{ display:none; } }
@@ -129,7 +130,7 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .thumb::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 50%, rgba(28,26,26,.30)); pointer-events:none; }
 .thumb-badge{ position:absolute; top:11px; left:11px; z-index:2; font-family:var(--sans); font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:#5b4a2e; background:linear-gradient(180deg,#F4E4C4,var(--gold)); padding:5px 11px; border-radius:var(--r-pill); box-shadow:0 6px 16px rgba(201,169,110,0.35); border:1px solid rgba(255,255,255,0.5); max-width:calc(100% - 22px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .thumb-badge.rose{ color:#fff; background:linear-gradient(180deg,var(--rose),var(--deep-rose)); box-shadow:0 6px 16px rgba(176,127,122,0.35); }
-.thumb-chip{ position:absolute; top:11px; right:11px; z-index:2; font-family:var(--sans); font-weight:700; font-size:12px; letter-spacing:0.5px; background:var(--glass); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.6); padding:5px 10px; border-radius:var(--r-pill); color:var(--gold); }
+.thumb-chip{ position:absolute; top:11px; right:11px; z-index:2; font-family:var(--sans); font-weight:700; font-size:12px; letter-spacing:0.5px; background:var(--glass); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.6); padding:5px 10px; border-radius:var(--r-pill); color:var(--gold-ink); }
 .thumb-chip .off{ color:rgba(201,169,110,0.30); }
 .thumb-chip.free{ color:#5a7a5a; } .thumb-chip.paid{ color:var(--deep-rose); }
 .thumb-rating{ position:absolute; left:11px; bottom:11px; z-index:2; display:none; align-items:center; gap:4px; font-family:var(--sans); font-weight:600; font-size:12px; color:#fff; text-shadow:0 1px 4px rgba(0,0,0,.4); }
@@ -168,7 +169,7 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .modal-body .label{ display:block; }
 .modal-body h2{ font-family:var(--sans); font-weight:600; font-size:26px; letter-spacing:-0.02em; line-height:1.12; margin:6px 0 2px; }
 .modal-body .m-meta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:8px 0 14px; }
-.m-price{ font-family:var(--sans); font-weight:700; font-size:16px; letter-spacing:1px; color:var(--gold); } .m-price .off{ color:rgba(201,169,110,0.30); }
+.m-price{ font-family:var(--sans); font-weight:700; font-size:16px; letter-spacing:1px; color:var(--gold-ink); } .m-price .off{ color:rgba(201,169,110,0.30); }
 .m-entry{ display:inline-flex; align-items:center; gap:6px; font-family:var(--sans); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.07em; padding:5px 12px; border-radius:var(--r-pill); }
 .m-entry.free{ color:#5a7a5a; background:rgba(180,205,170,0.30); } .m-entry.paid{ color:var(--deep-rose); background:rgba(232,197,193,0.40); }
 .m-rating{ display:inline-flex; align-items:center; gap:6px; font-family:var(--sans); font-weight:600; font-size:14px; color:var(--ink); }
@@ -333,6 +334,9 @@ footer .small{ font-size:12px; color:var(--muted); margin-top:8px; letter-spacin
   .ov-row{ padding:14px 18px; }
   .modal, .favs-sheet{ padding-bottom:calc(env(safe-area-inset-bottom) + 8px); }
   .view.content{ padding-top:96px; }
+  .nav button{ min-height:44px; }
+  .modal-close{ width:44px; height:44px; }
+  .leaflet-bar a{ width:40px!important; height:40px!important; line-height:40px!important; }
 }
 
 /* ---- hero crest monogram (Jer & Tev) ---- */
@@ -511,6 +515,7 @@ body.dragging{ cursor:grabbing; -webkit-user-select:none; user-select:none; }
 .pc-x{ all:unset; cursor:pointer; font-size:11px; line-height:1; color:var(--muted); padding:1px 2px; border-radius:50%; transition:color .15s; }
 .pc-x:hover{ color:var(--deep-rose); }
 .pc-who{ all:unset; cursor:pointer; width:12px; height:12px; border-radius:50%; border:1.5px solid var(--blush); background:transparent; flex:0 0 auto; transition:transform .15s; }
+.pc-who, .pc-x{ position:relative; } .pc-who::before, .pc-x::before{ content:""; position:absolute; inset:-11px; }
 .pc-who:hover{ transform:scale(1.18); }
 .pchip[data-who="jer"] .pc-who{ background:var(--jer); border-color:transparent; }
 .pchip[data-who="tev"] .pc-who{ background:var(--tev); border-color:transparent; }
@@ -932,7 +937,7 @@ const DEST_META = {
     best:"A clear afternoon: the Heath, then a fire.", areas:"The Village · the Heath · Highgate · Kenwood" },
   bath:     { name:"Bath",       tag:"a city the colour of honey",
     blurb:"A whole city cut from honey-coloured stone, warm springs still rising under it after two thousand years. We'll bathe on the roof at dusk and pretend we live here.",
-    best:"Spring light; book the rooftop pool for dusk.", areas:"City centre · Royal Crescent · Pulteney" },
+    best:"Long July light; book the rooftop pool for dusk.", areas:"City centre · Royal Crescent · Pulteney" },
   wales:    { name:"Wales",      tag:"castles, coast, and the wild bit",
     blurb:"Arcades and a roaring stadium in Cardiff, then north until the roads narrow and the mountains start. Fortresses on the sea, a toy Italian village, and Eryri going on for miles.",
     best:"Summer for the peaks; give the north a day or two.", areas:"Cardiff · Eryri / Snowdonia · the North coast" },
@@ -943,7 +948,7 @@ const DEST_META = {
 const CAT_ORDER = ["restaurants","coffee","matcha","wellness","pubs","landmarks","parks"];
 const CAT_META = {
   restaurants:{ label:"Restaurants", emoji:"🍽" },
-  coffee:     { label:"Coffee Shops", emoji:"☕" },
+  coffee:     { label:"Coffee",       emoji:"☕" },
   matcha:     { label:"Matcha",       emoji:"🍵" },
   wellness:   { label:"Wellness",     emoji:"🧘" },
   pubs:       { label:"Pubs & Bars",  emoji:"🍺" },
@@ -1136,12 +1141,12 @@ const PLACES = [
 
   /* ===================== LONDON · PUBS & BARS ===================== */
   { id:"churchill-arms", dest:"london", cat:"pubs", name:"The Churchill Arms", hood:"Kensington Church St, Notting Hill",
-    cuisine:"🌸 Famous flower-covered exterior: legendary", price:1, walkIn:"Walk-in: yes",
+    cuisine:"Famous flower-covered exterior: legendary", price:1, walkIn:"Walk-in: yes",
     summary:"One of the most photographed pubs in London, its front entirely buried under hanging baskets and flowers. Inside it's all happy clutter and old Churchill memorabilia, and there's a proper Thai kitchen out the back that's genuinely good.",
     tags:["flowers","photogenic","Thai food"] },
 
   { id:"george-inn", dest:"london", cat:"pubs", name:"The George Inn", hood:"Borough / London Bridge, SE1",
-    cuisine:"🏛 London's only surviving galleried coaching inn · 1542", price:1, walkIn:"Walk-in: yes",
+    cuisine:"London's only surviving galleried coaching inn · 1542", price:1, walkIn:"Walk-in: yes",
     summary:"The last galleried coaching inn in London, and the only pub the National Trust owns, down an alley near London Bridge. It has barely changed since Shakespeare's day. Take a pint out into the cobbled courtyard.",
     tags:["National Trust","historic","courtyard"] },
 
@@ -1708,7 +1713,7 @@ const PLACES = [
     bookingUrl:"https://cafesthonore.com", bookingLabel:"Book", walkIn:"Book ahead · walk-ins possible at lunch.",
     summary:"Edinburgh's most beloved French bistro, hidden down a cobbled New Town lane. Zinc bar, wooden floors, Gallic warmth. The kind of place that feels like a discovery even though locals have known it forever.",
     tags:["French","hidden gem","cosy"] },
-  { id:"chaophraya", dest:"scotland", cat:"restaurants", name:"Chaophraya", hood:"Castle St, New Town, Edinburgh", cuisine:"🏰 Thai: panoramic castle views", price:2,
+  { id:"chaophraya", dest:"scotland", cat:"restaurants", name:"Chaophraya", hood:"Castle St, New Town, Edinburgh", cuisine:"Thai: panoramic castle views", price:2,
     bookingUrl:"https://chaophraya.co.uk/edinburgh/", bookingLabel:"Book", walkIn:"Request a window table when booking.",
     summary:"Request a castle-view table and you'll have Edinburgh Castle lit up outside your window while you eat pad Thai. One of the few places in the city with dramatic castle views during dinner. The view does all the work.",
     tags:["castle views","Thai","romantic view"] },
@@ -1969,17 +1974,18 @@ const FAVS = loadFavs();
 function saveFavsStore(){ try{ localStorage.setItem(FAV_KEY, JSON.stringify({ jer:[...FAVS.jer], tev:[...FAVS.tev] })); }catch(_){} }
 function savesHTML(id){
   return `<div class="saves">`+
-    `<button class="save-btn jer${FAVS.jer.has(id)?" on":""}" data-who="jer" data-id="${id}" title="Jer's pick" aria-label="Jer's pick">J</button>`+
-    `<button class="save-btn tev${FAVS.tev.has(id)?" on":""}" data-who="tev" data-id="${id}" title="Tev's pick" aria-label="Tev's pick">T</button></div>`;
+    `<button class="save-btn jer${FAVS.jer.has(id)?" on":""}" data-who="jer" data-id="${id}" title="Jer's pick" aria-label="Jer's pick" aria-pressed="${FAVS.jer.has(id)}">J</button>`+
+    `<button class="save-btn tev${FAVS.tev.has(id)?" on":""}" data-who="tev" data-id="${id}" title="Tev's pick" aria-label="Tev's pick" aria-pressed="${FAVS.tev.has(id)}">T</button></div>`;
 }
 function savesRowHTML(id){
   return `<div class="save-row"><span class="save-row-label">save to</span>`+
-    `<button class="save-pill jer${FAVS.jer.has(id)?" on":""}" data-who="jer" data-id="${id}">💙 Jer's pick</button>`+
-    `<button class="save-pill tev${FAVS.tev.has(id)?" on":""}" data-who="tev" data-id="${id}">💗 Tev's pick</button></div>`;
+    `<button class="save-pill jer${FAVS.jer.has(id)?" on":""}" data-who="jer" data-id="${id}" aria-pressed="${FAVS.jer.has(id)}">💙 Jer</button>`+
+    `<button class="save-pill tev${FAVS.tev.has(id)?" on":""}" data-who="tev" data-id="${id}" aria-pressed="${FAVS.tev.has(id)}">💗 Tev</button></div>`;
 }
 function syncFavUI(id){
   document.querySelectorAll(`.save-btn[data-id="${id}"], .save-pill[data-id="${id}"]`).forEach(b=>{
-    b.classList.toggle("on", FAVS[b.dataset.who].has(id));
+    const on = FAVS[b.dataset.who].has(id);
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on);
   });
 }
 function toggleFav(who,id){
@@ -2136,7 +2142,7 @@ DEST_ORDER.forEach(dest=>{
   const meta = DEST_META[dest];
   const sec = document.createElement("section");
   sec.className = "view content"; sec.dataset.view = dest;
-  let html = `<div class="wrap"><div class="city-hero" id="hero-${dest}" style="background-image:url('${CITY_DUO[dest]||""}')">
+  let html = `<div class="wrap"><div class="city-hero" id="hero-${dest}">
       <span class="seal-badge">${sealHTML(dest)}</span>
       <div class="city-hero-text">
         <div class="ch-eyebrow">${flagHTML(COUNTRY[dest])}<span>${(COUNTRY[dest]||"").toUpperCase()}</span></div>
@@ -2245,7 +2251,7 @@ function detailHTML(p){
   const summary = p.summary ? `<p class="summary">${p.summary}</p>` : "";
   const must = p.mustTry ? `<p class="must"><b>Must-try:</b> ${p.mustTry}</p>` : "";
   const tip  = p.tip ? `<p class="tip"><b>Tip ·</b> ${p.tip}</p>` : "";
-  const walk = p.walkIn ? `<p class="walk"><b>Walk-in ·</b> ${p.walkIn}</p>` : "";
+  const walk = p.walkIn ? `<p class="walk"><b>Walk-in ·</b> ${p.walkIn.replace(/^\s*walk[-\s]?ins?\b[:.;\s·-]*/i,"")}</p>` : "";
   const tags = (p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("");
   const actions = [];
   if(p.bookingUrl) actions.push(`<a class="chip-link solid" href="${p.bookingUrl}" target="_blank" rel="noopener">${p.bookingLabel||"Book"} ↗</a>`);
@@ -2316,19 +2322,20 @@ const nav = document.getElementById("nav");
 const navBtns = [...nav.querySelectorAll("button")];
 navBtns.forEach(b=>{ const d=b.dataset.view; if(COUNTRY[d]) b.insertAdjacentHTML("afterbegin", flagHTML(COUNTRY[d])); });
 let currentView = "hero";
-function showView(name){
+function showView(name, fromPop){
   const target = document.querySelector(`.view[data-view="${name}"]`);
   if(!target) return;
+  if(!fromPop){ try{ history.pushState({view:name}, "", name==="hero" ? location.pathname : ("?view="+name)); }catch(_){} }
   const apply=()=>{
     document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v===target));
-    navBtns.forEach(b=>b.classList.toggle("active", b.dataset.view===name));
+    navBtns.forEach(b=>{ b.classList.toggle("active", b.dataset.view===name); b.setAttribute("aria-current", b.dataset.view===name?"page":"false"); });
     nav.classList.toggle("show", name!=="hero");
     const _fab = document.getElementById("fab"); if(_fab) _fab.style.display = name==="hero" ? "none" : "inline-flex";
     window.scrollTo({ top:0, behavior:"auto" });
     currentView = name;
     if(name==="map"){ ensureMap(); playRouteMap(); if(window.trainStart) trainStart(); }
     else if(name==="days"){ if(window.renderTrayPicks) window.renderTrayPicks(); }
-    else if(DEST_META[name]){ enrichPlaces(PLACES.filter(p=>p.dest===name)); fetchWeather(name); }
+    else if(DEST_META[name]){ const _h=document.getElementById("hero-"+name); if(_h && CITY_DUO[name] && !_h.style.backgroundImage){ _h.style.backgroundImage="url('"+CITY_DUO[name]+"')"; } enrichPlaces(PLACES.filter(p=>p.dest===name)); fetchWeather(name); }
   };
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(document.startViewTransition && !reduce){
@@ -2383,8 +2390,13 @@ function playRouteMap(){
 (function(){
   try{
     const q=new URLSearchParams(location.search).get("view");
-    if(q && document.querySelector('.view[data-view="'+q+'"]')) showView(q);
+    if(q && document.querySelector('.view[data-view="'+q+'"]')){ history.replaceState({view:q}, ""); showView(q, true); }
+    else { history.replaceState({view:"hero"}, ""); }
   }catch(_){}
+  window.addEventListener("popstate", e=>{
+    const v=(e.state&&e.state.view) || (new URLSearchParams(location.search).get("view")) || "hero";
+    if(document.querySelector('.view[data-view="'+v+'"]')) showView(v, true);
+  });
 })();
 
 /* ---------- countdown + day-by-day itinerary (Phase 1) ---------- */
@@ -2812,7 +2824,7 @@ function loadLeaflet(){
   return _leafletP;
 }
 async function ensureMap(){
-  try{ await loadLeaflet(); }catch(_){ return; } /* offline / CDN blocked — map-frame just shows its blush background */
+  try{ await loadLeaflet(); }catch(_){ if(mapNote) mapNote.innerHTML=`The map didn't load here — <a href="https://www.google.com/maps/search/London,+Bath,+Cardiff,+Edinburgh,+UK" target="_blank" rel="noopener">open it in Google Maps ↗</a>`; return; } /* offline / CDN blocked */
   if(typeof L==="undefined") return;
   if(!lmap){
     lmap = L.map("map-canvas", { zoomControl:true, scrollWheelZoom:false, attributionControl:true, center:[54.5,-4.0], zoom:5 });
@@ -2823,6 +2835,7 @@ async function ensureMap(){
     mapFrame.classList.add("live");
     var tint=document.createElement("div"); tint.className="map-tint"; lmap.getContainer().appendChild(tint); /* blush multiply over tiles only (markers stay above) */
     buildLeafletMarkers();
+    if(mapNote) mapNote.textContent="Tap a pin to open a place · pinch or +/− to zoom";
   }
   sizeAndFit(0);
 }
