@@ -205,13 +205,19 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 #map-canvas{ display:none; } .map-frame iframe{ filter:saturate(0.85) hue-rotate(-6deg) brightness(1.03); }
 .map-frame.live #map-canvas{ display:block; } .map-frame.live iframe{ display:none; }
 .map-note{ font-size:var(--t-ui); color:var(--muted); margin-top:12px; max-width:60ch; }
-/* ---- Leaflet (free OpenStreetMap) map styling ---- */
-.map-frame .leaflet-tile-pane{ filter:grayscale(1) sepia(.55) hue-rotate(312deg) saturate(1.7) brightness(.99) contrast(1.14); }
+/* ---- the blush map (MapLibre + our own vector style; no key, no billing) ---- */
 .map-frame .map-tint{ position:absolute; inset:0; z-index:300; pointer-events:none; background:radial-gradient(135% 130% at 50% 42%, rgba(233,196,190,.05) 0%, rgba(233,196,190,0) 56%, rgba(160,95,90,.15) 100%); }
 .leaflet-container{ background:#F6E2DF; font-family:var(--sans); }
 .le-pin-wrap{ background:none; border:none; }
-.le-pin{ position:relative; filter:drop-shadow(0 2px 4px rgba(120,80,76,.32)); transition:transform .15s; }
-.le-pin:hover{ transform:translateY(-2px) scale(1.06); }
+.le-pin{ position:relative; filter:drop-shadow(0 2px 4px rgba(120,80,76,.32)); transition:transform .15s; transform:scale(var(--pin-s,1)); transform-origin:50% 100%; cursor:pointer; }
+.le-pin:hover{ transform:translateY(-2px) scale(calc(var(--pin-s,1)*1.1)); }
+.maplibregl-marker{ z-index:400; }
+.maplibregl-canvas{ outline:none; }
+.maplibregl-ctrl-group{ background:#FBF3EE!important; border:none!important; border-radius:12px!important; box-shadow:var(--soft)!important; overflow:hidden; }
+.maplibregl-ctrl-group button{ width:40px!important; height:40px!important; background:#FBF3EE!important; }
+.maplibregl-ctrl-group button+button{ border-top:1px solid var(--card-brd)!important; }
+.maplibregl-ctrl-attrib{ font-size:9px!important; background:rgba(253,244,240,.75)!important; color:var(--muted); }
+.maplibregl-ctrl-attrib a{ color:var(--deep-rose); }
 .le-pin .le-emoji{ position:absolute; top:6px; left:0; width:34px; text-align:center; font-size:14px; line-height:1; pointer-events:none; }
 .lmap-tip{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:var(--t-ui); color:var(--ink); background:#FBF3EE; border:1px solid var(--card-brd); border-radius:9px; box-shadow:var(--soft); padding:4px 11px; }
 .lmap-tip.leaflet-tooltip-top::before{ border-top-color:#FBF3EE; }
@@ -242,7 +248,7 @@ footer .small{ font-family:var(--sans); font-size:10.5px; letter-spacing:0.24em;
 /* ---- flags ---- */
 .flag{ display:inline-flex; width:20px; height:13px; border-radius:3px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.18); vertical-align:middle; flex:0 0 auto; }
 .flag svg{ width:100%; height:100%; display:block; }
-.nav button .flag{ width:17px; height:11px; margin-right:5px; }
+.nav button .n{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:12.5px; color:var(--gold-ink); margin-right:6px; }
 .city-row{ display:inline-flex; align-items:center; gap:13px; justify-content:center; }
 .city-row .flag{ width:36px; height:24px; border-radius:5px; box-shadow:0 2px 8px rgba(176,127,122,.25); }
 
@@ -2370,7 +2376,7 @@ document.addEventListener("keydown", e=>{
 /* ---------- view switching ---------- */
 const nav = document.getElementById("nav");
 const navBtns = [...nav.querySelectorAll("button")];
-navBtns.forEach(b=>{ const d=b.dataset.view; if(COUNTRY[d]) b.insertAdjacentHTML("afterbegin", flagHTML(COUNTRY[d])); });
+navBtns.forEach(b=>{ const d=b.dataset.view; if(ROMAN[d]) b.insertAdjacentHTML("afterbegin", '<span class="n">'+ROMAN[d]+'</span>'); });
 let currentView = "hero";
 function showView(name, fromPop){
   const target = document.querySelector(`.view[data-view="${name}"]`);
@@ -2834,62 +2840,128 @@ let lmap=null, lmarkers=[];
 const PLACE_COORDS = {"maine-mayfair":[51.50843,-0.14389],"the-dover":[51.50424,-0.12688],"bouchon-racine":[51.52161,-0.10948],"claridges":[51.51255,-0.148],"bottarga":[51.48339,-0.17661],"automat":[51.50826,-0.14584],"farm-girl":[51.51204,-0.20076],"elan-cafe":[51.50684,-0.15184],"laduree":[51.51449,-0.20074],"butter-bakery":[51.5177,-0.20139],"biscuiteers":[51.51558,-0.2057],"farm-girl-coffee":[51.50442,-0.20046],"leto":[51.509,-0.13637],"churchill-arms":[51.50688,-0.19487],"george-inn":[51.39155,-0.20388],"dickies-bar":[51.51304,-0.14405],"red-room":[51.50909,-0.14328],"va":[51.49589,-0.17288],"nhm":[51.49651,-0.176],"tate-modern":[51.50743,-0.09934],"national-gallery":[51.50872,-0.12859],"tower-of-london":[51.50822,-0.07619],"kensington-palace":[51.50509,-0.18763],"sky-garden":[51.51127,-0.08354],"borough-market":[51.50558,-0.0902],"portobello":[51.51609,-0.20512],"the-shard":[51.50451,-0.08644],"core-clare-smyth":[51.51272,-0.20311],"sketch":[51.51273,-0.14149],"helene-darroze":[51.50905,-0.15149],"gordon-ramsay-rhr":[51.48551,-0.16206],"a-wong":[51.493,-0.14054],"ikoyi":[51.51243,-0.11515],"gymkhana":[51.50848,-0.14149],"kitchen-table":[51.52039,-0.13648],"kol":[51.51479,-0.15753],"brat":[51.52427,-0.07669],"clove-club":[51.52708,-0.07916],"st-john":[51.52048,-0.10127],"monmouth":[51.51437,-0.1268],"kaffeine":[51.51845,-0.14034],"watchhouse":[51.51108,-0.12238],"how-matcha":[51.51282,-0.20598],"tsujiri":[51.54393,-0.00891],"tea-parlour":[51.51045,-0.12945],"cafe-kitsune":[51.51107,-0.13255],"connaught-bar":[51.50881,0.03943],"american-bar-savoy":[51.50987,-0.12715],"tayer-elementary":[51.52502,-0.09151],"cheshire-cheese":[51.51434,-0.10718],"gordons-wine":[51.50792,-0.12331],"british-museum":[51.51938,-0.12749],"st-pauls":[51.51379,-0.09845],"westminster-abbey":[51.4986,-0.1317],"tower-bridge":[51.50552,-0.07537],"buckingham-palace":[51.50083,-0.143],"stamford-bridge":[51.50415,-0.12802],"emirates-stadium":[51.50626,-0.13251],"spurs-stadium":[51.60416,-0.06626],"hyde-park":[51.50749,-0.16221],"regents-park":[51.52846,-0.15477],"st-james-park":[51.49928,-0.13459],"kyoto-garden":[51.51192,-0.13255],"richmond-park":[51.43851,-0.27474],"kew-gardens":[51.4782,-0.29689],"primrose-hill":[51.53929,-0.14073],"jin-kichi":[51.55728,-0.17843],"the-wells":[51.55873,-0.1736],"la-gaffe":[51.55933,-0.17848],"ginger-white":[51.5603,-0.17571],"louis-patisserie":[51.56321,-0.17993],"brew-house-kenwood":[51.56762,-0.17136],"holly-bush":[51.55789,-0.17932],"spaniards-inn":[51.57023,-0.17372],"the-flask-hampstead":[51.5566,-0.17725],"old-bull-bush":[51.56757,-0.18262],"kenwood-house":[51.57155,-0.16734],"keats-house":[51.55552,-0.16794],"parliament-hill":[51.55962,-0.15977],"hampstead-pergola":[51.5656,-0.18397],"hampstead-heath":[51.56415,-0.16717],"golders-hill-park":[51.56794,-0.18361],"olive-tree":[51.37697,-2.36334],"menu-gordon-jones":[51.37414,-2.36677],"hywel-jones":[51.38439,-2.36249],"scallop-shell":[51.38292,-2.36578],"beckford-bottle-shop":[51.38647,-2.3621],"colonna-small":[51.38274,-2.36441],"mokoko":[51.38135,-2.36022],"society-cafe":[51.38102,-2.36311],"landrace":[51.38592,-2.35992],"star-inn-bath":[51.38782,-2.36016],"saracens-head":[51.38152,-2.35468],"the-raven":[51.38312,-2.36197],"garricks-head":[51.38489,-2.35739],"roman-baths":[51.38103,-2.35968],"royal-crescent":[51.38727,-2.36823],"bath-abbey":[51.38145,-2.35887],"pulteney-bridge":[51.38304,-2.35792],"thermae-spa":[51.38057,-2.36103],"the-circus-bath":[51.3862,-2.36376],"jane-austen-centre":[51.38407,-2.36313],"royal-victoria-park":[51.38654,-2.37559],"prior-park":[51.37734,-2.36334],"alexandra-park":[51.37391,-2.35927],"ynyshir":[51.62625,-3.41239],"gorse":[51.88637,-4.74814],"heaneys":[51.48517,-3.20134],"asador-44":[51.48007,-3.18054],"bullys":[51.48468,-3.16351],"coffee-barker":[51.48589,-3.16743],"hard-lines":[51.48029,-3.17867],"uncommon-ground":[51.47825,-3.17743],"city-arms-cardiff":[51.48,-3.18096],"tiny-rebel-cardiff":[51.4799,-3.18116],"goat-major":[51.48098,-3.18059],"cardiff-castle":[51.48233,-3.18117],"principality-stadium":[51.47825,-3.18263],"cardiff-bay":[51.46396,-3.16414],"portmeirion":[52.91345,-4.09935],"conwy-castle":[53.28003,-3.82559],"caernarfon-castle":[53.13935,-4.27684],"yr-wyddfa":[52.92654,-4.13059],"llandudno":[51.48701,-3.17163],"harlech-castle":[52.85997,-4.10914],"bute-park":[51.48734,-3.1883],"roath-park":[51.50091,-3.17273],"fairy-glen":[51.48093,-3.16436],"witchery":[55.94881,-3.19563],"stockbridge":[55.95537,-3.18416],"six-by-nico":[55.95449,-3.19747],"cafe-st-honore":[55.95409,-3.20024],"chaophraya":[55.9522,-3.20307],"timberyard":[55.94635,-3.20173],"little-chartroom":[55.97258,-3.17596],"cairngorm":[57.15475,-2.13824],"fortitude":[55.95617,-3.17185],"bow-bar":[55.95427,-3.18512],"sheep-heid":[55.95526,-3.19147],"edinburgh-castle":[55.94869,-3.20042],"arthurs-seat":[55.94407,-3.1616],"royal-mile":[55.94929,-3.19357],"nms":[55.94707,-3.18934],"dean-village":[55.95226,-3.21822],"calton-hill":[55.95525,-3.1828],"cail-bruich":[55.87751,-4.28924],"unalome":[55.95496,-3.18992],"ox-and-finch":[55.86579,-4.28475],"crabshakk":[55.86502,-4.28471],"ka-pao":[55.87714,-4.29037],"three-chimneys":[57.44338,-6.64196],"loch-bay":[57.50748,-6.57743],"kinloch-lodge":[57.1756,-5.79774],"papercup":[55.86392,-4.29873],"spitfire-espresso":[55.85753,-4.24301],"pot-still":[55.8629,-4.25772],"oran-mor":[55.87756,-4.2897],"horse-shoe-bar":[55.93157,-4.49506],"kelvingrove-museum":[55.86858,-4.29063],"glasgow-cathedral":[55.95554,-3.19312],"riverside-museum":[55.86523,-4.30617],"eilean-donan":[57.2741,-5.51592],"glenfinnan":[56.87582,-5.42932],"loch-lomond":[56.1562,-4.65638],"glencoe":[56.68276,-5.10146],"old-man-storr":[57.50696,-6.17464],"quiraing":[57.64526,-6.27485],"fairy-pools":[57.41374,-6.20375],"ben-nevis":[56.79686,-5.00353],"princes-st-gardens":[55.95025,-3.19949],"rbge":[55.96529,-3.20886],"the-meadows":[55.94234,-3.19429],"kelvingrove-park":[55.86926,-4.28729],"glasgow-botanic":[55.87989,-4.29202],"heartcore-nottinghill":[51.50848,-0.19738],"equinox-stjames":[51.5054,-0.134],"third-space-mayfair":[51.5096,-0.1476],"kxu-chelsea":[51.49355,-0.1586],"bodyism-nottinghill":[51.51447,-0.2011],"peggy-porschen":[51.49329,-0.15054],"eln-mayfair":[51.5096,-0.1476],"saint-aymes":[51.518,-0.15],"the-wolseley":[51.50739,-0.14091],"sexy-fish":[51.50937,-0.14432],"amazonico-london":[51.50954,-0.14459],"isabel-mayfair":[51.50964,-0.14279],"scotts-mayfair":[51.5103,-0.149],"bacchanalia-mayfair":[51.5103,-0.149]}; /* id -> {lat,lng} — geocoded from OSM; injected below */
 function destBounds(dest){
   const pts = PLACES.filter(p=>p.dest===dest && PLACE_COORDS[p.id]).map(p=>PLACE_COORDS[p.id]);
-  return pts.length ? L.latLngBounds(pts) : null;
+  if(!pts.length) return null;
+  const b = new maplibregl.LngLatBounds();
+  pts.forEach(c=> b.extend([c[1], c[0]]));
+  return b;
 }
-function leIcon(cat){
-  const emoji = (CAT_META[cat]||{}).emoji || "✦";
-  const html = '<div class="le-pin"><svg viewBox="0 0 40 52" width="34" height="44"><path d="M20 2C10 2 2 10 2 19.5 2 33 20 50 20 50s18-17 18-30.5C38 10 30 2 20 2z" fill="#E8C5C1" stroke="#fff" stroke-width="2.5"/><circle cx="20" cy="19" r="12.5" fill="#FFF7F6"/></svg><span class="le-emoji">'+emoji+'</span></div>';
-  return L.divIcon({ className:"le-pin-wrap", html, iconSize:[34,44], iconAnchor:[17,44], tooltipAnchor:[0,-40] });
+/* our own cartography, designed not filtered: cream land, white roads with rose
+   casings, rose water, gold city names, italic rose neighbourhoods. */
+const BLUSH_MAP_STYLE = {
+  version: 8,
+  glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+  sources: { ofm: { type:"vector", url:"https://tiles.openfreemap.org/planet" } },
+  layers: [
+    { id:"bg", type:"background", paint:{ "background-color":"#FAEDE7" } },
+    { id:"residential", type:"fill", source:"ofm", "source-layer":"landuse", minzoom:9,
+      filter:["in",["get","class"],["literal",["residential","suburb","neighbourhood"]]],
+      paint:{ "fill-color":"#F8E8E0", "fill-opacity":0.55 } },
+    { id:"green", type:"fill", source:"ofm", "source-layer":"landcover",
+      filter:["in",["get","class"],["literal",["wood","grass","farmland"]]],
+      paint:{ "fill-color":"#F1E3D2", "fill-opacity":0.5 } },
+    { id:"park", type:"fill", source:"ofm", "source-layer":"park",
+      paint:{ "fill-color":"#F0DFCB", "fill-opacity":0.55 } },
+    { id:"water", type:"fill", source:"ofm", "source-layer":"water",
+      paint:{ "fill-color":"#EFCBC5" } },
+    { id:"waterway", type:"line", source:"ofm", "source-layer":"waterway",
+      paint:{ "line-color":"#EFCBC5", "line-width":["interpolate",["linear"],["zoom"],8,0.5,14,2.4] } },
+    { id:"boundary", type:"line", source:"ofm", "source-layer":"boundary",
+      filter:["all",["<=",["get","admin_level"],4],["==",["get","maritime"],0]],
+      paint:{ "line-color":"#DBAFA9", "line-width":1, "line-dasharray":[3,2.4], "line-opacity":0.6 } },
+    { id:"rail", type:"line", source:"ofm", "source-layer":"transportation", minzoom:11,
+      filter:["==",["get","class"],"rail"],
+      paint:{ "line-color":"#E7CBC4", "line-width":0.8, "line-dasharray":[2,2.6] } },
+    { id:"road-casing", type:"line", source:"ofm", "source-layer":"transportation",
+      filter:["in",["get","class"],["literal",["motorway","trunk","primary","secondary"]]],
+      layout:{ "line-cap":"round", "line-join":"round" },
+      paint:{ "line-color":"#E9CBC3", "line-width":["interpolate",["exponential",1.4],["zoom"],6,0.7,10,2.2,14,6,17,16] } },
+    { id:"road-major", type:"line", source:"ofm", "source-layer":"transportation",
+      filter:["in",["get","class"],["literal",["motorway","trunk","primary","secondary"]]],
+      layout:{ "line-cap":"round", "line-join":"round" },
+      paint:{ "line-color":"#FFFDFA", "line-width":["interpolate",["exponential",1.4],["zoom"],6,0.4,10,1.4,14,4.4,17,13] } },
+    { id:"road-minor", type:"line", source:"ofm", "source-layer":"transportation", minzoom:11,
+      filter:["in",["get","class"],["literal",["tertiary","minor","service"]]],
+      layout:{ "line-cap":"round", "line-join":"round" },
+      paint:{ "line-color":"#FFFFFF", "line-width":["interpolate",["exponential",1.4],["zoom"],11,0.5,14,2,17,7], "line-opacity":0.9 } },
+    { id:"building", type:"fill", source:"ofm", "source-layer":"building", minzoom:14,
+      paint:{ "fill-color":"#F3DCD3", "fill-opacity":0.5 } },
+    { id:"hood-label", type:"symbol", source:"ofm", "source-layer":"place", minzoom:12,
+      filter:["in",["get","class"],["literal",["suburb","neighbourhood","quarter"]]],
+      layout:{ "text-field":["get","name:latin"], "text-font":["Noto Sans Italic"], "text-size":11, "text-letter-spacing":0.08 },
+      paint:{ "text-color":"#B4726C", "text-halo-color":"#FBF1EA", "text-halo-width":1.3 } },
+    { id:"town-label", type:"symbol", source:"ofm", "source-layer":"place", minzoom:8.5,
+      filter:["in",["get","class"],["literal",["town","village"]]],
+      layout:{ "text-field":["get","name:latin"], "text-font":["Noto Sans Regular"], "text-size":["interpolate",["linear"],["zoom"],9,10.5,13,12.5], "text-letter-spacing":0.06 },
+      paint:{ "text-color":"#A98A5B", "text-halo-color":"#FBF1EA", "text-halo-width":1.3 } },
+    { id:"city-label", type:"symbol", source:"ofm", "source-layer":"place",
+      filter:["==",["get","class"],"city"],
+      layout:{ "text-field":["get","name:latin"], "text-font":["Noto Sans Regular"], "text-size":["interpolate",["linear"],["zoom"],5,11.5,10,15], "text-letter-spacing":0.14, "text-transform":"uppercase" },
+      paint:{ "text-color":"#8A6A2E", "text-halo-color":"#FBF1EA", "text-halo-width":1.5 } }
+  ]
+};
+function mkPin(p){
+  const emoji = (CAT_META[p.cat]||{}).emoji || "✦";
+  const el = document.createElement("div");
+  el.className = "le-pin";
+  el.innerHTML = '<svg viewBox="0 0 40 52" width="34" height="44"><path d="M20 2C10 2 2 10 2 19.5 2 33 20 50 20 50s18-17 18-30.5C38 10 30 2 20 2z" fill="#E8C5C1" stroke="#fff" stroke-width="2.5"/><circle cx="20" cy="19" r="12.5" fill="#FFF7F6"/></svg><span class="le-emoji">'+emoji+'</span>';
+  el.title = p.name;
+  el.addEventListener("click", (e)=>{ e.stopPropagation(); openDetail(p.id); });
+  return el;
 }
-function buildLeafletMarkers(){
+function buildMapMarkers(){
   lmarkers.forEach(m=>m.remove()); lmarkers=[];
   PLACES.forEach(p=>{
     const c = PLACE_COORDS[p.id]; if(!c) return;
-    const m = L.marker(c, { icon:leIcon(p.cat) });
-    m.bindTooltip(p.name, { direction:"top", className:"lmap-tip", opacity:1 });
-    m.on("click", ()=>openDetail(p.id));
-    m.addTo(lmap); lmarkers.push(m);
+    const m = new maplibregl.Marker({ element:mkPin(p), anchor:"bottom" }).setLngLat([c[1], c[0]]).addTo(lmap);
+    lmarkers.push(m);
   });
+}
+/* pins shrink as the map zooms out so a city never becomes one solid blob */
+function scalePins(){
+  if(!lmap) return;
+  const z = lmap.getZoom();
+  const s = z<7 ? 0.58 : z<9 ? 0.7 : z<10.5 ? 0.82 : 1;
+  lmap.getContainer().style.setProperty("--pin-s", s);
 }
 function flyToCity(dest){
   if(!lmap) return;
   const b = destBounds(dest);
   const tight = (dest==="london"||dest==="hampstead"||dest==="bath");
-  if(b) lmap.fitBounds(b, { padding:[44,44], maxZoom: tight?14:11, animate:true, duration:.8 });
-  else { const v=CITY_VIEW[dest]; lmap.setView([v.center.lat, v.center.lng], v.zoom); }
+  if(b) lmap.fitBounds(b, { padding:44, maxZoom: tight?13:10, duration:800 });
+  else { const v=CITY_VIEW[dest]; lmap.jumpTo({ center:[v.center.lng, v.center.lat], zoom:v.zoom-1 }); }
 }
-/* Leaflet inits while #map-canvas is still display:none, so its size caches as 0.
-   Retry invalidateSize until the container actually has dimensions, then fit. */
+/* the map inits while #map-canvas is still display:none, so its size caches as 0.
+   Retry resize until the container actually has dimensions, then fit. */
 function sizeAndFit(tries){
   if(!lmap) return;
-  lmap.invalidateSize(true);
-  if(lmap.getSize().x > 0) flyToCity(currentDest);
+  lmap.resize();
+  if(lmap.getContainer().clientWidth > 0) flyToCity(currentDest);
   else if(tries < 12) setTimeout(()=>sizeAndFit(tries+1), 120);
 }
-/* lazy-load Leaflet only when the map tab opens (keeps the rest of the site free of the CDN) */
-let _leafletP=null;
-function loadLeaflet(){
-  if(window.L) return Promise.resolve();
-  if(_leafletP) return _leafletP;
-  _leafletP = new Promise((resolve,reject)=>{
-    const css=document.createElement("link"); css.rel="stylesheet"; css.href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; document.head.appendChild(css);
-    const js=document.createElement("script"); js.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"; js.onload=resolve; js.onerror=reject; document.head.appendChild(js);
+/* lazy-load MapLibre only when the map tab opens (keeps the rest of the site free of the CDN) */
+let _mlP=null;
+function loadMapLibre(){
+  if(window.maplibregl) return Promise.resolve();
+  if(_mlP) return _mlP;
+  _mlP = new Promise((resolve,reject)=>{
+    const css=document.createElement("link"); css.rel="stylesheet"; css.href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"; document.head.appendChild(css);
+    const js=document.createElement("script"); js.src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"; js.onload=resolve; js.onerror=reject; document.head.appendChild(js);
   });
-  return _leafletP;
+  return _mlP;
 }
 async function ensureMap(){
-  try{ await loadLeaflet(); }catch(_){ if(mapNote) mapNote.innerHTML=`The map didn't load here — <a href="https://www.google.com/maps/search/London,+Bath,+Cardiff,+Edinburgh,+UK" target="_blank" rel="noopener">open it in Google Maps ↗</a>`; return; } /* offline / CDN blocked */
-  if(typeof L==="undefined") return;
+  try{ await loadMapLibre(); }catch(_){ if(mapNote) mapNote.innerHTML=`The map didn't load here — <a href="https://www.google.com/maps/search/London,+Bath,+Cardiff,+Edinburgh,+UK" target="_blank" rel="noopener">open it in Google Maps ↗</a>`; return; } /* offline / CDN blocked */
+  if(typeof maplibregl==="undefined") return;
   if(!lmap){
-    lmap = L.map("map-canvas", { zoomControl:true, scrollWheelZoom:false, attributionControl:true, center:[54.5,-4.0], zoom:5 });
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png", {
-      maxZoom:19, subdomains:"abcd",
-      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-    }).addTo(lmap);
+    lmap = new maplibregl.Map({ container:"map-canvas", style:BLUSH_MAP_STYLE, center:[-4.0,54.5], zoom:4.4, attributionControl:{ compact:true }, cooperativeGestures:true });
+    lmap.addControl(new maplibregl.NavigationControl({ showCompass:false }), "top-left");
+    lmap.on("error", ()=>{}); /* a missing optional source-layer shouldn't spam the console */
+    lmap.on("zoom", scalePins);
     mapFrame.classList.add("live");
-    var tint=document.createElement("div"); tint.className="map-tint"; lmap.getContainer().appendChild(tint); /* blush multiply over tiles only (markers stay above) */
-    buildLeafletMarkers();
-    if(mapNote) mapNote.textContent="Tap a pin to open a place · pinch or +/− to zoom";
+    var tint=document.createElement("div"); tint.className="map-tint"; lmap.getContainer().appendChild(tint); /* blush vignette over the tiles (markers z-index above) */
+    buildMapMarkers();
+    scalePins();
+    if(mapNote) mapNote.textContent="Tap a pin to open a place · two fingers (or +/−) to move and zoom";
   }
   sizeAndFit(0);
 }
@@ -2903,7 +2975,7 @@ function setCity(dest){
 }
 hoodsEl.addEventListener("click", e=>{
   const b = e.target.closest("button.hood-chip"); if(!b) return;
-  if(lmap) lmap.flyTo([+b.dataset.lat, +b.dataset.lng], +b.dataset.zoom, { duration:.7 });
+  if(lmap) lmap.flyTo({ center:[+b.dataset.lng, +b.dataset.lat], zoom:(+b.dataset.zoom)-1, duration:700 });
 });
 document.getElementById("mapToggle").querySelectorAll("button").forEach(b=>{
   b.addEventListener("click",()=>{
