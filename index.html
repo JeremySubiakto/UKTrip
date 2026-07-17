@@ -72,11 +72,12 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .hero-names{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(58px,16vw,132px); line-height:0.92; letter-spacing:-0.02em; color:var(--ink); margin-top:8px; text-shadow:0 2px 30px rgba(251,244,236,.8), 0 2px 6px rgba(120,66,62,.14); }
 .hero-names .amp{ color:var(--gold); font-weight:400; padding:0 .03em; text-shadow:0 1px 12px rgba(94,52,51,.4); }
 .hero-sub{ font-family:var(--serif); font-style:italic; font-size:clamp(15px,2.6vw,19px); color:#7d3f3a; margin-top:14px; text-shadow:0 1px 16px rgba(251,244,236,.95); }
-.hero-eyebrow, .hero-count, .hero-now{ text-shadow:0 1px 12px rgba(251,244,236,.96); }
+.hero-eyebrow{ text-shadow:0 1px 12px rgba(251,244,236,.96); }
+.hero-count, .hero-now{ text-shadow:0 1px 3px rgba(46,14,20,.62), 0 2px 14px rgba(46,14,20,.44); }
 .hero-toc{ display:flex; flex-wrap:wrap; justify-content:center; gap:4px 18px; margin-top:28px; }
-.hero-toc button{ font-family:var(--sans); font-weight:500; font-size:13px; letter-spacing:.06em; color:var(--deep-rose); background:none; border:none; cursor:pointer; padding:4px 2px; text-shadow:0 1px 12px rgba(251,244,236,.96); transition:color .2s; }
-.hero-toc button:hover{ color:var(--ink); }
-.hero-toc .n{ font-family:var(--serif); font-style:italic; color:var(--gold-ink); margin-right:6px; }
+.hero-toc button{ font-family:var(--sans); font-weight:600; font-size:13px; letter-spacing:.06em; color:#FBEFE9; background:none; border:none; cursor:pointer; padding:4px 2px; text-shadow:0 1px 3px rgba(46,14,20,.62), 0 2px 12px rgba(46,14,20,.46); transition:color .2s; }
+.hero-toc button:hover{ color:#fff; }
+.hero-toc .n{ font-family:var(--serif); font-style:italic; color:#F0D9A8; margin-right:6px; }
 .btn{ display:inline-flex; align-items:center; gap:12px; font-family:var(--sans); font-weight:600; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink); background:linear-gradient(180deg,#F0D6D3 0%, var(--blush) 60%, var(--rose) 100%); border:1px solid rgba(201,164,92,0.4); padding:16px 34px; border-radius:var(--r-pill); margin-top:38px; cursor:pointer; box-shadow:0 1px 0 rgba(255,255,255,0.7) inset,0 6px 18px rgba(176,127,122,0.24); transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
 @media (hover:hover){
   .btn:hover{ transform:translateY(-2px); box-shadow:0 1px 0 rgba(255,255,255,0.8) inset,0 10px 26px rgba(176,127,122,0.3); }
@@ -434,12 +435,12 @@ html:not(.revealed) .crest, html:not(.revealed) .crest *{ animation-play-state:p
 @keyframes whirlSpin{ to{ transform:rotate(360deg); } }
 
 /* ---- hero countdown: still numerals in the display face ---- */
-.hero-count{ font-family:var(--sans); font-size:var(--t-caps); font-weight:500; text-transform:uppercase; letter-spacing:0.18em; color:var(--muted); margin-top:14px; }
-.hero-count strong{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:26px; line-height:1; letter-spacing:0; text-transform:none; color:var(--deep-rose); margin-right:.14em; vertical-align:-0.08em; }
+.hero-count{ font-family:var(--sans); font-size:var(--t-caps); font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#FBEFE9; margin-top:14px; }
+.hero-count strong{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:26px; line-height:1; letter-spacing:0; text-transform:none; color:#F2DBA6; margin-right:.14em; vertical-align:-0.08em; }
 
 /* ---- live UK light: clock, sunset, golden hour + serendipity ---- */
-.hero-now{ font-family:var(--sans); font-size:var(--t-meta); letter-spacing:0.05em; color:var(--muted); margin-top:8px; min-height:1.6em; }
-.hero-now b{ font-weight:600; color:var(--deep-rose); }
+.hero-now{ font-family:var(--sans); font-size:var(--t-meta); letter-spacing:0.05em; color:#F7E4DE; margin-top:8px; min-height:1.6em; }
+.hero-now b{ font-weight:600; color:#F2DBA6; }
 .ov-surprise{ display:flex; align-items:center; gap:10px; margin:14px 0 22px; flex-wrap:wrap; }
 .surprise-hint{ font-family:var(--sans); font-size:12px; color:var(--muted); }
 @media (prefers-reduced-motion: no-preference){
