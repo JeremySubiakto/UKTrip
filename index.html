@@ -387,7 +387,8 @@ html:not(.revealed) .crest, html:not(.revealed) .crest *{ animation-play-state:p
 .burst{ position:absolute; inset:0; overflow:visible; pointer-events:none; z-index:6; perspective:900px; }
 .burst .bp{ position:absolute; left:0; top:0; display:block; will-change:transform,opacity; }
 .burst .bp svg{ width:100%; height:100%; display:block; }
-.bpetal{ background:radial-gradient(circle at 30% 30%, #F6E2DF, #EFB9C2); border-radius:80% 0 80% 0; }
+.bpetal{ border-radius:88% 4% 90% 10% / 64% 30% 74% 34%; box-shadow:inset 1.5px 2px 3px rgba(255,251,246,.6), inset -2px -3px 5px rgba(143,92,87,.34); }
+.bpetal::after{ content:""; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(132deg, rgba(255,252,248,.5), rgba(255,252,248,0) 38%, rgba(143,92,87,0) 58%, rgba(109,58,66,.28) 92%); }
 .bspark{ border-radius:50%; background:radial-gradient(circle, #EFD3A0 0%, #D9AE66 55%, rgba(217,174,102,0) 78%); }
 @media (prefers-reduced-motion: no-preference){
   .crest.boom svg{ animation:crestBoom .68s cubic-bezier(.34,1.56,.64,1); }
@@ -675,6 +676,30 @@ html[data-vt] .view.content.active, html[data-vt] .cat-panel.active .grid>.card,
 .afterword .aw-back{ margin-top:18px; font-family:var(--sans); font-weight:600; font-size:var(--t-prose-sm); color:var(--deep-rose); background:none; border:none; border-bottom:1px solid rgba(176,127,122,.35); cursor:pointer; padding:0 0 2px; }
 .why{ font-family:var(--serif); font-style:italic; font-size:var(--t-prose-sm); line-height:1.45; color:var(--deep-rose); margin:7px 0 2px; }
 .why-k{ display:block; font-family:var(--sans); font-style:normal; font-size:var(--t-caps-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-ink); margin-bottom:3px; }
+/* ---- journey panorama v2 additions ---- */
+.rm-glyph{ stroke-width:1.5; }
+.rm-gfill{ stroke-width:1.5; }
+.rm-shadow{ fill:rgba(143,92,87,.13); opacity:0; }
+.rm-field{ fill:none; stroke:#D9A89F; stroke-width:.8; opacity:.4; stroke-linecap:round; }
+.rm-wave{ fill:none; stroke:#FFFFFF; stroke-width:1.2; opacity:.75; stroke-linecap:round; }
+@media (prefers-reduced-motion: no-preference){
+  .routemap.play .rm-shadow{ animation:rmShadowIn .6s ease both; animation-delay:var(--d,0s); }
+}
+@media (prefers-reduced-motion: reduce){
+  .routemap.play .rm-shadow{ opacity:1; }
+}
+@keyframes rmShadowIn{ from{ opacity:0; } to{ opacity:1; } }
+/* ---- engraved medallion upgrade (appended: overrides earlier equal-specificity seal rules) ---- */
+.seal-coin{ fill:url(#slFace); }
+.seal-rim{ stroke-width:2.2; }
+.seal-ring2{ stroke-width:.8; opacity:.85; }
+.seal-mill{ fill:none; stroke:#b98a49; stroke-width:3.2; stroke-dasharray:.85 1.75; opacity:.8; }
+.seal-rope{ fill:none; stroke:#b98a49; stroke-width:.7; opacity:.85; }
+.seal-dots{ stroke-width:1; }
+.seal-sprig{ fill:none; stroke:var(--gold-ink); stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; opacity:.85; }
+.seal-emblem{ stroke-width:1.8; }
+.seal-shadow{ stroke:#5c431a; opacity:.42; }
+.seal-name-shadow{ fill:#5c431a; opacity:.42; }
 </style>
 </head>
 <body>
@@ -774,22 +799,80 @@ html[data-vt] .view.content.active, html[data-vt] .cat-panel.active .grid>.card,
       <div class="rm-stage">
         <svg viewBox="0 0 660 300" role="img" aria-label="Our route: London, Bath, Cardiff, Eryri, then Edinburgh">
           <defs>
-            <linearGradient id="rmSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFF7F3"/><stop offset="100%" stop-color="#FBEBE7" stop-opacity="0"/></linearGradient>
+            <linearGradient id="rmSkyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8F4"/><stop offset=".7" stop-color="#FCEEE9"/><stop offset="1" stop-color="#FBEBE7" stop-opacity="0"/></linearGradient>
+            <radialGradient id="rmSunG"><stop offset="0" stop-color="#F6C9A2" stop-opacity=".55"/><stop offset=".55" stop-color="#F6CBA6" stop-opacity=".2"/><stop offset="1" stop-color="#F6CBA6" stop-opacity="0"/></radialGradient>
+            <linearGradient id="rmRidgeA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FAEEEB"/><stop offset="1" stop-color="#F6E3DF"/></linearGradient>
+            <linearGradient id="rmRidgeB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8E8E4"/><stop offset="1" stop-color="#F4DBD7"/></linearGradient>
+            <linearGradient id="rmRidgeC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E0DC"/><stop offset="1" stop-color="#F1D3CF"/></linearGradient>
+            <linearGradient id="rmRidgeD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2D8D3"/><stop offset="1" stop-color="#EDCAC4"/></linearGradient>
+            <linearGradient id="rmRidgeE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EFCFC9"/><stop offset="1" stop-color="#E9BFB8"/></linearGradient>
+            <linearGradient id="rmMistG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".5"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+            <linearGradient id="rmSeaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5E0DC"/><stop offset="1" stop-color="#EAC7C2"/></linearGradient>
           </defs>
-          <rect x="0" y="0" width="660" height="190" fill="url(#rmSky)" rx="14"/>
-          <circle cx="100" cy="54" r="26" fill="#F6DDD0" opacity=".55"/>
-          <circle cx="100" cy="54" r="15" fill="#F2C9AE" opacity=".85"/>
-          <g stroke="#C9A45C" stroke-width="1.6" opacity=".6" stroke-linecap="round"><path d="M100,20 v-7 M66,54 h-7 M134,54 h7 M76,30 l-5,-5 M124,30 l5,-5"/></g>
-          <text x="258" y="52" font-size="13" fill="var(--rose)" opacity=".7" text-anchor="middle">✦</text>
-          <text x="392" y="34" font-size="11" fill="var(--rose)" opacity=".55" text-anchor="middle">✦</text>
-          <text x="556" y="28" font-size="12" fill="var(--rose)" opacity=".6" text-anchor="middle">✦</text>
-          <g class="rm-cloud" fill="#FFFFFF" opacity=".85"><ellipse cx="218" cy="78" rx="31" ry="11"/><ellipse cx="240" cy="71" rx="21" ry="9"/><ellipse cx="199" cy="72" rx="17" ry="8"/></g>
-          <g class="rm-cloud c2" fill="#FFFFFF" opacity=".7"><ellipse cx="484" cy="54" rx="26" ry="9"/><ellipse cx="501" cy="48" rx="16" ry="7"/></g>
-          <path d="M0,186 Q80,176 150,184 Q260,194 340,172 Q420,150 480,140 Q545,126 612,116 L660,112 L660,300 L0,300 Z" fill="#F8E9E6"/>
-          <path d="M0,228 Q90,214 170,224 Q280,236 360,214 Q440,190 505,184 Q575,176 660,158 L660,300 L0,300 Z" fill="#F4DCD9"/>
-          <path d="M0,262 Q120,250 240,260 Q380,270 480,250 Q575,233 660,226 L660,300 L0,300 Z" fill="#F1D3CF"/>
-          <g class="rm-pine" opacity=".85"><path d="M420,196 l8,-15 l8,15 Z"/><path d="M442,190 l7,-13 l7,13 Z"/><path d="M502,160 l7,-13 l7,13 Z"/><path d="M518,155 l6,-11 l6,11 Z"/></g>
-          <g class="rm-glyph" opacity=".55"><path d="M290,274 q7,-5 14,0 q7,5 14,0"/><path d="M312,283 q7,-5 14,0 q7,5 14,0"/></g>
+          <rect x="0" y="0" width="660" height="192" fill="url(#rmSkyG)" rx="14"/>
+          <circle cx="100" cy="54" r="38" fill="url(#rmSunG)"/>
+          <circle cx="100" cy="54" r="26" fill="#F6DDD0" opacity=".6"/>
+          <circle cx="100" cy="54" r="15" fill="#F3C7A6" opacity=".95"/>
+          <circle cx="100" cy="54" r="21" fill="none" stroke="#C9A45C" stroke-width=".8" opacity=".3"/>
+          <g stroke="#C9A45C" stroke-width="1.3" opacity=".55" stroke-linecap="round" fill="none"><path d="M100,21 v-8 M65,54 h-8 M135,54 h8 M76,30 l-5.5,-5.5 M124,30 l5.5,-5.5"/></g>
+          <text x="258" y="52" font-size="13" fill="var(--rose)" opacity=".7" text-anchor="middle">&#10022;</text>
+          <text x="392" y="34" font-size="11" fill="var(--rose)" opacity=".55" text-anchor="middle">&#10022;</text>
+          <text x="556" y="28" font-size="12" fill="var(--rose)" opacity=".6" text-anchor="middle">&#10022;</text>
+          <g fill="none" stroke="#8F5C57" stroke-width="1.05" opacity=".45" stroke-linecap="round"><path d="M306,62 q3,-3 6,0 q3,-3 6,0"/><path d="M322,55 q2.5,-2.5 5,0 q2.5,-2.5 5,0"/><path d="M336,63 q2.2,-2.2 4.4,0 q2.2,-2.2 4.4,0"/></g>
+          <g fill="none" stroke="#8F5C57" stroke-width="1.05" opacity=".35" stroke-linecap="round"><path d="M470,44 q2.6,-2.6 5.2,0 q2.6,-2.6 5.2,0"/><path d="M484,39 q2.2,-2.2 4.4,0 q2.2,-2.2 4.4,0"/><path d="M566,50 q2.4,-2.4 4.8,0 q2.4,-2.4 4.8,0"/></g>
+          <g class="rm-cloud">
+            <ellipse cx="216" cy="76" rx="30" ry="9" fill="#FFFFFF" opacity=".92"/>
+            <ellipse cx="237" cy="69" rx="18" ry="7" fill="#FFFFFF" opacity=".85"/>
+            <ellipse cx="196" cy="70.5" rx="13" ry="6" fill="#FFFFFF" opacity=".8"/>
+            <ellipse cx="221" cy="82.5" rx="21" ry="4" fill="#F6E1DA" opacity=".6"/>
+            <path d="M191,85.5 h56" stroke="#EDCDC4" stroke-width="1" opacity=".55" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="rm-cloud c2">
+            <ellipse cx="484" cy="54" rx="24" ry="7.5" fill="#FFFFFF" opacity=".8"/>
+            <ellipse cx="500" cy="48.5" rx="14" ry="6" fill="#FFFFFF" opacity=".75"/>
+            <ellipse cx="488" cy="59.5" rx="16" ry="3.4" fill="#F6E1DA" opacity=".5"/>
+            <path d="M466,62 h42" stroke="#EDCDC4" stroke-width="1" opacity=".5" fill="none" stroke-linecap="round"/>
+          </g>
+          <g opacity=".55"><ellipse cx="382" cy="92" rx="16" ry="4.5" fill="#FFFFFF"/><ellipse cx="393" cy="88" rx="9" ry="3.5" fill="#FFFFFF" opacity=".8"/></g>
+          <path d="M0,180 Q70,168 140,172 Q230,178 310,158 Q400,136 470,124 Q545,110 605,98 L660,92 L660,300 L0,300 Z" fill="url(#rmRidgeA)"/>
+          <path d="M0,204 Q85,192 160,199 Q260,208 350,188 Q430,170 495,158 Q570,143 660,128 L660,300 L0,300 Z" fill="url(#rmRidgeB)"/>
+          <rect x="0" y="148" width="660" height="46" fill="url(#rmMistG)"/>
+          <g class="rm-pine" opacity=".5"><path d="M552,146 l4.5,-8.5 4.5,8.5 Z"/><path d="M566,142.5 l4,-7.5 4,7.5 Z"/></g>
+          <path d="M0,232 Q95,218 175,226 Q285,236 365,216 Q445,194 508,186 Q580,176 660,160 L660,300 L0,300 Z" fill="url(#rmRidgeC)"/>
+          <g>
+            <circle cx="100" cy="224" r="4.6" fill="#E6B8B0"/><path d="M100,228.6 v3.4" stroke="#C08B82" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <circle cx="116" cy="226.5" r="3.4" fill="#EAC3BB"/><path d="M116,229.9 v2.8" stroke="#C08B82" stroke-width="1" stroke-linecap="round" fill="none"/>
+          </g>
+          <g class="rm-pine" opacity=".9">
+            <path d="M416,206 l6,-11 6,11 Z"/><path d="M419,199.5 l3,-6 3,6 Z"/>
+            <path d="M436,200 l5.5,-10 5.5,10 Z"/><path d="M439,194 l2.8,-5.5 2.8,5.5 Z"/>
+            <path d="M498,193 l5,-9.5 5,9.5 Z"/>
+            <path d="M514,188.5 l4.5,-8.5 4.5,8.5 Z"/>
+          </g>
+          <path d="M0,262 Q120,250 240,258 Q380,268 480,250 Q575,234 660,226 L660,300 L0,300 Z" fill="url(#rmRidgeD)"/>
+          <g>
+            <circle cx="230" cy="253" r="4.4" fill="#E4B4AC"/><path d="M230,257.4 v3.4" stroke="#C08B82" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+          </g>
+          <path d="M238,300 L238,268 Q300,258 340,260 Q380,262 412,258 L412,300 Z" fill="url(#rmSeaG)"/>
+          <path d="M238,268 Q300,258 340,260 Q380,262 412,258" fill="none" stroke="#E2B3AB" stroke-width="1" opacity=".6"/>
+          <g class="rm-wave">
+            <path d="M258,278 q5,-3 10,0 q5,3 10,0"/>
+            <path d="M350,274 q5,-3 10,0 q5,3 10,0"/>
+            <path d="M300,287 q5,-3 10,0 q5,3 10,0"/>
+            <path d="M377,285 q4.5,-2.7 9,0"/>
+            <path d="M270,292 q4.5,-2.7 9,0"/>
+          </g>
+          <g fill="none" stroke="#8F5C57" stroke-width="1.05" opacity=".55" stroke-linecap="round" stroke-linejoin="round"><path d="M366,268 q4.5,2.6 9,0"/><path d="M370.5,266 v-8.5 l5.5,6.5 h-5.5"/></g>
+          <path d="M0,286 Q70,276 150,280 Q210,283 258,278 L258,300 L0,300 Z" fill="url(#rmRidgeE)"/>
+          <path d="M392,276 Q470,268 560,258 Q615,252 660,250 L660,300 L392,300 Z" fill="url(#rmRidgeE)"/>
+          <g class="rm-field">
+            <path d="M28,290 q52,-8 104,-7"/>
+            <path d="M58,296 q60,-9 118,-8"/>
+            <path d="M430,283 q62,-10 122,-14"/>
+            <path d="M462,292 q66,-10 132,-15"/>
+            <path d="M540,272 q52,-7 104,-10"/>
+          </g>
+          <g fill="#D9A198" opacity=".45"><circle cx="452" cy="277" r="1.2"/><circle cx="459" cy="276.2" r="1"/><circle cx="466" cy="275.4" r="1.1"/><circle cx="510" cy="268" r="1.1"/><circle cx="517" cy="267.2" r="1"/></g>
           <path d="M60,244 C110,236 148,232 185,232 C245,232 268,244 315,240 C382,236 408,186 455,164 C505,140 562,112 600,84" fill="none" stroke="rgba(217,139,134,.16)" stroke-width="9" stroke-linecap="round"/>
           <path id="rmRoutePath" class="rm-route-bg" d="M60,244 C110,236 148,232 185,232 C245,232 268,244 315,240 C382,236 408,186 455,164 C505,140 562,112 600,84"/>
           <path class="rm-route" pathLength="1" d="M60,244 C110,236 148,232 185,232 C245,232 268,244 315,240 C382,236 408,186 455,164 C505,140 562,112 600,84"/>
@@ -801,15 +884,20 @@ html[data-vt] .view.content.active, html[data-vt] .cat-panel.active .grid>.card,
               <circle cx="-4" cy="3.4" r="1.8" fill="var(--deep-rose)"/><circle cx="4" cy="3.4" r="1.8" fill="var(--deep-rose)"/>
             </g>
           </g>
-          <text class="rm-leg" x="122" y="216" text-anchor="middle">~1h20 · rail</text>
-          <text class="rm-leg" x="252" y="224" text-anchor="middle">~1h · rail</text>
+          <text class="rm-leg" x="122" y="216" text-anchor="middle">~1h20 &#183; rail</text>
+          <text class="rm-leg" x="252" y="224" text-anchor="middle">~1h &#183; rail</text>
           <text class="rm-leg" x="390" y="188" text-anchor="middle">into the hills</text>
           <text class="rm-leg" x="534" y="104" text-anchor="middle">the long way up</text>
-          <g transform="translate(60,244)"><g class="rm-stop" style="--d:.5s" data-go="london" tabindex="0" role="link" aria-label="London"><g class="rm-glyph"><path d="M-7,-20 v-30 h14 v30"/><path d="M-7,-50 L0,-64 L7,-50"/><path d="M0,-64 v-8 M0,-72 l6,2.4 l-6,2.4"/><path d="M-7,-26 h14 M-7,-46 h14"/><path d="M-3,-20 v-4 a3,3 0 0 1 6,0 v4"/></g><circle class="rm-gfill" cx="0" cy="-36" r="5.4"/><g class="rm-glyph"><path d="M0,-36 v-3.6 M0,-36 l2.8,1.7"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">London</text></g></g>
-          <g transform="translate(185,232)"><g class="rm-stop" style="--d:.95s" data-go="bath" tabindex="0" role="link" aria-label="Bath"><g class="rm-glyph"><path d="M-19,-20 A22,22 0 0 1 19,-20"/><path d="M-15,-22 A17.5,17.5 0 0 1 15,-22"/><path d="M-13,-23 v-8 M-8,-27 v-9 M-3,-29 v-9 M3,-29 v-9 M8,-27 v-9 M13,-23 v-8"/><path d="M-16,-20 h32" opacity=".6"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Bath</text></g></g>
-          <g transform="translate(315,240)"><g class="rm-stop" style="--d:1.4s" data-go="wales" tabindex="0" role="link" aria-label="Cardiff"><g class="rm-glyph"><path d="M-11,-20 v-18 h4 v5 h4.4 v-5 h5.2 v5 h4.4 v-5 h4 v18 Z"/><path d="M-4,-20 v-8 a4,4 0 0 1 8,0 v8"/><path d="M0,-38 v-12 M0,-50 l8,3 l-8,3"/><path d="M-15,-20 h30" opacity=".6"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Cardiff</text></g></g>
-          <g transform="translate(455,164)"><g class="rm-stop" style="--d:1.85s" data-go="wales" tabindex="0" role="link" aria-label="Eryri"><g class="rm-glyph"><path d="M-20,-18 L-7,-44 L0,-32 L10,-52 L24,-18"/><path d="M-10,-38 l3.5,-4.5 l3.5,4.5 M5,-44 l5,-6.5 l5,6.5"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Eryri</text></g></g>
-          <g transform="translate(600,84)"><g class="rm-stop" style="--d:2.3s" data-go="scotland" tabindex="0" role="link" aria-label="Edinburgh"><g class="rm-glyph"><path d="M-16,-18 L-10,-28 h20 L16,-18"/><path d="M-12,-18 l-3,-4 M14,-18 l3,-5"/><path d="M-10,-28 v-10 M10,-28 v-10 M-10,-38 h4 M-3,-38 h6 M7,-38 h3"/><path d="M-4,-38 v-10 h8 v10"/><path d="M0,-48 v-10 M0,-58 l7,2.6 l-7,2.6"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Edinburgh</text></g></g>
+          <ellipse class="rm-shadow" cx="60" cy="257.5" rx="15" ry="3.2" style="--d:.5s"/>
+          <g transform="translate(60,244)"><g class="rm-stop" style="--d:.5s" data-go="london" tabindex="0" role="link" aria-label="London"><g class="rm-glyph"><path d="M-9,-20 h18" opacity=".6"/><path d="M-6.5,-20 v-32 h13 v32"/><path d="M-2.6,-20 v-3.4 a2.6,2.6 0 0 1 5.2,0 v3.4"/><path d="M-6.5,-27 h13 M-6.5,-33 h13 M-6.5,-47 h13"/><path d="M-7.5,-52 h15"/><path d="M-5.8,-52 L0,-65 L5.8,-52"/><path d="M-2.6,-57.5 h5.2"/><path d="M0,-65 v-7 M0,-72 l5.6,2.2 l-5.6,2.2"/></g><circle class="rm-gfill" cx="0" cy="-40" r="5.6"/><g fill="none" stroke="var(--deep-rose)" stroke-width="1.1" stroke-linecap="round" opacity=".85"><path d="M0,-44.8 v1.5 M0,-36.7 v1.5 M-4.5,-40 h1.5 M3,-40 h1.5"/></g><g class="rm-glyph"><path d="M0,-40 v-3.3 M0,-40 l2.5,1.4"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">London</text></g></g>
+          <ellipse class="rm-shadow" cx="185" cy="245.5" rx="15" ry="3.2" style="--d:.95s"/>
+          <g transform="translate(185,232)"><g class="rm-stop" style="--d:.95s" data-go="bath" tabindex="0" role="link" aria-label="Bath"><g class="rm-glyph"><path d="M-22,-20 h44" opacity=".6"/><path d="M-19,-20 A21.5,21.5 0 0 1 19,-20"/><path d="M-12.7,-20 A17.5,17.5 0 0 1 12.7,-20"/><path d="M-9,-23 v-6.3 M-4.5,-24.9 v-5.9 M0,-25.5 v-5.8 M4.5,-24.9 v-5.9 M9,-23 v-6.3"/><path d="M-6.2,-20 v-2.4 M0,-20 v-2.8 M6.2,-20 v-2.4" opacity=".8"/><path d="M-17,-15.5 q17,3.6 34,0" opacity=".5" stroke-dasharray="1.4 2.6"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Bath</text></g></g>
+          <ellipse class="rm-shadow" cx="315" cy="253.5" rx="15" ry="3.2" style="--d:1.4s"/>
+          <g transform="translate(315,240)"><g class="rm-stop" style="--d:1.4s" data-go="wales" tabindex="0" role="link" aria-label="Cardiff"><g class="rm-glyph"><path d="M-16,-20 h32" opacity=".6"/><path d="M-12,-20 v-19 h4.4 v4.6 h4 v-4.6 h7.2 v4.6 h4 v-4.6 h4.4 v19 Z"/><path d="M-4,-20 v-7.2 a4,4 0 0 1 8,0 v7.2"/><path d="M-7.8,-31.5 v3.6 M7.8,-31.5 v3.6"/><path d="M0,-39 v-12.5"/><path d="M0,-51.5 l8.5,2.7 l-8.5,2.7"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Cardiff</text></g></g>
+          <ellipse class="rm-shadow" cx="455" cy="177.5" rx="15" ry="3.2" style="--d:1.85s"/>
+          <g transform="translate(455,164)"><g class="rm-stop" style="--d:1.85s" data-go="wales" tabindex="0" role="link" aria-label="Eryri"><g class="rm-glyph"><path d="M-22,-18 L-8,-46 L-1,-33 L10,-55 L25,-18"/><path d="M-11.4,-39.2 l3.4,-4.6 l3.3,4.4"/><path d="M5.6,-45.4 l4.4,-6.2 l4.3,6"/><path d="M-13,-30 l-3.4,6 M14,-34 l3.6,6.2" opacity=".5"/><path d="M0,-21.5 q3.5,-2.2 7,0 q3.5,2.2 7,0" opacity=".5"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Eryri</text></g></g>
+          <ellipse class="rm-shadow" cx="600" cy="97.5" rx="15" ry="3.2" style="--d:2.3s"/>
+          <g transform="translate(600,84)"><g class="rm-stop" style="--d:2.3s" data-go="scotland" tabindex="0" role="link" aria-label="Edinburgh"><g class="rm-glyph"><path d="M-20,-18 h40" opacity=".6"/><path d="M-17,-18 L-11,-31 M11,-31 L17,-18"/><path d="M-12.6,-24 l-1.9,4.2 M12.6,-24 l1.9,4.2 M-10.2,-21 l-1.4,2.8 M10.2,-21 l1.4,2.8" opacity=".5"/><path d="M-11,-31 h22"/><path d="M-11,-31 v-8.5 M11,-31 v-8.5"/><path d="M-11,-39.5 h3 M-7.7,-39.5 h3 M4.7,-39.5 h3 M8,-39.5 h3"/><path d="M-8,-34.8 v2 M8,-34.8 v2" opacity=".8"/><path d="M-4.5,-39.5 v-9 h9 v9"/><path d="M0,-45.5 v2.6" opacity=".8"/><path d="M-4.5,-48.5 h9"/><path d="M0,-48.5 v-9 M0,-57.5 l7,2.4 l-7,2.4"/></g><circle class="pin-seal" r="11"/><circle class="pin-seal-in" r="6.6"/><circle class="pin-dot" r="2.6"/><text class="pin-name" y="30" text-anchor="middle">Edinburgh</text></g></g>
         </svg>
       </div>
     </div>
@@ -1007,24 +1095,47 @@ const FLAG = {
 };
 function flagHTML(country){ return `<span class="flag">${FLAG[country]||""}</span>`; }
 
-/* per-place travel-stamp seal (the destination "logo") */
+/* per-place travel-stamp seal (the destination "logo") — engraved medallion edition */
 const SEAL = {
-  london:   { name:"LONDON",    country:"ENGLAND", emblem:`<path d="M94,122 V90 h12 V122"/><path d="M92,90 L100,76 L108,90"/><path d="M100,76 V70 M100,70 l6,2 -6,2"/><circle cx="100" cy="101" r="4.2"/><path d="M100,101 V98 M100,101 l2.4,1.4"/><path d="M94,112 h12"/>` },
-  hampstead:{ name:"HAMPSTEAD", country:"ENGLAND", emblem:`<path d="M100,123 V105"/><path d="M100,105 c-12,1 -17,-8 -12,-15 c-3,-9 9,-14 12,-7 c3,-7 15,-2 12,7 c5,7 0,16 -12,15 Z"/><path d="M86,123 q14,-4 28,0"/>` },
-  bath:     { name:"BATH",      country:"ENGLAND", emblem:`<path d="M86,98 L100,86 L114,98 Z"/><path d="M88,98 h24"/><path d="M92,98 V121 M100,98 V121 M108,98 V121"/><path d="M85,121 h30"/>` },
-  wales:    { name:"WALES",     country:"CYMRU",   emblem:`<path d="M89,121 V99 h22 V121 Z"/><path d="M89,99 v-5 h4 v3 h4 v-3 h4 v3 h4 v-3 h6 v5"/><path d="M100,94 V82 M100,82 c8,1 8,5 0,5"/><path d="M95,121 V111 a5,5 0 0 1 10,0 V121"/>` },
-  scotland: { name:"SCOTLAND",  country:"ALBA",    emblem:`<path d="M100,122 V104"/><path d="M90,106 Q100,117 110,106 Q108,96 100,93 Q92,96 90,106 Z"/><path d="M93,102 h14 M94,108 h12"/><path d="M100,93 V75 M100,93 L90,78 M100,93 L110,78 M100,93 L84,83 M100,93 L116,83"/><path d="M91,119 Q83,115 81,108 M109,119 Q117,115 119,108"/>` },
+  london:   { name:"LONDON",    country:"ENGLAND", emblem:`<path d="M84,132 h32"/><path d="M92,132 V90 M108,132 V90"/><path d="M92,124 h16 M92,100 h16"/><path d="M95,118 v-9 M100,118 v-9 M105,118 v-9"/><path d="M90,90 h20 M90,90 V72 M110,90 V72 M90,72 h20"/><circle cx="100" cy="81" r="6.6"/><path d="M100,81 V75.4 M100,81 l3.8,2.3"/><path d="M91,72 V64 M109,72 V64 M91,64 h18 M95,70 v-4 M100,70 v-5 M105,70 v-4"/><path d="M91,64 L100,54 L109,64 M100,54 V50"/>` },
+  hampstead:{ name:"HAMPSTEAD", country:"ENGLAND", emblem:`<path d="M76,132 q24,-6 48,0"/><path d="M96,132 C96,120 98,111 96,103 M104,132 C104,120 102,111 104,103"/><path d="M98,111 L90,102 M102,113 L110,103"/><path d="M74,90 Q62,80 76,72 Q74,58 90,62 Q100,51 110,62 Q126,58 124,72 Q138,80 126,90 Q130,103 114,102 Q100,111 86,102 Q70,103 74,90 Z"/><path d="M85,90 q8,7 15,1 M101,92 q7,5 13,-2"/>` },
+  bath:     { name:"BATH",      country:"ENGLAND", emblem:`<path d="M70,88 L100,64 L130,88 Z"/><path d="M100,64 V59"/><path d="M77,85 L100,69 L123,85"/><circle cx="100" cy="80" r="3.4"/><path d="M74,93 h52"/><path d="M79,93 V124 M93,93 V124 M107,93 V124 M121,93 V124"/><path d="M76.5,96.5 h5 M90.5,96.5 h5 M104.5,96.5 h5 M118.5,96.5 h5"/><path d="M75,124 h50 M71,128 h58 M67,132 h66"/>` },
+  wales:    { name:"WALES",     country:"CYMRU",   emblem:`<path d="M74,132 h52"/><path d="M80,132 V92 M120,132 V92"/><path d="M80,92 v-8 h8 v6 h8 v-6 h8 v6 h8 v-6 h8 v8"/><path d="M93,132 V115 a7,7 0 0 1 14,0 V132"/><path d="M90,112 v-8 M110,112 v-8 M100,106 v-9 M96.5,100.5 h7"/><path d="M100,84 V60"/><path d="M100,62 L127,66.5 L119,70 L127,73.5 L100,78 Z"/><path d="M106,71.5 q3.5,-5.5 9,-2.5 q-3.5,1.5 -2.5,4.5"/>` },
+  scotland: { name:"SCOTLAND",  country:"ALBA",    emblem:`<path d="M86,132 h28"/><path d="M100,132 V112"/><path d="M100,124 Q87,121 83,109 M83,109 l-2.5,-5 M83,109 l5,-1.5"/><path d="M100,118 Q113,115 117,103 M117,103 l2.5,-5 M117,103 l-5,-1.5"/><path d="M87,102 Q100,116 113,102 Q111,89 100,85 Q89,89 87,102 Z"/><path d="M91,103 L103,91 M95,107 L108,94 M109,103 L97,91 M105,107 L92,94"/><path d="M100,85 V64 M100,85 L87,68 M100,85 L113,68 M100,85 L78,76 M100,85 L122,76"/>` },
 };
+/* engine-turned guilloche ring: two phase-offset sine rings that braid */
+function slGuill(r,amp,n,ph){
+  const P=(a,rr)=>((100+rr*Math.cos(a)).toFixed(1)+" "+(100+rr*Math.sin(a)).toFixed(1));
+  const seg=Math.PI/n;
+  let d="M"+P(ph,r);
+  for(let i=0;i<2*n;i++){
+    const a0=ph+i*seg;
+    d+=" Q"+P(a0+seg/2, r+(i%2? -2*amp : 2*amp))+" "+P(a0+seg,r);
+  }
+  return d+" Z";
+}
+const SL_ROPE1=slGuill(83.3,1.8,26,0);
+const SL_ROPE2=slGuill(83.3,1.8,26,Math.PI/26);
+/* laurel sprig (left side; right side is mirrored in sealHTML) */
+const SL_SPRIG=`M62,134 C57,125 58,116 64,108 M61,128 Q51,126 48,118 Q57,118 61,128 Z M60,120 Q51,116 50,108 Q59,111 60,120 Z M62,124 Q70,121 72,114 Q64,115 62,124 Z M63,115 Q70,111 71,104 Q64,107 63,115 Z M64,108 Q61,101 66,96 Q69,103 64,108 Z`;
+/* soft two-stop face sheen (id shared by all five seals; identical defs may repeat) */
+const SL_FACE=`<radialGradient id="slFace" cx="42%" cy="36%" r="78%"><stop offset="0%" stop-color="#f8f0e1"/><stop offset="100%" stop-color="#e9d9ba"/></radialGradient>`;
 function sealHTML(dest){
   const s=SEAL[dest]; if(!s) return "";
   return `<svg class="sealsvg" viewBox="0 0 200 200" aria-hidden="true">
-    <defs><path id="seal-arc-${dest}" d="M46,100 A54,54 0 0 1 154,100" fill="none"/></defs>
+    <defs><path id="seal-arc-${dest}" d="M46,100 A54,54 0 0 1 154,100" fill="none"/>${SL_FACE}</defs>
     <circle class="seal-coin" cx="100" cy="100" r="94"/>
+    <circle class="seal-mill" cx="100" cy="100" r="90.6"/>
     <circle class="seal-rim" cx="100" cy="100" r="94"/>
-    <circle class="seal-ring2" cx="100" cy="100" r="86"/>
-    <circle class="seal-dots" cx="100" cy="100" r="82"/>
+    <circle class="seal-ring2" cx="100" cy="100" r="87.2"/>
+    <path class="seal-rope" d="${SL_ROPE1}"/>
+    <path class="seal-rope" d="${SL_ROPE2}"/>
+    <circle class="seal-dots" cx="100" cy="100" r="77"/>
+    <text class="seal-name seal-name-shadow" transform="translate(0.6,0.8)"><textPath href="#seal-arc-${dest}" startOffset="50%" text-anchor="middle">${s.name}</textPath></text>
     <text class="seal-name"><textPath href="#seal-arc-${dest}" startOffset="50%" text-anchor="middle">${s.name}</textPath></text>
     <text class="seal-star" x="34" y="106">✦</text><text class="seal-star" x="166" y="106" text-anchor="end">✦</text>
+    <g class="seal-sprig"><path d="${SL_SPRIG}"/><path d="${SL_SPRIG}" transform="translate(200,0) scale(-1,1)"/></g>
+    <g class="seal-emblem seal-shadow" transform="translate(0.6,0.8)">${s.emblem}</g>
     <g class="seal-emblem">${s.emblem}</g>
     <text class="seal-country" x="100" y="156" text-anchor="middle">${s.country}</text>
   </svg>`;
@@ -3219,13 +3330,46 @@ function crestHTML(){
 
 /* ---------- the peony bombs: a salvo with real air. blooms are heavy and rock as they arc;
    petals stall and flip and drift; sparks flash and die; blooms shed loose petals mid-flight ---------- */
-const PEONY_TONES=[["#F7E3E1","#EFC0CA"],["#F4CDD5","#E8A6B4"],["#F1BBC6","#DE95A6"],["#F3D9D3","#E2ABA7"]];
+/* ---------- painterly peonies: 4 rings of ruffled bezier petals, pale rims deepening
+   to a rose heart, gold stamen cluster. petal shapes (q0-q3) are identical for every
+   bloom; gradient defs (pg[A-D]0/1) are deterministic per tone family, so duplicated
+   ids across instances always reference identical defs ---------- */
+const PEONY_TONES=[
+  ["#FAECE9","#D58398","#F0C0CB","#A85A72","A"],
+  ["#F8E3E7","#CB7291","#EDB3C3","#9E4E6A","B"],
+  ["#FAEDE4","#D68B7E","#F2C8BC","#A96054","C"],
+  ["#F7E6EE","#C1789E","#EAB8CD","#8F5273","D"]
+];
+const PEONY_PETALS=[
+  'M0-2C-5-4-9-9-9.7-16C-10.1-20.4-7.7-23.3-5.7-21.7C-4.6-24.5-1.9-25.5-.4-23.5C1.2-25.7 4-24.7 4.9-22.1C7-23.5 9.7-20.6 9.5-16.4C9-9.3 4.9-4 0-2Z',
+  'M0-1.7C-3.9-3.3-7-7.2-7.4-12.4C-7.7-15.7-5.9-18-4.4-16.8C-3.4-18.9-1.2-19.6-.1-17.9C1-19.7 3.2-18.9 4.1-16.8C5.7-18 7.5-15.5 7.2-12.1C6.6-7 3.7-3.2 0-1.7Z',
+  'M0-1.4C-2.9-2.6-5.1-5.4-5.4-8.9C-5.6-11.4-4.2-13.2-3-12.2C-2.1-13.8-.7-14.3 .1-12.9C1-14.4 2.6-13.7 3.2-12C4.4-12.9 5.6-11 5.3-8.7C4.9-5.2 2.7-2.5 0-1.4Z',
+  'M0-1C-2-1.8-3.5-3.6-3.6-6C-3.7-8-2.4-9.4-1.3-8.4C-.4-9.6 1-9.5 1.6-8.2C2.8-9.1 3.7-7.6 3.5-5.7C3.2-3.3 1.9-1.7 0-1Z'
+];
 function bloomSVG(ci){
-  const t=PEONY_TONES[ci%PEONY_TONES.length];
-  let s="";
-  for(let i=0;i<8;i++) s+='<ellipse cx="0" cy="-11" rx="7.5" ry="12" fill="'+t[1]+'" transform="rotate('+(i*45)+')"/>';
-  for(let i=0;i<6;i++) s+='<ellipse cx="0" cy="-7.5" rx="6" ry="9.5" fill="'+t[0]+'" transform="rotate('+(i*60+22)+')"/>';
-  return '<svg viewBox="-24 -24 48 48"><g>'+s+'<circle r="4.4" fill="#EFC98F"/><circle r="2.4" fill="#DCA45E" opacity=".85"/></g></svg>';
+  const t=PEONY_TONES[ci%PEONY_TONES.length], L=t[4];
+  let s='<defs>';
+  for(let i=0;i<4;i++) s+='<path id="q'+i+'" d="'+PEONY_PETALS[i]+'"/>';
+  s+='<linearGradient id="pg'+L+'0" x2="0" y2="1"><stop stop-color="'+t[0]+'"/><stop offset=".55" stop-color="'+t[2]+'"/><stop offset="1" stop-color="'+t[1]+'"/></linearGradient>'
+   +'<linearGradient id="pg'+L+'1" x2="0" y2="1"><stop stop-color="'+t[2]+'"/><stop offset="1" stop-color="'+t[3]+'"/></linearGradient></defs>';
+  function ring(p,g,n,op){
+    let r='<g fill="url(#pg'+L+g+')" opacity="'+op+'">'; const st=360/n, b=Math.random()*360;
+    for(let i=0;i<n;i++) r+='<use href="#q'+p+'" transform="rotate('+((b+i*st+burstRnd(-6,6))%360|0)+')"/>';
+    return r+'</g>';
+  }
+  s+=ring(0,0,7,'.9')+ring(1,0,6,'.88')+ring(2,1,5,'.92')+ring(3,1,4,'.95');
+  let fil='',au='',ai='';
+  for(let i=0;i<10;i++){
+    const a=i*.628+burstRnd(-.22,.22), r=burstRnd(2.6,4.8),
+      x=(Math.cos(a)*r).toFixed(1), y=(Math.sin(a)*r*.9).toFixed(1);
+    fil+='M0 0L'+x+' '+y;
+    if(i%3===2) ai+='M'+x+' '+y+'h.01'; else au+='M'+x+' '+y+'h.01';
+  }
+  s+='<circle r="2.7" fill="'+t[3]+'"/>'
+   +'<path d="'+fil+'" stroke="#C9A45C" stroke-width=".55" fill="none"/>'
+   +'<path d="'+au+'" stroke="#C9A45C" stroke-width="1.6" stroke-linecap="round"/>'
+   +'<path d="'+ai+'" stroke="#8A6A2E" stroke-width="1.3" stroke-linecap="round"/>';
+  return '<svg viewBox="-27 -27 54 54">'+s+'</svg>';
 }
 const BURST={ parts:[], running:false };
 function burstRnd(a,b){ return a+Math.random()*(b-a); }
