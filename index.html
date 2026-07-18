@@ -133,6 +133,7 @@ img{ max-width:100%; display:block; } a{ color:inherit; text-decoration:none; } 
 .thumb[data-base="pubs"]{ background:linear-gradient(145deg,#F3DEDB,#D9A8A2 70%,#B07F7A); }
 .thumb[data-base="landmarks"]{ background:linear-gradient(145deg,#F6E8DE,#E6C9A8 70%,#C9A96E); }
 .thumb[data-base="parks"]{ background:linear-gradient(145deg,#E9EEE0,#C6D2B4 70%,#A2B18C); }
+.thumb[data-base="things"]{ background:linear-gradient(145deg,#F9E9E0,#EFC9B8 70%,#D8A18C); }
 .thumb img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .55s; }
 .thumb img.loaded{ opacity:1; }
 .thumb-emoji{ font-size:44px; opacity:.55; filter:saturate(.85); }
@@ -1083,7 +1084,7 @@ const DEST_META = {
     blurb:"The last leg, and the wildest. Edinburgh's gothic spires, Glasgow's galleries, then the train pushing north into lochs and empty glens and the long strange light over Skye.",
     best:"Long summer days; take the train up, it's the lovely part.", areas:"Edinburgh · Glasgow · the Highlands & Skye" },
 };
-const CAT_ORDER = ["restaurants","coffee","matcha","wellness","pubs","landmarks","parks"];
+const CAT_ORDER = ["restaurants","coffee","matcha","wellness","pubs","things","landmarks","parks"];
 /* emoji stays ONLY for the beloved map pins; the UI tabs use engraved monoline icons */
 const CAT_META = {
   restaurants:{ label:"Restaurants", emoji:"🍽", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v5.5a2 2 0 0 0 2 2V21M9 3v5M5 3v5"/><path d="M17.5 3c-1.9 1.3-2.7 3.5-2.7 6 0 1.7.9 2.4 2.7 2.4V21"/></svg>' },
@@ -1093,6 +1094,7 @@ const CAT_META = {
   pubs:       { label:"Pubs & Bars",  emoji:"🍺", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4.5h13l-1 3a5.7 5.7 0 0 1-11 0z"/><path d="M12 11V20M8.5 20h7"/></svg>' },
   landmarks:  { label:"Landmarks",    emoji:"🏛", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8.5 12 4l7.5 4.5"/><path d="M5.5 9.5h13"/><path d="M7.5 9.5V18M12 9.5V18M16.5 9.5V18"/><path d="M5.5 18h13M4 21h16"/></svg>' },
   parks:      { label:"Parks",        emoji:"🌳", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9.2" r="5.7"/><path d="M12 15v6M9.5 21h5"/><path d="M12 12.4l-2-1.7M12 10.6l2-1.7"/></svg>' },
+  things:     { label:"Things to do", emoji:"🎟", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5 H19.5 V9.8 A2.2 2.2 0 0 0 19.5 14.2 V17.5 H4.5 V14.2 A2.2 2.2 0 0 0 4.5 9.8 Z"/><path d="M12 8.4v1.5M12 11.3v1.5M12 14.2v1.5"/></svg>' },
 };
 
 /* country per destination → flag */
@@ -2129,6 +2131,142 @@ const PLACES = [
     summary:"Real antiquities on the walls, a Greco-Roman menu to match, and theatre in every corner. Absurd in the best way, and rather wonderful for a special night.",
     tags:["opulent","Greek-Italian","Mayfair"] },
 
+  /* ---------- things to do (added 2026-07: the doing, not just the eating) ---------- */
+  { id:"electric-cinema", dest:"london", cat:"things", name:"The Electric Cinema", hood:"Portobello Rd, Notting Hill", price:2,
+    cuisine:"Cinema in armchairs, since 1910", feature:true,
+    why:"Velvet armchairs, footstools, wine carried to your seat in the dark. The best date in Notting Hill, and it is not close.",
+    summary:"One of the oldest working cinemas in Britain and easily the most beautiful. Leather armchairs with footstools, double sofas at the back, and a bar that brings the drinks to you.",
+    tags:["cinema","date night","since 1910"],
+    bookingUrl:"https://www.electriccinema.co.uk", bookingLabel:"Book seats",
+    tip:"The double sofas are the back row. Book the early-evening showing and walk out into golden Portobello." },
+  { id:"notting-hill-bookshop", dest:"london", cat:"things", name:"The Notting Hill Bookshop", hood:"Blenheim Crescent, Notting Hill", entry:"free",
+    cuisine:"The travel bookshop from the film",
+    summary:"The blue-fronted bookshop the film borrowed. Small, warm, stacked with travel writing, and five minutes from the Electric. Buy one book to read aloud on the train north.",
+    tags:["bookshop","from the film","Portobello"], badge:"from the film",
+    tip:"Mornings are quietest. The facade from the film itself is at 142 Portobello; the real shop is here." },
+  { id:"daunt-books", dest:"london", cat:"things", name:"Daunt Books", hood:"Marylebone High St", entry:"free",
+    cuisine:"Edwardian bookshop, arranged by country",
+    summary:"Oak galleries, a long skylight, and every book shelved by the country it belongs to. Find the Britain shelf and choose where we go next.",
+    tags:["bookshop","Edwardian","Marylebone"] },
+  { id:"columbia-road-market", dest:"london", cat:"things", name:"Columbia Road Flower Market", hood:"Columbia Rd, East London", entry:"free",
+    cuisine:"Sunday flower market",
+    summary:"On Sunday mornings this narrow street disappears under flowers. Go early, take coffee from a hatch, and carry peonies home through the East End.",
+    tags:["market","flowers","sundays"], badge:"sundays only",
+    tip:"Over by 2pm. Early for the best flowers; late for the bargains." },
+  { id:"west-end-night", dest:"london", cat:"things", name:"A West End Night", hood:"Theatreland, WC2", price:3,
+    cuisine:"A show, then the lit-up streets",
+    summary:"Pick the show when we land. Something with songs, an interval ice cream, and the slow walk back through streets that are all lights.",
+    tags:["theatre","evening","classic"],
+    bookingUrl:"https://www.todaytix.com/london", bookingLabel:"TodayTix" },
+  { id:"thames-clipper-dusk", dest:"london", cat:"things", name:"The River at Dusk", hood:"Embankment Pier, eastbound", entry:"paid · ~£10",
+    cuisine:"A commuter boat used as a cruise",
+    summary:"The Uber Boat is just a river bus, which is the trick: cruise views without the cruise. Board near sunset and ride east under the bridges to Greenwich.",
+    tags:["river","sunset","golden hour"],
+    tip:"Sit outside at the stern. Tap in with contactless, no ticket needed." },
+  { id:"fortnums-tea", dest:"london", cat:"things", name:"Tea at Fortnum's", hood:"Piccadilly, St James's", price:3,
+    cuisine:"Afternoon tea in the Jubilee salon",
+    summary:"Eau-de-nil walls, silver pots, scones done properly. The most London afternoon that exists, and worth dressing up for.",
+    tags:["afternoon tea","icon","dress up"],
+    bookingUrl:"https://www.fortnumandmason.com", bookingLabel:"Book tea" },
+
+  { id:"hampstead-ponds", dest:"hampstead", cat:"things", name:"The Swimming Ponds", hood:"Hampstead Heath", entry:"paid · ~£5",
+    cuisine:"Wild swimming under old trees",
+    summary:"Londoners have swum these spring-fed ponds for a century. Cold, green, quiet, and somehow holy. Towels on the meadow after.",
+    tags:["swimming","the Heath","brave"],
+    tip:"The mixed pond is the easy one for two. July water is as warm as it ever gets, which is not very." },
+  { id:"everyman-hampstead", dest:"hampstead", cat:"things", name:"Everyman Hampstead", hood:"Holly Bush Vale", price:2,
+    cuisine:"Sofas, blankets, wine at your seat",
+    summary:"A neighbourhood cinema with velvet sofas and a proper bar. If it rains on the Heath, this is where the afternoon goes.",
+    tags:["cinema","sofas","rainy day"],
+    bookingUrl:"https://www.everymancinema.com", bookingLabel:"Book" },
+  { id:"keith-fawkes", dest:"hampstead", cat:"things", name:"Keith Fawkes Books", hood:"Flask Walk", entry:"free",
+    cuisine:"Antiquarian clutter, floor to ceiling",
+    summary:"A secondhand bookshop so full the books hold each other up. Dusty, narrow, completely unbothered by the century outside.",
+    tags:["bookshop","antiquarian","kept quiet"], badge:"kept quiet" },
+  { id:"burgh-house", dest:"hampstead", cat:"things", name:"Burgh House", hood:"New End Square", entry:"free",
+    cuisine:"A 1704 house and its garden cafe",
+    summary:"A Queen Anne house kept as Hampstead's own museum, with a buttery garden cafe below. Constable lived nearby; the light explains why.",
+    tags:["museum","garden","free"] },
+
+  { id:"bath-boating", dest:"bath", cat:"things", name:"The Boating Station", hood:"Forester Rd, Bathwick", entry:"paid · ~£12/hr",
+    cuisine:"Victorian skiffs on the Avon",
+    summary:"Wooden boats from a boathouse unchanged since 1877. Row upriver under the willows and pretend we are in a novel.",
+    tags:["boats","river","romantic"],
+    tip:"An hour is plenty. Whoever is not rowing reads aloud." },
+  { id:"topping-books", dest:"bath", cat:"things", name:"Topping & Company", hood:"York St, by the Abbey", entry:"free",
+    cuisine:"Ladders, oak, free pots of coffee",
+    summary:"A bookshop with rolling ladders and a habit of putting a free pot of coffee in your hands while you browse. Dangerous.",
+    tags:["bookshop","coffee","ladders"] },
+  { id:"theatre-royal-bath", dest:"bath", cat:"things", name:"Theatre Royal", hood:"Saw Close", price:2,
+    cuisine:"A Georgian playhouse, 1805",
+    summary:"One of the oldest theatres in the country, all gilt and red velvet. See whatever is on; the room is half the show.",
+    tags:["theatre","Georgian","evening"],
+    bookingUrl:"https://www.theatreroyal.org.uk", bookingLabel:"Book" },
+  { id:"sally-lunns", dest:"bath", cat:"things", name:"Sally Lunn's", hood:"North Parade Passage", price:1,
+    cuisine:"The bun, since 1680",
+    summary:"The oldest house in Bath serves one famous thing: a warm brioche bun the size of a hat. Split one, order the cinnamon butter.",
+    tags:["historic","the bun","tea"], walkIn:"Walk-in: the queue moves fast" },
+  { id:"bath-skyline", dest:"bath", cat:"things", name:"The Bath Skyline", hood:"the hills above the city", entry:"free",
+    cuisine:"Six miles of meadow and view",
+    summary:"The National Trust path that circles above the city. An hour of it from the Bathwick fields gives you all of Bath laid out in honey-coloured miniature.",
+    tags:["walk","view","golden hour","free"] },
+
+  { id:"ffestiniog-railway", dest:"wales", cat:"things", name:"The Ffestiniog Railway", hood:"Porthmadog, Eryri", price:2,
+    cuisine:"Steam through the mountains, since 1832", feature:true,
+    why:"A steam train the size of a toy, climbing through oakwoods into slate mountains. The whole carriage smells of coal and rain.",
+    summary:"The oldest narrow-gauge railway on earth, hauling wooden carriages from the harbour up into Eryri.",
+    tags:["steam","Eryri","iconic"],
+    bookingUrl:"https://www.festrail.co.uk", bookingLabel:"Book seats",
+    tip:"Sit on the left going up. The sea appears twice." },
+  { id:"spillers-records", dest:"wales", cat:"things", name:"Spillers Records", hood:"Morgan Arcade, Cardiff", entry:"free",
+    cuisine:"The oldest record shop in the world, 1894",
+    summary:"Trading since 1894, which makes it the oldest record shop on the planet, tucked inside a Victorian arcade. Buy each other one record. No vetoes.",
+    tags:["records","arcade","since 1894"], badge:"world's oldest" },
+  { id:"wales-millennium", dest:"wales", cat:"things", name:"Wales Millennium Centre", hood:"Cardiff Bay", price:2,
+    cuisine:"The bronze shell of song",
+    summary:"The great bronze-and-slate shell above the Bay, its face burning with words in Welsh and English after dark. Catch whatever is singing.",
+    tags:["theatre","the Bay","evening"],
+    bookingUrl:"https://www.wmc.org.uk", bookingLabel:"What's on" },
+  { id:"national-museum-cardiff", dest:"wales", cat:"things", name:"National Museum Cardiff", hood:"Cathays Park", entry:"free",
+    cuisine:"Monet and Welsh light, free",
+    summary:"A serious museum that asks nothing at the door and keeps one of Europe's best Impressionist rooms upstairs. The Monets alone are worth Cardiff.",
+    tags:["museum","Monet","free"] },
+  { id:"st-fagans", dest:"wales", cat:"things", name:"St Fagans", hood:"the edge of Cardiff", entry:"free",
+    cuisine:"Wales, rebuilt house by house",
+    summary:"An open-air museum where real buildings from all over Wales were taken down, carried here, and stood back up in a park. Whole centuries in one afternoon.",
+    tags:["open air","history","free"] },
+
+  { id:"edinburgh-fringe", dest:"scotland", cat:"things", name:"The Fringe", hood:"everywhere, Edinburgh", entry:"paid · from £5",
+    cuisine:"The world's biggest arts festival", feature:true, badge:"begins while we're there", badgeRose:true,
+    why:"The Fringe opens while we are in Scotland. The whole city becomes a stage, and we get first pick.",
+    summary:"From the first of August the city triples: comedy in cellars, opera in churches, someone doing Hamlet in a swimming pool. Two shows a day, argued about at dinner.",
+    tags:["festival","august","once a year"],
+    bookingUrl:"https://www.edfringe.com", bookingLabel:"Browse shows" },
+  { id:"mary-kings-close", dest:"scotland", cat:"things", name:"Real Mary King's Close", hood:"Royal Mile, underground", price:2,
+    cuisine:"The buried street beneath the Mile",
+    summary:"A seventeenth-century close sealed under the Royal Mile, streets and rooms intact. An hour underground that rearranges the city above.",
+    tags:["underground","history","tour"],
+    bookingUrl:"https://www.realmarykingsclose.com", bookingLabel:"Book tour" },
+  { id:"scottish-national-gallery", dest:"scotland", cat:"things", name:"Scottish National Gallery", hood:"The Mound, Princes St", entry:"free",
+    cuisine:"Old masters above the gardens",
+    summary:"Small enough to finish, good enough to stun: Vermeer, Raeburn's skating minister, and Turner light over the gardens outside.",
+    tags:["museum","free","rainy day"] },
+  { id:"jazz-bar-edinburgh", dest:"scotland", cat:"things", name:"The Jazz Bar", hood:"Chambers St, Old Town", price:1,
+    cuisine:"Three sets a night, underground",
+    summary:"A basement that takes jazz seriously and closes very late. Go after dinner and stay for whoever wanders in with a horn.",
+    tags:["jazz","late","basement"], walkIn:"Walk-in: yes, small cover at the door" },
+  { id:"mackintosh-willow", dest:"scotland", cat:"things", name:"Mackintosh at the Willow", hood:"Sauchiehall St, Glasgow", price:2,
+    cuisine:"Tea inside a work of art, 1903",
+    summary:"Charles Rennie Mackintosh designed everything here down to the teaspoons in 1903, and it still serves afternoon tea inside his geometry.",
+    tags:["afternoon tea","Mackintosh","design"],
+    bookingUrl:"https://www.mackintoshatthewillow.com", bookingLabel:"Book tea" },
+  { id:"jacobite-steam", dest:"scotland", cat:"things", name:"The Jacobite", hood:"Fort William to Mallaig", price:3,
+    cuisine:"Steam over the Glenfinnan viaduct",
+    summary:"The steam train that curves over the Glenfinnan viaduct with the loch far below. Yes, that train.",
+    tags:["steam","Glenfinnan","iconic"],
+    bookingUrl:"https://westcoastrailways.co.uk", bookingLabel:"Book seats",
+    tip:"Books out months ahead. Left side outbound for the viaduct curve." },
+
   /* INSERT-NEW-PLACES-HERE */
 ];
 
@@ -2210,6 +2348,7 @@ const CAT_GRAD = {
   pubs:["#F4DFDC","#D9A8A2","#B98A85"],
   landmarks:["#F7EADF","#E7CFB2","#CFB489"],
   parks:["#E9EEE0","#C6D2B4","#A2B18C"],
+  things:["#F9E9E0","#EFC9B8","#D8A18C"],
 };
 function thumbGrad(p){ const g=CAT_GRAD[p.cat]||CAT_GRAD.restaurants; const a=100+(hashId(p.id)%90); return `linear-gradient(${a}deg, ${g[0]} 0%, ${g[1]} 60%, ${g[2]} 100%)`; }
 const CAT_ICON = {
@@ -2220,6 +2359,7 @@ const CAT_ICON = {
   pubs:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18h24l-3 34H23z"/><path d="M20 26h24"/><path d="M24 18q4-6 8 0q4-6 8 0"/></svg>`,
   landmarks:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 24L32 12l20 12"/><path d="M14 24h36"/><path d="M19 24v22M28 24v22M36 24v22M45 24v22"/><path d="M14 46h36M10 52h44"/></svg>`,
   parks:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="22" r="13"/><circle cx="22" cy="31" r="8"/><circle cx="42" cy="31" r="8"/><path d="M32 39v15M32 47l-7-5M32 45l7-5"/></svg>`,
+  things:`<svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18 H52 V26.5 A6.5 6.5 0 0 0 52 37.5 V46 H12 V37.5 A6.5 6.5 0 0 0 12 26.5 Z"/><path d="M32 22.5v4.5M32 30.5v4.5M32 38.5v4.5"/></svg>`,
 };
 
 function cardHTML(p){
@@ -2957,7 +3097,7 @@ const CITY_VIEW = {
 };
 /* ---------- interactive map: free OpenStreetMap via Leaflet (no key, no billing) ---------- */
 let lmap=null, lmarkers=[];
-const PLACE_COORDS = {"maine-mayfair":[51.50843,-0.14389],"the-dover":[51.50424,-0.12688],"bouchon-racine":[51.52161,-0.10948],"claridges":[51.51255,-0.148],"bottarga":[51.48339,-0.17661],"automat":[51.50826,-0.14584],"farm-girl":[51.51204,-0.20076],"elan-cafe":[51.50684,-0.15184],"laduree":[51.51449,-0.20074],"butter-bakery":[51.5177,-0.20139],"biscuiteers":[51.51558,-0.2057],"farm-girl-coffee":[51.50442,-0.20046],"leto":[51.509,-0.13637],"churchill-arms":[51.50688,-0.19487],"george-inn":[51.39155,-0.20388],"dickies-bar":[51.51304,-0.14405],"red-room":[51.50909,-0.14328],"va":[51.49589,-0.17288],"nhm":[51.49651,-0.176],"tate-modern":[51.50743,-0.09934],"national-gallery":[51.50872,-0.12859],"tower-of-london":[51.50822,-0.07619],"kensington-palace":[51.50509,-0.18763],"sky-garden":[51.51127,-0.08354],"borough-market":[51.50558,-0.0902],"portobello":[51.51609,-0.20512],"the-shard":[51.50451,-0.08644],"core-clare-smyth":[51.51272,-0.20311],"sketch":[51.51273,-0.14149],"helene-darroze":[51.50905,-0.15149],"gordon-ramsay-rhr":[51.48551,-0.16206],"a-wong":[51.493,-0.14054],"ikoyi":[51.51243,-0.11515],"gymkhana":[51.50848,-0.14149],"kitchen-table":[51.52039,-0.13648],"kol":[51.51479,-0.15753],"brat":[51.52427,-0.07669],"clove-club":[51.52708,-0.07916],"st-john":[51.52048,-0.10127],"monmouth":[51.51437,-0.1268],"kaffeine":[51.51845,-0.14034],"watchhouse":[51.51108,-0.12238],"how-matcha":[51.51282,-0.20598],"tsujiri":[51.54393,-0.00891],"tea-parlour":[51.51045,-0.12945],"cafe-kitsune":[51.51107,-0.13255],"connaught-bar":[51.50881,0.03943],"american-bar-savoy":[51.50987,-0.12715],"tayer-elementary":[51.52502,-0.09151],"cheshire-cheese":[51.51434,-0.10718],"gordons-wine":[51.50792,-0.12331],"british-museum":[51.51938,-0.12749],"st-pauls":[51.51379,-0.09845],"westminster-abbey":[51.4986,-0.1317],"tower-bridge":[51.50552,-0.07537],"buckingham-palace":[51.50083,-0.143],"stamford-bridge":[51.50415,-0.12802],"emirates-stadium":[51.50626,-0.13251],"spurs-stadium":[51.60416,-0.06626],"hyde-park":[51.50749,-0.16221],"regents-park":[51.52846,-0.15477],"st-james-park":[51.49928,-0.13459],"kyoto-garden":[51.51192,-0.13255],"richmond-park":[51.43851,-0.27474],"kew-gardens":[51.4782,-0.29689],"primrose-hill":[51.53929,-0.14073],"jin-kichi":[51.55728,-0.17843],"the-wells":[51.55873,-0.1736],"la-gaffe":[51.55933,-0.17848],"ginger-white":[51.5603,-0.17571],"louis-patisserie":[51.56321,-0.17993],"brew-house-kenwood":[51.56762,-0.17136],"holly-bush":[51.55789,-0.17932],"spaniards-inn":[51.57023,-0.17372],"the-flask-hampstead":[51.5566,-0.17725],"old-bull-bush":[51.56757,-0.18262],"kenwood-house":[51.57155,-0.16734],"keats-house":[51.55552,-0.16794],"parliament-hill":[51.55962,-0.15977],"hampstead-pergola":[51.5656,-0.18397],"hampstead-heath":[51.56415,-0.16717],"golders-hill-park":[51.56794,-0.18361],"olive-tree":[51.37697,-2.36334],"menu-gordon-jones":[51.37414,-2.36677],"hywel-jones":[51.38439,-2.36249],"scallop-shell":[51.38292,-2.36578],"beckford-bottle-shop":[51.38647,-2.3621],"colonna-small":[51.38274,-2.36441],"mokoko":[51.38135,-2.36022],"society-cafe":[51.38102,-2.36311],"landrace":[51.38592,-2.35992],"star-inn-bath":[51.38782,-2.36016],"saracens-head":[51.38152,-2.35468],"the-raven":[51.38312,-2.36197],"garricks-head":[51.38489,-2.35739],"roman-baths":[51.38103,-2.35968],"royal-crescent":[51.38727,-2.36823],"bath-abbey":[51.38145,-2.35887],"pulteney-bridge":[51.38304,-2.35792],"thermae-spa":[51.38057,-2.36103],"the-circus-bath":[51.3862,-2.36376],"jane-austen-centre":[51.38407,-2.36313],"royal-victoria-park":[51.38654,-2.37559],"prior-park":[51.37734,-2.36334],"alexandra-park":[51.37391,-2.35927],"ynyshir":[51.62625,-3.41239],"gorse":[51.88637,-4.74814],"heaneys":[51.48517,-3.20134],"asador-44":[51.48007,-3.18054],"bullys":[51.48468,-3.16351],"coffee-barker":[51.48589,-3.16743],"hard-lines":[51.48029,-3.17867],"uncommon-ground":[51.47825,-3.17743],"city-arms-cardiff":[51.48,-3.18096],"tiny-rebel-cardiff":[51.4799,-3.18116],"goat-major":[51.48098,-3.18059],"cardiff-castle":[51.48233,-3.18117],"principality-stadium":[51.47825,-3.18263],"cardiff-bay":[51.46396,-3.16414],"portmeirion":[52.91345,-4.09935],"conwy-castle":[53.28003,-3.82559],"caernarfon-castle":[53.13935,-4.27684],"yr-wyddfa":[52.92654,-4.13059],"llandudno":[51.48701,-3.17163],"harlech-castle":[52.85997,-4.10914],"bute-park":[51.48734,-3.1883],"roath-park":[51.50091,-3.17273],"fairy-glen":[51.48093,-3.16436],"witchery":[55.94881,-3.19563],"stockbridge":[55.95537,-3.18416],"six-by-nico":[55.95449,-3.19747],"cafe-st-honore":[55.95409,-3.20024],"chaophraya":[55.9522,-3.20307],"timberyard":[55.94635,-3.20173],"little-chartroom":[55.97258,-3.17596],"cairngorm":[57.15475,-2.13824],"fortitude":[55.95617,-3.17185],"bow-bar":[55.95427,-3.18512],"sheep-heid":[55.95526,-3.19147],"edinburgh-castle":[55.94869,-3.20042],"arthurs-seat":[55.94407,-3.1616],"royal-mile":[55.94929,-3.19357],"nms":[55.94707,-3.18934],"dean-village":[55.95226,-3.21822],"calton-hill":[55.95525,-3.1828],"cail-bruich":[55.87751,-4.28924],"unalome":[55.95496,-3.18992],"ox-and-finch":[55.86579,-4.28475],"crabshakk":[55.86502,-4.28471],"ka-pao":[55.87714,-4.29037],"three-chimneys":[57.44338,-6.64196],"loch-bay":[57.50748,-6.57743],"kinloch-lodge":[57.1756,-5.79774],"papercup":[55.86392,-4.29873],"spitfire-espresso":[55.85753,-4.24301],"pot-still":[55.8629,-4.25772],"oran-mor":[55.87756,-4.2897],"horse-shoe-bar":[55.93157,-4.49506],"kelvingrove-museum":[55.86858,-4.29063],"glasgow-cathedral":[55.95554,-3.19312],"riverside-museum":[55.86523,-4.30617],"eilean-donan":[57.2741,-5.51592],"glenfinnan":[56.87582,-5.42932],"loch-lomond":[56.1562,-4.65638],"glencoe":[56.68276,-5.10146],"old-man-storr":[57.50696,-6.17464],"quiraing":[57.64526,-6.27485],"fairy-pools":[57.41374,-6.20375],"ben-nevis":[56.79686,-5.00353],"princes-st-gardens":[55.95025,-3.19949],"rbge":[55.96529,-3.20886],"the-meadows":[55.94234,-3.19429],"kelvingrove-park":[55.86926,-4.28729],"glasgow-botanic":[55.87989,-4.29202],"heartcore-nottinghill":[51.50848,-0.19738],"equinox-stjames":[51.5054,-0.134],"third-space-mayfair":[51.5096,-0.1476],"kxu-chelsea":[51.49355,-0.1586],"bodyism-nottinghill":[51.51447,-0.2011],"peggy-porschen":[51.49329,-0.15054],"eln-mayfair":[51.5096,-0.1476],"saint-aymes":[51.518,-0.15],"the-wolseley":[51.50739,-0.14091],"sexy-fish":[51.50937,-0.14432],"amazonico-london":[51.50954,-0.14459],"isabel-mayfair":[51.50964,-0.14279],"scotts-mayfair":[51.5103,-0.149],"bacchanalia-mayfair":[51.5103,-0.149]}; /* id -> {lat,lng} — geocoded from OSM; injected below */
+const PLACE_COORDS = {"maine-mayfair":[51.50843,-0.14389],"the-dover":[51.50424,-0.12688],"bouchon-racine":[51.52161,-0.10948],"claridges":[51.51255,-0.148],"bottarga":[51.48339,-0.17661],"automat":[51.50826,-0.14584],"farm-girl":[51.51204,-0.20076],"elan-cafe":[51.50684,-0.15184],"laduree":[51.51449,-0.20074],"butter-bakery":[51.5177,-0.20139],"biscuiteers":[51.51558,-0.2057],"farm-girl-coffee":[51.50442,-0.20046],"leto":[51.509,-0.13637],"churchill-arms":[51.50688,-0.19487],"george-inn":[51.39155,-0.20388],"dickies-bar":[51.51304,-0.14405],"red-room":[51.50909,-0.14328],"va":[51.49589,-0.17288],"nhm":[51.49651,-0.176],"tate-modern":[51.50743,-0.09934],"national-gallery":[51.50872,-0.12859],"tower-of-london":[51.50822,-0.07619],"kensington-palace":[51.50509,-0.18763],"sky-garden":[51.51127,-0.08354],"borough-market":[51.50558,-0.0902],"portobello":[51.51609,-0.20512],"the-shard":[51.50451,-0.08644],"core-clare-smyth":[51.51272,-0.20311],"sketch":[51.51273,-0.14149],"helene-darroze":[51.50905,-0.15149],"gordon-ramsay-rhr":[51.48551,-0.16206],"a-wong":[51.493,-0.14054],"ikoyi":[51.51243,-0.11515],"gymkhana":[51.50848,-0.14149],"kitchen-table":[51.52039,-0.13648],"kol":[51.51479,-0.15753],"brat":[51.52427,-0.07669],"clove-club":[51.52708,-0.07916],"st-john":[51.52048,-0.10127],"monmouth":[51.51437,-0.1268],"kaffeine":[51.51845,-0.14034],"watchhouse":[51.51108,-0.12238],"how-matcha":[51.51282,-0.20598],"tsujiri":[51.54393,-0.00891],"tea-parlour":[51.51045,-0.12945],"cafe-kitsune":[51.51107,-0.13255],"connaught-bar":[51.50881,0.03943],"american-bar-savoy":[51.50987,-0.12715],"tayer-elementary":[51.52502,-0.09151],"cheshire-cheese":[51.51434,-0.10718],"gordons-wine":[51.50792,-0.12331],"british-museum":[51.51938,-0.12749],"st-pauls":[51.51379,-0.09845],"westminster-abbey":[51.4986,-0.1317],"tower-bridge":[51.50552,-0.07537],"buckingham-palace":[51.50083,-0.143],"stamford-bridge":[51.50415,-0.12802],"emirates-stadium":[51.50626,-0.13251],"spurs-stadium":[51.60416,-0.06626],"hyde-park":[51.50749,-0.16221],"regents-park":[51.52846,-0.15477],"st-james-park":[51.49928,-0.13459],"kyoto-garden":[51.51192,-0.13255],"richmond-park":[51.43851,-0.27474],"kew-gardens":[51.4782,-0.29689],"primrose-hill":[51.53929,-0.14073],"jin-kichi":[51.55728,-0.17843],"the-wells":[51.55873,-0.1736],"la-gaffe":[51.55933,-0.17848],"ginger-white":[51.5603,-0.17571],"louis-patisserie":[51.56321,-0.17993],"brew-house-kenwood":[51.56762,-0.17136],"holly-bush":[51.55789,-0.17932],"spaniards-inn":[51.57023,-0.17372],"the-flask-hampstead":[51.5566,-0.17725],"old-bull-bush":[51.56757,-0.18262],"kenwood-house":[51.57155,-0.16734],"keats-house":[51.55552,-0.16794],"parliament-hill":[51.55962,-0.15977],"hampstead-pergola":[51.5656,-0.18397],"hampstead-heath":[51.56415,-0.16717],"golders-hill-park":[51.56794,-0.18361],"olive-tree":[51.37697,-2.36334],"menu-gordon-jones":[51.37414,-2.36677],"hywel-jones":[51.38439,-2.36249],"scallop-shell":[51.38292,-2.36578],"beckford-bottle-shop":[51.38647,-2.3621],"colonna-small":[51.38274,-2.36441],"mokoko":[51.38135,-2.36022],"society-cafe":[51.38102,-2.36311],"landrace":[51.38592,-2.35992],"star-inn-bath":[51.38782,-2.36016],"saracens-head":[51.38152,-2.35468],"the-raven":[51.38312,-2.36197],"garricks-head":[51.38489,-2.35739],"roman-baths":[51.38103,-2.35968],"royal-crescent":[51.38727,-2.36823],"bath-abbey":[51.38145,-2.35887],"pulteney-bridge":[51.38304,-2.35792],"thermae-spa":[51.38057,-2.36103],"the-circus-bath":[51.3862,-2.36376],"jane-austen-centre":[51.38407,-2.36313],"royal-victoria-park":[51.38654,-2.37559],"prior-park":[51.37734,-2.36334],"alexandra-park":[51.37391,-2.35927],"ynyshir":[51.62625,-3.41239],"gorse":[51.88637,-4.74814],"heaneys":[51.48517,-3.20134],"asador-44":[51.48007,-3.18054],"bullys":[51.48468,-3.16351],"coffee-barker":[51.48589,-3.16743],"hard-lines":[51.48029,-3.17867],"uncommon-ground":[51.47825,-3.17743],"city-arms-cardiff":[51.48,-3.18096],"tiny-rebel-cardiff":[51.4799,-3.18116],"goat-major":[51.48098,-3.18059],"cardiff-castle":[51.48233,-3.18117],"principality-stadium":[51.47825,-3.18263],"cardiff-bay":[51.46396,-3.16414],"portmeirion":[52.91345,-4.09935],"conwy-castle":[53.28003,-3.82559],"caernarfon-castle":[53.13935,-4.27684],"yr-wyddfa":[52.92654,-4.13059],"llandudno":[51.48701,-3.17163],"harlech-castle":[52.85997,-4.10914],"bute-park":[51.48734,-3.1883],"roath-park":[51.50091,-3.17273],"fairy-glen":[51.48093,-3.16436],"witchery":[55.94881,-3.19563],"stockbridge":[55.95537,-3.18416],"six-by-nico":[55.95449,-3.19747],"cafe-st-honore":[55.95409,-3.20024],"chaophraya":[55.9522,-3.20307],"timberyard":[55.94635,-3.20173],"little-chartroom":[55.97258,-3.17596],"cairngorm":[57.15475,-2.13824],"fortitude":[55.95617,-3.17185],"bow-bar":[55.95427,-3.18512],"sheep-heid":[55.95526,-3.19147],"edinburgh-castle":[55.94869,-3.20042],"arthurs-seat":[55.94407,-3.1616],"royal-mile":[55.94929,-3.19357],"nms":[55.94707,-3.18934],"dean-village":[55.95226,-3.21822],"calton-hill":[55.95525,-3.1828],"cail-bruich":[55.87751,-4.28924],"unalome":[55.95496,-3.18992],"ox-and-finch":[55.86579,-4.28475],"crabshakk":[55.86502,-4.28471],"ka-pao":[55.87714,-4.29037],"three-chimneys":[57.44338,-6.64196],"loch-bay":[57.50748,-6.57743],"kinloch-lodge":[57.1756,-5.79774],"papercup":[55.86392,-4.29873],"spitfire-espresso":[55.85753,-4.24301],"pot-still":[55.8629,-4.25772],"oran-mor":[55.87756,-4.2897],"horse-shoe-bar":[55.93157,-4.49506],"kelvingrove-museum":[55.86858,-4.29063],"glasgow-cathedral":[55.95554,-3.19312],"riverside-museum":[55.86523,-4.30617],"eilean-donan":[57.2741,-5.51592],"glenfinnan":[56.87582,-5.42932],"loch-lomond":[56.1562,-4.65638],"glencoe":[56.68276,-5.10146],"old-man-storr":[57.50696,-6.17464],"quiraing":[57.64526,-6.27485],"fairy-pools":[57.41374,-6.20375],"ben-nevis":[56.79686,-5.00353],"princes-st-gardens":[55.95025,-3.19949],"rbge":[55.96529,-3.20886],"the-meadows":[55.94234,-3.19429],"kelvingrove-park":[55.86926,-4.28729],"glasgow-botanic":[55.87989,-4.29202],"heartcore-nottinghill":[51.50848,-0.19738],"equinox-stjames":[51.5054,-0.134],"third-space-mayfair":[51.5096,-0.1476],"kxu-chelsea":[51.49355,-0.1586],"bodyism-nottinghill":[51.51447,-0.2011],"peggy-porschen":[51.49329,-0.15054],"eln-mayfair":[51.5096,-0.1476],"saint-aymes":[51.518,-0.15],"the-wolseley":[51.50739,-0.14091],"sexy-fish":[51.50937,-0.14432],"amazonico-london":[51.50954,-0.14459],"isabel-mayfair":[51.50964,-0.14279],"scotts-mayfair":[51.5103,-0.149],"bacchanalia-mayfair":[51.5103,-0.149],"electric-cinema":[51.51581,-0.20489],"notting-hill-bookshop":[51.51554,-0.20292],"daunt-books":[51.52059,-0.15171],"columbia-road-market":[51.52977,-0.06915],"west-end-night":[51.51157,-0.12881],"thames-clipper-dusk":[51.50701,-0.1214],"fortnums-tea":[51.50843,-0.13805],"hampstead-ponds":[51.56062,-0.15837],"everyman-hampstead":[51.55598,-0.1787],"keith-fawkes":[51.55663,-0.1777],"burgh-house":[51.55893,-0.1769],"bath-boating":[51.3897,-2.34864],"topping-books":[51.38146,-2.35818],"theatre-royal-bath":[51.38126,-2.36303],"sally-lunns":[51.38096,-2.3585],"bath-skyline":[51.3768,-2.3335],"ffestiniog-railway":[52.92543,-4.12811],"spillers-records":[51.48047,-3.17823],"wales-millennium":[51.46508,-3.16323],"national-museum-cardiff":[51.48594,-3.17673],"st-fagans":[51.487,-3.2735],"edinburgh-fringe":[55.9495,-3.1901],"mary-kings-close":[55.9499,-3.1905],"scottish-national-gallery":[55.9509,-3.1957],"jazz-bar-edinburgh":[55.9475,-3.188],"mackintosh-willow":[55.8652,-4.2569],"jacobite-steam":[56.8204,-5.1062]}; /* id -> {lat,lng} — geocoded from OSM; injected below */
 function destBounds(dest){
   const pts = PLACES.filter(p=>p.dest===dest && PLACE_COORDS[p.id]).map(p=>PLACE_COORDS[p.id]);
   if(!pts.length) return null;
